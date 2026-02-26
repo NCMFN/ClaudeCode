@@ -25,6 +25,7 @@
 - [ ] Shell scripts pass shellcheck (if applicable)
 - [ ] No sensitive data exposed in logs or output
 - [ ] Follows conventional commits format
+- [ ] Pre-commit hooks pass (if configured)
 
 ## Documentation
 - [ ] Updated relevant documentation
