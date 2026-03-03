@@ -93,4 +93,66 @@ jq -n \
   --argjson count "$skill_count" \
   '{skills: $skills, generated_at: $generated_at, count: $count}' > "$INDEX_FILE"
 
+# --- Also index instincts for the surfacer ---
+INSTINCT_INDEX_FILE="${HOME}/.claude/hooks/skill-router/instinct-index.json"
+INSTINCT_DIR="${HOME}/.claude/homunculus/instincts/personal"
+
+if [ -d "$INSTINCT_DIR" ]; then
+  instinct_entries="[]"
+  instinct_files=$(find -L "$INSTINCT_DIR" -name "*.md" -type f 2>/dev/null)
+
+  while IFS= read -r ifile; do
+    [ -z "$ifile" ] && continue
+
+    # Extract YAML frontmatter
+    in_fm=false
+    fm=""
+    while IFS= read -r iline; do
+      if [ "$iline" = "---" ]; then
+        if [ "$in_fm" = true ]; then break; else in_fm=true; continue; fi
+      fi
+      if [ "$in_fm" = true ]; then fm="${fm}${iline}"$'\n'; fi
+    done < "$ifile"
+
+    i_trigger=$(echo "$fm" | grep -E '^trigger:' | head -1 | sed 's/^trigger:[[:space:]]*//' | sed 's/^["'"'"']//' | sed 's/["'"'"']$//')
+    i_domain=$(echo "$fm" | grep -E '^domain:' | head -1 | sed 's/^domain:[[:space:]]*//' | sed 's/^["'"'"']//' | sed 's/["'"'"']$//')
+    i_confidence=$(echo "$fm" | grep -E '^confidence:' | head -1 | sed 's/^confidence:[[:space:]]*//')
+    i_phase=$(echo "$fm" | grep -E '^phase:' | head -1 | sed 's/^phase:[[:space:]]*//' | sed 's/^["'"'"']//' | sed 's/["'"'"']$//')
+
+    # Extract first content line after ## Action heading from markdown body
+    i_action=$(awk '/^## Action/{found=1; next} found && /^[^#]/ && NF{print; exit}' "$ifile")
+
+    [ -z "$i_trigger" ] && continue
+
+    # Build triggers array from trigger text (split on commas or spaces)
+    triggers_lower=$(echo "$i_trigger" | tr '[:upper:]' '[:lower:]' | tr -cs '[:alnum:]' '\n' | awk 'length >= 3' | sort -u)
+    triggers_json=$(echo "$triggers_lower" | jq -R -s 'split("\n") | map(select(length > 0))')
+
+    # Summary is first 120 chars of the action body
+    summary=$(echo "$i_action" | head -c 120)
+
+    i_entry=$(jq -n \
+      --arg id "$(basename "$ifile" .md)" \
+      --argjson triggers "$triggers_json" \
+      --arg domain "${i_domain:-general}" \
+      --arg phase "${i_phase:-general}" \
+      --arg summary "$summary" \
+      --argjson confidence "${i_confidence:-0.50}" \
+      '{id: $id, triggers: $triggers, domain: $domain, phase: $phase, summary: $summary, confidence: $confidence}')
+
+    instinct_entries=$(echo "$instinct_entries" | jq --argjson e "$i_entry" '. + [$e]')
+  done <<< "$instinct_files"
+
+  instinct_count=$(echo "$instinct_entries" | jq 'length')
+  jq -n \
+    --argjson instincts "$instinct_entries" \
+    --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+    --argjson count "$instinct_count" \
+    '{instincts: $instincts, generated_at: $generated_at, count: $count}' > "$INSTINCT_INDEX_FILE"
+
+  echo "[SkillIndexer] Indexed $instinct_count instincts → $INSTINCT_INDEX_FILE" >&2
+else
+  echo '{"instincts":[],"generated_at":"'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'","count":0}' > "$INSTINCT_INDEX_FILE"
+fi
+
 echo "[SkillIndexer] Indexed $skill_count skills → $INDEX_FILE" >&2

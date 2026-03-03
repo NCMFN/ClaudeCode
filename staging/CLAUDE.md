@@ -111,21 +111,35 @@ NEVER use DummyJSON in a project that already has its own API or database. Alway
 
 ---
 
-## Learned Instincts (auto-observed from 547 sessions, 6,890 tool calls)
+## Core Instincts (universal, always active)
+- **TypeScript first** (0.85): Default to .ts. TypeScript is 5-8x more frequent.
+- **Read before modify** (0.75): ALWAYS read before editing. Never edit blind.
+- **Dedicated tools over bash** (0.72): Use Read/Grep/Glob, not cat/grep/find.
+- **Plan before code** (0.70): Enter plan mode for non-trivial work.
 
-These patterns were extracted from historical session data. Confidence reflects pattern strength.
+Contextual instincts are surfaced dynamically by the skill router based on session phase.
+Source: `~/.claude/homunculus/instincts/personal/`
 
-- **TypeScript first** (0.85): Default to .ts for new code. TypeScript is 5-8x more frequent than JS in this user's work.
-- **Read before modify** (0.75): ALWAYS read a file before editing. 1.9:1 Read-to-Edit ratio observed. Never edit blind.
-- **Dedicated tools over bash** (0.72): Use Read/Grep/Glob for file ops, not cat/grep/find. Reserve Bash for git, npm, ssh, docker.
-- **Delegate with Task tool** (0.75): User values subagent parallelism (413 delegation events). Use Task for parallel research and independent subtasks.
-- **Plan before code** (0.70): Enter plan mode for non-trivial work. 82 planning events observed. Get approval before writing.
-- **Visual validation for design** (0.68): After Pencil batch_design, ALWAYS get_screenshot to verify. Don't assume design code is correct.
-- **Heavy remote/multi-project workflow** (0.80): 230 ssh commands, 930 cd commands. Expect deployment, server management, Docker tasks.
-- **Web research is expected** (0.65): 147 WebFetch/WebSearch calls. Don't hesitate to search when current info is needed.
-- **Markdown for docs** (0.70): Default documentation format. 470 markdown operations observed.
+## Parallelization Rules
+ALWAYS parallelize (no permission needed) when:
+1. Plan identifies 3+ tasks touching different directories
+2. Work spans frontend + backend + tests
+3. Task is "for each X, do Y" across multiple files
+4. Multiple independent research questions
 
-Instinct source: `~/.claude/homunculus/instincts/personal/`
+NEVER parallelize when:
+1. Tasks share files or database state
+2. Task B needs Task A's output
+3. Total work is <15 minutes sequential
+
+Default is parallel. Sequential requires justification.
+
+## Self-Correction
+After making an error that required 3+ attempts to fix:
+1. Note what went wrong and what the root cause was
+2. Check if an existing instinct covers this pattern
+3. If not, write one to `~/.claude/learned/`
+Do this automatically. Do not wait for the user to point it out.
 
 ---
 

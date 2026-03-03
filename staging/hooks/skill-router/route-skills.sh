@@ -13,6 +13,7 @@
 # Output: stdout text → injected into Claude's context as system reminder
 
 INDEX_FILE="${HOME}/.claude/hooks/skill-router/skill-index.json"
+INSTINCT_INDEX_FILE="${HOME}/.claude/hooks/skill-router/instinct-index.json"
 LOG_FILE="${HOME}/.claude/hooks/skill-router/recommendations.jsonl"
 
 # Read stdin (hook receives JSON with session context)
@@ -114,6 +115,65 @@ else
   printf '{"ts":"%s","prompt":"%s","recommended":[]}\n' \
     "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
     "$(echo "$prompt_trunc" | jq -Rs '.' | sed 's/^"//;s/"$//')" >> "$LOG_FILE" 2>/dev/null
+fi
+
+# --- Instinct Surfacing ---
+# Detect session phase from tracker data and surface relevant instincts
+PHASE="general"
+SESSION_ID=$(echo "$input" | jq -r '.session_id // ""' 2>/dev/null)
+if [ -z "$SESSION_ID" ] || [ "$SESSION_ID" = "null" ]; then
+  # Fallback: find most recent tracker file
+  LATEST_TRACKER=$(ls -t /tmp/claude-session-tracker/*.json 2>/dev/null | head -1)
+  if [ -n "$LATEST_TRACKER" ]; then
+    SESSION_ID=$(basename "$LATEST_TRACKER" .json)
+  fi
+fi
+
+TRACKER_FILE="/tmp/claude-session-tracker/${SESSION_ID}.json"
+if [ -n "$SESSION_ID" ] && [ "$SESSION_ID" != "null" ] && [ -f "$TRACKER_FILE" ]; then
+  # Phase detection from tool usage ratios
+  total=$(jq '[.tools[]] | add // 1' "$TRACKER_FILE" 2>/dev/null)
+  if [ "${total:-0}" -gt 5 ]; then
+    read_count=$(jq '.tools.Read // 0' "$TRACKER_FILE" 2>/dev/null)
+    edit_count=$(jq '.tools.Edit // 0' "$TRACKER_FILE" 2>/dev/null)
+    bash_count=$(jq '.tools.Bash // 0' "$TRACKER_FILE" 2>/dev/null)
+    websearch_count=$(jq '.tools.WebSearch // 0' "$TRACKER_FILE" 2>/dev/null)
+
+    read_pct=$((read_count * 100 / total))
+    edit_pct=$((edit_count * 100 / total))
+    bash_pct=$((bash_count * 100 / total))
+    ws_pct=$((websearch_count * 100 / total))
+
+    if [ "$ws_pct" -gt 30 ]; then PHASE="research"
+    elif [ "$read_pct" -gt 50 ]; then PHASE="investigation"
+    elif [ "$edit_pct" -gt 35 ]; then PHASE="editing"
+    elif [ "$bash_pct" -gt 45 ]; then PHASE="execution"
+    fi
+  fi
+fi
+
+# Surface instincts if index exists
+if [ -f "$INSTINCT_INDEX_FILE" ]; then
+  # Single jq call: filter by phase, match prompt keywords, rank by score
+  instinct_output=$(jq -r --arg phase "$PHASE" --arg words "$prompt_lower" '
+    [.instincts[] |
+      select(.phase == $phase or .phase == "general" or .phase == null) |
+      . + {match_count: (
+        [.triggers[] | select($words | contains(.))] | length
+      )}
+    ] |
+    sort_by(-.confidence, -.match_count) |
+    [.[] | select(.match_count > 0)] |
+    .[0:3] |
+    if length > 0 then
+      "[Instinct Surfacer] Phase: \($phase)\n" +
+      ([.[] | "- \(.summary) (confidence: \(.confidence))"] | join("\n"))
+    else empty end
+  ' "$INSTINCT_INDEX_FILE" 2>/dev/null)
+
+  if [ -n "$instinct_output" ]; then
+    echo "$instinct_output"
+  fi
 fi
 
 exit 0
