@@ -19,44 +19,79 @@ A Claude Code plugin — a collection of production-ready agents, skills, hooks,
 
 ## Repository Structure
 
-```mermaid
-graph TD
-    ROOT["everything-claude-code/"]
-
-    ROOT --> AGENTS["agents/\nSpecialized subagents"]
-    ROOT --> SKILLS["skills/\nWorkflow knowledge"]
-    ROOT --> COMMANDS["commands/\nSlash commands"]
-    ROOT --> HOOKS["hooks/\nhooks.json + scripts"]
-    ROOT --> RULES["rules/\nAlways-follow guidelines"]
-    ROOT --> SCRIPTS["scripts/\nNode.js utilities"]
-    ROOT --> MCP["mcp-configs/\nMCP server configs"]
-    ROOT --> CONTEXTS["contexts/\nSystem prompt contexts"]
-    ROOT --> EXAMPLES["examples/\nCLAUDE.md templates"]
-    ROOT --> TESTS["tests/\nTest suite"]
-
-    AGENTS --> A1["architect.md\nHexagonal + DDD enforcer"]
-    AGENTS --> A2["architect-module.md\nModule-level design"]
-    AGENTS --> A3["uncle-bob.md\nClean Code consultant"]
-    AGENTS --> A4["planner.md"]
-    AGENTS --> A5["code-reviewer.md"]
-    AGENTS --> A6["tdd-guide.md"]
-    AGENTS --> A7["security-reviewer.md"]
-    AGENTS --> A8["refactor-cleaner.md"]
-    AGENTS --> A9["doc-updater.md"]
-
-    RULES --> R1["common/\nLanguage-agnostic"]
-    RULES --> R2["typescript/"]
-    RULES --> R3["python/"]
-    RULES --> R4["golang/"]
-
-    SKILLS --> S1["tdd-workflow/"]
-    SKILLS --> S2["security-review/"]
-    SKILLS --> S3["backend-patterns/"]
-    SKILLS --> S4["frontend-patterns/"]
-    SKILLS --> S5["continuous-learning/"]
-    SKILLS --> S6["autonomous-loops/"]
-    SKILLS --> S7["...50+ more"]
 ```
+everything-claude-code/
+│
+├── agents/                          # Specialized subagents for delegation
+│   ├── architect.md                 # ★ Hexagonal Architecture + DDD enforcer (system-level)
+│   ├── architect-module.md          # ★ Module-level design within hexagonal boundaries
+│   ├── uncle-bob.md                 # ★ Clean Architecture + Clean Code consultant
+│   ├── planner.md                   # Feature planning, risk assessment, phase breakdown
+│   ├── code-reviewer.md             # Security, quality, and Clean Code review
+│   ├── tdd-guide.md                 # Test-driven development workflow
+│   ├── security-reviewer.md         # OWASP / vulnerability analysis
+│   ├── refactor-cleaner.md          # Dead code detection and safe removal
+│   └── doc-updater.md               # Documentation sync
+│
+├── skills/                          # Domain knowledge invoked by agents or commands
+│   ├── tdd-workflow/
+│   ├── security-review/
+│   ├── backend-patterns/
+│   ├── frontend-patterns/
+│   ├── continuous-learning/
+│   ├── autonomous-loops/
+│   └── ...50+ more
+│
+├── commands/                        # Slash commands (/plan, /tdd, /code-review, ...)
+│   ├── plan.md
+│   ├── tdd.md
+│   ├── code-review.md
+│   ├── build-fix.md
+│   ├── e2e.md
+│   ├── refactor-clean.md
+│   └── ...30+ more
+│
+├── rules/                           # Always-follow guidelines (copy to ~/.claude/rules/)
+│   ├── common/                      # Language-agnostic — always install
+│   │   ├── coding-style.md
+│   │   ├── git-workflow.md
+│   │   ├── testing.md
+│   │   ├── security.md
+│   │   └── agents.md
+│   ├── typescript/
+│   ├── python/
+│   └── golang/
+│
+├── hooks/                           # Trigger-based automations
+│   └── hooks.json                   # PreToolUse, PostToolUse, Stop, SessionStart events
+│
+├── scripts/                         # Cross-platform Node.js hook implementations
+│   ├── lib/
+│   │   ├── utils.js
+│   │   └── package-manager.js
+│   └── hooks/
+│       ├── session-start.js
+│       ├── session-end.js
+│       └── evaluate-session.js
+│
+├── contexts/                        # Dynamic system prompt injection
+│   ├── dev.md
+│   ├── review.md
+│   └── research.md
+│
+├── mcp-configs/
+│   └── mcp-servers.json             # GitHub, Supabase, Vercel, Railway, ...
+│
+├── examples/                        # CLAUDE.md templates for real-world stacks
+│   ├── saas-nextjs-CLAUDE.md
+│   ├── go-microservice-CLAUDE.md
+│   └── django-api-CLAUDE.md
+│
+└── tests/
+    └── run-all.js
+```
+
+> ★ = added or heavily modified in this fork
 
 ---
 
