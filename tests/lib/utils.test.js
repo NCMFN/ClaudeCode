@@ -1070,6 +1070,19 @@ function runTests() {
     assert.ok(result.output.includes('metacharacters not allowed'), 'Should block newline injection');
   })) passed++; else failed++;
 
+  if (test('runCommand blocks $() inside double quotes (shell still evaluates)', () => {
+    // $() inside double quotes is still evaluated by the shell, so block $ everywhere
+    const result = utils.runCommand('node -e "$(whoami)"');
+    assert.strictEqual(result.success, false);
+    assert.ok(result.output.includes('metacharacters not allowed'), 'Should block $ inside quotes');
+  })) passed++; else failed++;
+
+  if (test('runCommand blocks backtick inside double quotes (shell still evaluates)', () => {
+    const result = utils.runCommand('node -e "`whoami`"');
+    assert.strictEqual(result.success, false);
+    assert.ok(result.output.includes('metacharacters not allowed'), 'Should block backtick inside quotes');
+  })) passed++; else failed++;
+
   if (test('runCommand error message does not leak command string', () => {
     const secret = 'rm secret_password_123';
     const result = utils.runCommand(secret);
