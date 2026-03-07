@@ -179,7 +179,7 @@ observation = {
 _SECRET_RE = re.compile(
     r"(?i)(api[_-]?key|token|secret|password|authorization|credentials?|auth)"
     r"""(["'"'"'\s:=]+)"""
-    r"(?:[A-Za-z]+\s+)?"
+    r"([A-Za-z]+\s+)?"
     r"([A-Za-z0-9_\-/.+=]{8,})",
     re.IGNORECASE
 )
@@ -187,7 +187,7 @@ _SECRET_RE = re.compile(
 def scrub(val):
     if val is None:
         return None
-    return _SECRET_RE.sub(r"\1\2[REDACTED]", str(val))
+    return _SECRET_RE.sub(lambda m: m.group(1) + m.group(2) + (m.group(3) or "") + "[REDACTED]", str(val))
 
 if parsed["input"]:
     observation["input"] = scrub(parsed["input"])

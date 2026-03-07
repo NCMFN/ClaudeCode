@@ -347,7 +347,7 @@ function runCommand(cmd, options = {}) {
 
   // Reject shell command-chaining operators outside of quoted strings
   const unquoted = cmd.replace(/"[^"]*"/g, '').replace(/'[^']*'/g, '');
-  if (/[;|&`]/.test(unquoted)) {
+  if (/[;|&`$\n]/.test(unquoted)) {
     return { success: false, output: 'runCommand blocked: shell metacharacters not allowed' };
   }
 
