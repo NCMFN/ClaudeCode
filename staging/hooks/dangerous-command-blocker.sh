@@ -38,9 +38,12 @@ if echo "$cmd" | grep -qE '\brm\s+.*--recursive'; then
   blocked "Recursive rm detected" "Use 'trash' instead of rm --recursive"
 fi
 
-# --- SUDO (belt-and-suspenders with deny list) ---
-if echo "$cmd" | grep -qE '(^|;|&&|\|)\s*sudo\s'; then
-  blocked "sudo is not allowed" "Ask the user to run privileged commands manually"
+# --- SUDO (local only — SSH sudo handled by ssh-tier-gate.sh) ---
+# Skip if this is an SSH command; the tiered SSH hook classifies remote sudo
+if ! echo "$cmd" | grep -qE '^\s*ssh\s'; then
+  if echo "$cmd" | grep -qE '(^|;|&&|\|)\s*sudo\s'; then
+    blocked "sudo is not allowed" "Ask the user to run privileged commands manually"
+  fi
 fi
 
 # --- DD EVASION (absolute paths, backslash, command prefix) ---
@@ -137,10 +140,13 @@ if echo "$cmd" | grep -qE '\bcdk\s+destroy\b'; then
   blocked "CDK destroy" "Infrastructure teardown requires explicit user approval — run manually"
 fi
 
-# --- SSH REMOTE DESTRUCTIVE COMMANDS ---
-# Local blockers above don't catch destructive commands passed inside SSH arguments
-if echo "$cmd" | grep -qE '\bssh\s+.*\b(rm\s+-|sudo\s|dd\s|mkfs|wipefs|shutdown|reboot|poweroff|halt|init\s+[06]|terraform\s+destroy)'; then
-  blocked "Destructive command via SSH" "Remote destructive operations require explicit user approval — run manually"
+# --- SSH REMOTE COMMANDS ---
+# Full SSH command classification is handled by ssh-tier-gate.sh (tiered system)
+# This blocker only catches SSH commands if the tier gate hook is somehow missing
+if ! [ -x "$HOME/.claude/hooks/ssh-tier-gate.sh" ]; then
+  if echo "$cmd" | grep -qE '\bssh\s+.*\b(dd\s+if=|mkfs|wipefs|shutdown|reboot|poweroff|halt|init\s+[06])'; then
+    blocked "Destructive command via SSH" "Remote destructive operations require explicit user approval — run manually"
+  fi
 fi
 
 # --- CREDENTIAL FILE TRANSFER ---

@@ -20,7 +20,6 @@
       "mcp__pencil"
     ],
     "deny": [
-      "Bash(*sudo *)",
       "Bash(*rm -rf *)",
       "Bash(*rm -rf)",
       "Bash(*rm -fr *)",
@@ -173,6 +172,16 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/dangerous-command-blocker.sh",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": "tool == \"Bash\"",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/ssh-tier-gate.sh",
             "timeout": 5000
           }
         ]

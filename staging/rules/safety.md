@@ -4,12 +4,11 @@
 
 - `rm -rf` on any directory
 - `git push --force` to main/master
-- `sudo` commands
+- Local `sudo` commands (remote sudo is tiered — see SSH Tiers below)
 - Installing dependencies not on whitelist
 - `--no-verify` to skip pre-commit hooks (NEVER - fix the issue instead)
 - Cloud resource deletion (gcloud, aws, cdk, terraform)
 - Docker service/stack/network removal
-- SSH commands containing destructive operations
 
 ## File Deletion Policy
 
@@ -26,7 +25,7 @@
 |-----------|------|------------|
 | Force push | Destroys history | Never to main/master |
 | rm -rf | Unrecoverable | Use trash |
-| sudo | System-wide | Always ask first |
+| Local sudo | System-wide | Always ask first |
 | DROP TABLE | Data loss | Explicit approval |
 | Hard reset | Loses commits | Soft reset preferred |
 | gcloud delete | Cloud resource loss | NEVER run from Claude |
@@ -54,12 +53,69 @@
 - NEVER run `docker compose down -v` or `--volumes` — the volume flag deletes data
 - Safe: `docker compose down` (without -v), `docker ps`, `docker logs`, `docker inspect`
 
-## Remote Server Safety
+## Remote Server Safety (SSH Tiers)
+
+SSH commands are classified into four safety tiers. The `ssh-tier-gate.sh` hook enforces these automatically.
+
+### Tier 0 — Always allowed (read-only)
+
+No confirmation needed. System info, file reading, Docker status, logs, network diagnostics.
+
+- `ssh server 'docker ps'`, `docker logs`, `docker inspect`, `docker stats`
+- `ssh server 'systemctl status ...'`, `journalctl`, `tail -f /var/log/...`
+- `ssh server 'df -h'`, `free -m`, `uptime`, `ps aux`, `ls`, `cat`, `grep`
+- `ssh server 'pg_dump ...'` (read-only backup), `psql -c "SELECT ..."`
+
+### Tier 1 — Allow with explanation (state-changing, recoverable)
+
+Claude proceeds but explains what it's doing and why.
+
+- Docker lifecycle: `docker compose up -d`, `docker compose down` (no -v), `docker compose restart`
+- Service control: `systemctl restart/start/stop/reload <service>`
+- Package updates: `sudo apt update && sudo apt upgrade`
+- Git operations: `git pull`, `git checkout`
+- Build/deploy: `npm run build`, `npm install`, dependency installs
+- Database migrations: `prisma migrate deploy`, `drizzle-kit push`
+- Web server reload: `nginx -t && systemctl reload nginx`
+- File edits: `sed -i`, `tee`, single file `rm`
+- Any `sudo` not caught by a higher tier
+
+### Tier 2 — Requires user permission (significant state change)
+
+Claude pauses and asks before proceeding.
+
+- New package installs: `sudo apt install <package>`
+- Package removal: `sudo apt remove/purge`
+- Firewall changes: `ufw`, `iptables`, `firewall-cmd`
+- SSL/cert operations: `certbot`, `acme.sh`
+- User/group management: `adduser`, `usermod`, `deluser`
+- File permission changes: `chmod`, `chown`
+- Docker volume/network create/remove
+- Docker service/stack removal
+- Database destructive ops: `DROP TABLE`, `TRUNCATE`
+- Database restore: `pg_restore`, `mongorestore`
+- Systemd unit enable/disable/mask
+- Recursive file deletion (specific directories)
+
+### Tier 3 — Hard blocked (catastrophic, irreversible)
+
+NEVER allowed via SSH. No override possible.
+
+- Server shutdown/reboot: `shutdown`, `reboot`, `poweroff`, `halt`, `init 0/6`
+- Disk destruction: `dd if=`, `mkfs`, `mke2fs`, `wipefs`
+- Wide-scope deletion: `rm -rf /`, `rm -rf /home`, `rm -rf /var`, etc.
+- Fork bombs: `:(){ :|:& };:`
+- Infrastructure destruction: `terraform destroy`, `cdk destroy`
+- Direct disk device writes: `> /dev/sda`
+- System account password changes: `passwd root`
+- Docker compose down with `-v`/`--volumes` (data loss)
+- Docker system prune
+
+### Credential Transfer — Always blocked
 
 - NEVER transfer .env or credential files to remote servers (rsync, scp, etc.)
 - NEVER transfer SSH keys (.pem, id_rsa, id_ed25519) to remote servers
 - NEVER create files containing secrets in /tmp or world-readable directories on servers
-- NEVER run destructive commands via SSH (rm, sudo, dd, mkfs, shutdown, etc.)
 - If credentials must be passed to a remote service, use env vars in the orchestrator (Dokploy, Docker Swarm, etc.), never files on disk
 
 ## Git History Protection
