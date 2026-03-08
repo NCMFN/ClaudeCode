@@ -75,6 +75,20 @@ function cleanupTestDir(testDir) {
   fs.rmSync(testDir, { recursive: true, force: true });
 }
 
+function createCommandShim(binDir, name, logFile) {
+  const shimPath = path.join(binDir, name);
+  const script = `#!/bin/sh
+{
+  printf '%s\n' "$(basename "$0")"
+  for arg in "$@"; do
+    printf '%s\n' "$arg"
+  done
+} > ${JSON.stringify(logFile)}
+`;
+  fs.writeFileSync(shimPath, script, { mode: 0o755 });
+  return shimPath;
+}
+
 // Test suite
 async function runTests() {
   console.log('\n=== Testing Hook Scripts ===\n');
@@ -699,6 +713,64 @@ async function runTests() {
     const result = await runScript(path.join(scriptsDir, 'post-edit-format.js'), stdinJson);
     assert.strictEqual(result.code, 0, 'Should exit 0 even when prettier fails');
     assert.ok(result.stdout.includes('tool_input'), 'Should pass through original data');
+  })) passed++; else failed++;
+
+  if (await asyncTest('uses CLAUDE_PACKAGE_MANAGER runner for formatter fallback', async () => {
+    const testDir = createTestDir();
+    const binDir = path.join(testDir, 'bin');
+    const logFile = path.join(testDir, 'pnpm.log');
+    fs.mkdirSync(binDir, { recursive: true });
+    createCommandShim(binDir, 'pnpm', logFile);
+
+    const testFile = path.join(testDir, 'src', 'example.ts');
+    fs.mkdirSync(path.dirname(testFile), { recursive: true });
+    fs.writeFileSync(path.join(testDir, 'package.json'), JSON.stringify({ name: 'pm-env-test' }));
+    fs.writeFileSync(path.join(testDir, '.prettierrc'), '{}');
+    fs.writeFileSync(testFile, 'const answer=42;\n');
+
+    try {
+      const stdinJson = JSON.stringify({ tool_input: { file_path: testFile } });
+      const result = await runScript(path.join(scriptsDir, 'post-edit-format.js'), stdinJson, {
+        CLAUDE_PACKAGE_MANAGER: 'pnpm',
+        PATH: `${binDir}${path.delimiter}${process.env.PATH || ''}`
+      });
+
+      assert.strictEqual(result.code, 0, 'Should exit 0 with pnpm fallback');
+      const logLines = fs.readFileSync(logFile, 'utf8').trim().split('\n');
+      assert.deepStrictEqual(logLines, ['pnpm', 'dlx', 'prettier', '--write', testFile]);
+    } finally {
+      cleanupTestDir(testDir);
+    }
+  })) passed++; else failed++;
+
+  if (await asyncTest('uses project package manager config for formatter fallback', async () => {
+    const testDir = createTestDir();
+    const binDir = path.join(testDir, 'bin');
+    const logFile = path.join(testDir, 'bunx.log');
+    fs.mkdirSync(binDir, { recursive: true });
+    fs.mkdirSync(path.join(testDir, '.claude'), { recursive: true });
+    createCommandShim(binDir, 'bunx', logFile);
+
+    const testFile = path.join(testDir, 'src', 'example.ts');
+    fs.mkdirSync(path.dirname(testFile), { recursive: true });
+    fs.writeFileSync(path.join(testDir, 'package.json'), JSON.stringify({ name: 'pm-project-test' }));
+    fs.writeFileSync(path.join(testDir, 'biome.json'), '{}');
+    fs.writeFileSync(path.join(testDir, '.claude', 'package-manager.json'), JSON.stringify({ packageManager: 'bun' }));
+    fs.writeFileSync(testFile, 'const answer=42;\n');
+
+    try {
+      const stdinJson = JSON.stringify({ tool_input: { file_path: testFile } });
+      const result = await runScript(path.join(scriptsDir, 'post-edit-format.js'), stdinJson, {
+        CLAUDE_PACKAGE_MANAGER: '',
+        PATH: `${binDir}${path.delimiter}${process.env.PATH || ''}`
+      });
+
+      assert.strictEqual(result.code, 0, 'Should exit 0 with project-config fallback');
+      const logLines = fs.readFileSync(logFile, 'utf8').trim().split('\n');
+      assert.deepStrictEqual(logLines, ['bunx', '@biomejs/biome', 'format', '--write', testFile]);
+    } finally {
+      cleanupTestDir(testDir);
+    }
   })) passed++; else failed++;
 
   // post-edit-typecheck.js tests

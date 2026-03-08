@@ -13,6 +13,7 @@
 const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { getPackageManager } = require('../lib/package-manager');
 
 const MAX_STDIN = 1024 * 1024; // 1MB limit
 let data = '';
@@ -60,13 +61,42 @@ function detectFormatter(projectRoot) {
   return null;
 }
 
-function getFormatterCommand(formatter, filePath) {
-  const npxBin = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+function getRunnerBin(bin) {
+  if (process.platform !== 'win32') return bin;
+
+  if (bin === 'npx') return 'npx.cmd';
+  if (bin === 'pnpm') return 'pnpm.cmd';
+  if (bin === 'yarn') return 'yarn.cmd';
+  if (bin === 'bunx') return 'bunx.cmd';
+
+  return bin;
+}
+
+function getFormatterRunner(projectRoot) {
+  const pm = getPackageManager({ projectDir: projectRoot });
+  const execCmd = pm?.config?.execCmd || 'npx';
+  const [bin = 'npx', ...prefix] = execCmd.split(/\s+/).filter(Boolean);
+
+  return {
+    bin: getRunnerBin(bin),
+    prefix
+  };
+}
+
+function getFormatterCommand(formatter, filePath, projectRoot) {
+  const runner = getFormatterRunner(projectRoot);
+
   if (formatter === 'biome') {
-    return { bin: npxBin, args: ['@biomejs/biome', 'format', '--write', filePath] };
+    return {
+      bin: runner.bin,
+      args: [...runner.prefix, '@biomejs/biome', 'format', '--write', filePath]
+    };
   }
   if (formatter === 'prettier') {
-    return { bin: npxBin, args: ['prettier', '--write', filePath] };
+    return {
+      bin: runner.bin,
+      args: [...runner.prefix, 'prettier', '--write', filePath]
+    };
   }
   return null;
 }
@@ -80,7 +110,7 @@ process.stdin.on('end', () => {
       try {
         const projectRoot = findProjectRoot(path.dirname(path.resolve(filePath)));
         const formatter = detectFormatter(projectRoot);
-        const cmd = getFormatterCommand(formatter, filePath);
+        const cmd = getFormatterCommand(formatter, filePath, projectRoot);
 
         if (cmd) {
           execFileSync(cmd.bin, cmd.args, {
