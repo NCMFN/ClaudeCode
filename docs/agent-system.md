@@ -28,6 +28,7 @@ model_providers/
   claude_provider.ts
   openai_provider.ts
   local_provider.ts
+  mock_provider.ts
 ```
 
 ## Commands

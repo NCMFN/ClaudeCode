@@ -118,7 +118,17 @@ function summarizeSemanticHints(insights) {
     return 'No semantic hints available.';
   }
 
-  return insights.map((insight) => `- ${insight.topic}: ${insight.fact}`).join('\n');
+  const normalizedHints = insights
+    .map((insight) => {
+      const topic = safeString(insight && insight.topic, 'Unknown topic');
+      const fact = safeString(insight && insight.fact, 'No fact provided.');
+      return `- ${topic}: ${fact}`;
+    })
+    .filter(Boolean);
+
+  return normalizedHints.length > 0
+    ? normalizedHints.join('\n')
+    : 'No semantic hints available.';
 }
 
 module.exports = {

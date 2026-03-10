@@ -18,9 +18,12 @@ class EpisodicMemory {
   }
 
   saveEpisode(episode) {
-    const runId = episode && episode.runId ? episode.runId : `episode-${Date.now()}`;
+    const runId = episode && episode.runId ? episode.runId : createFallbackRunId(this.directory);
     const filePath = path.join(this.directory, `${runId}.json`);
-    writeJson(filePath, episode);
+    writeJson(filePath, {
+      ...(episode || {}),
+      runId
+    });
     return filePath;
   }
 
@@ -83,6 +86,19 @@ class EpisodicMemory {
       })
       .sort((left, right) => right.modifiedAt - left.modifiedAt);
   }
+}
+
+function createFallbackRunId(directory) {
+  const baseId = `episode-${Date.now()}`;
+  let candidate = baseId;
+  let suffix = 0;
+
+  while (fs.existsSync(path.join(directory, `${candidate}.json`))) {
+    suffix += 1;
+    candidate = `${baseId}-${suffix}`;
+  }
+
+  return candidate;
 }
 
 function buildEpisodeSearchText(episode) {

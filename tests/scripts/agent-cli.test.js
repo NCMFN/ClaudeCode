@@ -45,7 +45,8 @@ function writeJson(filePath, value) {
 function runCli(args, cwd) {
   return spawnSync('node', [path.join(__dirname, '..', '..', 'scripts', 'agent-cli.js'), ...args], {
     cwd,
-    encoding: 'utf8'
+    encoding: 'utf8',
+    timeout: 10000
   });
 }
 
@@ -116,9 +117,8 @@ function runTests() {
     try {
       const configPath = makeConfig(tmpDir);
       const executeResult = runCli(['execute', 'Debug a Python dependency error', '--config', configPath, '--cwd', tmpDir, '--json'], tmpDir);
-      const learnResult = runCli(['learn', '--episode', 'latest', '--config', configPath, '--cwd', tmpDir, '--json'], tmpDir);
-
       assert.strictEqual(executeResult.status, 0, executeResult.stderr);
+      const learnResult = runCli(['learn', '--episode', 'latest', '--config', configPath, '--cwd', tmpDir, '--json'], tmpDir);
       assert.strictEqual(learnResult.status, 0, learnResult.stderr);
 
       const executionPayload = parseJson(executeResult.stdout);

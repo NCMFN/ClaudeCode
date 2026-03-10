@@ -1,7 +1,9 @@
 'use strict';
 
+const KNOWN_PROVIDER_IDS = new Set(['claude', 'openai', 'local', 'mock']);
+
 function createModelProvider(config, options) {
-  const providerId = getProviderId(config, options);
+  const providerId = normalizeProviderId(getProviderId(config, options));
 
   if (providerId === 'claude') {
     const { ClaudeProvider } = require('../../model_providers/claude_provider.ts');
@@ -25,6 +27,9 @@ function createModelProvider(config, options) {
   }
 
   const { MockModelProvider } = require('../../model_providers/mock_provider.ts');
+  if (providerId !== 'mock') {
+    console.warn(`Unknown model provider "${providerId}". Falling back to "mock".`);
+  }
   return new MockModelProvider({
     model: getModelName(config, options)
   });
@@ -40,6 +45,11 @@ function getProviderId(config, options) {
   }
 
   return (config && config.model && config.model.provider) || 'mock';
+}
+
+function normalizeProviderId(providerId) {
+  const normalizedProviderId = String(providerId || 'mock').trim().toLowerCase();
+  return KNOWN_PROVIDER_IDS.has(normalizedProviderId) ? normalizedProviderId : normalizedProviderId || 'mock';
 }
 
 function getModelName(config, options) {

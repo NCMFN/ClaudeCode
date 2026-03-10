@@ -29,10 +29,11 @@ class LocalProvider {
       })
     });
 
-    const payload = await response.json();
     if (!response.ok) {
-      throw new Error(`Local provider request failed: ${JSON.stringify(payload)}`);
+      throw new Error(await formatHttpError('Local provider request failed', response));
     }
+
+    const payload = await parseJsonResponse('Local provider response', response);
 
     return {
       text: String(payload.response || '').trim(),
@@ -61,10 +62,11 @@ class LocalProvider {
       })
     });
 
-    const payload = await response.json();
     if (!response.ok) {
-      throw new Error(`Local provider request failed: ${JSON.stringify(payload)}`);
+      throw new Error(await formatHttpError('Local provider request failed', response));
     }
+
+    const payload = await parseJsonResponse('Local provider response', response);
 
     const output = Array.isArray(payload.output) ? payload.output : [];
     const text = output
@@ -79,6 +81,29 @@ class LocalProvider {
       model: payload.model || this.model,
       raw: payload
     };
+  }
+}
+
+async function formatHttpError(prefix, response) {
+  const bodyText = await response.text().catch(() => '');
+  const normalizedBody = String(bodyText || '').trim();
+  return normalizedBody
+    ? `${prefix} (${response.status}): ${normalizedBody}`
+    : `${prefix} (${response.status})`;
+}
+
+async function parseJsonResponse(prefix, response) {
+  const bodyText = await response.text().catch(() => '');
+  const normalizedBody = String(bodyText || '').trim();
+
+  if (!normalizedBody) {
+    throw new Error(`${prefix} was empty.`);
+  }
+
+  try {
+    return JSON.parse(normalizedBody);
+  } catch (_err) {
+    throw new Error(`${prefix} was not valid JSON.`);
   }
 }
 

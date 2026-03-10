@@ -19,6 +19,7 @@ class ExecutorAgent {
     const reactHistory = [];
     const artifactPaths = [];
     let completionSummary = '';
+    let didComplete = false;
 
     for (let stepIndex = 0; stepIndex < this.maxSteps; stepIndex += 1) {
       const prompt = loadPrompt('builder_prompt.md', {
@@ -43,7 +44,9 @@ class ExecutorAgent {
       const normalizedDecision = normalizeDecision(parsedDecision, fallbackDecision);
 
       if (normalizedDecision.action.type === 'finish' || normalizedDecision.isComplete) {
-        completionSummary = normalizedDecision.action.summary || normalizedDecision.thought;
+        didComplete = true;
+        completionSummary = safeString(normalizedDecision.action.summary, '')
+          || safeString(normalizedDecision.thought, '');
         break;
       }
 
@@ -62,7 +65,7 @@ class ExecutorAgent {
     }
 
     return {
-      status: completionSummary ? 'completed' : 'incomplete',
+      status: didComplete ? 'completed' : 'incomplete',
       steps: reactHistory,
       summary: completionSummary || 'Builder reached the ReAct step limit before issuing a finish action.',
       artifacts: Array.from(new Set(artifactPaths))

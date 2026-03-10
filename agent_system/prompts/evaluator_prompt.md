@@ -7,7 +7,7 @@ Return JSON only with this shape:
 ```json
 {
   "status": "pass",
-  "score": 0.0,
+  "score": 0.95,
   "findings": ["string"],
   "nextSteps": ["string"],
   "confidence": "high"

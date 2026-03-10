@@ -6,6 +6,7 @@ function createTaskGraph(tasks) {
   const missingDependencies = [];
   const adjacency = {};
   const incomingCounts = {};
+  const edges = [];
 
   for (const task of normalizedTasks) {
     adjacency[task.id] = [];
@@ -24,6 +25,10 @@ function createTaskGraph(tasks) {
 
       adjacency[dependency] = [...adjacency[dependency], task.id];
       incomingCounts[task.id] += 1;
+      edges.push({
+        from: dependency,
+        to: task.id
+      });
     }
   }
 
@@ -49,10 +54,7 @@ function createTaskGraph(tasks) {
 
   return {
     nodes: normalizedTasks,
-    edges: normalizedTasks.flatMap((task) => task.dependencies.map((dependency) => ({
-      from: dependency,
-      to: task.id
-    }))),
+    edges,
     order,
     missingDependencies,
     hasCycle

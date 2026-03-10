@@ -4,7 +4,7 @@ const { cloneValue } = require('./file_utils.ts');
 
 function tryParseJson(rawValue) {
   if (rawValue === null || typeof rawValue === 'undefined') {
-    return null;
+    return undefined;
   }
 
   if (typeof rawValue === 'object') {
@@ -13,18 +13,18 @@ function tryParseJson(rawValue) {
 
   const rawText = String(rawValue).trim();
   if (!rawText) {
-    return null;
+    return undefined;
   }
 
   const direct = parseCandidate(rawText);
-  if (direct !== null) {
+  if (typeof direct !== 'undefined') {
     return direct;
   }
 
   const fencedMatch = rawText.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fencedMatch) {
     const fenced = parseCandidate(fencedMatch[1].trim());
-    if (fenced !== null) {
+    if (typeof fenced !== 'undefined') {
       return fenced;
     }
   }
@@ -33,7 +33,7 @@ function tryParseJson(rawValue) {
   const lastObjectIndex = rawText.lastIndexOf('}');
   if (firstObjectIndex >= 0 && lastObjectIndex > firstObjectIndex) {
     const objectCandidate = parseCandidate(rawText.slice(firstObjectIndex, lastObjectIndex + 1));
-    if (objectCandidate !== null) {
+    if (typeof objectCandidate !== 'undefined') {
       return objectCandidate;
     }
   }
@@ -42,25 +42,25 @@ function tryParseJson(rawValue) {
   const lastArrayIndex = rawText.lastIndexOf(']');
   if (firstArrayIndex >= 0 && lastArrayIndex > firstArrayIndex) {
     const arrayCandidate = parseCandidate(rawText.slice(firstArrayIndex, lastArrayIndex + 1));
-    if (arrayCandidate !== null) {
+    if (typeof arrayCandidate !== 'undefined') {
       return arrayCandidate;
     }
   }
 
-  return null;
+  return undefined;
 }
 
 function parseCandidate(candidate) {
   try {
     return JSON.parse(candidate);
   } catch (_err) {
-    return null;
+    return undefined;
   }
 }
 
 function parseJsonWithFallback(rawValue, fallbackValue) {
   const parsed = tryParseJson(rawValue);
-  return parsed === null ? cloneValue(fallbackValue) : parsed;
+  return typeof parsed === 'undefined' ? cloneValue(fallbackValue) : parsed;
 }
 
 function safeString(value, fallback = '') {

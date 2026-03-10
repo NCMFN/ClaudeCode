@@ -15,7 +15,7 @@ Expected outcome:
 ## Example 2: Executing a debug task
 
 ```bash
-npm run agent:execute -- "Debug a Python dependency error" -- --live
+npm run agent:execute -- "Debug a Python dependency error" --live
 ```
 
 Expected outcome:

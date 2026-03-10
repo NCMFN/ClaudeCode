@@ -59,13 +59,31 @@ async function runTests() {
   let modules = null;
   if (await test('core agent system modules load from .ts entrypoints', async () => {
     modules = {
+      executorAgent: loadModule('agent_system/builder/executor_agent.ts'),
+      jsonUtils: loadModule('agent_system/shared/json_utils.ts'),
+      openaiProvider: loadModule('model_providers/openai_provider.ts'),
+      localProvider: loadModule('model_providers/local_provider.ts'),
+      toolRunner: loadModule('agent_system/builder/tool_runner.ts'),
+      episodicMemory: loadModule('agent_system/memory/episodic_memory.ts'),
+      plannerAgent: loadModule('agent_system/planner/planner_agent.ts'),
+      providerFactory: loadModule('agent_system/shared/provider_factory.ts'),
       taskGraph: loadModule('agent_system/planner/task_graph.ts'),
+      terminalInterface: loadModule('agent_system/environment/terminal_interface.ts'),
       skillLibrary: loadModule('agent_system/memory/skill_library.ts'),
       orchestrator: loadModule('agent_system/orchestrator/agent_orchestrator.ts'),
       mockProvider: loadModule('model_providers/mock_provider.ts')
     };
 
     assert.strictEqual(typeof modules.taskGraph.createTaskGraph, 'function');
+      assert.strictEqual(typeof modules.executorAgent.ExecutorAgent, 'function');
+    assert.strictEqual(typeof modules.jsonUtils.tryParseJson, 'function');
+    assert.strictEqual(typeof modules.openaiProvider.OpenAIProvider, 'function');
+    assert.strictEqual(typeof modules.localProvider.LocalProvider, 'function');
+    assert.strictEqual(typeof modules.toolRunner.ToolRunner, 'function');
+    assert.strictEqual(typeof modules.episodicMemory.EpisodicMemory, 'function');
+    assert.strictEqual(typeof modules.plannerAgent.PlannerAgent, 'function');
+    assert.strictEqual(typeof modules.providerFactory.createModelProvider, 'function');
+    assert.strictEqual(typeof modules.terminalInterface.TerminalInterface, 'function');
     assert.strictEqual(typeof modules.skillLibrary.SkillLibrary, 'function');
     assert.strictEqual(typeof modules.orchestrator.AgentOrchestrator, 'function');
     assert.strictEqual(typeof modules.mockProvider.MockModelProvider, 'function');
@@ -104,6 +122,227 @@ async function runTests() {
     assert.deepStrictEqual(graph.order, ['plan', 'build', 'eval']);
     assert.deepStrictEqual(graph.missingDependencies, []);
     assert.strictEqual(graph.hasCycle, false);
+  })) passed++; else failed++;
+
+  if (await test('createTaskGraph omits edges for missing dependencies while reporting them', async () => {
+    const graph = modules.taskGraph.createTaskGraph([
+      {
+        id: 'build',
+        title: 'Build',
+        description: 'Implement the feature',
+        dependencies: ['missing-plan']
+      }
+    ]);
+
+    assert.deepStrictEqual(graph.edges, []);
+    assert.deepStrictEqual(graph.missingDependencies, [
+      {
+        taskId: 'build',
+        dependency: 'missing-plan'
+      }
+    ]);
+  })) passed++; else failed++;
+
+  console.log('\nExecution semantics:');
+
+  if (await test('ExecutorAgent marks finish actions as completed even with an empty summary', async () => {
+    const agent = new modules.executorAgent.ExecutorAgent({
+      provider: {
+        async complete() {
+          return {
+            text: JSON.stringify({
+              thought: 'Finished cleanly.',
+              action: {
+                type: 'finish',
+                summary: ''
+              }
+            })
+          };
+        }
+      },
+      toolRunner: {
+        async run() {
+          throw new Error('tool runner should not be called for finish actions');
+        }
+      },
+      maxSteps: 1
+    });
+
+    const result = await agent.execute({
+      goal: 'Finish immediately',
+      architecture: {}
+    });
+
+    assert.strictEqual(result.status, 'completed');
+    assert.strictEqual(result.summary, 'Finished cleanly.');
+    assert.deepStrictEqual(result.steps, []);
+  })) passed++; else failed++;
+
+  console.log('\nTool runner:');
+
+  if (await test('ToolRunner returns a structured error when a backend is missing', async () => {
+    const runner = new modules.toolRunner.ToolRunner({});
+    const result = await runner.run({
+      type: 'write_file',
+      path: 'README.md',
+      content: 'hello'
+    });
+
+    assert.strictEqual(result.ok, false);
+    assert.ok(result.error.includes('fileSystem backend'));
+  })) passed++; else failed++;
+
+  console.log('\nMemory helpers:');
+
+  if (await test('EpisodicMemory generates unique fallback runIds when Date.now collides', async () => {
+    const tmpDir = makeTmpDir();
+    const originalDateNow = Date.now;
+    try {
+      const memory = new modules.episodicMemory.EpisodicMemory({
+        cwd: tmpDir,
+        directory: 'agent_memory/episodic'
+      });
+
+      Date.now = () => 1700000000000;
+      const firstPath = memory.saveEpisode({ goal: 'first' });
+      const secondPath = memory.saveEpisode({ goal: 'second' });
+
+      assert.notStrictEqual(firstPath, secondPath);
+      assert.ok(fs.existsSync(firstPath));
+      assert.ok(fs.existsSync(secondPath));
+    } finally {
+      Date.now = originalDateNow;
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  })) passed++; else failed++;
+
+  console.log('\nPlanner prompts:');
+
+  if (await test('PlannerAgent omits undefined semantic hint fields from the prompt', async () => {
+    const requests = [];
+    const planner = new modules.plannerAgent.PlannerAgent({
+      provider: {
+        async complete(request) {
+          requests.push(request);
+          return {
+            text: JSON.stringify({
+              summary: 'ok',
+              tasks: []
+            })
+          };
+        }
+      }
+    });
+
+    await planner.plan({
+      goal: 'Plan with partial semantic hints',
+      semanticHints: [
+        { topic: 'Caching' },
+        { fact: 'Warm the cache before the rollout.' },
+        {}
+      ]
+    });
+
+    assert.strictEqual(requests.length, 1);
+    assert.ok(!requests[0].prompt.includes('undefined'));
+    assert.ok(requests[0].prompt.includes('Unknown topic'));
+    assert.ok(requests[0].prompt.includes('No fact provided.'));
+  })) passed++; else failed++;
+
+  console.log('\nSafety helpers:');
+
+  if (await test('tryParseJson preserves a valid JSON null instead of treating it as a parse failure', async () => {
+    const parsed = modules.jsonUtils.tryParseJson('null');
+    const parsedWithFallback = modules.jsonUtils.parseJsonWithFallback('null', { fallback: true });
+
+    assert.strictEqual(parsed, null);
+    assert.strictEqual(parsedWithFallback, null);
+  })) passed++; else failed++;
+
+  if (await test('createModelProvider warns before falling back from an unknown provider id', async () => {
+    const originalWarn = console.warn;
+    const warnings = [];
+    try {
+      console.warn = (message) => warnings.push(message);
+      const provider = modules.providerFactory.createModelProvider({
+        model: {
+          provider: 'claudee',
+          name: 'mock-agent-team'
+        }
+      });
+
+      assert.strictEqual(provider.constructor.name, 'MockModelProvider');
+      assert.strictEqual(warnings.length, 1);
+      assert.ok(warnings[0].includes('claudee'));
+    } finally {
+      console.warn = originalWarn;
+    }
+  })) passed++; else failed++;
+
+  if (await test('TerminalInterface blocks normalized destructive commands without substring false positives', async () => {
+    const terminal = new modules.terminalInterface.TerminalInterface({
+      cwd: process.cwd(),
+      config: {
+        tool_permissions: {
+          allow_terminal: true,
+          blocked_commands: ['rm -rf', 'git reset --hard']
+        }
+      }
+    });
+
+    const blockedResult = await terminal.runCommand('FOO=1 rm -r -f dist');
+    const allowedResult = await terminal.runCommand('echo "rm -rf"');
+
+    assert.strictEqual(blockedResult.ok, false);
+    assert.strictEqual(blockedResult.error, 'Command was blocked by the execution policy.');
+    assert.strictEqual(allowedResult.ok, true);
+  })) passed++; else failed++;
+
+  console.log('\nProvider error handling:');
+
+  if (await test('OpenAIProvider surfaces HTTP status for non-JSON error bodies', async () => {
+    const originalFetch = global.fetch;
+    try {
+      global.fetch = async () => ({
+        ok: false,
+        status: 502,
+        text: async () => '<html>bad gateway</html>'
+      });
+
+      const provider = new modules.openaiProvider.OpenAIProvider({
+        apiKey: 'test-key'
+      });
+
+      await assert.rejects(
+        () => provider.complete({ prompt: 'hello' }),
+        /OpenAI provider request failed \(502\): <html>bad gateway<\/html>/
+      );
+    } finally {
+      global.fetch = originalFetch;
+    }
+  })) passed++; else failed++;
+
+  if (await test('LocalProvider surfaces HTTP status for non-JSON error bodies', async () => {
+    const originalFetch = global.fetch;
+    try {
+      global.fetch = async () => ({
+        ok: false,
+        status: 503,
+        text: async () => 'service unavailable'
+      });
+
+      const provider = new modules.localProvider.LocalProvider({
+        baseUrl: 'http://localhost:9999',
+        kind: 'openai-compatible'
+      });
+
+      await assert.rejects(
+        () => provider.complete({ prompt: 'hello' }),
+        /Local provider request failed \(503\): service unavailable/
+      );
+    } finally {
+      global.fetch = originalFetch;
+    }
   })) passed++; else failed++;
 
   console.log('\nSkill library:');

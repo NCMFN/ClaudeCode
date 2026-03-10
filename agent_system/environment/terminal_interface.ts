@@ -85,8 +85,133 @@ function isBlockedCommand(command, config) {
     ? config.tool_permissions.blocked_commands
     : [];
 
-  const normalizedCommand = String(command || '').toLowerCase();
-  return blockedCommands.some((blockedFragment) => normalizedCommand.includes(String(blockedFragment).toLowerCase()));
+  const commandTokens = normalizeCommandTokens(tokenizeShellCommand(command));
+  return blockedCommands.some((blockedCommand) => matchesBlockedPattern(commandTokens, normalizeCommandTokens(tokenizeShellCommand(blockedCommand))));
+}
+
+function matchesBlockedPattern(commandTokens, blockedTokens) {
+  if (commandTokens.length === 0 || blockedTokens.length === 0) {
+    return false;
+  }
+
+  if (commandTokens[0] !== blockedTokens[0]) {
+    return false;
+  }
+
+  const blockedRemainder = blockedTokens.slice(1);
+  if (blockedRemainder.length === 0) {
+    return true;
+  }
+
+  if (blockedRemainder.every(isFlagToken)) {
+    const commandFlags = collectLeadingFlags(commandTokens.slice(1));
+    const commandFlagSet = new Set(commandFlags);
+    return blockedRemainder.every((flag) => commandFlagSet.has(flag));
+  }
+
+  if (commandTokens.length < blockedTokens.length) {
+    return false;
+  }
+
+  return blockedTokens.every((token, index) => commandTokens[index] === token);
+}
+
+function collectLeadingFlags(tokens) {
+  const flags = [];
+  for (const token of tokens) {
+    if (!isFlagToken(token)) {
+      break;
+    }
+
+    flags.push(token);
+  }
+
+  return flags;
+}
+
+function isFlagToken(token) {
+  return typeof token === 'string' && token.startsWith('-');
+}
+
+function normalizeCommandTokens(tokens) {
+  return stripLeadingEnvAssignments(tokens)
+    .map((token) => String(token || '').trim().toLowerCase())
+    .filter(Boolean)
+    .flatMap(expandShortFlags);
+}
+
+function stripLeadingEnvAssignments(tokens) {
+  const normalizedTokens = Array.isArray(tokens) ? [...tokens] : [];
+  while (normalizedTokens.length > 0 && /^[a-z_][a-z0-9_]*=.*$/i.test(normalizedTokens[0])) {
+    normalizedTokens.shift();
+  }
+
+  return normalizedTokens;
+}
+
+function expandShortFlags(token) {
+  if (!/^-[a-zA-Z]{2,}$/.test(token)) {
+    return [token];
+  }
+
+  return token
+    .slice(1)
+    .split('')
+    .map((flag) => `-${flag.toLowerCase()}`);
+}
+
+function tokenizeShellCommand(command) {
+  const input = String(command || '');
+  const tokens = [];
+  let current = '';
+  let quote = '';
+
+  for (let index = 0; index < input.length; index += 1) {
+    const char = input[index];
+
+    if (quote) {
+      if (char === '\\' && quote === '"' && index + 1 < input.length) {
+        current += input[index + 1];
+        index += 1;
+        continue;
+      }
+
+      if (char === quote) {
+        quote = '';
+        continue;
+      }
+
+      current += char;
+      continue;
+    }
+
+    if (char === '"' || char === '\'') {
+      quote = char;
+      continue;
+    }
+
+    if (/\s/.test(char)) {
+      if (current) {
+        tokens.push(current);
+        current = '';
+      }
+      continue;
+    }
+
+    if (char === '\\' && index + 1 < input.length) {
+      current += input[index + 1];
+      index += 1;
+      continue;
+    }
+
+    current += char;
+  }
+
+  if (current) {
+    tokens.push(current);
+  }
+
+  return tokens;
 }
 
 module.exports = {
