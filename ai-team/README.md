@@ -86,9 +86,10 @@ Pass this block between stages:
 For a new project:
 
 1. Open `ai-team/workflows/start-new-project.md`.
-2. Give Codex the project goal, target users, constraints, and tech stack preferences.
-3. Let Codex run Planner -> Architect -> Builder -> Reviewer in order.
-4. Keep each stage output as a handoff block so the next stage works from explicit context.
+2. Or use the copy-paste bootstrap template in `ai-team/NEW_PROJECT_PROMPT.md`.
+3. Give Codex the project goal, target users, constraints, and tech stack preferences.
+4. Let Codex run Planner -> Architect -> Builder -> Reviewer in order.
+5. Keep each stage output as a handoff block so the next stage works from explicit context.
 
 For existing codebases:
 
