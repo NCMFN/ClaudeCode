@@ -64,7 +64,14 @@ After delivering the answer, immediately continue the active task from the exact
 ## Edge Cases
 
 **No question provided (`/aside` with nothing after it):**
-Respond: "What would you like to know? (ask your question and I'll answer without losing the current task context)"
+Respond:
+```
+ASIDE: no question provided
+
+What would you like to know? (ask your question and I'll answer without losing the current task context)
+
+— Back to task: [one-line description of what was being done]
+```
 
 **Question reveals a potential problem with the current task:**
 Flag it clearly before resuming:
@@ -89,13 +96,14 @@ Wait for the user's answer — do not make assumptions.
 Answer from the live context. If the file was read earlier in the session, reference it directly. If not, read it now (read-only) and answer with a file:line reference.
 
 **No active task (nothing in progress when `/aside` is invoked):**
-Use a reduced wrapper that omits the "Back to task" line since there is nothing to resume:
+Still use the standard wrapper so the response shape stays consistent:
 ```
 ASIDE: [restate the question briefly]
 
 [Your answer here]
+
+— Back to task: no active task to resume
 ```
-Do not include `— Back to task:` when there is no active task.
 
 **Question requires a long answer:**
 Give the essential answer concisely, then offer:
