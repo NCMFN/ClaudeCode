@@ -98,6 +98,28 @@ function cleanupTestDir(testDir) {
   fs.rmSync(testDir, { recursive: true, force: true });
 }
 
+function normalizeComparablePath(targetPath) {
+  if (!targetPath) return '';
+
+  let normalizedPath = String(targetPath).trim().replace(/\\/g, '/');
+
+  if (/^\/[a-zA-Z]\//.test(normalizedPath)) {
+    normalizedPath = `${normalizedPath[1]}:/${normalizedPath.slice(3)}`;
+  }
+
+  if (/^[a-zA-Z]:\//.test(normalizedPath)) {
+    normalizedPath = `${normalizedPath[0].toUpperCase()}:${normalizedPath.slice(2)}`;
+  }
+
+  try {
+    normalizedPath = fs.realpathSync(normalizedPath);
+  } catch {
+    // Fall through to string normalization when the path cannot be resolved directly.
+  }
+
+  return path.normalize(normalizedPath).replace(/\\/g, '/').replace(/^([a-z]):/, (_, drive) => `${drive.toUpperCase()}:`);
+}
+
 function createCommandShim(binDir, baseName, logFile) {
   fs.mkdirSync(binDir, { recursive: true });
 
@@ -2199,7 +2221,11 @@ async function runTests() {
         assert.ok(registry[projectId], 'registry should contain the detected project');
         assert.strictEqual(metadata.id, projectId, 'project.json should include the detected id');
         assert.strictEqual(metadata.name, path.basename(repoDir), 'project.json should include the repo name');
-        assert.strictEqual(fs.realpathSync(metadata.root), fs.realpathSync(repoDir), 'project.json should include the repo root');
+        assert.strictEqual(
+          normalizeComparablePath(metadata.root),
+          normalizeComparablePath(repoDir),
+          'project.json should include the repo root',
+        );
         assert.strictEqual(metadata.remote, 'https://github.com/example/ecc-test.git', 'project.json should include the sanitized remote');
         assert.ok(metadata.created_at, 'project.json should include created_at');
         assert.ok(metadata.last_seen, 'project.json should include last_seen');
