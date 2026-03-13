@@ -109,12 +109,12 @@ fi
 # Env-var checks first (cheapest — no subprocess spawning):
 
 # Layer 1: CLAUDE_CODE_ENTRYPOINT — set by Claude Code itself to indicate how
-# it was invoked. Non-interactive SDK/programmatic sessions use sdk-ts, sdk-py,
-# sdk-cli, mcp, or remote. Interactive terminal sessions use "cli".
-# This universally catches automation from ANY tool using the Anthropic SDK
-# without requiring that tool to set any special env vars.
+# it was invoked. Only interactive terminal sessions should continue; treat any
+# explicit non-cli entrypoint as automated so future entrypoint types fail closed
+# without requiring updates here.
 case "${CLAUDE_CODE_ENTRYPOINT:-cli}" in
-  sdk-ts|sdk-py|sdk-cli|mcp|remote) exit 0 ;;
+  cli) ;;
+  *) exit 0 ;;
 esac
 
 # Layer 2: Respect ECC_HOOK_PROFILE=minimal — suppresses non-essential hooks
