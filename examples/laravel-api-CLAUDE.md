@@ -232,6 +232,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Repositories\OrderRepository;
+use App\Services\OrderMailer;
 
 final class SendOrderConfirmation implements ShouldQueue
 {
@@ -239,7 +241,7 @@ final class SendOrderConfirmation implements ShouldQueue
 
     public function __construct(private int $orderId) {}
 
-    public function handle(OrderRepository $orders, Mailer $mailer): void
+    public function handle(OrderRepository $orders, OrderMailer $mailer): void
     {
         $order = $orders->findOrFail($this->orderId);
         $mailer->sendOrderConfirmation($order);

@@ -133,14 +133,21 @@ $user = User::factory()->state(['role' => 'admin'])->create();
 
 ```php
 use App\Models\Project;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-public function test_project_can_be_retrieved_by_slug(): void
+final class ProjectRepositoryTest extends TestCase
 {
-    $project = Project::factory()->create(['slug' => 'alpha']);
+    use RefreshDatabase;
 
-    $found = Project::query()->where('slug', 'alpha')->firstOrFail();
+    public function test_project_can_be_retrieved_by_slug(): void
+    {
+        $project = Project::factory()->create(['slug' => 'alpha']);
 
-    $this->assertSame($project->id, $found->id);
+        $found = Project::query()->where('slug', 'alpha')->firstOrFail();
+
+        $this->assertSame($project->id, $found->id);
+    }
 }
 ```
 
