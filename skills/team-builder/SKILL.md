@@ -1,6 +1,6 @@
 ---
 name: team-builder
-description: Interactive agent picker — browse available agents by domain, compose custom teams, and dispatch them in parallel on a task. Use when saying "team builder", "pick agents", "assemble team", or "browse agents".
+description: Interactive agent picker for composing and dispatching parallel teams
 origin: community
 ---
 
@@ -33,7 +33,7 @@ agents/
     └── discovery-coach.md
 ```
 
-**Flat layout** — all agents in one directory, domain inferred from filename prefix (e.g., `engineering-security-engineer.md` → Engineering). If no prefix pattern is detected, agents are grouped under "General":
+**Flat layout** — domain inferred from shared filename prefixes. A prefix counts as a domain when 2+ files share it. Files with unique prefixes go to "General". Note: the algorithm splits at the first `-`, so multi-word domains (e.g., `product-management`) should use the subdirectory layout instead:
 
 ```
 agents/
@@ -45,12 +45,12 @@ agents/
 
 ## Configuration
 
-The agent directory path is probed in order. The first location that contains `.md` files wins:
+Agent directories are probed in order and results are merged:
 
 1. `./agents/**/*.md` + `./agents/*.md` — project-local agents (both depths)
 2. `~/.claude/agents/**/*.md` + `~/.claude/agents/*.md` — global agents (both depths)
 
-Results from both locations are merged and deduplicated (by agent name). A custom path can be used instead if the user specifies one.
+Results from all locations are merged and deduplicated by agent name. Project-local agents take precedence over global agents with the same name. A custom path can be used instead if the user specifies one.
 
 ## How It Works
 
@@ -58,7 +58,7 @@ Results from both locations are merged and deduplicated (by agent name). A custo
 
 Glob agent directories using the probe order above. Exclude README files. For each file found:
 - **Subdirectory layout:** extract the domain from the parent folder name
-- **Flat layout:** extract the domain from the filename prefix before the first `-` that separates domain from agent name (e.g., `engineering-security-engineer.md` → Engineering). If no prefix pattern is detected, use "General"
+- **Flat layout:** collect all filename prefixes (text before the first `-`). A prefix qualifies as a domain only if it appears in 2 or more filenames (e.g., `engineering-security-engineer.md` and `engineering-software-architect.md` both start with `engineering` → Engineering domain). Files with unique prefixes (e.g., `code-reviewer.md`, `tdd-guide.md`) are grouped under "General"
 - Extract the agent name from the first `# Heading`
 - Extract a one-line summary from the first paragraph after the heading
 
@@ -85,7 +85,7 @@ Accept flexible input:
 - Names: "security + seo" fuzzy-matches against discovered agents
 - "all from engineering" selects every agent in that domain
 
-If more than 5 agents are selected, list them and ask the user to narrow down: "You selected N agents (max 5). Pick which to keep, or say 'top 5'."
+If more than 5 agents are selected, list them alphabetically and ask the user to narrow down: "You selected N agents (max 5). Pick which to keep, or say 'first 5' to use the first five alphabetically."
 
 Confirm selection:
 ```
@@ -118,7 +118,7 @@ If only 1 agent was selected, skip synthesis and present the output directly.
 - **Dynamic discovery only.** Never hardcode agent lists. New files in the directory auto-appear in the menu.
 - **Max 5 agents per team.** More than 5 produces diminishing returns and excessive token usage. Enforce at selection time.
 - **Parallel dispatch.** All agents run simultaneously — use the Agent tool's parallel invocation pattern.
-- **No TeamCreate needed.** Ad-hoc teams use parallel Agent calls. Reserve TeamCreate for pre-built teams where agents need to debate or respond to each other.
+- **Parallel Agent calls, not TeamCreate.** This skill uses parallel Agent tool calls for independent work. TeamCreate (a Claude Code tool for multi-agent dialogue) is only needed when agents must debate or respond to each other.
 
 ## Examples
 
