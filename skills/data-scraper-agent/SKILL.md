@@ -122,7 +122,6 @@ my-agent/
 ├── data/
 │   └── feedback.json        # User decision history (auto-updated)
 ├── .env.example
-├── config.yaml
 ├── setup.py                 # One-time DB/schema creation
 ├── enrich_existing.py       # Backfill AI scores on old rows
 ├── requirements.txt
@@ -145,7 +144,7 @@ Method: [REST API / HTML scraping / RSS feed]
 """
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone
 from scraper.filters import is_relevant
 
 HEADERS = {
@@ -177,7 +176,7 @@ def _normalise(raw: dict) -> dict:
         "name": raw.get("title", ""),
         "url": raw.get("link", ""),
         "source": "MySource",
-        "date_found": datetime.utcnow().date().isoformat(),
+        "date_found": datetime.now(timezone.utc).date().isoformat(),
         # add domain-specific fields here
     }
 ```
@@ -281,12 +280,10 @@ def _parse(resp) -> dict:
 
 ```python
 # ai/pipeline.py
+import json
 import yaml
 from pathlib import Path
 from ai.client import generate
-
-BATCH_SIZE = 5  # items per API call
-
 
 def analyse_batch(items: list[dict], context: str = "", preference_prompt: str = "") -> list[dict]:
     """Analyse items in batches. Returns items enriched with AI fields."""
@@ -294,8 +291,9 @@ def analyse_batch(items: list[dict], context: str = "", preference_prompt: str =
     model = config.get("ai", {}).get("model", "gemini-2.5-flash")
     rate_limit = config.get("ai", {}).get("rate_limit_seconds", 7.0)
     min_score = config.get("ai", {}).get("min_score", 0)
+    batch_size = config.get("ai", {}).get("batch_size", 5)
 
-    batches = [items[i:i + BATCH_SIZE] for i in range(0, len(items), BATCH_SIZE)]
+    batches = [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
     print(f"  [AI] {len(items)} items → {len(batches)} API calls")
 
     enriched = []
@@ -341,9 +339,6 @@ def _build_prompt(batch, context, preference_prompt, config):
 # Instructions
 Return: {{"analyses": [{{"score": <0-100>, "summary": "<2 sentences>", "notes": "<why this matches or doesn't>"}} for each item in order]}}
 Be concise. Score 90+=excellent match, 70-89=good, 50-69=ok, <50=weak."""
-
-
-import json
 ```
 
 ---
@@ -471,6 +466,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from scraper.sources import my_source          # add your sources
+
+# NOTE: This example uses Notion. If storage.provider is "sheets" or "supabase",
+# replace this import with storage.sheets_sync or storage.supabase_sync and update
+# the env var and sync() call accordingly.
 from storage.notion_sync import sync
 
 SOURCES = [
@@ -481,9 +480,17 @@ def ai_enabled():
     return bool(os.environ.get("GEMINI_API_KEY"))
 
 def main():
-    db_id = os.environ.get("NOTION_DATABASE_ID")
-    if not db_id:
-        print("ERROR: NOTION_DATABASE_ID not set"); sys.exit(1)
+    config = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text())
+    provider = config.get("storage", {}).get("provider", "notion")
+
+    # Resolve the storage target identifier from env based on provider
+    if provider == "notion":
+        db_id = os.environ.get("NOTION_DATABASE_ID")
+        if not db_id:
+            print("ERROR: NOTION_DATABASE_ID not set"); sys.exit(1)
+    else:
+        # Extend here for sheets (SHEET_ID) or supabase (SUPABASE_TABLE) etc.
+        print(f"ERROR: provider '{provider}' not yet wired in main.py"); sys.exit(1)
 
     config = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text())
     all_items = []
@@ -505,12 +512,16 @@ def main():
     print(f"Unique items: {len(deduped)}")
 
     if ai_enabled() and deduped:
-        from ai.memory import load_feedback, build_preference_prompt, sync_feedback
+        from ai.memory import load_feedback, build_preference_prompt
         from ai.pipeline import analyse_batch
 
-        feedback = sync_feedback(db_id, config)     # pull decisions from Notion
+        # load_feedback() reads data/feedback.json written by your feedback sync script.
+        # To keep it current, implement a separate feedback_sync.py that queries your
+        # storage provider for items with positive/negative statuses and calls save_feedback().
+        feedback = load_feedback()
         preference = build_preference_prompt(feedback)
-        context = (Path(__file__).parent.parent / "profile" / "context.md").read_text()
+        context_path = Path(__file__).parent.parent / "profile" / "context.md"
+        context = context_path.read_text() if context_path.exists() else ""
         deduped = analyse_batch(deduped, context=context, preference_prompt=preference)
     else:
         print("[AI] Skipped — GEMINI_API_KEY not set")
@@ -535,6 +546,9 @@ on:
     - cron: "0 */3 * * *"  # every 3 hours — adjust to your needs
   workflow_dispatch:        # allow manual trigger
 
+permissions:
+  contents: write   # required for the feedback-history commit step
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -550,6 +564,10 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      # Uncomment if Playwright is enabled in requirements.txt
+      # - name: Install Playwright browsers
+      #   run: python -m playwright install chromium --with-deps
+
       - name: Run agent
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -563,7 +581,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/feedback.json || true
           git diff --cached --quiet || git commit -m "chore: update feedback history"
-          git push || true
+          git push
 ```
 
 ---
@@ -741,8 +759,6 @@ Before marking the agent complete:
 
 ## Reference Implementation
 
-A complete working example — job listings → Notion with AI scoring, learning, and GitHub Actions:
-
-**[imrobinsingh/job-hunt-agent](https://github.com/imrobinsingh/job-hunt-agent)**
-
-Built with this exact architecture. Scrapes 4+ job boards, batches Gemini calls, learns from Applied/Rejected decisions in Notion. 100% free.
+A complete working agent built with this exact architecture would scrape 4+ sources,
+batch Gemini calls, learn from Applied/Rejected decisions stored in Notion, and run
+100% free on GitHub Actions. Follow Steps 1–9 above to build your own.
