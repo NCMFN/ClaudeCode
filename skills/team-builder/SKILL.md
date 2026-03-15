@@ -40,7 +40,9 @@ agents/
 ├── engineering-security-engineer.md
 ├── engineering-software-architect.md
 ├── marketing-seo-specialist.md
-└── sales-discovery-coach.md
+├── marketing-content-strategist.md
+├── sales-discovery-coach.md
+└── sales-outbound-strategist.md
 ```
 
 ## Configuration
@@ -59,7 +61,7 @@ Results from all locations are merged and deduplicated by agent name. Project-lo
 Glob agent directories using the probe order above. Exclude README files. For each file found:
 - **Subdirectory layout:** extract the domain from the parent folder name
 - **Flat layout:** collect all filename prefixes (text before the first `-`). A prefix qualifies as a domain only if it appears in 2 or more filenames (e.g., `engineering-security-engineer.md` and `engineering-software-architect.md` both start with `engineering` → Engineering domain). Files with unique prefixes (e.g., `code-reviewer.md`, `tdd-guide.md`) are grouped under "General"
-- Extract the agent name from the first `# Heading`
+- Extract the agent name from the first `# Heading`. If no heading is found, derive the name from the filename (strip `.md`, replace hyphens with spaces, title-case)
 - Extract a one-line summary from the first paragraph after the heading
 
 If no agent files are found after probing all locations, inform the user: "No agent files found. Checked: [list paths probed]. Expected: markdown files in one of those directories." Then stop.
@@ -101,6 +103,7 @@ What should they work on? (describe the task):
    - `subagent_type: "general-purpose"`
    - `prompt: "{agent file content}\n\nTask: {task description}"`
    - Each agent runs independently — no inter-agent communication needed
+4. If an agent fails (error, timeout, or empty output), note the failure inline (e.g., "Security Engineer: failed — [reason]") and continue with results from agents that succeeded
 
 ### Step 5: Synthesize Results
 
