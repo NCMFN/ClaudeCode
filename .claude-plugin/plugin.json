@@ -3,11 +3,11 @@
   "version": "1.8.0",
   "description": "Complete collection of battle-tested Claude Code configs from an Anthropic hackathon winner - agents, skills, hooks, and rules evolved over 10+ months of intensive daily use",
   "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaanmustafa"
+    "name": "lianghaofeng",
+    "url": "https://github.com/lianghaofeng"
   },
-  "homepage": "https://github.com/affaan-m/everything-claude-code",
-  "repository": "https://github.com/affaan-m/everything-claude-code",
+  "homepage": "https://github.com/lianghaofeng/everything-claude-code",
+  "repository": "https://github.com/lianghaofeng/everything-claude-code",
   "license": "MIT",
   "keywords": [
     "claude-code",

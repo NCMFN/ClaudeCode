@@ -25,17 +25,17 @@
     "slides"
   ],
   "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaanmustafa"
+    "name": "lianghaofeng",
+    "url": "https://github.com/lianghaofeng"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/affaan-m/everything-claude-code.git"
+    "url": "git+https://github.com/lianghaofeng/everything-claude-code.git"
   },
-  "homepage": "https://github.com/affaan-m/everything-claude-code#readme",
+  "homepage": "https://github.com/lianghaofeng/everything-claude-code#readme",
   "bugs": {
-    "url": "https://github.com/affaan-m/everything-claude-code/issues"
+    "url": "https://github.com/lianghaofeng/everything-claude-code/issues"
   },
   "files": [
     ".agents/",
