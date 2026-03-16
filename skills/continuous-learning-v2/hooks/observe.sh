@@ -79,8 +79,11 @@ fi
 
 CONFIG_DIR="${HOME}/.claude/homunculus"
 
-# Skip if disabled
+# Skip if disabled (check both default and CLV2_CONFIG-derived locations)
 if [ -f "$CONFIG_DIR/disabled" ]; then
+  exit 0
+fi
+if [ -n "${CLV2_CONFIG:-}" ] && [ -f "$(dirname "$CLV2_CONFIG")/disabled" ]; then
   exit 0
 fi
 
@@ -280,7 +283,14 @@ _CHECK_OBSERVER_RUNNING() {
   if [ -f "$pid_file" ]; then
     local pid
     pid=$(cat "$pid_file" 2>/dev/null)
-    if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+    # Validate PID is a positive integer (>1) to prevent signaling invalid targets
+    case "$pid" in
+      ''|*[!0-9]*|0|1)
+        rm -f "$pid_file" 2>/dev/null || true
+        return 1
+        ;;
+    esac
+    if kill -0 "$pid" 2>/dev/null; then
       return 0  # Process is alive
     fi
     # Stale PID file - remove it
@@ -301,9 +311,9 @@ else
   # Use effective config path for both existence check and reading
   EFFECTIVE_CONFIG="$CONFIG_FILE"
   if [ -f "$EFFECTIVE_CONFIG" ] && [ -n "$PYTHON_CMD" ]; then
-    _enabled=$("$PYTHON_CMD" -c "
+    _enabled=$(CLV2_CONFIG_PATH="$EFFECTIVE_CONFIG" "$PYTHON_CMD" -c "
 import json, os
-with open('$EFFECTIVE_CONFIG') as f:
+with open(os.environ['CLV2_CONFIG_PATH']) as f:
     cfg = json.load(f)
 print(str(cfg.get('observer', {}).get('enabled', False)).lower())
 " 2>/dev/null || echo "false")
@@ -355,7 +365,11 @@ fi
 signaled_pids=" "
 for pid_file in "${PROJECT_DIR}/.observer.pid" "${CONFIG_DIR}/.observer.pid"; do
   if [ -f "$pid_file" ]; then
-    observer_pid=$(cat "$pid_file")
+    observer_pid=$(cat "$pid_file" 2>/dev/null || true)
+    # Validate PID is a positive integer (>1)
+    case "$observer_pid" in
+      ''|*[!0-9]*|0|1) rm -f "$pid_file" 2>/dev/null || true; continue ;;
+    esac
     # Deduplicate: skip if already signaled this pass
     case "$signaled_pids" in
       *" $observer_pid "*) continue ;;
