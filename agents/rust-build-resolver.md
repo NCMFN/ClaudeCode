@@ -26,7 +26,7 @@ cargo check 2>&1
 cargo clippy -- -D warnings 2>&1
 cargo fmt --check 2>&1
 cargo tree --duplicates 2>/dev/null || echo "no duplicates"
-cargo audit 2>/dev/null || echo "cargo-audit not installed"
+command -v cargo-audit >/dev/null && cargo audit || echo "cargo-audit not installed"
 ```
 
 ## Resolution Workflow
