@@ -305,7 +305,7 @@ let handles: Vec<_> = (0..10).map(|_| {
 }).collect();
 
 for handle in handles {
-    handle.join().unwrap();
+    handle.join().expect("worker thread panicked");
 }
 ```
 
