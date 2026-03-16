@@ -279,6 +279,79 @@ function runTests() {
     }
   })) passed++; else failed++;
 
+  if (test('reports permission errors without silently removing managed files', () => {
+    if (process.platform === 'win32' || process.getuid?.() === 0) {
+      console.log('    (skipped — chmod ineffective on Windows/root)');
+      return;
+    }
+
+    const homeDir = createTempDir('uninstall-home-');
+    const projectRoot = createTempDir('uninstall-project-');
+
+    try {
+      const targetRoot = path.join(projectRoot, '.cursor');
+      fs.mkdirSync(targetRoot, { recursive: true });
+      const normalizedTargetRoot = fs.realpathSync(targetRoot);
+      const statePath = path.join(normalizedTargetRoot, 'ecc-install-state.json');
+      const managedPath = path.join(normalizedTargetRoot, 'managed-note.txt');
+      fs.writeFileSync(managedPath, 'managed\n');
+
+      writeState(statePath, {
+        adapter: { id: 'cursor-project', target: 'cursor', kind: 'project' },
+        targetRoot: normalizedTargetRoot,
+        installStatePath: statePath,
+        request: {
+          profile: null,
+          modules: ['platform-configs'],
+          includeComponents: [],
+          excludeComponents: [],
+          legacyLanguages: [],
+          legacyMode: false,
+        },
+        resolution: {
+          selectedModules: ['platform-configs'],
+          skippedModules: [],
+        },
+        operations: [
+          {
+            kind: 'copy-file',
+            moduleId: 'platform-configs',
+            sourceRelativePath: 'rules/common/coding-style.md',
+            destinationPath: managedPath,
+            strategy: 'preserve-relative-path',
+            ownership: 'managed',
+            scaffoldOnly: false,
+          },
+        ],
+        source: {
+          repoVersion: CURRENT_PACKAGE_VERSION,
+          repoCommit: 'abc123',
+          manifestVersion: CURRENT_MANIFEST_VERSION,
+        },
+      });
+
+      fs.chmodSync(normalizedTargetRoot, 0o555);
+
+      const uninstallResult = run(['--target', 'cursor', '--json'], {
+        cwd: projectRoot,
+        homeDir,
+      });
+
+      assert.strictEqual(uninstallResult.code, 1, uninstallResult.stderr);
+      const parsed = JSON.parse(uninstallResult.stdout);
+      assert.strictEqual(parsed.summary.errorCount, 1);
+      assert.strictEqual(parsed.results[0].status, 'error');
+      assert.ok(parsed.results[0].error);
+      assert.ok(fs.existsSync(managedPath));
+      assert.ok(fs.existsSync(statePath));
+    } finally {
+      const targetRoot = path.join(projectRoot, '.cursor');
+      try { fs.chmodSync(targetRoot, 0o755); } catch { /* best-effort */ }
+      cleanup(homeDir);
+      cleanup(projectRoot);
+    }
+  })) passed++; else failed++;
+
   console.log(`\nResults: Passed: ${passed}, Failed: ${failed}`);
   process.exit(failed > 0 ? 1 : 0);
 }
