@@ -272,10 +272,17 @@ print(json.dumps(observation))
 ' >> "$OBSERVATIONS_FILE"
 
 # Lazy-start observer if enabled but not running (first-time setup)
-if [ ! -f "${PROJECT_DIR}/.observer.pid" ]; then
-  # Check if observer is enabled in config
+# Use flock for atomic check-then-act to prevent race conditions
+LAZY_START_LOCK="${PROJECT_DIR}/.observer-start.lock"
+if [ -f "${CONFIG_DIR}/disabled" ]; then
+  OBSERVER_ENABLED=false
+else
   OBSERVER_ENABLED=false
   CONFIG_FILE="${SKILL_ROOT}/config.json"
+  # Allow CLV2_CONFIG override
+  if [ -n "${CLV2_CONFIG:-}" ]; then
+    CONFIG_FILE="$CLV2_CONFIG"
+  fi
   if [ -f "$CONFIG_FILE" ] && [ -n "$PYTHON_CMD" ]; then
     _enabled=$("$PYTHON_CMD" -c "
 import json, os
@@ -286,10 +293,17 @@ print(str(cfg.get('observer', {}).get('enabled', False)).lower())
       OBSERVER_ENABLED=true
     fi
   fi
+fi
 
-  if [ "$OBSERVER_ENABLED" = "true" ]; then
-    "${SKILL_ROOT}/agents/start-observer.sh" start 2>/dev/null || true
-  fi
+# Check both project-scoped AND global PID files
+if [ "$OBSERVER_ENABLED" = "true" ] && [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
+  (
+    flock -n 9 || exit 0
+    # Double-check PID files after acquiring lock
+    if [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
+      "${SKILL_ROOT}/agents/start-observer.sh" start 2>/dev/null || true
+    fi
+  ) 9>"$LAZY_START_LOCK"
 fi
 
 # Signal observer if running (check both project-scoped and global observer)
