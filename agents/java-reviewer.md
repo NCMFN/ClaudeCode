@@ -15,6 +15,7 @@ When invoked:
 
 ### CRITICAL -- Security
 - **SQL injection**: String concatenation in `@Query` or `JdbcTemplate` — use bind parameters (`:param` or `?`)
+- **Command injection**: User-controlled input passed to `ProcessBuilder`, `Runtime.exec()`, or `ScriptEngine` — validate and sanitise before any process invocation
 - **Hardcoded secrets**: API keys, passwords, tokens in source — must come from environment or secrets manager
 - **PII/token logging**: `log.info(...)` calls near auth code that expose passwords or tokens
 - **Missing `@Valid`**: Raw `@RequestBody` without Bean Validation — never trust unvalidated input
@@ -82,4 +83,4 @@ Read `pom.xml`, `build.gradle`, or `build.gradle.kts` to determine the build too
 - **Warning**: MEDIUM issues only
 - **Block**: CRITICAL or HIGH issues found
 
-For detailed Spring Boot patterns and examples, see `skill: spring-boot`.
+For detailed Spring Boot patterns and examples, see `skill: springboot-patterns`.
