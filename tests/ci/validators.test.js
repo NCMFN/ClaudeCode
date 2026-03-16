@@ -140,6 +140,40 @@ function runValidator(validatorName) {
   }
 }
 
+function runCatalogValidator(overrides = {}) {
+  const validatorPath = path.join(validatorsDir, 'catalog.js');
+  let source = fs.readFileSync(validatorPath, 'utf8');
+  source = source.replace(/^#!.*\n/, '');
+  source = `process.argv.push('--text');\n${source}`;
+
+  const resolvedOverrides = {
+    ROOT: repoRoot,
+    README_PATH: path.join(repoRoot, 'README.md'),
+    AGENTS_PATH: path.join(repoRoot, 'AGENTS.md'),
+    ...overrides,
+  };
+
+  for (const [constant, overridePath] of Object.entries(resolvedOverrides)) {
+    const dirRegex = new RegExp(`const ${constant} = .*?;`);
+    source = source.replace(dirRegex, `const ${constant} = ${JSON.stringify(overridePath)};`);
+  }
+
+  try {
+    const stdout = execFileSync('node', ['-e', source], {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+      timeout: 10000,
+    });
+    return { code: 0, stdout, stderr: '' };
+  } catch (err) {
+    return {
+      code: err.status || 1,
+      stdout: err.stdout || '',
+      stderr: err.stderr || '',
+    };
+  }
+}
+
 function runTests() {
   console.log('\n=== Testing CI Validators ===\n');
 
@@ -260,6 +294,44 @@ function runTests() {
     const result = runValidator('validate-hooks');
     assert.strictEqual(result.code, 0, `Should pass, got stderr: ${result.stderr}`);
     assert.ok(result.stdout.includes('Validated'), 'Should output validation count');
+  })) passed++; else failed++;
+
+  // ==========================================
+  // catalog.js
+  // ==========================================
+  console.log('\ncatalog.js:');
+
+  if (test('passes on real project catalog counts', () => {
+    const result = runCatalogValidator();
+    assert.strictEqual(result.code, 0, `Should pass, got stderr: ${result.stderr}`);
+    assert.ok(result.stdout.includes('Documentation counts match the repository catalog.'), 'Should report matching counts');
+  })) passed++; else failed++;
+
+  if (test('fails when README and AGENTS catalog counts drift', () => {
+    const testDir = createTestDir();
+    const readmePath = path.join(testDir, 'README.md');
+    const agentsPath = path.join(testDir, 'AGENTS.md');
+
+    fs.mkdirSync(path.join(testDir, 'agents'), { recursive: true });
+    fs.mkdirSync(path.join(testDir, 'commands'), { recursive: true });
+    fs.mkdirSync(path.join(testDir, 'skills', 'demo-skill'), { recursive: true });
+
+    fs.writeFileSync(path.join(testDir, 'agents', 'planner.md'), '---\nmodel: sonnet\ntools: Read\n---\n# Planner');
+    fs.writeFileSync(path.join(testDir, 'commands', 'plan.md'), '---\ndescription: Plan\n---\n# Plan');
+    fs.writeFileSync(path.join(testDir, 'skills', 'demo-skill', 'SKILL.md'), '---\nname: demo-skill\ndescription: Demo skill\norigin: ECC\n---\n# Demo Skill');
+
+    fs.writeFileSync(readmePath, 'Access to 99 agents, 99 skills, and 99 commands.\n| Feature | Claude Code | Cursor IDE | Codex CLI | OpenCode |\n|---------|------------|------------|-----------|----------|\n| Agents | ✅ 99 agents | Shared | Shared | 1 |\n| Commands | ✅ 99 commands | Shared | Shared | 1 |\n| Skills | ✅ 99 skills | Shared | Shared | 1 |\n');
+    fs.writeFileSync(agentsPath, 'This is a **production-ready AI coding plugin** providing 99 specialized agents, 99 skills, 99 commands, and automated hook workflows for software development.\n\n```\nagents/          — 99 specialized subagents\nskills/          — 99 workflow skills and domain knowledge\ncommands/        — 99 slash commands\n```\n');
+
+    const result = runCatalogValidator({
+      ROOT: testDir,
+      README_PATH: readmePath,
+      AGENTS_PATH: agentsPath,
+    });
+
+    assert.strictEqual(result.code, 1, 'Should fail when catalog counts drift');
+    assert.ok((result.stdout + result.stderr).includes('Documentation count mismatches found:'), 'Should report mismatches');
+    cleanupTestDir(testDir);
   })) passed++; else failed++;
 
   if (test('exits 0 when hooks.json does not exist', () => {
