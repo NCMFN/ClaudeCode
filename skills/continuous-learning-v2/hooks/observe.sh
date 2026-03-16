@@ -273,7 +273,22 @@ print(json.dumps(observation))
 
 # Lazy-start observer if enabled but not running (first-time setup)
 # Use flock for atomic check-then-act to prevent race conditions
+# Fallback for macOS (no flock): use lockfile or skip
 LAZY_START_LOCK="${PROJECT_DIR}/.observer-start.lock"
+_CHECK_OBSERVER_RUNNING() {
+  local pid_file="$1"
+  if [ -f "$pid_file" ]; then
+    local pid
+    pid=$(cat "$pid_file" 2>/dev/null)
+    if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+      return 0  # Process is alive
+    fi
+    # Stale PID file - remove it
+    rm -f "$pid_file" 2>/dev/null || true
+  fi
+  return 1  # No PID file or process dead
+}
+
 if [ -f "${CONFIG_DIR}/disabled" ]; then
   OBSERVER_ENABLED=false
 else
@@ -283,10 +298,13 @@ else
   if [ -n "${CLV2_CONFIG:-}" ]; then
     CONFIG_FILE="$CLV2_CONFIG"
   fi
-  if [ -f "$CONFIG_FILE" ] && [ -n "$PYTHON_CMD" ]; then
+  # Use effective config path for both existence check and reading
+  EFFECTIVE_CONFIG="$CONFIG_FILE"
+  if [ -f "$EFFECTIVE_CONFIG" ] && [ -n "$PYTHON_CMD" ]; then
     _enabled=$("$PYTHON_CMD" -c "
 import json, os
-cfg = json.load(open(os.environ.get('CLV2_CONFIG', '$CONFIG_FILE')))
+with open('$EFFECTIVE_CONFIG') as f:
+    cfg = json.load(f)
 print(str(cfg.get('observer', {}).get('enabled', False)).lower())
 " 2>/dev/null || echo "false")
     if [ "$_enabled" = "true" ]; then
@@ -295,23 +313,52 @@ print(str(cfg.get('observer', {}).get('enabled', False)).lower())
   fi
 fi
 
-# Check both project-scoped AND global PID files
-if [ "$OBSERVER_ENABLED" = "true" ] && [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
-  (
-    flock -n 9 || exit 0
-    # Double-check PID files after acquiring lock
-    if [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
-      "${SKILL_ROOT}/agents/start-observer.sh" start 2>/dev/null || true
+# Check both project-scoped AND global PID files (with stale PID recovery)
+if [ "$OBSERVER_ENABLED" = "true" ]; then
+  # Clean up stale PID files first
+  _CHECK_OBSERVER_RUNNING "${PROJECT_DIR}/.observer.pid" || true
+  _CHECK_OBSERVER_RUNNING "${CONFIG_DIR}/.observer.pid" || true
+
+  # Check if observer is now running after cleanup
+  if [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
+    # Use flock if available (Linux), fallback for macOS
+    if command -v flock >/dev/null 2>&1; then
+      (
+        flock -n 9 || exit 0
+        # Double-check PID files after acquiring lock
+        _CHECK_OBSERVER_RUNNING "${PROJECT_DIR}/.observer.pid" || true
+        _CHECK_OBSERVER_RUNNING "${CONFIG_DIR}/.observer.pid" || true
+        if [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
+          nohup "${SKILL_ROOT}/agents/start-observer.sh" start >/dev/null 2>&1 &
+        fi
+      ) 9>"$LAZY_START_LOCK"
+    else
+      # macOS fallback: use lockfile if available, otherwise skip
+      if command -v lockfile >/dev/null 2>&1; then
+        lockfile -r 1 "$LAZY_START_LOCK" 2>/dev/null || exit 0
+        _CHECK_OBSERVER_RUNNING "${PROJECT_DIR}/.observer.pid" || true
+        _CHECK_OBSERVER_RUNNING "${CONFIG_DIR}/.observer.pid" || true
+        if [ ! -f "${PROJECT_DIR}/.observer.pid" ] && [ ! -f "${CONFIG_DIR}/.observer.pid" ]; then
+          nohup "${SKILL_ROOT}/agents/start-observer.sh" start >/dev/null 2>&1 &
+        fi
+        rm -f "$LAZY_START_LOCK" 2>/dev/null || true
+      fi
     fi
-  ) 9>"$LAZY_START_LOCK"
+  fi
 fi
 
-# Signal observer if running (check both project-scoped and global observer)
+# Signal observer if running (check both project-scoped and global observer, deduplicate)
+signaled_pids=" "
 for pid_file in "${PROJECT_DIR}/.observer.pid" "${CONFIG_DIR}/.observer.pid"; do
   if [ -f "$pid_file" ]; then
     observer_pid=$(cat "$pid_file")
+    # Deduplicate: skip if already signaled this pass
+    case "$signaled_pids" in
+      *" $observer_pid "*) continue ;;
+    esac
     if kill -0 "$observer_pid" 2>/dev/null; then
       kill -USR1 "$observer_pid" 2>/dev/null || true
+      signaled_pids="${signaled_pids}${observer_pid} "
     fi
   fi
 done
