@@ -10,13 +10,17 @@ const fs = require('fs');
 const os = require('os');
 const { spawn, spawnSync } = require('child_process');
 
-function toBashPath(filePath) {
-  if (process.platform !== 'win32') {
+function toBashPath(filePath, platform = process.platform, env = process.env) {
+  if (platform !== 'win32') {
     return filePath;
   }
 
+  const isWsl = Boolean(env.WSLENV || env.WSL_DISTRO_NAME);
+  const isCygwin = Boolean(env.CYGWIN || (typeof env.OSTYPE === 'string' && env.OSTYPE.toLowerCase().includes('cygwin')));
+  const prefix = isWsl ? '/mnt/' : isCygwin ? '/cygdrive/' : '/';
+
   return String(filePath)
-    .replace(/^([A-Za-z]):/, (_, driveLetter) => `/mnt/${driveLetter.toLowerCase()}`)
+    .replace(/^([A-Za-z]):/, (_, driveLetter) => `${prefix}${driveLetter.toLowerCase()}`)
     .replace(/\\/g, '/');
 }
 
@@ -246,6 +250,50 @@ async function runTests() {
   let failed = 0;
 
   const scriptsDir = path.join(__dirname, '..', '..', 'scripts', 'hooks');
+
+  console.log('Path conversion helpers:');
+
+  if (
+    test('toBashPath keeps non-Windows paths unchanged', () => {
+      const sourcePath = '/tmp/ecc/hooks/observe.sh';
+      assert.strictEqual(toBashPath(sourcePath, 'linux', {}), sourcePath);
+    })
+  )
+    passed++;
+  else failed++;
+
+  if (
+    test('toBashPath uses WSL /mnt drive mounts when WSL is detected', () => {
+      assert.strictEqual(
+        toBashPath('E:\\workspace\\hooks\\observe.sh', 'win32', { WSLENV: 'HOME/u' }),
+        '/mnt/e/workspace/hooks/observe.sh'
+      );
+    })
+  )
+    passed++;
+  else failed++;
+
+  if (
+    test('toBashPath uses MSYS-style drive mounts outside WSL by default', () => {
+      assert.strictEqual(
+        toBashPath('E:\\workspace\\hooks\\observe.sh', 'win32', { MSYSTEM: 'MINGW64' }),
+        '/e/workspace/hooks/observe.sh'
+      );
+    })
+  )
+    passed++;
+  else failed++;
+
+  if (
+    test('toBashPath uses /cygdrive mounts when Cygwin is detected', () => {
+      assert.strictEqual(
+        toBashPath('E:\\workspace\\hooks\\observe.sh', 'win32', { OSTYPE: 'cygwin' }),
+        '/cygdrive/e/workspace/hooks/observe.sh'
+      );
+    })
+  )
+    passed++;
+  else failed++;
 
   // session-start.js tests
   console.log('session-start.js:');
