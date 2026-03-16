@@ -319,7 +319,7 @@ let (tx, rx) = mpsc::sync_channel(16); // Bounded channel with backpressure
 for i in 0..5 {
     let tx = tx.clone();
     std::thread::spawn(move || {
-        tx.send(format!("message {i}")).unwrap();
+        tx.send(format!("message {i}")).expect("receiver disconnected");
     });
 }
 drop(tx); // Close sender so rx iterator terminates
