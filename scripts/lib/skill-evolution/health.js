@@ -253,8 +253,11 @@ function formatHealthReport(report, options = {}) {
 }
 
 module.exports = {
+  PENDING_AMENDMENT_STATUSES,
+  calculateSuccessRate,
   collectSkillHealth,
   discoverSkills,
+  filterRecordsWithinDays,
   formatHealthReport,
   summarizeHealthReport,
 };
