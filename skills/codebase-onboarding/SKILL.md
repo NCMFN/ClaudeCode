@@ -8,7 +8,7 @@ origin: ECC
 
 Systematically analyze an unfamiliar codebase and produce a structured onboarding guide. Designed for developers joining a new project or setting up Claude Code in an existing repo for the first time.
 
-## When to Activate
+## When to Use
 
 - First time opening a project with Claude Code
 - Joining a new team or repository
@@ -16,7 +16,7 @@ Systematically analyze an unfamiliar codebase and produce a structured onboardin
 - User asks to generate a CLAUDE.md for a project
 - User says "onboard me" or "walk me through this repo"
 
-## Onboarding Workflow
+## How It Works
 
 ### Phase 1: Reconnaissance
 
@@ -127,6 +127,7 @@ Produce two outputs:
 [Diagram or description of how components connect]
 
 ## Key Entry Points
+<!-- Example for a Next.js project — replace with detected paths -->
 - **API routes**: `src/app/api/` — Next.js route handlers
 - **UI pages**: `src/app/(dashboard)/` — authenticated pages
 - **Database**: `prisma/schema.prisma` — data model source of truth
@@ -152,6 +153,7 @@ Produce two outputs:
 - **Build for production**: `npm run build`
 
 ## Where to Look
+<!-- Example for a Next.js project — replace with detected paths -->
 | I want to... | Look at... |
 |--------------|-----------|
 | Add an API endpoint | `src/app/api/` |
@@ -163,7 +165,7 @@ Produce two outputs:
 
 #### Output 2: Starter CLAUDE.md
 
-Generate a project-specific CLAUDE.md based on detected conventions:
+Generate or update a project-specific CLAUDE.md based on detected conventions. If `CLAUDE.md` already exists, read it first and enhance it — preserve existing project-specific instructions and clearly call out what was added or changed.
 
 ```markdown
 # Project Instructions
@@ -208,3 +210,20 @@ Generate a project-specific CLAUDE.md based on detected conventions:
 - Listing every dependency — highlight only the ones that shape how you write code
 - Describing obvious directory names — `src/` doesn't need an explanation
 - Copying the README — the onboarding guide adds structural insight the README lacks
+
+## Examples
+
+### Example 1: First time in a new repo
+**User**: "Onboard me to this codebase"
+**Action**: Run full 4-phase workflow → produce Onboarding Guide + Starter CLAUDE.md
+**Output**: Two artifacts written to `docs/onboarding-guide.md` and `CLAUDE.md`
+
+### Example 2: Generate CLAUDE.md for existing project
+**User**: "Generate a CLAUDE.md for this project"
+**Action**: Run Phases 1-3, skip Onboarding Guide, produce only CLAUDE.md
+**Output**: Project-specific `CLAUDE.md` with detected conventions
+
+### Example 3: Enhance existing CLAUDE.md
+**User**: "Update the CLAUDE.md with current project conventions"
+**Action**: Read existing CLAUDE.md, run Phases 1-3, merge new findings
+**Output**: Updated `CLAUDE.md` with additions clearly marked
