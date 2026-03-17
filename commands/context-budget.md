@@ -117,9 +117,9 @@ Using the data collected in Steps 1-3:
 Context Budget Report
 ═══════════════════════════════════════
 
-Total estimated overhead: ~45,100 tokens
+Total estimated overhead: ~66,400 tokens
 Context model: Claude Sonnet (200K window)
-Effective available context: ~154,900 tokens (77.5%)
+Effective available context: ~133,600 tokens (66.8%)
 
 Component Breakdown:
 ┌─────────────────┬────────┬───────────┐
@@ -128,7 +128,7 @@ Component Breakdown:
 │ Agents          │ 16     │ ~12,400   │
 │ Skills          │ 28     │ ~6,200    │
 │ Rules           │ 12     │ ~2,800    │
-│ MCP tools       │ 45     │ ~22,500   │
+│ MCP tools       │ 87     │ ~43,500   │
 │ CLAUDE.md       │ 2      │ ~1,200    │
 └─────────────────┴────────┴───────────┘
 
@@ -153,7 +153,7 @@ Top 3 Optimizations:
 2. Remove 3 CLI-replaceable MCP servers → save ~1,500 tokens
 3. Deduplicate rules → save ~400 tokens
 
-Potential savings: ~5,100 tokens (20.6% of current overhead)
+Potential savings: ~5,100 tokens (7.7% of current overhead)
 ```
 
 ## Verbose Mode
