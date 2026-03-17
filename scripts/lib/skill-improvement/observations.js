@@ -31,10 +31,15 @@ function createObservationId() {
 }
 
 function createSkillObservation(input) {
+  if (!input || typeof input !== 'object') {
+    throw new Error('input must be an object');
+  }
+
+  const skill = input.skill && typeof input.skill === 'object' ? input.skill : null;
   const task = ensureString(input.task, 'task');
-  const skillId = ensureString(input.skill && input.skill.id, 'skill.id');
-  const skillPath = typeof input.skill.path === 'string' && input.skill.path.trim().length > 0
-    ? input.skill.path.trim()
+  const skillId = ensureString(skill && skill.id, 'skill.id');
+  const skillPath = typeof skill?.path === 'string' && skill.path.trim().length > 0
+    ? skill.path.trim()
     : null;
   const success = Boolean(input.success);
   const error = input.error === null || input.error === undefined ? null : String(input.error);

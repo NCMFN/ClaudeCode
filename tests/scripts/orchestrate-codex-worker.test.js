@@ -40,7 +40,12 @@ function toBashPath(filePath) {
   }
 
   const normalized = String(filePath).replace(/\\/g, '/');
-  const drivePrefix = getBashPathStyle() === 'wsl' ? '/mnt/' : '/';
+  const bashPathStyle = getBashPathStyle();
+  const drivePrefix = bashPathStyle === 'wsl'
+    ? '/mnt/'
+    : bashPathStyle === 'cygwin'
+      ? '/cygdrive/'
+      : '/';
   return normalized.replace(/^([A-Za-z]):/, (_, driveLetter) => `${drivePrefix}${driveLetter.toLowerCase()}`);
 }
 

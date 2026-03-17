@@ -81,9 +81,24 @@ _CLV2_PROJECTS_DIR="${_CLV2_HOMUNCULUS_DIR}/projects"
 _CLV2_REGISTRY_FILE="${_CLV2_HOMUNCULUS_DIR}/projects.json"
 
 _clv2_resolve_python_cmd() {
-  if [ -n "${CLV2_PYTHON_CMD:-}" ] && command -v "$CLV2_PYTHON_CMD" >/dev/null 2>&1; then
-    command -v "$CLV2_PYTHON_CMD"
-    return 0
+  if [ -n "${CLV2_PYTHON_CMD:-}" ]; then
+    local normalized_python_cmd=""
+    normalized_python_cmd="$(_clv2_normalize_path "$CLV2_PYTHON_CMD")"
+
+    if [ -f "$normalized_python_cmd" ] && [ -x "$normalized_python_cmd" ]; then
+      printf '%s\n' "$normalized_python_cmd"
+      return 0
+    fi
+
+    if command -v "$CLV2_PYTHON_CMD" >/dev/null 2>&1; then
+      command -v "$CLV2_PYTHON_CMD"
+      return 0
+    fi
+
+    if [ "$normalized_python_cmd" != "$CLV2_PYTHON_CMD" ] && command -v "$normalized_python_cmd" >/dev/null 2>&1; then
+      command -v "$normalized_python_cmd"
+      return 0
+    fi
   fi
 
   if command -v python3 >/dev/null 2>&1; then

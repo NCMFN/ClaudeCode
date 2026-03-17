@@ -70,6 +70,13 @@ test('observation layer writes and reads structured skill outcomes', () => {
   }
 });
 
+test('observation layer rejects non-object input before dereferencing nested fields', () => {
+  assert.throws(
+    () => createSkillObservation(null),
+    /input must be an object/
+  );
+});
+
 test('health inspector traces recurring failures for a skill across runs', () => {
   const projectRoot = makeProjectRoot('ecc-skill-health-');
 
