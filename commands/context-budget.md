@@ -43,7 +43,7 @@ For each skill:
   - Read SKILL.md
   - Count approximate tokens
   - Flag skills over 400 lines
-  - Note if skill has multiple harness versions (double-counted?)
+  - Check for duplicates in .agents/skills/ (Codex harness copies — skip if identical)
 ```
 
 **Rules** (`rules/**/*.md`)
