@@ -10,16 +10,16 @@ Use this workflow when working on **add-new-skill-or-agent** in `everything-clau
 
 ## Goal
 
-Adds a new skill or agent to the system, including documentation and registration.
+Adds a new skill or agent to the system, including documentation and configuration.
 
 ## Common Files
 
-- `skills/*/SKILL.md`
-- `agents/*.md`
-- `AGENTS.md`
-- `rules/common/agents.md`
 - `.agents/skills/*/SKILL.md`
 - `.agents/skills/*/agents/openai.yaml`
+- `skills/*/SKILL.md`
+- `.cursor/skills/*/SKILL.md`
+- `AGENTS.md`
+- `rules/common/agents.md`
 
 ## Suggested Sequence
 
@@ -30,10 +30,11 @@ Adds a new skill or agent to the system, including documentation and registratio
 
 ## Typical Commit Signals
 
-- Create or update SKILL.md in skills/<skill-name>/ or agents/<agent-name>.md
-- Add or update agent/skill documentation in AGENTS.md or rules/common/agents.md
-- Optionally, add openai.yaml for agent harness integration
-- Register new skill/agent in install manifests or documentation counts
+- Create or update SKILL.md in .agents/skills/{skill-name}/
+- Add or update agents/openai.yaml in .agents/skills/{skill-name}/agents/
+- Optionally, add SKILL.md in skills/{skill-name}/ and/or .cursor/skills/{skill-name}/
+- Register agent in AGENTS.md if applicable
+- Update rules/common/agents.md if applicable
 
 ## Notes
 
