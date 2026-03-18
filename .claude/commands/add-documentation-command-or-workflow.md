@@ -15,6 +15,7 @@ Adds documentation for a new command or workflow to the project.
 ## Common Files
 
 - `.claude/commands/add-command-or-workflow-doc.md`
+- `.claude/commands/add-documentation-command-or-workflow.md`
 
 ## Suggested Sequence
 
@@ -25,8 +26,8 @@ Adds documentation for a new command or workflow to the project.
 
 ## Typical Commit Signals
 
-- Create or update a markdown file in .claude/commands/ with the name add-command-or-workflow-doc.md
-- Commit the new or updated documentation file
+- Create a new markdown file in .claude/commands/ with a name matching add-*-command-or-workflow*.md
+- Commit the new file with a message referencing the ECC bundle.
 
 ## Notes
 
