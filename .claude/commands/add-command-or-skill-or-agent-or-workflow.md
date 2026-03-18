@@ -25,7 +25,7 @@ Adds a new command, skill, agent, or workflow to the ECC system.
 
 ## Typical Commit Signals
 
-- Create or update .claude/commands/add-command-or-skill-or-agent-or-workflow.md
+- Create or update .claude/commands/add-command-or-skill-or-agent-or-workflow.md with the new entity details
 
 ## Notes
 
