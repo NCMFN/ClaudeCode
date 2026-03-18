@@ -14,10 +14,8 @@ Adds new documentation for a command, skill, agent, or workflow to the ECC bundl
 
 ## Common Files
 
-- `.claude/commands/add-documentation-command-or-skill.md`
 - `.claude/commands/add-documentation-command-or-skill-or-agent-or-workflow.md`
-- `.claude/commands/add-documentation-skill-or-agent.md`
-- `.claude/commands/add-documentation-command-or-workflow.md`
+- `.claude/commands/add-documentation-command-or-skill.md`
 
 ## Suggested Sequence
 
@@ -28,7 +26,7 @@ Adds new documentation for a command, skill, agent, or workflow to the ECC bundl
 
 ## Typical Commit Signals
 
-- Create a new markdown file in .claude/commands/ with a descriptive name (e.g., add-documentation-command-or-skill.md, add-documentation-command-or-skill-or-agent-or-workflow.md, add-documentation-skill-or-agent.md, add-documentation-command-or-workflow.md).
+- Create a new markdown file in .claude/commands/ with a descriptive name (e.g., add-documentation-command-or-skill-or-agent-or-workflow.md or add-documentation-command-or-skill.md).
 - Commit the new file with a message referencing the ECC bundle.
 
 ## Notes
