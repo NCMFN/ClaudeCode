@@ -77,7 +77,7 @@ public Order createOrder(String customerName, BigDecimal amount) {
 ## Error Messages
 
 - Never expose stack traces, internal paths, or SQL errors in API responses
-- Centralize error handling — map exceptions to safe, generic client messages
+- Map exceptions to safe, generic client messages at handler boundaries
 - Log detailed errors server-side; return generic messages to clients
 
 ```java
