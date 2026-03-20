@@ -10,14 +10,13 @@ Use this workflow when working on **add-new-skill** in `everything-claude-code`.
 
 ## Goal
 
-Adds a new skill to the project, including documentation and agent harnesses.
+Adds a new skill to the everything-claude-code project, including documentation and configuration.
 
 ## Common Files
 
-- `skills/*/SKILL.md`
-- `.agents/skills/*/SKILL.md`
-- `.agents/skills/*/agents/openai.yaml`
-- `.cursor/skills/*/SKILL.md`
+- `.claude/commands/add-new-skill.md`
+- `.agents/skills/everything-claude-code/SKILL.md`
+- `.claude/skills/everything-claude-code/SKILL.md`
 
 ## Suggested Sequence
 
@@ -28,9 +27,9 @@ Adds a new skill to the project, including documentation and agent harnesses.
 
 ## Typical Commit Signals
 
-- Create SKILL.md in skills/skill-name/
-- Create SKILL.md in .agents/skills/skill-name/ and/or .cursor/skills/skill-name/ for cross-harness support
-- Add agents/openai.yaml in .agents/skills/skill-name/ if applicable
+- Create or update '.claude/commands/add-new-skill.md' with instructions or documentation for the new skill.
+- Create or update '.agents/skills/everything-claude-code/SKILL.md' to document the skill's details.
+- Create or update '.claude/skills/everything-claude-code/SKILL.md' for additional documentation or configuration.
 
 ## Notes
 
