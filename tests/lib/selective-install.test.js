@@ -23,7 +23,7 @@ const {
 } = require('../../scripts/lib/install/request');
 
 const {
-  loadInstallManifests,
+  loadInstallManifests, // eslint-disable-line no-unused-vars
   listInstallComponents,
   resolveInstallPlan,
 } = require('../../scripts/lib/install-manifests');
