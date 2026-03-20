@@ -52,9 +52,9 @@ Sort every component into a bucket:
 
 | Bucket | Criteria | Action |
 |--------|----------|--------|
-| **Always needed** | Used in >80% of sessions, core to workflow | Keep |
-| **Sometimes needed** | Domain-specific, occasional use | Consider on-demand activation |
-| **Rarely needed** | Niche, overlapping, or outdated | Remove or lazy-load |
+| **Always needed** | Referenced in CLAUDE.md, backs an active command, or matches current project type | Keep |
+| **Sometimes needed** | Domain-specific (e.g. language patterns), not referenced in CLAUDE.md | Consider on-demand activation |
+| **Rarely needed** | No command reference, overlapping content, or no obvious project match | Remove or lazy-load |
 
 ### Phase 3: Detect Issues
 
