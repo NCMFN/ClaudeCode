@@ -10,16 +10,13 @@ Use this workflow when working on **add-command-or-skill-bundle** in `everything
 
 ## Goal
 
-Adds a new command or skill bundle to the ECC system, typically by creating or updating files in .claude/commands/, .claude/skills/, .agents/skills/, or related directories.
+Adds a new command or skill bundle to the ECC system, typically as a markdown documentation or configuration file.
 
 ## Common Files
 
 - `.claude/commands/*.md`
 - `.claude/skills/*/SKILL.md`
 - `.agents/skills/*/SKILL.md`
-- `.claude/team/*.json`
-- `.claude/rules/*.md`
-- `.claude/research/*.md`
 
 ## Suggested Sequence
 
@@ -30,8 +27,9 @@ Adds a new command or skill bundle to the ECC system, typically by creating or u
 
 ## Typical Commit Signals
 
-- Create or update a markdown or JSON file in .claude/commands/, .claude/skills/, .agents/skills/, .claude/team/, .claude/rules/, .claude/research/, .claude/enterprise/, .codex/agents/, or similar directories.
-- Commit the new or updated file(s) with a message indicating the addition of an ECC bundle.
+- Create a new markdown file in .claude/commands/ or .claude/skills/ or .agents/skills/ directory.
+- Document the new command or skill in the respective SKILL.md or command file.
+- Optionally, update related configuration files.
 
 ## Notes
 
