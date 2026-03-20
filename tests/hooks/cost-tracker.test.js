@@ -31,10 +31,12 @@ function makeTempDir() {
 function runScript(input, envOverrides = {}) {
   const inputStr = typeof input === 'string' ? input : JSON.stringify(input);
   // Mirror HOME to USERPROFILE for Windows (os.homedir() checks USERPROFILE on Windows)
-  const env = { ...process.env, ...envOverrides };
-  if ('HOME' in envOverrides && !('USERPROFILE' in envOverrides)) {
-    env.USERPROFILE = envOverrides.HOME;
-  }
+  const shouldMirrorHome = 'HOME' in envOverrides && !('USERPROFILE' in envOverrides);
+  const env = {
+    ...process.env,
+    ...envOverrides,
+    ...(shouldMirrorHome ? { USERPROFILE: envOverrides.HOME } : {})
+  };
   const result = spawnSync('node', [script], {
     encoding: 'utf8',
     input: inputStr,
@@ -53,16 +55,18 @@ function runTests() {
   // 1. Passes through input on stdout
   test('passes through input on stdout', () => {
     const tmpHome = makeTempDir();
-    const input = {
-      model: 'claude-sonnet-4-20250514',
-      usage: { input_tokens: 100, output_tokens: 50 }
-    };
-    const inputStr = JSON.stringify(input);
-    const result = runScript(input, { HOME: tmpHome });
-    assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
-    assert.strictEqual(result.stdout, inputStr, 'Expected stdout to match original input');
-
-    fs.rmSync(tmpHome, { recursive: true, force: true });
+    try {
+      const input = {
+        model: 'claude-sonnet-4-20250514',
+        usage: { input_tokens: 100, output_tokens: 50 }
+      };
+      const inputStr = JSON.stringify(input);
+      const result = runScript(input, { HOME: tmpHome });
+      assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
+      assert.strictEqual(result.stdout, inputStr, 'Expected stdout to match original input');
+    } finally {
+      fs.rmSync(tmpHome, { recursive: true, force: true });
+    }
   })
     ? passed++
     : failed++;
@@ -70,25 +74,27 @@ function runTests() {
   // 2. Creates metrics file when given valid usage data
   test('creates metrics file when given valid usage data', () => {
     const tmpHome = makeTempDir();
-    const input = {
-      model: 'claude-sonnet-4-20250514',
-      usage: { input_tokens: 1000, output_tokens: 500 }
-    };
-    const result = runScript(input, { HOME: tmpHome });
-    assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
+    try {
+      const input = {
+        model: 'claude-sonnet-4-20250514',
+        usage: { input_tokens: 1000, output_tokens: 500 }
+      };
+      const result = runScript(input, { HOME: tmpHome });
+      assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
 
-    const metricsFile = path.join(tmpHome, '.claude', 'metrics', 'costs.jsonl');
-    assert.ok(fs.existsSync(metricsFile), `Expected metrics file to exist at ${metricsFile}`);
+      const metricsFile = path.join(tmpHome, '.claude', 'metrics', 'costs.jsonl');
+      assert.ok(fs.existsSync(metricsFile), `Expected metrics file to exist at ${metricsFile}`);
 
-    const content = fs.readFileSync(metricsFile, 'utf8').trim();
-    const row = JSON.parse(content);
-    assert.strictEqual(row.input_tokens, 1000, 'Expected input_tokens to be 1000');
-    assert.strictEqual(row.output_tokens, 500, 'Expected output_tokens to be 500');
-    assert.ok(row.timestamp, 'Expected timestamp to be present');
-    assert.ok(typeof row.estimated_cost_usd === 'number', 'Expected estimated_cost_usd to be a number');
-    assert.ok(row.estimated_cost_usd > 0, 'Expected estimated_cost_usd to be positive');
-
-    fs.rmSync(tmpHome, { recursive: true, force: true });
+      const content = fs.readFileSync(metricsFile, 'utf8').trim();
+      const row = JSON.parse(content);
+      assert.strictEqual(row.input_tokens, 1000, 'Expected input_tokens to be 1000');
+      assert.strictEqual(row.output_tokens, 500, 'Expected output_tokens to be 500');
+      assert.ok(row.timestamp, 'Expected timestamp to be present');
+      assert.ok(typeof row.estimated_cost_usd === 'number', 'Expected estimated_cost_usd to be a number');
+      assert.ok(row.estimated_cost_usd > 0, 'Expected estimated_cost_usd to be positive');
+    } finally {
+      fs.rmSync(tmpHome, { recursive: true, force: true });
+    }
   })
     ? passed++
     : failed++;
@@ -96,12 +102,14 @@ function runTests() {
   // 3. Handles empty input gracefully
   test('handles empty input gracefully', () => {
     const tmpHome = makeTempDir();
-    const result = runScript('', { HOME: tmpHome });
-    assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
-    // stdout should be empty since input was empty
-    assert.strictEqual(result.stdout, '', 'Expected empty stdout for empty input');
-
-    fs.rmSync(tmpHome, { recursive: true, force: true });
+    try {
+      const result = runScript('', { HOME: tmpHome });
+      assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
+      // stdout should be empty since input was empty
+      assert.strictEqual(result.stdout, '', 'Expected empty stdout for empty input');
+    } finally {
+      fs.rmSync(tmpHome, { recursive: true, force: true });
+    }
   })
     ? passed++
     : failed++;
@@ -109,13 +117,15 @@ function runTests() {
   // 4. Handles invalid JSON gracefully
   test('handles invalid JSON gracefully', () => {
     const tmpHome = makeTempDir();
-    const invalidInput = 'not valid json {{{';
-    const result = runScript(invalidInput, { HOME: tmpHome });
-    assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
-    // Should still pass through the raw input on stdout
-    assert.strictEqual(result.stdout, invalidInput, 'Expected stdout to contain original invalid input');
-
-    fs.rmSync(tmpHome, { recursive: true, force: true });
+    try {
+      const invalidInput = 'not valid json {{{';
+      const result = runScript(invalidInput, { HOME: tmpHome });
+      assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
+      // Should still pass through the raw input on stdout
+      assert.strictEqual(result.stdout, invalidInput, 'Expected stdout to contain original invalid input');
+    } finally {
+      fs.rmSync(tmpHome, { recursive: true, force: true });
+    }
   })
     ? passed++
     : failed++;
@@ -123,21 +133,23 @@ function runTests() {
   // 5. Handles missing usage fields gracefully
   test('handles missing usage fields gracefully', () => {
     const tmpHome = makeTempDir();
-    const input = { model: 'claude-sonnet-4-20250514' };
-    const inputStr = JSON.stringify(input);
-    const result = runScript(input, { HOME: tmpHome });
-    assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
-    assert.strictEqual(result.stdout, inputStr, 'Expected stdout to match original input');
+    try {
+      const input = { model: 'claude-sonnet-4-20250514' };
+      const inputStr = JSON.stringify(input);
+      const result = runScript(input, { HOME: tmpHome });
+      assert.strictEqual(result.code, 0, `Expected exit code 0, got ${result.code}`);
+      assert.strictEqual(result.stdout, inputStr, 'Expected stdout to match original input');
 
-    const metricsFile = path.join(tmpHome, '.claude', 'metrics', 'costs.jsonl');
-    assert.ok(fs.existsSync(metricsFile), 'Expected metrics file to exist even with missing usage');
+      const metricsFile = path.join(tmpHome, '.claude', 'metrics', 'costs.jsonl');
+      assert.ok(fs.existsSync(metricsFile), 'Expected metrics file to exist even with missing usage');
 
-    const row = JSON.parse(fs.readFileSync(metricsFile, 'utf8').trim());
-    assert.strictEqual(row.input_tokens, 0, 'Expected input_tokens to be 0 when missing');
-    assert.strictEqual(row.output_tokens, 0, 'Expected output_tokens to be 0 when missing');
-    assert.strictEqual(row.estimated_cost_usd, 0, 'Expected estimated_cost_usd to be 0 when no tokens');
-
-    fs.rmSync(tmpHome, { recursive: true, force: true });
+      const row = JSON.parse(fs.readFileSync(metricsFile, 'utf8').trim());
+      assert.strictEqual(row.input_tokens, 0, 'Expected input_tokens to be 0 when missing');
+      assert.strictEqual(row.output_tokens, 0, 'Expected output_tokens to be 0 when missing');
+      assert.strictEqual(row.estimated_cost_usd, 0, 'Expected estimated_cost_usd to be 0 when no tokens');
+    } finally {
+      fs.rmSync(tmpHome, { recursive: true, force: true });
+    }
   })
     ? passed++
     : failed++;
