@@ -1,6 +1,6 @@
 # Everything Claude Code (ECC) — 智能体指令
 
-这是一个**生产就绪的 AI 编码插件**，提供 16 个专业代理、65+ 项技能、40 条命令以及自动化钩子工作流，用于软件开发。
+这是一个**可用于生产的AI编码插件**，提供26个专业代理、108项技能、57条命令以及自动化钩子工作流，专为软件开发设计。
 
 ## 核心原则
 
@@ -20,16 +20,26 @@
 | code-reviewer | 代码质量与可维护性 | 编写/修改代码后 |
 | security-reviewer | 漏洞检测 | 提交前、敏感代码 |
 | build-error-resolver | 修复构建/类型错误 | 构建失败时 |
-| e2e-runner | 端到端 Playwright 测试 | 关键用户流程 |
-| refactor-cleaner | 死代码清理 | 代码维护 |
-| doc-updater | 文档与代码映射更新 | 更新文档时 |
-| go-reviewer | Go 代码审查 | Go 项目 |
-| go-build-resolver | Go 构建错误 | Go 构建失败时 |
-| database-reviewer | PostgreSQL/Supabase 专家 | 模式设计、查询优化 |
-| python-reviewer | Python 代码审查 | Python 项目 |
-| chief-of-staff | 沟通分流与草稿 | 多渠道电子邮件、Slack、LINE、Messenger |
+| e2e-runner | 端到端Playwright测试 | 关键用户流程 |
+| refactor-cleaner | 清理死代码 | 代码维护 |
+| doc-updater | 文档与代码地图更新 | 更新文档时 |
+| docs-lookup | 文档与API参考研究 | 库/API文档问题 |
+| cpp-reviewer | C++代码审查 | C++项目 |
+| cpp-build-resolver | C++构建错误 | C++构建失败 |
+| go-reviewer | Go代码审查 | Go项目 |
+| go-build-resolver | Go构建错误 | Go构建失败 |
+| kotlin-reviewer | Kotlin代码审查 | Kotlin/Android/KMP项目 |
+| kotlin-build-resolver | Kotlin/Gradle构建错误 | Kotlin构建失败 |
+| database-reviewer | PostgreSQL/Supabase专家 | 架构设计、查询优化 |
+| python-reviewer | Python代码审查 | Python项目 |
+| java-reviewer | Java与Spring Boot代码审查 | Java/Spring Boot项目 |
+| java-build-resolver | Java/Maven/Gradle构建错误 | Java构建失败 |
+| chief-of-staff | 沟通分流与草拟 | 多渠道邮件、Slack、LINE、Messenger |
 | loop-operator | 自主循环执行 | 安全运行循环、监控停滞、干预 |
-| harness-optimizer | 线束配置调优 | 可靠性、成本、吞吐量 |
+| harness-optimizer | 工具配置调优 | 可靠性、成本、吞吐量 |
+| rust-reviewer | Rust代码审查 | Rust项目 |
+| rust-build-resolver | Rust构建错误 | Rust构建失败 |
+| typescript-reviewer | TypeScript/JavaScript代码审查 | TypeScript/JavaScript项目 |
 
 ## 智能体编排
 
@@ -133,9 +143,9 @@
 ## 项目结构
 
 ```
-agents/          — 13 specialized subagents
-skills/          — 65+ workflow skills and domain knowledge
-commands/        — 40 slash commands
+agents/          — 26 specialized subagents
+skills/          — 108 workflow skills and domain knowledge
+commands/        — 57 slash commands
 hooks/           — Trigger-based automations
 rules/           — Always-follow guidelines (common + per-language)
 scripts/         — Cross-platform Node.js utilities

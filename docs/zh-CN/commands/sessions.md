@@ -1,3 +1,7 @@
+---
+description: 管理Claude Code会话历史、别名和会话元数据。
+---
+
 # Sessions 命令
 
 管理 Claude Code 会话历史 - 列出、加载、设置别名和编辑存储在 `~/.claude/sessions/` 中的会话。
@@ -260,11 +264,6 @@ if (aliases.length > 0) {
 /sessions aliases                      # List all aliases
 ```
 
-## 操作员笔记
-
-* 会话文件在头部持久化 `Project`、`Branch` 和 `Worktree`，以便 `/sessions info` 可以区分并行 tmux/工作树运行。
-* 对于指挥中心式监控，请结合使用 `/sessions info`、`git diff --stat` 以及由 `scripts/hooks/cost-tracker.js` 发出的成本指标。
-
 **脚本：**
 
 ```bash
@@ -289,6 +288,11 @@ if (aliases.length === 0) {
 }
 "
 ```
+
+## 操作员笔记
+
+* 会话文件在头部持久化 `Project`、`Branch` 和 `Worktree`，以便 `/sessions info` 可以区分并行 tmux/工作树运行。
+* 对于指挥中心式监控，请结合使用 `/sessions info`、`git diff --stat` 以及由 `scripts/hooks/cost-tracker.js` 发出的成本指标。
 
 ## 参数
 

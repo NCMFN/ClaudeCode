@@ -1,6 +1,6 @@
 # 工具链审计命令
 
-审计当前代码库的智能体工具链设置并返回一份优先级评分卡。
+运行确定性仓库工具审计并返回优先级评分卡。
 
 ## 使用方式
 
@@ -9,9 +9,19 @@
 * `scope` (可选): `repo` (默认), `hooks`, `skills`, `commands`, `agents`
 * `--format`: 输出样式 (`text` 默认, `json` 用于自动化)
 
-## 评估内容
+## 确定性引擎
 
-将每个类别从 `0` 到 `10` 进行评分：
+始终运行：
+
+```bash
+node scripts/harness-audit.js <scope> --format <text|json>
+```
+
+此脚本是评分和检查的真相来源。请勿发明额外的维度或临时评分点。
+
+评分标准版本：`2026-03-16`。
+
+该脚本计算7个固定类别（每个类别 `0-10` 进行归一化）：
 
 1. 工具覆盖度
 2. 上下文效率
@@ -21,34 +31,37 @@
 6. 安全护栏
 7. 成本效率
 
+分数源自明确的文件/规则检查，并且对于同一提交是可重现的。
+
 ## 输出约定
 
 返回：
 
-1. `overall_score` (满分 70)
-2. 类别得分和具体发现
-3. 前 3 项待办事项及其确切文件路径
-4. 建议接下来应用的 ECC 技能
+1. `overall_score` 分，满分 `max_score` 分（`repo` 对应70分；范围更小的审计对应更小的满分）
+2. 类别分数及具体发现项
+3. 失败的检查及其精确文件路径
+4. 来自确定性输出的前3项操作（`top_actions`）
+5. 建议接下来应用的ECC技能
 
 ## 检查清单
 
-* 检查 `hooks/hooks.json`, `scripts/hooks/` 以及钩子测试。
-* 检查 `skills/`、命令覆盖度和智能体覆盖度。
-* 验证 `.cursor/`, `.opencode/`, `.codex/` 在跨工具链间的一致性。
-* 标记已损坏或过时的引用。
+* 直接使用脚本输出；请勿手动重新评分。
+* 如果请求 `--format json`，则原样返回脚本JSON。
+* 如果请求文本输出，则总结失败的检查和首要操作。
+* 包含来自 `checks[]` 和 `top_actions[]` 的精确文件路径。
 
 ## 结果示例
 
 ```text
-Harness Audit (repo): 52/70
-- Quality Gates: 9/10
-- Eval Coverage: 6/10
-- Cost Efficiency: 4/10
+Harness Audit (repo): 66/70
+- Tool Coverage: 10/10 (10/10 pts)
+- Context Efficiency: 9/10 (9/10 pts)
+- Quality Gates: 10/10 (10/10 pts)
 
 Top 3 Actions:
-1) Add cost tracking hook in scripts/hooks/cost-tracker.js
-2) Add pass@k docs and templates in skills/eval-harness/SKILL.md
-3) Add command parity for /harness-audit in .opencode/commands/
+1) [Security Guardrails] Add prompt/tool preflight security guards in hooks/hooks.json. (hooks/hooks.json)
+2) [Tool Coverage] Sync commands/harness-audit.md and .opencode/commands/harness-audit.md. (.opencode/commands/harness-audit.md)
+3) [Eval Coverage] Increase automated test coverage across scripts/hooks/lib. (tests/)
 ```
 
 ## 参数

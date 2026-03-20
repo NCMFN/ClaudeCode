@@ -4,13 +4,14 @@
 
 ## 目录
 
-* [我们正在寻找的内容](#我们寻找什么)
+* [我们正在寻找的](#我们寻找什么)
 * [快速开始](#快速开始)
 * [贡献技能](#贡献技能)
 * [贡献智能体](#贡献智能体)
 * [贡献钩子](#贡献钩子)
 * [贡献命令](#贡献命令)
-* [跨平台与翻译](#跨平台与翻译)
+* [MCP 与文档（例如 Context7）](#mcp-与文档例如-context7)
+* [跨平台工具与翻译](#跨平台与翻译)
 * [拉取请求流程](#拉取请求流程)
 
 ***
@@ -190,9 +191,9 @@ model: sonnet
 | 字段 | 描述 | 选项 |
 |-------|-------------|---------|
 | `name` | 小写，用连字符连接 | `code-reviewer` |
-| `description` | 用于决定何时调用 | 要具体！ |
-| `tools` | 仅包含必要的内容 | `Read, Write, Edit, Bash, Grep, Glob, WebFetch, Task` |
-| `model` | 复杂度级别 | `haiku` (简单), `sonnet` (编码), `opus` (复杂) |
+| `description` | 用于决定何时调用 | 请具体说明！ |
+| `tools` | 仅包含必要内容 | `Read, Write, Edit, Bash, Grep, Glob, WebFetch, Task`，或者当智能体使用 MCP 时的 MCP 工具名称（例如 `mcp__context7__resolve-library-id`，`mcp__context7__query-docs`） |
+| `model` | 复杂程度 | `haiku`（简单），`sonnet`（编码），`opus`（复杂） |
 
 ### 智能体示例
 
@@ -347,6 +348,17 @@ description: 在 /help 中显示的简要描述
 | `code-review.md` | 审查代码变更 |
 | `tdd.md` | TDD 工作流 |
 | `e2e.md` | E2E 测试 |
+
+***
+
+## MCP 与文档（例如 Context7）
+
+技能和智能体可以使用 **MCP（模型上下文协议）** 工具来获取最新数据，而不是仅仅依赖训练数据。这对于文档尤其有用。
+
+* **Context7** 是一个 MCP 服务器，它暴露了 `resolve-library-id` 和 `query-docs`。当用户询问有关库、框架或 API 的问题时，请使用它，以便答案能反映当前的文档和代码示例。
+* 在贡献依赖于实时文档（例如设置、API 使用）的 **技能** 时，请描述如何使用相关的 MCP 工具（例如解析库 ID，然后查询文档），并指向 `documentation-lookup` 技能或 Context7 作为参考模式。
+* 在贡献用于回答文档/API 问题的 **智能体** 时，请在其工具中包含 Context7 MCP 工具名称（例如 `mcp__context7__resolve-library-id`，`mcp__context7__query-docs`），并记录解析 → 查询的工作流程。
+* **mcp-configs/mcp-servers.json** 包含一个 Context7 条目；用户在其工具平台（例如 Claude Code，Cursor）中启用它，即可使用文档查找技能（位于 `skills/documentation-lookup/`）和 `/docs` 命令。
 
 ***
 
