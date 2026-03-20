@@ -48,7 +48,7 @@ Follow these commit message conventions based on 500 analyzed commits.
 *Commit message example*
 
 ```text
-feat: add everything-claude-code ECC bundle (.claude/commands/add-language-rules.md)
+feat: add everything-claude-code ECC bundle (.claude/commands/add-command-or-skill-bundle.md)
 ```
 
 *Commit message example*
@@ -184,27 +184,6 @@ try {
 
 These workflows were detected from analyzing commit patterns.
 
-### Database Migration
-
-Database schema changes with migration files
-
-**Frequency**: ~2 times per month
-
-**Steps**:
-1. Create migration file
-2. Update schema definitions
-3. Generate/update types
-
-**Files typically involved**:
-- `migrations/*`
-
-**Example commit sequence**:
-```
-Add Kiro IDE support (.kiro/) (#548)
-Revert "Add Kiro IDE support (.kiro/) (#548)"
-feat(rules): add C# language support
-```
-
 ### Feature Development
 
 Standard feature implementation workflow
@@ -216,85 +195,135 @@ Standard feature implementation workflow
 2. Add tests for feature
 3. Update documentation
 
-**Files typically involved**:
-- `**/*.test.*`
-- `**/api/**`
-
 **Example commit sequence**:
 ```
-feat(skills): add rules-distill skill (rebased #561) (#678)
-feat: add block-no-verify hook for Claude Code and Cursor (#649)
-Add Kiro IDE support (.kiro/) (#548)
+feat: add everything-claude-code ECC bundle (.claude/team/everything-claude-code-team-config.json)
+feat: add everything-claude-code ECC bundle (.claude/enterprise/controls.md)
+feat: add everything-claude-code ECC bundle (.claude/commands/database-migration.md)
 ```
 
 ### Add Command Or Skill Bundle
 
-Adds a new command or skill bundle to the ECC system, typically by creating or updating files in .claude/commands/, .claude/skills/, .agents/skills/, or related directories.
+Adds a new command or skill bundle to the ECC system, typically as a markdown documentation or configuration file.
 
-**Frequency**: ~10 times per month
+**Frequency**: ~4 times per month
 
 **Steps**:
-1. Create or update a markdown or JSON file in .claude/commands/, .claude/skills/, .agents/skills/, .claude/team/, .claude/rules/, .claude/research/, .claude/enterprise/, .codex/agents/, or similar directories.
-2. Commit the new or updated file(s) with a message indicating the addition of an ECC bundle.
+1. Create a new markdown file in .claude/commands/ or .claude/skills/ or .agents/skills/ directory.
+2. Document the new command or skill in the respective SKILL.md or command file.
+3. Optionally, update related configuration files.
 
 **Files typically involved**:
 - `.claude/commands/*.md`
 - `.claude/skills/*/SKILL.md`
 - `.agents/skills/*/SKILL.md`
-- `.claude/team/*.json`
-- `.claude/rules/*.md`
-- `.claude/research/*.md`
-- `.claude/enterprise/*.md`
-- `.codex/agents/*.toml`
+
+**Example commit sequence**:
+```
+Create a new markdown file in .claude/commands/ or .claude/skills/ or .agents/skills/ directory.
+Document the new command or skill in the respective SKILL.md or command file.
+Optionally, update related configuration files.
+```
+
+### Update Team Or Identity Config
+
+Updates team configuration or identity files, likely to reflect changes in team structure or system identity.
+
+**Frequency**: ~3 times per month
+
+**Steps**:
+1. Edit .claude/team/everything-claude-code-team-config.json or .claude/identity.json.
+2. Commit the changes.
+3. Optionally, inform team members or trigger downstream automation.
+
+**Files typically involved**:
+- `.claude/team/everything-claude-code-team-config.json`
 - `.claude/identity.json`
+
+**Example commit sequence**:
+```
+Edit .claude/team/everything-claude-code-team-config.json or .claude/identity.json.
+Commit the changes.
+Optionally, inform team members or trigger downstream automation.
+```
+
+### Add Or Update Research Or Rules Playbook
+
+Adds or updates research playbooks or rules/guardrails documentation to guide development and maintain standards.
+
+**Frequency**: ~2 times per month
+
+**Steps**:
+1. Create or update a markdown file in .claude/research/ or .claude/rules/.
+2. Document the new or revised process or rule.
+3. Commit the changes.
+
+**Files typically involved**:
+- `.claude/research/*.md`
+- `.claude/rules/*.md`
+
+**Example commit sequence**:
+```
+Create or update a markdown file in .claude/research/ or .claude/rules/.
+Document the new or revised process or rule.
+Commit the changes.
+```
+
+### Add Or Update Ecc Tools Config
+
+Adds or updates the ECC tools configuration to register new tools or update tool metadata.
+
+**Frequency**: ~2 times per month
+
+**Steps**:
+1. Edit .claude/ecc-tools.json.
+2. Commit the changes.
+
+**Files typically involved**:
 - `.claude/ecc-tools.json`
 
 **Example commit sequence**:
 ```
-Create or update a markdown or JSON file in .claude/commands/, .claude/skills/, .agents/skills/, .claude/team/, .claude/rules/, .claude/research/, .claude/enterprise/, .codex/agents/, or similar directories.
-Commit the new or updated file(s) with a message indicating the addition of an ECC bundle.
+Edit .claude/ecc-tools.json.
+Commit the changes.
 ```
 
-### Language Support Rules Bundle
+### Add Or Update Codex Agent Config
 
-Adds support for a new programming language by creating a set of rules and patterns files for that language.
+Adds or updates agent configuration files for the Codex system, enabling new agent roles or capabilities.
 
-**Frequency**: ~1 times per month
+**Frequency**: ~2 times per month
 
 **Steps**:
-1. Create a new directory under rules/ for the language.
-2. Add multiple markdown files: coding-style.md, hooks.md, patterns.md, security.md, testing.md.
-3. Commit all new files together with a message indicating language support.
+1. Create or update a .toml file in .codex/agents/.
+2. Commit the changes.
 
 **Files typically involved**:
-- `rules/<language>/*.md`
+- `.codex/agents/*.toml`
 
 **Example commit sequence**:
 ```
-Create a new directory under rules/ for the language.
-Add multiple markdown files: coding-style.md, hooks.md, patterns.md, security.md, testing.md.
-Commit all new files together with a message indicating language support.
+Create or update a .toml file in .codex/agents/.
+Commit the changes.
 ```
 
-### Add Or Revert Large Feature Bundle
+### Add Or Update Enterprise Controls
 
-Adds or reverts a large, multi-file feature or integration (such as IDE support), involving many agent, skill, hook, and documentation files.
+Adds or updates enterprise controls documentation or configuration.
 
-**Frequency**: ~1 times per month
+**Frequency**: ~2 times per month
 
 **Steps**:
-1. Add or remove a large set of files under a new or existing directory (e.g., .kiro/).
-2. Include multiple agent definitions, skills, hooks, scripts, and documentation files.
-3. Commit all files in a single commit with a descriptive message.
+1. Create or update .claude/enterprise/controls.md.
+2. Commit the changes.
 
 **Files typically involved**:
-- `.kiro/**/*`
+- `.claude/enterprise/controls.md`
 
 **Example commit sequence**:
 ```
-Add or remove a large set of files under a new or existing directory (e.g., .kiro/).
-Include multiple agent definitions, skills, hooks, scripts, and documentation files.
-Commit all files in a single commit with a descriptive message.
+Create or update .claude/enterprise/controls.md.
+Commit the changes.
 ```
 
 
