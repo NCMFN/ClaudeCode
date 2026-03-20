@@ -46,7 +46,7 @@ class ComplianceSpec:
 
 def parse_trace(path: Path) -> list[ObservationEvent]:
     """Parse a JSONL observation trace file into sorted events."""
-    if not path.exists():
+    if not path.is_file():
         raise FileNotFoundError(f"Trace file not found: {path}")
 
     text = path.read_text().strip()
@@ -59,20 +59,25 @@ def parse_trace(path: Path) -> list[ObservationEvent]:
             raw = json.loads(line)
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON at line {i}: {e}") from e
-        events.append(ObservationEvent(
-            timestamp=raw["timestamp"],
-            event=raw["event"],
-            tool=raw["tool"],
-            session=raw["session"],
-            input=raw.get("input", ""),
-            output=raw.get("output", ""),
-        ))
+        try:
+            events.append(ObservationEvent(
+                timestamp=raw["timestamp"],
+                event=raw["event"],
+                tool=raw["tool"],
+                session=raw["session"],
+                input=raw.get("input", ""),
+                output=raw.get("output", ""),
+            ))
+        except KeyError as e:
+            raise ValueError(f"Missing required field {e} at line {i}") from e
 
     return sorted(events, key=lambda e: e.timestamp)
 
 
 def parse_spec(path: Path) -> ComplianceSpec:
     """Parse a YAML compliance spec file."""
+    if not path.is_file():
+        raise FileNotFoundError(f"Spec file not found: {path}")
     raw = yaml.safe_load(path.read_text())
 
     steps: list[Step] = []

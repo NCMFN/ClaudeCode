@@ -72,7 +72,7 @@ def grade(
 
     # Convert indices to events
     classified: dict[str, list[ObservationEvent]] = {
-        step_id: [sorted_trace[i] for i in indices if i < len(sorted_trace)]
+        step_id: [sorted_trace[i] for i in indices if 0 <= i < len(sorted_trace)]
         for step_id, indices in classification.items()
     }
 

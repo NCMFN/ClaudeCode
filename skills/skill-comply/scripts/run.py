@@ -93,11 +93,11 @@ def main() -> None:
     graded_results: list[tuple[str, Any, list[Any]]] = []
 
     for scenario in scenarios:
-        print(f"       Running {scenario.level_name}...", end="", flush=True)
+        logger.info("       Running %s...", scenario.level_name)
         run = run_scenario(scenario, model=args.model)
         result = grade(spec, list(run.observations))
         graded_results.append((scenario.level_name, result, list(run.observations)))
-        print(f" {result.compliance_rate:.0%}")
+        logger.info("       %s: %.0f%%", scenario.level_name, result.compliance_rate * 100)
 
     # Step 4: Generate report
     skill_name = args.skill.parent.name if args.skill.stem == "SKILL" else args.skill.stem
@@ -105,10 +105,14 @@ def main() -> None:
     logger.info("[4/4] Generating report...")
 
     report = generate_report(args.skill, spec, graded_results, scenarios=scenarios)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(report)
     logger.info("       Report saved to %s", output_path)
 
     # Summary
+    if not graded_results:
+        logger.warning("No scenarios were executed.")
+        return
     overall = sum(r.compliance_rate for _, r, _obs in graded_results) / len(graded_results)
     logger.info("\n%s", "=" * 50)
     logger.info("Overall Compliance: %.0f%%", overall * 100)

@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+import logging
 import subprocess
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 from scripts.parser import ComplianceSpec, ObservationEvent
 
@@ -69,11 +72,14 @@ def _parse_classification(text: str) -> dict[str, list[int]]:
 
     try:
         parsed = json.loads(cleaned)
-        # Validate structure
+        if not isinstance(parsed, dict):
+            logger.warning("Classifier returned non-dict JSON: %s", type(parsed).__name__)
+            return {}
         return {
             k: [int(i) for i in v]
             for k, v in parsed.items()
             if isinstance(v, list)
         }
-    except (json.JSONDecodeError, ValueError):
+    except (json.JSONDecodeError, ValueError, TypeError) as e:
+        logger.warning("Failed to parse classification output: %s", e)
         return {}
