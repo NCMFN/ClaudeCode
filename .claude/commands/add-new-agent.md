@@ -10,14 +10,12 @@ Use this workflow when working on **add-new-agent** in `everything-claude-code`.
 
 ## Goal
 
-Adds a new agent to the project, including documentation and registration.
+Adds a new agent to the everything-claude-code project, including documentation and configuration.
 
 ## Common Files
 
-- `agents/*.md`
-- `AGENTS.md`
-- `README.md`
-- `docs/COMMAND-AGENT-MAP.md`
+- `.claude/commands/add-new-agent.md`
+- `.agents/skills/everything-claude-code/agents/openai.yaml`
 
 ## Suggested Sequence
 
@@ -28,10 +26,8 @@ Adds a new agent to the project, including documentation and registration.
 
 ## Typical Commit Signals
 
-- Create a new agent documentation file in agents/ (e.g., agents/agent-name.md)
-- Register the agent in AGENTS.md
-- Update README.md with agent count or agent list
-- Optionally update docs/COMMAND-AGENT-MAP.md if mapping is needed
+- Create or update '.claude/commands/add-new-agent.md' with instructions or documentation for the new agent.
+- Create or update '.agents/skills/everything-claude-code/agents/openai.yaml' for agent configuration.
 
 ## Notes
 
