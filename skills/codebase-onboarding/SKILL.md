@@ -102,7 +102,7 @@ Identify patterns the codebase already follows:
 - Branch naming from recent branches
 - Commit message style from recent commits
 - PR workflow (squash, merge, rebase)
-- If the repo has no commits yet, skip this section and note "No git history available"
+- If the repo has no commits yet or only a shallow history (e.g. `git clone --depth 1`), skip this section and note "Git history unavailable or too shallow to detect conventions"
 
 ### Phase 4: Generate Onboarding Artifacts
 
