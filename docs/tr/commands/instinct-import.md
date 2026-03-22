@@ -26,7 +26,7 @@ Yerel dosya yollarından veya HTTP(S) URL'lerinden içgüdüleri içe aktar.
 
 ```
 /instinct-import team-instincts.yaml
-/instinct-import https://github.com/org/repo/instincts.yaml
+/instinct-import https://raw.githubusercontent.com/org/repo/main/instincts.yaml
 /instinct-import team-instincts.yaml --dry-run
 /instinct-import team-instincts.yaml --scope global --force
 ```
