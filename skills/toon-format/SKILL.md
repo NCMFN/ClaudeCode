@@ -91,11 +91,11 @@ cat data.json | npx @toon-format/cli@2.1.0
 
 **Tip**: Install globally once to avoid repeated downloads:
 ```bash
-npm install -g @toon-format/cli
+npm install -g @toon-format/cli@2.1.0
 # Then use: gh api ... | toon
 ```
 
-**Rule**: Any Bash tool call that returns JSON for agent consumption should pipe through `npx @toon-format/cli@<version>` (or the installed `toon` binary) before the agent reads the output.
+**Rule**: Any Bash tool call that returns JSON for agent consumption should pipe through `npx @toon-format/cli@2.1.0` (or the installed `toon` binary) before the agent reads the output.
 
 ## Library Reference
 

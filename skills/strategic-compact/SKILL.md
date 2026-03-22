@@ -121,7 +121,7 @@ Common sources of duplicate context:
 - Multiple skills covering overlapping domains
 
 ### Data Format Optimization
-When injecting structured data into agent prompts, convert JSON to TOON format (~40% fewer tokens, higher accuracy). Pipe CLI output through `npx @toon-format/cli` before reading. Use `encode()` from TOON libraries for programmatic conversion. See the `toon-format` skill for patterns.
+When injecting structured data into agent prompts, convert JSON to TOON format (~40% fewer tokens, higher accuracy). Pipe CLI output through the TOON CLI (pinned version — see `toon-format` skill) before reading. Use `encode()` from TOON libraries for programmatic conversion. See the `toon-format` skill for patterns.
 
 ### Context Optimization Tools
 - `token-optimizer` MCP — Automated 95%+ token reduction via content deduplication
