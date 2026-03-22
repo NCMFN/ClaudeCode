@@ -232,8 +232,9 @@ Future<Result<User>> getUser(String id) async {
 
 Test at every layer: unit, widget, and integration.
 
+**Unit test** (with mockito):
+
 ```dart
-// Unit test with mockito
 @GenerateMocks([UserRepository])
 void main() {
   late MockUserRepository mockRepo;
@@ -253,22 +254,28 @@ void main() {
     verify(mockRepo.findById('1')).called(1);
   });
 }
+```
 
-// Widget test
+**Widget test:**
+
+```dart
 void main() {
   testWidgets('UserTile displays name and email', (tester) async {
-  await tester.pumpWidget(
-    MaterialApp(
-      home: UserTile(user: testUser),
-    ),
-  );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: UserTile(user: testUser),
+      ),
+    );
 
     expect(find.text('John Doe'), findsOneWidget);
     expect(find.text('john@example.com'), findsOneWidget);
   });
 }
+```
 
-// Integration test
+**Integration test:**
+
+```dart
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
