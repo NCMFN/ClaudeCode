@@ -178,7 +178,7 @@
         "description": "Run quality gate checks after file edits"
       },
       {
-        "matcher": "Edit",
+        "matcher": "Edit|Write|MultiEdit",
         "hooks": [
           {
             "type": "command",
