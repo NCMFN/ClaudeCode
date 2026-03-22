@@ -101,13 +101,13 @@ npm install -g @toon-format/cli@2.1.0
 
 | Language | Package | Install |
 |---|---|---|
-| TypeScript/JS | `@toon-format/toon` | `npm install @toon-format/toon` |
+| TypeScript/JS | `@toon-format/toon` | `npm install @toon-format/toon` (pin in package.json) |
 | CLI | `@toon-format/cli` | `npx @toon-format/cli@2.1.0` |
-| Python | `toon` | `pip install toon` |
-| Rust | `toon-rust` | `cargo add toon-rust` |
-| Java | `toon-java` | Maven/Gradle |
-| Go | `toon-go` | `go get github.com/toon-format/toon-go` |
-| Swift | `toon-swift` | SPM |
+| Python | `toon` | `pip install toon` (pin in requirements.txt) |
+| Rust | `toon-rust` | `cargo add toon-rust` (pin in Cargo.toml) |
+| Java | `toon-java` | Maven/Gradle (pin in pom.xml / build.gradle) |
+| Go | `toon-go` | `go get github.com/toon-format/toon-go` (pinned via go.sum) |
+| Swift | `toon-swift` | SPM (pin in Package.swift) |
 
 ## Programmatic Conversion
 
