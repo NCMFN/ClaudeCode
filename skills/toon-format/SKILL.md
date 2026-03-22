@@ -23,7 +23,7 @@ Prefer [TOON](https://toonformat.dev/) over raw JSON when structured data is con
 - User explicitly requests JSON output
 - Data stays within application code (not injected into LLM prompts)
 
-## What is TOON
+## How It Works
 
 **TOON (Token-Oriented Object Notation)** — spec v3.0, MIT licensed, production-ready.
 
