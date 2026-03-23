@@ -75,11 +75,17 @@ function writeFileOrThrow(filePath, content) {
 }
 
 function replaceOrThrow(content, regex, replacer, source) {
-  if (!regex.test(content)) {
+  let matched = false;
+  const nextContent = content.replace(regex, (...args) => {
+    matched = true;
+    return replacer(...args);
+  });
+
+  if (!matched) {
     throw new Error(`${source} is missing the expected catalog marker`);
   }
 
-  return content.replace(regex, replacer);
+  return nextContent;
 }
 
 function parseReadmeExpectations(readmeContent) {
@@ -441,36 +447,50 @@ const DOCUMENT_SPECS = [
   {
     filePath: README_PATH,
     label: 'README.md',
+    required: true,
     parseExpectations: parseReadmeExpectations,
     syncContent: syncEnglishReadme
   },
   {
     filePath: AGENTS_PATH,
     label: 'AGENTS.md',
+    required: true,
     parseExpectations: parseAgentsDocExpectations,
     syncContent: syncEnglishAgents
   },
   {
     filePath: README_ZH_CN_PATH,
     label: 'README.zh-CN.md',
+    required: true,
     parseExpectations: parseZhRootReadmeExpectations,
     syncContent: syncZhRootReadme
   },
   {
     filePath: DOCS_ZH_CN_README_PATH,
     label: 'docs/zh-CN/README.md',
+    required: true,
     parseExpectations: parseZhDocsReadmeExpectations,
     syncContent: syncZhDocsReadme
   },
   {
     filePath: DOCS_ZH_CN_AGENTS_PATH,
     label: 'docs/zh-CN/AGENTS.md',
+    required: true,
     parseExpectations: parseZhAgentsDocExpectations,
     syncContent: syncZhAgents
   }
 ];
 
-function getActiveDocumentSpecs() {
+function getTrackedDocumentSpecs() {
+  const missingRequiredSpecs = DOCUMENT_SPECS
+    .filter(spec => spec.required !== false && !fs.existsSync(spec.filePath));
+
+  if (missingRequiredSpecs.length > 0) {
+    throw new Error(
+      `Catalog spec files not found: ${missingRequiredSpecs.map(spec => spec.label).join(', ')}`
+    );
+  }
+
   return DOCUMENT_SPECS.filter(spec => fs.existsSync(spec.filePath));
 }
 
@@ -479,14 +499,22 @@ function collectExpectations(documentSpecs) {
 }
 
 function syncDocumentationCounts(catalog, documentSpecs) {
-  const updatedFiles = [];
-
-  for (const spec of documentSpecs) {
+  const pendingWrites = documentSpecs.map(spec => {
     const currentContent = readFileOrThrow(spec.filePath);
     const nextContent = spec.syncContent(currentContent, catalog);
-    if (nextContent !== currentContent) {
-      writeFileOrThrow(spec.filePath, nextContent);
-      updatedFiles.push(spec.label);
+    return {
+      spec,
+      currentContent,
+      nextContent
+    };
+  });
+
+  const updatedFiles = [];
+
+  for (const entry of pendingWrites) {
+    if (entry.nextContent !== entry.currentContent) {
+      writeFileOrThrow(entry.spec.filePath, entry.nextContent);
+      updatedFiles.push(entry.spec.label);
     }
   }
 
@@ -552,7 +580,7 @@ function renderMarkdown(result) {
 
 function main() {
   const catalog = buildCatalog();
-  const documentSpecs = getActiveDocumentSpecs();
+  const documentSpecs = getTrackedDocumentSpecs();
   const updatedFiles = WRITE_MODE ? syncDocumentationCounts(catalog, documentSpecs) : [];
   const expectations = collectExpectations(documentSpecs);
   const checks = evaluateExpectations(catalog, expectations);

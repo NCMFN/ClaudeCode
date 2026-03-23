@@ -445,6 +445,27 @@ function runTests() {
     cleanupTestDir(testDir);
   })) passed++; else failed++;
 
+  if (test('fails when a tracked catalog document is missing', () => {
+    const testDir = createTestDir();
+    const { readmePath, agentsPath, zhAgentsPath } = writeCatalogFixture(testDir);
+    fs.rmSync(zhAgentsPath);
+
+    const result = runCatalogValidator({
+      overrides: {
+        ROOT: testDir,
+        README_PATH: readmePath,
+        AGENTS_PATH: agentsPath,
+      }
+    });
+
+    assert.strictEqual(result.code, 1, 'Should fail when a tracked catalog document is missing');
+    assert.ok(
+      (result.stdout + result.stderr).includes('docs/zh-CN/AGENTS.md'),
+      'Should mention the missing tracked document'
+    );
+    cleanupTestDir(testDir);
+  })) passed++; else failed++;
+
   if (test('writes synced counts back to English and zh-CN docs', () => {
     const testDir = createTestDir();
     const {
@@ -512,6 +533,41 @@ function runTests() {
     assert.ok(zhAgentsDoc.includes('提供 1 个专业代理、1 项技能、1 条命令'), 'Should sync docs/zh-CN/AGENTS summary');
     assert.ok(zhAgentsDoc.includes('commands/        — 1 个斜杠命令'), 'Should sync docs/zh-CN/AGENTS structure');
 
+    cleanupTestDir(testDir);
+  })) passed++; else failed++;
+
+  if (test('does not partially rewrite docs when write mode hits a later validation error', () => {
+    const testDir = createTestDir();
+    const {
+      readmePath,
+      agentsPath,
+      zhAgentsPath,
+    } = writeCatalogFixture(testDir, {
+      readmeCounts: { agents: 9, skills: 9, commands: 9 },
+      readmeTableCounts: { agents: 8, skills: 8, commands: 8 },
+    });
+    const originalReadme = fs.readFileSync(readmePath, 'utf8');
+    fs.writeFileSync(zhAgentsPath, '# broken marker file\n');
+
+    const result = runCatalogValidator({
+      argv: ['--write', '--text'],
+      overrides: {
+        ROOT: testDir,
+        README_PATH: readmePath,
+        AGENTS_PATH: agentsPath,
+      }
+    });
+
+    assert.strictEqual(result.code, 1, 'Should fail when a later document cannot be synced');
+    assert.ok(
+      (result.stdout + result.stderr).includes('docs/zh-CN/AGENTS.md'),
+      'Should mention the later failing document'
+    );
+    assert.strictEqual(
+      fs.readFileSync(readmePath, 'utf8'),
+      originalReadme,
+      'Should not rewrite earlier docs before all sync validations pass'
+    );
     cleanupTestDir(testDir);
   })) passed++; else failed++;
 

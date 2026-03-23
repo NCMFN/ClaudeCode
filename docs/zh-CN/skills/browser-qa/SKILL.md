@@ -1,6 +1,6 @@
 # Browser QA — 自动化视觉测试与交互验证
 
-## 何时使用
+## When to use
 
 - 功能部署到 staging / preview 之后
 - 需要验证跨页面的 UI 行为时
@@ -8,7 +8,7 @@
 - 审查涉及前端改动的 PR 时
 - 做可访问性审计和响应式测试时
 
-## 工作方式
+## How it works
 
 使用浏览器自动化 MCP（claude-in-chrome、Playwright 或 Puppeteer），像真实用户一样与线上页面交互。
 
@@ -46,7 +46,7 @@
 4. 检查屏幕阅读器地标
 ```
 
-## 输出格式
+## Examples
 
 ```markdown
 ## QA 报告 — [URL] — [timestamp]

@@ -24,7 +24,7 @@ module.exports = createInstallTargetAdapter({
   installStatePathSegments: ['ecc-install-state.json'],
   supportsModule(module) {
     const paths = Array.isArray(module && module.paths) ? module.paths : [];
-    return paths.every(supportsAntigravitySourcePath);
+    return paths.length > 0 && paths.every(supportsAntigravitySourcePath);
   },
   planOperations(input, adapter) {
     const modules = Array.isArray(input.modules)

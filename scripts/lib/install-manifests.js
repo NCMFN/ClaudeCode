@@ -76,6 +76,22 @@ function dedupeStrings(values) {
   return [...new Set((Array.isArray(values) ? values : []).map(value => String(value).trim()).filter(Boolean))];
 }
 
+function readOptionalStringOption(options, key) {
+  if (
+    !Object.prototype.hasOwnProperty.call(options, key)
+    || options[key] === null
+    || options[key] === undefined
+  ) {
+    return null;
+  }
+
+  if (typeof options[key] !== 'string' || options[key].trim() === '') {
+    throw new Error(`${key} must be a non-empty string when provided`);
+  }
+
+  return options[key];
+}
+
 function assertKnownModuleIds(moduleIds, manifests) {
   const unknownModuleIds = dedupeStrings(moduleIds)
     .filter(moduleId => !manifests.modulesById.has(moduleId));
@@ -322,11 +338,13 @@ function resolveInstallPlan(options = {}) {
       `Unknown install target: ${target}. Expected one of ${SUPPORTED_INSTALL_TARGETS.join(', ')}`
     );
   }
+  const validatedProjectRoot = readOptionalStringOption(options, 'projectRoot');
+  const validatedHomeDir = readOptionalStringOption(options, 'homeDir');
   const targetPlanningInput = target
     ? {
       repoRoot: manifests.repoRoot,
-      projectRoot: options.projectRoot || manifests.repoRoot,
-      homeDir: options.homeDir || os.homedir(),
+      projectRoot: validatedProjectRoot || manifests.repoRoot,
+      homeDir: validatedHomeDir || os.homedir(),
     }
     : null;
   const targetAdapter = target ? getInstallTargetAdapter(target) : null;
@@ -367,7 +385,8 @@ function resolveInstallPlan(options = {}) {
 
     const supportsTarget = !target
       || (
-        module.targets.includes(target)
+        Array.isArray(module.targets)
+        && module.targets.includes(target)
         && (!targetAdapter || targetAdapter.supportsModule(module, targetPlanningInput))
       );
 
