@@ -1,7 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { planInstallTargetScaffold } = require('./install-targets/registry');
+const { getInstallTargetAdapter, planInstallTargetScaffold } = require('./install-targets/registry');
 
 const DEFAULT_REPO_ROOT = path.join(__dirname, '../..');
 const SUPPORTED_INSTALL_TARGETS = ['claude', 'cursor', 'antigravity', 'codex', 'opencode'];
@@ -322,6 +322,14 @@ function resolveInstallPlan(options = {}) {
       `Unknown install target: ${target}. Expected one of ${SUPPORTED_INSTALL_TARGETS.join(', ')}`
     );
   }
+  const targetPlanningInput = target
+    ? {
+      repoRoot: manifests.repoRoot,
+      projectRoot: options.projectRoot || manifests.repoRoot,
+      homeDir: options.homeDir || os.homedir(),
+    }
+    : null;
+  const targetAdapter = target ? getInstallTargetAdapter(target) : null;
 
   const effectiveRequestedIds = dedupeStrings(
     requestedModuleIds.filter(moduleId => !excludedModuleOwners.has(moduleId))
@@ -357,7 +365,13 @@ function resolveInstallPlan(options = {}) {
       return;
     }
 
-    if (target && !module.targets.includes(target)) {
+    const supportsTarget = !target
+      || (
+        module.targets.includes(target)
+        && (!targetAdapter || targetAdapter.supportsModule(module, targetPlanningInput))
+      );
+
+    if (!supportsTarget) {
       if (dependencyOf) {
         skippedTargetIds.add(rootRequesterId || dependencyOf);
         return false;
