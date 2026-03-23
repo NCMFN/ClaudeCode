@@ -74,6 +74,8 @@ if not gate_or_revert("tests/", quick=True):
     try_alternative_approach()
 ```
 
+> **Warning:** `gate_or_revert` runs `git checkout -- .` when a regression is detected, discarding uncommitted changes. Commit or stash work-in-progress before entering the loop. You can also pass a custom revert command: `gate_or_revert("tests/", revert_cmd="git stash")`.
+
 ## MCP Integration
 
 EvalView exposes 8 tools via MCP — works with Claude Code, Cursor, and any MCP client:
