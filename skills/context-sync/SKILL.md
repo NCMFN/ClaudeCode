@@ -159,9 +159,10 @@ Verify that documentation claims match the current codebase.
 find src/ -type f -name "*.py" | wc -l        # or *.ts, *.go, etc.
 # Compare against documented module count
 
-# Test count matches
-pytest --collect-only -q 2>/dev/null | tail -1  # Python
-npm test -- --listTests 2>/dev/null | wc -l     # JavaScript
+# Test count matches (adapt command to your test runner)
+pytest --collect-only -q 2>/dev/null | tail -1       # Python (pytest)
+swift test --list-tests 2>/dev/null | wc -l          # Swift
+grep -r "it(\|test(\|describe(" tests/ | wc -l       # JS/TS (generic fallback)
 
 # Package version matches docs
 grep version pyproject.toml                      # or package.json
