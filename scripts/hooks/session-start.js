@@ -32,7 +32,10 @@ async function main() {
   ensureDir(learnedDir);
 
   // Clean up expired session files (default: 30 days)
-  const retentionDays = parseInt(process.env.ECC_SESSION_RETENTION_DAYS || '30', 10);
+  const parsedRetention = parseInt(process.env.ECC_SESSION_RETENTION_DAYS || '30', 10);
+  const retentionDays = Number.isFinite(parsedRetention) && parsedRetention > 0
+    ? parsedRetention
+    : 30;
   const expiredSessions = findFiles(sessionsDir, '*-session.tmp', { minAge: retentionDays });
 
   if (expiredSessions.length > 0) {
@@ -46,7 +49,7 @@ async function main() {
       }
     }
     if (cleaned > 0) {
-      log(`[SessionStart] Cleaned up ${cleaned} expired session file(s) (>${retentionDays} days old)`);
+      log(`[SessionStart] Cleaned up ${cleaned} expired session file(s) (${retentionDays}+ days old)`);
     }
   }
 
