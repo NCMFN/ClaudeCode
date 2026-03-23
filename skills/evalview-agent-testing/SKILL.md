@@ -56,7 +56,8 @@ result = gate(test_dir="tests/")
 if not result.passed:
     for d in result.diffs:
         if not d.passed:
-            print(f"  {d.test_name}: {d.status.value} ({d.score_delta:+.1f})")
+            delta = f" ({d.score_delta:+.1f})" if d.score_delta is not None else ""
+            print(f"  {d.test_name}: {d.status.value}{delta}")
 
 # Quick mode — no LLM judge, $0, sub-second
 result = gate(test_dir="tests/", quick=True)
