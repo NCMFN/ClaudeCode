@@ -162,6 +162,15 @@ function runTests() {
     assert.strictEqual(utils.sanitizeSessionId('.@foo@.'), 'foo');
   })) passed++; else failed++;
 
+  if (test('sanitizeSessionId is idempotent (applying twice gives same result)', () => {
+    const inputs = ['.claude', 'my.project', 'project@v2', 'a...b', 'my-project_123'];
+    for (const input of inputs) {
+      const once = utils.sanitizeSessionId(input);
+      const twice = utils.sanitizeSessionId(once);
+      assert.strictEqual(once, twice, `sanitizeSessionId should be idempotent for "${input}"`);
+    }
+  })) passed++; else failed++;
+
   // Session ID tests
   console.log('\nSession ID Functions:');
 
@@ -197,6 +206,28 @@ function runTests() {
       if (original) process.env.CLAUDE_SESSION_ID = original;
       else delete process.env.CLAUDE_SESSION_ID;
     }
+  })) passed++; else failed++;
+
+  if (test('getSessionIdShort sanitizes explicit fallback parameter', () => {
+    // Use subprocess at CWD=/ so getProjectName() returns null and fallback is reached.
+    // Same approach as Round 85 to ensure cross-platform compatibility.
+    if (process.platform === 'win32') {
+      console.log('    (skipped — root CWD differs on Windows)');
+      return;
+    }
+    const utilsPath = path.join(__dirname, '..', '..', 'scripts', 'lib', 'utils.js');
+    const script = `
+      const utils = require('${utilsPath.replace(/'/g, "\\'")}');
+      process.stdout.write(utils.getSessionIdShort('my.fallback'));
+    `;
+    const { spawnSync } = require('child_process');
+    const result = spawnSync('node', ['-e', script], {
+      encoding: 'utf8',
+      cwd: '/',
+      env: { ...process.env, CLAUDE_SESSION_ID: '' }
+    });
+    // fallback should be sanitized: 'my.fallback' → 'my-fallback'
+    assert.strictEqual(result.stdout, 'my-fallback');
   })) passed++; else failed++;
 
   // File operations tests
@@ -1460,25 +1491,28 @@ function runTests() {
   // ── Round 97: getSessionIdShort with whitespace-only CLAUDE_SESSION_ID ──
   console.log('\nRound 97: getSessionIdShort (whitespace-only session ID):');
 
-  if (test('getSessionIdShort returns whitespace when CLAUDE_SESSION_ID is all spaces', () => {
-    // utils.js line 116: if (sessionId && sessionId.length > 0) — '   ' is truthy
-    // and has length > 0, so it passes the check instead of falling back.
-    const original = process.env.CLAUDE_SESSION_ID;
-    try {
-      process.env.CLAUDE_SESSION_ID = '          ';  // 10 spaces
-      const result = utils.getSessionIdShort('fallback');
-      // slice(-8) on 10 spaces returns 8 spaces — not the expected fallback
-      assert.strictEqual(result, '        ',
-        'Whitespace-only ID should return 8 trailing spaces (no trim check)');
-      assert.strictEqual(result.trim().length, 0,
-        'Result should be entirely whitespace (demonstrating the missing trim)');
-    } finally {
-      if (original !== undefined) {
-        process.env.CLAUDE_SESSION_ID = original;
-      } else {
-        delete process.env.CLAUDE_SESSION_ID;
-      }
+  if (test('getSessionIdShort sanitizes whitespace-only CLAUDE_SESSION_ID to fallback', () => {
+    // Whitespace-only session ID: slice(-8) → '        ', sanitizeSessionId replaces
+    // spaces with hyphens → '--------', collapses → '-', strips → '', returns null.
+    // Then falls through to sanitized project name (or 'default' at root).
+    if (process.platform === 'win32') {
+      console.log('    (skipped — root CWD differs on Windows)');
+      return;
     }
+    const utilsPath = path.join(__dirname, '..', '..', 'scripts', 'lib', 'utils.js');
+    const script = `
+      const utils = require('${utilsPath.replace(/'/g, "\\'")}');
+      process.stdout.write(utils.getSessionIdShort('fallback'));
+    `;
+    const { spawnSync } = require('child_process');
+    const result = spawnSync('node', ['-e', script], {
+      encoding: 'utf8',
+      cwd: '/',
+      env: { ...process.env, CLAUDE_SESSION_ID: '          ' }
+    });
+    // At root: project name is null → fallback 'fallback' is used (already clean)
+    assert.strictEqual(result.stdout, 'fallback',
+      'Whitespace-only ID should sanitize to null and fall through to fallback');
   })) passed++; else failed++;
 
   // ── Round 97: countInFile with same RegExp object called twice (lastIndex reuse) ──

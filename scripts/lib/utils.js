@@ -132,9 +132,11 @@ function sanitizeSessionId(raw) {
 function getSessionIdShort(fallback = 'default') {
   const sessionId = process.env.CLAUDE_SESSION_ID;
   if (sessionId && sessionId.length > 0) {
-    return sessionId.slice(-8);
+    const sanitized = sanitizeSessionId(sessionId.slice(-8));
+    if (sanitized) return sanitized;
+    // Session ID sanitized to empty (e.g., all whitespace) — fall through
   }
-  return sanitizeSessionId(getProjectName()) || fallback;
+  return sanitizeSessionId(getProjectName()) || sanitizeSessionId(fallback) || 'default';
 }
 
 /**
