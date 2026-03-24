@@ -48,6 +48,32 @@ if (
 else failed++;
 
 if (
+  test('reference config enables Codex multi-agent support', () => {
+    assert.ok(
+      /^\s*multi_agent\s*=\s*true\s*$/m.test(config),
+      'Expected `.codex/config.toml` to opt into Codex multi-agent collaboration',
+    );
+  })
+)
+  passed++;
+else failed++;
+
+if (
+  test('reference config wires the sample Codex role files', () => {
+    for (const roleFile of ['explorer.toml', 'reviewer.toml', 'docs-researcher.toml']) {
+      const rolePath = path.join(codexAgentsDir, roleFile);
+      assert.ok(fs.existsSync(rolePath), `Expected role config to exist: ${roleFile}`);
+      assert.ok(
+        config.includes(`config_file = "agents/${roleFile}"`),
+        `Expected \`.codex/config.toml\` to reference ${roleFile}`,
+      );
+    }
+  })
+)
+  passed++;
+else failed++;
+
+if (
   test('sample Codex role configs do not use o4-mini', () => {
     const roleFiles = fs.readdirSync(codexAgentsDir).filter(file => file.endsWith('.toml'));
     assert.ok(roleFiles.length > 0, 'Expected sample role config files under `.codex/agents`');
