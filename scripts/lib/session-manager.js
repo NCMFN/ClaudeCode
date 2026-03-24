@@ -2,7 +2,7 @@
  * Session Manager Library for Claude Code
  * Provides core session CRUD operations for listing, loading, and managing sessions
  *
- * Sessions are stored as markdown files in ~/.claude/sessions/ with format:
+ * Sessions are stored as markdown files in ~/.claude/session-data/ with format:
  * - YYYY-MM-DD-session.tmp (old format)
  * - YYYY-MM-DD-<short-id>-session.tmp (new format)
  */

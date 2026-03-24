@@ -31,7 +31,7 @@ function getClaudeDir() {
  * Get the sessions directory
  */
 function getSessionsDir() {
-  return path.join(getClaudeDir(), 'sessions');
+  return path.join(getClaudeDir(), 'session-data');
 }
 
 /**

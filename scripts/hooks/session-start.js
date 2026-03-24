@@ -7,6 +7,9 @@
  * Runs when a new Claude session starts. Loads the most recent session
  * summary into Claude's context via stdout, and reports available
  * sessions and learned skills.
+ *
+ * SessionStart hooks require stdout in hookSpecificOutput format:
+ * {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"..."}}
  */
 
 const {
@@ -17,11 +20,25 @@ const {
   readFile,
   stripAnsi,
   log,
-  output
 } = require('../lib/utils');
 const { getPackageManager, getSelectionPrompt } = require('../lib/package-manager');
 const { listAliases } = require('../lib/session-aliases');
 const { detectProjectType } = require('../lib/project-detect');
+
+/**
+ * Emit hookSpecificOutput for SessionStart hooks.
+ * Uses process.stdout.write with a flush callback to avoid the race
+ * condition where process.exit() fires before stdout is fully flushed.
+ */
+function emitSessionStartOutput(context, callback) {
+  const payload = JSON.stringify({
+    hookSpecificOutput: {
+      hookEventName: 'SessionStart',
+      additionalContext: context,
+    },
+  });
+  process.stdout.write(payload + '\n', callback);
+}
 
 async function main() {
   const sessionsDir = getSessionsDir();
@@ -30,6 +47,8 @@ async function main() {
   // Ensure directories exist
   ensureDir(sessionsDir);
   ensureDir(learnedDir);
+
+  const contextParts = [];
 
   // Check for recent session files (last 7 days)
   const recentSessions = findFiles(sessionsDir, '*-session.tmp', { maxAge: 7 });
@@ -43,7 +62,7 @@ async function main() {
     const content = stripAnsi(readFile(latest.path));
     if (content && !content.includes('[Session context goes here]')) {
       // Only inject if the session has actual content (not the blank template)
-      output(`Previous session summary:\n${content}`);
+      contextParts.push(`Previous session summary:\n${content}`);
     }
   }
 
@@ -84,12 +103,20 @@ async function main() {
       parts.push(`frameworks: ${projectInfo.frameworks.join(', ')}`);
     }
     log(`[SessionStart] Project detected — ${parts.join('; ')}`);
-    output(`Project type: ${JSON.stringify(projectInfo)}`);
+    contextParts.push(`Project type: ${JSON.stringify(projectInfo)}`);
   } else {
     log('[SessionStart] No specific project type detected');
   }
 
-  process.exit(0);
+  // Emit all collected context via the correct hookSpecificOutput format,
+  // then exit only after stdout is flushed (avoids race condition)
+  if (contextParts.length > 0) {
+    emitSessionStartOutput(contextParts.join('\n\n'), () => {
+      process.exit(0);
+    });
+  } else {
+    process.exit(0);
+  }
 }
 
 main().catch(err => {
