@@ -4,8 +4,8 @@ use ratatui::{
 };
 
 use crate::config::Config;
-use crate::session::{Session, SessionState};
 use crate::session::store::StateStore;
+use crate::session::{Session, SessionState};
 
 pub struct Dashboard {
     db: StateStore,
@@ -42,7 +42,7 @@ impl Dashboard {
         let chunks = Layout::default()
             .direction(Direction::Vertical)
             .constraints([
-                Constraint::Length(3),  // Header
+                Constraint::Length(3), // Header
                 Constraint::Min(10),   // Main content
                 Constraint::Length(3), // Status bar
             ])
@@ -79,7 +79,11 @@ impl Dashboard {
     }
 
     fn render_header(&self, frame: &mut Frame, area: Rect) {
-        let running = self.sessions.iter().filter(|s| s.state == SessionState::Running).count();
+        let running = self
+            .sessions
+            .iter()
+            .filter(|s| s.state == SessionState::Running)
+            .count();
         let total = self.sessions.len();
 
         let title = format!(" ECC 2.0 | {running} running / {total} total ");
@@ -90,7 +94,11 @@ impl Dashboard {
                 Pane::Output => 1,
                 Pane::Metrics => 2,
             })
-            .highlight_style(Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD));
+            .highlight_style(
+                Style::default()
+                    .fg(Color::Cyan)
+                    .add_modifier(Modifier::BOLD),
+            );
 
         frame.render_widget(tabs, area);
     }
@@ -110,11 +118,18 @@ impl Dashboard {
                     SessionState::Pending => "◌",
                 };
                 let style = if i == self.selected_session {
-                    Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD)
+                    Style::default()
+                        .fg(Color::Cyan)
+                        .add_modifier(Modifier::BOLD)
                 } else {
                     Style::default()
                 };
-                let text = format!("{state_icon} {} [{}] {}", &s.id[..8.min(s.id.len())], s.agent_type, s.task);
+                let text = format!(
+                    "{state_icon} {} [{}] {}",
+                    &s.id[..8.min(s.id.len())],
+                    s.agent_type,
+                    s.task
+                );
                 ListItem::new(text).style(style)
             })
             .collect();
@@ -136,7 +151,10 @@ impl Dashboard {
 
     fn render_output(&self, frame: &mut Frame, area: Rect) {
         let content = if let Some(session) = self.sessions.get(self.selected_session) {
-            format!("Agent output for session {}...\n\n(Live streaming coming soon)", session.id)
+            format!(
+                "Agent output for session {}...\n\n(Live streaming coming soon)",
+                session.id
+            )
         } else {
             "No sessions. Press 'n' to start one.".to_string()
         };
@@ -253,7 +271,9 @@ impl Dashboard {
 
     pub fn stop_selected(&mut self) {
         if let Some(session) = self.sessions.get(self.selected_session) {
-            let _ = self.db.update_state(&session.id, &SessionState::Stopped);
+            let _ = self
+                .db
+                .update_state_and_pid(&session.id, &SessionState::Stopped, None);
             self.refresh();
         }
     }

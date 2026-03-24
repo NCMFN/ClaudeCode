@@ -13,6 +13,7 @@ pub struct Session {
     pub task: String,
     pub agent_type: String,
     pub state: SessionState,
+    pub pid: Option<u32>,
     pub worktree: Option<WorktreeInfo>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
