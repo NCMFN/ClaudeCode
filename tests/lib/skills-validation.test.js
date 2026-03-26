@@ -90,6 +90,7 @@ function getSkillDirectories() {
 
 /**
  * Get a sample of skills for testing (to keep test runtime reasonable).
+ * Uses deterministic selection for reproducible tests.
  */
 function getSampleSkills(sampleSize = 20) {
   const allSkills = getSkillDirectories();
@@ -108,10 +109,12 @@ function getSampleSkills(sampleSize = 20) {
     }
   }
   
-  // Add random skills from remaining to reach sampleSize
-  while (sampled.length < sampleSize && remaining.length > 0) {
-    const idx = Math.floor(Math.random() * remaining.length);
-    sampled.push(remaining.splice(idx, 1)[0]);
+  // Sort remaining by name for deterministic ordering, then take first N
+  remaining.sort((a, b) => a.name.localeCompare(b.name));
+  
+  // Add skills from remaining to reach sampleSize (deterministic selection)
+  for (let i = 0; i < remaining.length && sampled.length < sampleSize; i++) {
+    sampled.push(remaining[i]);
   }
   
   return sampled;
@@ -127,6 +130,14 @@ function runTests() {
   console.log('YAML Frontmatter:');
 
   const skills = getSkillDirectories();
+  
+  // Guard: Ensure we have skills to test
+  if (skills.length === 0) {
+    console.log('  \u2717 No skills discovered');
+    console.log(`    Error: No skills found in ${SKILLS_DIR}`);
+    console.log('\nResults: Passed: 0, Failed: 1');
+    process.exit(1);
+  }
 
   if (test('all skills have SKILL.md file', () => {
     const missing = skills.filter(s => !fs.existsSync(s.skillMdPath));
@@ -155,7 +166,7 @@ function runTests() {
   })) passed++; else failed++;
 
   if (test('most frontmatter has required fields (name, description, origin)', () => {
-    const invalid = [];
+    const invalidSkills = new Map(); // Track skills with issues (skill-level, not field-level)
     const withFrontmatter = [];
     for (const skill of skills) {
       if (!fs.existsSync(skill.skillMdPath)) continue;
@@ -164,25 +175,32 @@ function runTests() {
       if (!parsed) continue;
       
       withFrontmatter.push(skill.name);
+      const reasons = [];
+      
       if (!parsed.frontmatter.name) {
-        invalid.push({ name: skill.name, reason: 'Missing name' });
+        reasons.push('Missing name');
       }
       if (!parsed.frontmatter.description) {
-        invalid.push({ name: skill.name, reason: 'Missing description' });
+        reasons.push('Missing description');
       }
       if (!parsed.frontmatter.origin) {
-        invalid.push({ name: skill.name, reason: 'Missing origin' });
+        reasons.push('Missing origin');
+      }
+      
+      if (reasons.length > 0) {
+        invalidSkills.set(skill.name, reasons);
       }
     }
     
     // Report issues
-    if (invalid.length > 0) {
-      const details = invalid.slice(0, 5).map(i => `${i.name} (${i.reason})`);
-      console.log(`    [INFO] ${invalid.length} frontmatter issues: ${details.join(', ')}${invalid.length > 5 ? '...' : ''}`);
+    if (invalidSkills.size > 0) {
+      const details = [...invalidSkills.entries()].slice(0, 5).map(([name, reasons]) => `${name} (${reasons.join(', ')})`);
+      console.log(`    [INFO] ${invalidSkills.size} skills with frontmatter issues: ${details.join(', ')}${invalidSkills.size > 5 ? '...' : ''}`);
     }
     
     // Test passes if >85% of skills with frontmatter have all required fields
-    const pctValid = ((withFrontmatter.length - invalid.length) / withFrontmatter.length) * 100;
+    // Use skill count (invalidSkills.size), not field count
+    const pctValid = ((withFrontmatter.length - invalidSkills.size) / withFrontmatter.length) * 100;
     if (pctValid < 85) {
       throw new Error(`Only ${pctValid.toFixed(1)}% of frontmatter has all required fields (expected >85%)`);
     }
@@ -400,15 +418,19 @@ function runTests() {
       }
     }
     
-    // Report but don't fail - code blocks without language are common and often intentional
-    // (e.g., for shell output, file paths, generic examples)
+    // Report issues
     if (noLang.length > 0) {
       const details = noLang.slice(0, 5).map(n => `${n.name} (${n.count} blocks)`);
       console.log(`    [INFO] ${noLang.length} skills have code blocks without language: ${details.join(', ')}${noLang.length > 5 ? '...' : ''}`);
     }
     
-    // This is informational only - don't fail the test
-    // Many code blocks intentionally don't have language specifiers
+    // Assert that code blocks without language are not excessive
+    // Allow up to 80% of skills to have code blocks without language (often intentional)
+    // This threshold is lenient because many code blocks intentionally don't have language specifiers
+    const pctWithoutLang = (noLang.length / skills.length) * 100;
+    if (pctWithoutLang > 80) {
+      throw new Error(`${pctWithoutLang.toFixed(1)}% of skills have code blocks without language specifiers (expected <80%)`);
+    }
   })) passed++; else failed++;
 
   if (test('skills have at least one code example (for technical skills)', () => {

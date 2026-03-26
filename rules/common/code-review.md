@@ -103,8 +103,8 @@ Use these agents for code review:
 ## Approval Criteria
 
 - **Approve**: No CRITICAL or HIGH issues
-- **Warning**: Only HIGH issues (merge with caution)
-- **Block**: CRITICAL issues found
+- **Warning**: Only MEDIUM issues (merge after review)
+- **Block**: CRITICAL or HIGH issues found
 
 ## Integration with Other Rules
 

@@ -106,7 +106,7 @@ Link to complementary skills.
 |-------|----------|-------------|
 | `name` | Yes | Lowercase, hyphenated identifier (e.g., `react-patterns`) |
 | `description` | Yes | One-line description for skill list and auto-activation |
-| `origin` | No | Source identifier (e.g., `ECC`, `community`, project name) |
+| `origin` | Yes | Source identifier (e.g., `ECC`, `community`, project name) |
 | `tags` | No | Array of tags for categorization |
 | `version` | No | Skill version for tracking updates |
 
@@ -139,6 +139,7 @@ Here's a minimal template:
 ---
 name: your-skill-name
 description: Brief description of when to use this skill
+origin: ECC
 ---
 
 # Your Skill Title
