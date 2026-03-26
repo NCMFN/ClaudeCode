@@ -49,24 +49,6 @@ async function main() {
     const latest = recentSessions[0];
     log(`[SessionStart] Found ${recentSessions.length} recent session(s)`);
     log(`[SessionStart] Latest: ${latest.path}`);
-<<<<<<< HEAD
-
-    // Read and inject the latest session content into Claude's context.
-    // Claude Code SessionStart hooks must output JSON with hookSpecificOutput
-    // or the content is silently discarded. See issue #843.
-    const content = stripAnsi(readFile(latest.path));
-    if (content && !content.includes('[Session context goes here]')) {
-      // Only inject if the session has actual content (not the blank template)
-      const payload = {
-        hookSpecificOutput: {
-          hookEventName: 'SessionStart',
-          additionalContext: `Previous session summary:\n${content}`
-        }
-      };
-      process.stdout.write(JSON.stringify(payload) + '\n');
-    }
-=======
->>>>>>> 25a1c45 (fix(#843): ecc-sessions dir + single hookSpecificOutput JSON envelope)
   }
 
   // Check for learned skills
@@ -106,16 +88,6 @@ async function main() {
       parts.push(`frameworks: ${projectInfo.frameworks.join(', ')}`);
     }
     log(`[SessionStart] Project detected — ${parts.join('; ')}`);
-<<<<<<< HEAD
-    const projPayload = {
-      hookSpecificOutput: {
-        hookEventName: 'SessionStart',
-        additionalContext: `Project type: ${JSON.stringify(projectInfo)}`
-      }
-    };
-    process.stdout.write(JSON.stringify(projPayload) + '\n');
-=======
->>>>>>> 25a1c45 (fix(#843): ecc-sessions dir + single hookSpecificOutput JSON envelope)
   } else {
     log('[SessionStart] No specific project type detected');
   }
