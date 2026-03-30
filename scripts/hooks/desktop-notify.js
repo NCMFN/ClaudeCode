@@ -141,7 +141,7 @@ function run(raw) {
       } else if (ps) {
         // PowerShell exists but no BurntToast module
         log('[DesktopNotify] Tip: Install BurntToast module to enable notifications:');
-        log(`[DesktopNotify]   ${ps.path} -Command "Install-Module -Name BurntToast -Scope CurrentUser"`);
+        log(`[DesktopNotify]   "${ps.path}" -Command "Install-Module -Name BurntToast -Scope CurrentUser"`);
       } else {
         // No PowerShell found
         log('[DesktopNotify] Tip: Install BurntToast in PowerShell for notifications:');
