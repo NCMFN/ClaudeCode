@@ -1965,7 +1965,7 @@ async function runTests() {
     passed++;
   else failed++;
   if (
-    test('script references use CLAUDE_PLUGIN_ROOT variable or safe SessionStart inline resolver', () => {
+    test('script references use CLAUDE_PLUGIN_ROOT variable or a safe inline resolver', () => {
       const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
       const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
 
@@ -1973,9 +1973,8 @@ async function runTests() {
         for (const entry of hookArray) {
           for (const hook of entry.hooks) {
             if (hook.type === 'command' && hook.command.includes('scripts/hooks/')) {
-              // Check for the literal string "${CLAUDE_PLUGIN_ROOT}" in the command
-              const isSessionStartInlineResolver = hook.command.startsWith('node -e') && hook.command.includes('session:start') && hook.command.includes('run-with-flags.js');
-              const hasPluginRoot = hook.command.includes('${CLAUDE_PLUGIN_ROOT}') || isSessionStartInlineResolver;
+              const isInlineResolver = hook.command.startsWith('node -e') && hook.command.includes('run-with-flags.js');
+              const hasPluginRoot = hook.command.includes('${CLAUDE_PLUGIN_ROOT}') || isInlineResolver;
               assert.ok(hasPluginRoot, `Script paths should use CLAUDE_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`);
             }
           }
@@ -1984,6 +1983,24 @@ async function runTests() {
 
       for (const [, hookArray] of Object.entries(hooks.hooks)) {
         checkHooks(hookArray);
+      }
+    })
+  )
+    passed++;
+  else failed++;
+
+  if (
+    test('Stop and SessionEnd lifecycle hooks use inline resolvers when plugin root may be unset', () => {
+      const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
+      const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
+      const lifecycleHooks = [...(hooks.hooks.Stop || []), ...(hooks.hooks.SessionEnd || [])];
+
+      for (const entry of lifecycleHooks) {
+        for (const hook of entry.hooks || []) {
+          assert.ok(hook.command.startsWith('node -e "'), `Expected inline resolver for lifecycle hook: ${hook.command.substring(0, 80)}...`);
+          assert.ok(hook.command.includes("const hookId='"), 'Inline lifecycle resolver should embed hook identifiers');
+          assert.ok(hook.command.includes('plugins'), 'Inline lifecycle resolver should probe known plugin roots');
+        }
       }
     })
   )

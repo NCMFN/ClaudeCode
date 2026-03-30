@@ -179,6 +179,22 @@ function cleanupTestDir(testDir) {
   fs.rmSync(testDir, { recursive: true, force: true });
 }
 
+function linkPluginCacheInstall(homeDir) {
+  const installRoot = path.join(
+    homeDir,
+    '.claude',
+    'plugins',
+    'cache',
+    'everything-claude-code',
+    'affaan-m',
+    '1.9.0'
+  );
+
+  fs.mkdirSync(path.dirname(installRoot), { recursive: true });
+  fs.symlinkSync(REPO_ROOT, installRoot, process.platform === 'win32' ? 'junction' : 'dir');
+  return installRoot;
+}
+
 function getHookCommandByDescription(hooks, lifecycle, descriptionText) {
   const hookGroup = hooks.hooks[lifecycle]?.find(
     entry => entry.description && entry.description.includes(descriptionText)
@@ -265,6 +281,35 @@ async function runTests() {
     const payload = getSessionStartPayload(result.stdout);
     assert.ok(payload.hookSpecificOutput, 'Should include hookSpecificOutput');
     assert.strictEqual(payload.hookSpecificOutput.hookEventName, 'SessionStart');
+  })) passed++; else failed++;
+
+  if (await asyncTest('Stop hooks resolve plugin root without CLAUDE_PLUGIN_ROOT', async () => {
+    const hookCommand = getHookCommandByDescription(
+      hooks,
+      'Stop',
+      'Check for console.log in modified files'
+    );
+
+    const testHome = createTestDir();
+
+    try {
+      linkPluginCacheInstall(testHome);
+      const result = await runHookCommand(
+        hookCommand,
+        { tool_input: { file_path: 'src/example.js' } },
+        {
+          CLAUDE_PLUGIN_ROOT: '',
+          HOME: testHome,
+          USERPROFILE: testHome
+        }
+      );
+
+      assert.strictEqual(result.code, 0, 'Stop hook should exit 0 when plugin root is resolved from plugin cache');
+      assert.ok(!result.stderr.includes('/scripts/hooks/run-with-flags.js'), 'Should not fall back to an invalid absolute root path');
+      assert.ok(!result.stderr.includes('MODULE_NOT_FOUND'), 'Should not fail to locate run-with-flags.js');
+    } finally {
+      cleanupTestDir(testHome);
+    }
   })) passed++; else failed++;
 
   if (await asyncTest('PreCompact hook logs to stderr', async () => {
