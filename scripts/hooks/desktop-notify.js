@@ -50,7 +50,7 @@ function findPowerShell() {
   for (const path of candidates) {
     try {
       const result = spawnSync(path, ['-Command', 'exit 0'],
-        { stdio: ['ignore', 'pipe', 'ignore'], timeout: 1000 });
+        { stdio: ['ignore', 'pipe', 'ignore'], timeout: 3000 });
       if (result.status === 0) {
         return path;
       }
@@ -63,7 +63,8 @@ function findPowerShell() {
 
 /**
  * Send a Windows Toast notification via PowerShell BurntToast.
- * Returns true on success, false on failure.
+ * Returns { success: boolean, reason: string|null }.
+ * reason is null on success, or contains error detail on failure.
  */
 function notifyWindows(pwshPath, title, body) {
   const safeBody = body.replace(/'/g, "''");
@@ -71,7 +72,11 @@ function notifyWindows(pwshPath, title, body) {
   const command = `Import-Module BurntToast; New-BurntToastNotification -Text '${safeTitle}', '${safeBody}'`;
   const result = spawnSync(pwshPath, ['-Command', command],
     { stdio: ['ignore', 'pipe', 'pipe'], timeout: 5000 });
-  return result.status === 0;
+  if (result.status === 0) {
+    return { success: true, reason: null };
+  }
+  const errorMsg = result.error ? result.error.message : result.stderr?.toString();
+  return { success: false, reason: errorMsg || `exit ${result.status}` };
 }
 
 /**
@@ -120,11 +125,17 @@ function run(raw) {
       notifyMacOS(TITLE, summary);
     } else if (isWSL) {
       const ps = findPowerShell();
-      if (ps && notifyWindows(ps, TITLE, summary)) {
-        // notification sent successfully
-      } else if (ps) {
-        // PowerShell found but BurntToast not available
-        log('[DesktopNotify] Tip: Install BurntToast module to enable notifications');
+      if (ps) {
+        const { success, reason } = notifyWindows(ps, TITLE, summary);
+        if (success) {
+          // notification sent successfully
+        } else if (reason && reason.toLowerCase().includes('burnttoast')) {
+          // BurntToast module not found
+          log('[DesktopNotify] Tip: Install BurntToast module to enable notifications');
+        } else if (reason) {
+          // Other PowerShell/notification error - log for debugging
+          log(`[DesktopNotify] Notification failed: ${reason}`);
+        }
       } else {
         // No PowerShell found
         log('[DesktopNotify] Tip: Install BurntToast module in PowerShell for notifications');
