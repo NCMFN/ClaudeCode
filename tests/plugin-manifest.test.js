@@ -216,6 +216,14 @@ test('.mcp.json includes at least github, context7, and exa servers', () => {
   assert.ok(servers.includes('exa'), 'Expected exa MCP server');
 });
 
+test('.mcp.json remote Exa server declares its transport type', () => {
+  assert.strictEqual(
+    mcpConfig.mcpServers.exa?.type,
+    'http',
+    'Expected Exa MCP server to declare type="http" for Claude Code schema compliance',
+  );
+});
+
 // ── Codex marketplace file ────────────────────────────────────────────────────
 // Per official docs: repo marketplace lives at $REPO_ROOT/.agents/plugins/marketplace.json
 console.log('\n=== .agents/plugins/marketplace.json ===\n');
