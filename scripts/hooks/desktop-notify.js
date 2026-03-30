@@ -144,8 +144,7 @@ function run(raw) {
         log(`[DesktopNotify]   "${ps.path}" -Command "Install-Module -Name BurntToast -Scope CurrentUser"`);
       } else {
         // No PowerShell found
-        log('[DesktopNotify] Tip: Install BurntToast in PowerShell for notifications:');
-        log('[DesktopNotify]   https://github.com/microsoft/BurntToast');
+        log('[DesktopNotify] Tip: Install BurntToast module in PowerShell for notifications');
       }
     }
   } catch (err) {
