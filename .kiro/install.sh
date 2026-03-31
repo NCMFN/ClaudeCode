@@ -14,7 +14,7 @@ set -euo pipefail
 # When globs match nothing, expand to empty list instead of the literal pattern
 shopt -s nullglob
 
-# Resolve the directory where this script lives (the repo root)
+# Resolve the directory where this script lives
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SOURCE_KIRO="$SCRIPT_DIR"
 
