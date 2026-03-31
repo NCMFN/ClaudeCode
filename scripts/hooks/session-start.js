@@ -24,6 +24,25 @@ const { getPackageManager, getSelectionPrompt } = require('../lib/package-manage
 const { listAliases } = require('../lib/session-aliases');
 const { detectProjectType } = require('../lib/project-detect');
 const path = require('path');
+const fs = require('fs');
+
+/**
+ * Resolve a filesystem path to its canonical (real) form.
+ *
+ * Handles symlinks and, on case-insensitive filesystems (macOS, Windows),
+ * normalizes casing so that path comparisons are reliable.
+ * Falls back to the original path if resolution fails (e.g. path no longer exists).
+ *
+ * @param {string} p - The path to normalize.
+ * @returns {string} The canonical path, or the original if resolution fails.
+ */
+function normalizePath(p) {
+  try {
+    return fs.realpathSync(p);
+  } catch {
+    return p;
+  }
+}
 
 function dedupeRecentSessions(searchDirs) {
   const recentSessionsByName = new Map();
@@ -83,6 +102,9 @@ function dedupeRecentSessions(searchDirs) {
 function selectMatchingSession(sessions, cwd, currentProject) {
   if (sessions.length === 0) return null;
 
+  // Normalize cwd once outside the loop to avoid repeated syscalls
+  const normalizedCwd = normalizePath(cwd);
+
   let projectMatch = null;
   let projectMatchContent = null;
   let fallbackSession = null;
@@ -103,7 +125,8 @@ function selectMatchingSession(sessions, cwd, currentProject) {
     const sessionWorktree = worktreeMatch ? worktreeMatch[1].trim() : '';
 
     // Exact worktree match — best possible, return immediately
-    if (sessionWorktree && sessionWorktree === cwd) {
+    // Normalize both paths to handle symlinks and case-insensitive filesystems
+    if (sessionWorktree && normalizePath(sessionWorktree) === normalizedCwd) {
       return { session, content, matchReason: 'worktree' };
     }
 
