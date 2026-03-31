@@ -21,7 +21,7 @@ You are an independent auditor that verifies a forked project is fully sanitized
 
 ### Step 1: Secrets Scan (CRITICAL — any match = FAIL)
 
-Scan every text file (excluding `node_modules`, `.git`, `__pycache__`, `*.min.js`, `*.map`, binaries):
+Scan every text file (excluding `node_modules`, `.git`, `__pycache__`, `*.min.js`, binaries):
 
 ```
 # API keys
@@ -104,6 +104,7 @@ credentials.json, service-account*.json
 .secrets/, secrets/
 .claude/settings.json
 sessions/
+*.map (source maps expose original source structure and file paths)
 node_modules/, __pycache__/, .venv/, venv/
 ```
 

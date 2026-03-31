@@ -89,6 +89,7 @@ key-[A-Za-z0-9]{32}
 - `.secrets/`, `secrets/`
 - `.claude/settings.json`
 - `sessions/`
+- `*.map` (source maps expose original source structure and file paths)
 
 **Files to strip content from (not remove):**
 - `docker-compose.yml` — replace hardcoded values with `${VAR_NAME}`
