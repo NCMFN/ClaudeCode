@@ -48,7 +48,7 @@ require_file() {
 check_config_pattern() {
   local pattern="$1"
   local label="$2"
-  if rg -n "$pattern" "$CONFIG_FILE" >/dev/null 2>&1; then
+  if grep -En "$pattern" "$CONFIG_FILE" >/dev/null 2>&1; then
     ok "$label"
   else
     fail "$label"
@@ -58,7 +58,7 @@ check_config_pattern() {
 check_config_absent() {
   local pattern="$1"
   local label="$2"
-  if rg -n "$pattern" "$CONFIG_FILE" >/dev/null 2>&1; then
+  if grep -En "$pattern" "$CONFIG_FILE" >/dev/null 2>&1; then
     fail "$label"
   else
     ok "$label"
@@ -73,13 +73,13 @@ require_file "$CONFIG_FILE" "Global config.toml"
 require_file "$AGENTS_FILE" "Global AGENTS.md"
 
 if [[ -f "$AGENTS_FILE" ]]; then
-  if rg -n '^# Everything Claude Code \(ECC\) — Agent Instructions' "$AGENTS_FILE" >/dev/null 2>&1; then
+  if grep -En '^# Everything Claude Code \(ECC\) — Agent Instructions' "$AGENTS_FILE" >/dev/null 2>&1; then
     ok "AGENTS contains ECC root instructions"
   else
     fail "AGENTS missing ECC root instructions"
   fi
 
-  if rg -n '^# Codex Supplement \(From ECC \.codex/AGENTS\.md\)' "$AGENTS_FILE" >/dev/null 2>&1; then
+  if grep -En '^# Codex Supplement \(From ECC \.codex/AGENTS\.md\)' "$AGENTS_FILE" >/dev/null 2>&1; then
     ok "AGENTS contains ECC Codex supplement"
   else
     fail "AGENTS missing ECC Codex supplement"
@@ -87,11 +87,11 @@ if [[ -f "$AGENTS_FILE" ]]; then
 fi
 
 if [[ -f "$CONFIG_FILE" ]]; then
-  check_config_pattern '^multi_agent\s*=\s*true' "multi_agent is enabled"
-  check_config_absent '^\s*collab\s*=' "deprecated collab flag is absent"
+  check_config_pattern '^multi_agent[[:space:]]*=[[:space:]]*true' "multi_agent is enabled"
+  check_config_absent '^[[:space:]]*collab[[:space:]]*=' "deprecated collab flag is absent"
   # persistent_instructions is recommended but optional; warn instead of fail
   # so users who rely on AGENTS.md alone are not blocked (#967).
-  if rg -n '^[[:space:]]*persistent_instructions\s*=' "$CONFIG_FILE" >/dev/null 2>&1; then
+  if grep -En '^[[:space:]]*persistent_instructions[[:space:]]*=' "$CONFIG_FILE" >/dev/null 2>&1; then
     ok "persistent_instructions is configured"
   else
     warn "persistent_instructions is not set (recommended but optional)"
@@ -105,7 +105,7 @@ if [[ -f "$CONFIG_FILE" ]]; then
     'mcp_servers.sequential-thinking' \
     'mcp_servers.context7'
   do
-    if rg -n "^\[$section\]" "$CONFIG_FILE" >/dev/null 2>&1; then
+    if grep -En "^\[$section\]" "$CONFIG_FILE" >/dev/null 2>&1; then
       ok "MCP section [$section] exists"
     else
       fail "MCP section [$section] missing"
@@ -115,11 +115,11 @@ if [[ -f "$CONFIG_FILE" ]]; then
   has_context7_legacy=0
   has_context7_current=0
 
-  if rg -n '^\[mcp_servers\.context7\]' "$CONFIG_FILE" >/dev/null 2>&1; then
+  if grep -En '^\[mcp_servers\.context7\]' "$CONFIG_FILE" >/dev/null 2>&1; then
     has_context7_legacy=1
   fi
 
-  if rg -n '^\[mcp_servers\.context7-mcp\]' "$CONFIG_FILE" >/dev/null 2>&1; then
+  if grep -En '^\[mcp_servers\.context7-mcp\]' "$CONFIG_FILE" >/dev/null 2>&1; then
     has_context7_current=1
   fi
 
