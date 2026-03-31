@@ -150,6 +150,17 @@
           }
         ],
         "description": "Load previous context and detect package manager on new session"
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/hooks/run-with-flags.js\" \"session:log-init\" \"scripts/hooks/session-log-init.js\" \"minimal,standard,strict\"",
+            "timeout": 5
+          }
+        ],
+        "description": "LOG protocol: inject session opening questionnaire (energy, type, heavy?) into Claude context"
       }
     ],
     "PostToolUse": [
@@ -311,6 +322,18 @@
           }
         ],
         "description": "Send desktop notification (macOS/WSL) with task summary when Claude responds"
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/hooks/run-with-flags.js\" \"stop:session-log-close\" \"scripts/hooks/session-log-close.js\" \"minimal,standard,strict\"",
+            "async": true,
+            "timeout": 10
+          }
+        ],
+        "description": "LOG+ reminder: suggest session closure after heavy activity (15+ messages, ~50k+ tokens)"
       }
     ],
     "SessionEnd": [
