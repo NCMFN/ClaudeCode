@@ -97,7 +97,8 @@
         "cursor",
         "antigravity",
         "codex",
-        "opencode"
+        "opencode",
+        "codebuddy"
       ],
       "dependencies": [],
       "defaultInstall": true,
