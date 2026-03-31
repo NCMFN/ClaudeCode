@@ -41,6 +41,7 @@ function runTests() {
     assert.ok(targets.includes('antigravity'), 'Should include antigravity target');
     assert.ok(targets.includes('codex'), 'Should include codex target');
     assert.ok(targets.includes('opencode'), 'Should include opencode target');
+    assert.ok(targets.includes('codebuddy'), 'Should include codebuddy target');
   })) passed++; else failed++;
 
   if (test('resolves cursor adapter root and install-state path from project root', () => {
@@ -213,6 +214,75 @@ function runTests() {
     assert.throws(
       () => getInstallTargetAdapter('ghost-target'),
       /Unknown install target adapter/
+    );
+  })) passed++; else failed++;
+
+  if (test('resolves codebuddy adapter root and install-state path from project root', () => {
+    const adapter = getInstallTargetAdapter('codebuddy');
+    const projectRoot = '/workspace/app';
+    const root = adapter.resolveRoot({ projectRoot });
+    const statePath = adapter.getInstallStatePath({ projectRoot });
+
+    assert.strictEqual(adapter.id, 'codebuddy-project');
+    assert.strictEqual(adapter.target, 'codebuddy');
+    assert.strictEqual(adapter.kind, 'project');
+    assert.strictEqual(root, path.join(projectRoot, '.codebuddy'));
+    assert.strictEqual(statePath, path.join(projectRoot, '.codebuddy', 'ecc-install-state.json'));
+  })) passed++; else failed++;
+
+  if (test('codebuddy adapter supports lookup by target and adapter id', () => {
+    const byTarget = getInstallTargetAdapter('codebuddy');
+    const byId = getInstallTargetAdapter('codebuddy-project');
+
+    assert.strictEqual(byTarget.id, 'codebuddy-project');
+    assert.strictEqual(byId.id, 'codebuddy-project');
+    assert.ok(byTarget.supports('codebuddy'));
+    assert.ok(byTarget.supports('codebuddy-project'));
+  })) passed++; else failed++;
+
+  if (test('plans codebuddy rules with flat namespaced filenames', () => {
+    const repoRoot = path.join(__dirname, '..', '..');
+    const projectRoot = '/workspace/app';
+
+    const plan = planInstallTargetScaffold({
+      target: 'codebuddy',
+      repoRoot,
+      projectRoot,
+      modules: [
+        {
+          id: 'rules-core',
+          paths: ['rules'],
+        },
+      ],
+    });
+
+    assert.strictEqual(plan.adapter.id, 'codebuddy-project');
+    assert.strictEqual(plan.targetRoot, path.join(projectRoot, '.codebuddy'));
+    assert.strictEqual(plan.installStatePath, path.join(projectRoot, '.codebuddy', 'ecc-install-state.json'));
+
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === 'rules/common/coding-style.md'
+        && operation.destinationPath === path.join(projectRoot, '.codebuddy', 'rules', 'common-coding-style.md')
+      )),
+      'Should flatten common rules into namespaced files for codebuddy'
+    );
+    assert.ok(
+      !plan.operations.some(operation => (
+        operation.destinationPath === path.join(projectRoot, '.codebuddy', 'rules', 'common', 'coding-style.md')
+      )),
+      'Should not preserve nested rule directories for codebuddy installs'
+    );
+  })) passed++; else failed++;
+
+  if (test('exposes validate and planOperations on codebuddy adapter', () => {
+    const codebuddyAdapter = getInstallTargetAdapter('codebuddy');
+
+    assert.strictEqual(typeof codebuddyAdapter.planOperations, 'function');
+    assert.strictEqual(typeof codebuddyAdapter.validate, 'function');
+    assert.deepStrictEqual(
+      codebuddyAdapter.validate({ projectRoot: '/workspace/app', repoRoot: '/repo/ecc' }),
+      []
     );
   })) passed++; else failed++;
 
