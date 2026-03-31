@@ -85,14 +85,18 @@ function selectMatchingSession(sessions, cwd, currentProject) {
 
   let projectMatch = null;
   let projectMatchContent = null;
+  let fallbackSession = null;
   let fallbackContent = null;
 
   for (const session of sessions) {
     const content = readFile(session.path);
     if (!content) continue;
 
-    // Cache first readable content for fallback
-    if (!fallbackContent) fallbackContent = content;
+    // Cache first readable session+content pair for fallback
+    if (!fallbackSession) {
+      fallbackSession = session;
+      fallbackContent = content;
+    }
 
     // Extract **Worktree:** field
     const worktreeMatch = content.match(/\*\*Worktree:\*\*\s*(.+)$/m);
@@ -118,9 +122,9 @@ function selectMatchingSession(sessions, cwd, currentProject) {
     return { session: projectMatch, content: projectMatchContent, matchReason: 'project' };
   }
 
-  // Fallback: most recent session with readable content (original behavior)
-  if (fallbackContent) {
-    return { session: sessions[0], content: fallbackContent, matchReason: 'recency-fallback' };
+  // Fallback: most recent readable session (original behavior)
+  if (fallbackSession) {
+    return { session: fallbackSession, content: fallbackContent, matchReason: 'recency-fallback' };
   }
 
   log('[SessionStart] All session files were unreadable');
