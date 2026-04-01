@@ -34,7 +34,25 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<List<User>> getAll() async {
+    final remote = await _remote.getAll();
+    for (final user in remote) {
+      await _local.save(user);
+    }
+    return remote;
+  }
+
+  @override
   Stream<List<User>> watchAll() => _local.watchAll();
+
+  @override
+  Future<void> save(User user) => _local.save(user);
+
+  @override
+  Future<void> delete(String id) async {
+    await _remote.delete(id);
+    await _local.delete(id);
+  }
 }
 ```
 
@@ -161,12 +179,13 @@ class GetUserUseCase {
 }
 
 class CreateUserUseCase {
-  const CreateUserUseCase(this._repository);
+  const CreateUserUseCase(this._repository, this._idGenerator);
   final UserRepository _repository;
+  final IdGenerator _idGenerator; // injected — domain layer must not depend on uuid package directly
 
   Future<void> call(CreateUserInput input) async {
     // Validate, apply business rules, then persist
-    final user = User(id: const Uuid().v4(), name: input.name, email: input.email);
+    final user = User(id: _idGenerator.generate(), name: input.name, email: input.email);
     await _repository.save(user);
   }
 }
@@ -224,8 +243,10 @@ final router = GoRouter(
       },
     ),
   ],
+  // refreshListenable re-evaluates redirect whenever auth state changes
+  refreshListenable: GoRouterRefreshStream(authCubit.stream),
   redirect: (context, state) {
-    final isLoggedIn = context.read<AuthState>().isLoggedIn;
+    final isLoggedIn = context.read<AuthCubit>().state is AuthAuthenticated;
     if (!isLoggedIn && !state.matchedLocation.startsWith('/login')) {
       return '/login';
     }

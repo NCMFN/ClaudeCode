@@ -101,22 +101,30 @@ if (uri != null && uri.host == 'myapp.com' && _allowedPaths.contains(uri.path)) 
 
 ## WebView Security
 
-- Disable JavaScript in WebView unless explicitly required
+- Use `webview_flutter` v4+ (`WebViewController` / `WebViewWidget`) — the legacy `WebView` widget is removed
+- Disable JavaScript unless explicitly required (`JavaScriptMode.disabled`)
 - Validate URLs before loading — never load arbitrary URLs from deep links
 - Never expose Dart callbacks to JavaScript unless absolutely needed and carefully sandboxed
-- Use `navigationDelegate` to intercept and validate navigation requests
+- Use `NavigationDelegate.onNavigationRequest` to intercept and validate navigation requests
 
 ```dart
-WebView(
-  javascriptMode: JavascriptMode.disabled, // default to disabled
-  navigationDelegate: (request) {
-    final uri = Uri.tryParse(request.url);
-    if (uri == null || uri.host != 'trusted.example.com') {
-      return NavigationDecision.prevent;
-    }
-    return NavigationDecision.navigate;
-  },
-)
+// webview_flutter v4+ API (WebViewController + WebViewWidget)
+final controller = WebViewController()
+  ..setJavaScriptMode(JavaScriptMode.disabled) // disabled unless required
+  ..setNavigationDelegate(
+    NavigationDelegate(
+      onNavigationRequest: (request) {
+        final uri = Uri.tryParse(request.url);
+        if (uri == null || uri.host != 'trusted.example.com') {
+          return NavigationDecision.prevent;
+        }
+        return NavigationDecision.navigate;
+      },
+    ),
+  );
+
+// In your widget tree:
+WebViewWidget(controller: controller)
 ```
 
 ## Obfuscation and Build Security

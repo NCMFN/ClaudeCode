@@ -43,18 +43,28 @@ Follow Dart conventions:
 
 ## Null Safety
 
-- Never use `!` (bang operator) — prefer `?.`, `??`, `if (x != null)`, or Dart 3 pattern matching
-- Use `?.let` style with null checks over forced unwrapping
+- Avoid `!` (bang operator) — prefer `?.`, `??`, `if (x != null)`, or Dart 3 pattern matching; reserve `!` only where a null value is a programming error and crashing is the right behaviour
 - Avoid `late` unless initialization is guaranteed before first use (prefer nullable or constructor init)
 - Use `required` for constructor parameters that must always be provided
 
 ```dart
-// BAD
+// BAD — crashes at runtime if user is null
 final name = user!.name;
 
-// GOOD
+// GOOD — null-aware operators
 final name = user?.name ?? 'Unknown';
-final name = switch (user) { User(:final name) => name, null => 'Unknown' };
+
+// GOOD — Dart 3 pattern matching (exhaustive, compiler-checked)
+final name = switch (user) {
+  User(:final name) => name,
+  null => 'Unknown',
+};
+
+// GOOD — early-return null guard
+String getUserName(User? user) {
+  if (user == null) return 'Unknown';
+  return user.name; // promoted to non-null after the guard
+}
 ```
 
 ## Sealed Types and Pattern Matching (Dart 3+)
@@ -138,9 +148,9 @@ await fetchData();      // or properly awaited
 
 ## Imports
 
-- Use `package:` imports, not relative imports — for consistency across the codebase
-- Order: dart:, package: (external), package: (internal), relative (only for same-package src files)
-- No unused imports — `dart analyze` enforces this
+- Use `package:` imports throughout — never relative imports (`../`) for cross-feature or cross-layer code
+- Order: `dart:` → external `package:` → internal `package:` (same package)
+- No unused imports — `dart analyze` enforces this with `unused_import`
 
 ## Code Generation
 

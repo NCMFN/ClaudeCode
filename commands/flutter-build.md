@@ -97,7 +97,9 @@ state.items.add(item);
 ```
 To:
 ```dart
-context.read<CartCubit>().add(CartItemAdded(item));
+context.read<CartCubit>().addItem(item);
+// Note: Cubit exposes named methods (addItem, removeItem);
+// .add(event) is the BLoC event API — don't mix them.
 ```
 
 ```

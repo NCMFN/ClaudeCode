@@ -128,10 +128,14 @@ class FakeUserRepository implements UserRepository {
   Stream<List<User>> watchAll() => Stream.value(_users.values.toList());
 
   @override
-  Future<void> save(User user) async => _users[user.id] = user;
+  Future<void> save(User user) async {
+    _users[user.id] = user;
+  }
 
   @override
-  Future<void> delete(String id) async => _users.remove(id);
+  Future<void> delete(String id) async {
+    _users.remove(id);
+  }
 
   void addUser(User user) => _users[user.id] = user;
 }

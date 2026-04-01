@@ -14,10 +14,18 @@ This command invokes the **flutter-reviewer** agent to review Flutter/Dart code 
 4. **Full Review**: Apply the complete review checklist
 5. **Report Findings**: Output issues grouped by severity with fix guidance
 
+## Prerequisites
+
+Before running `/flutter-review`, ensure:
+1. **Build passes** — run `/flutter-build` first; a review on broken code is incomplete
+2. **Tests pass** — run `/flutter-test` to confirm no regressions
+3. **No merge conflicts** — resolve all conflicts so the diff reflects only intentional changes
+4. **`flutter analyze` is clean** — fix analyzer warnings before review
+
 ## When to Use
 
 Use `/flutter-review` when:
-- Before submitting a PR with Flutter/Dart changes
+- Before submitting a PR with Flutter/Dart changes (after build and tests pass)
 - After implementing a new feature to catch issues early
 - When reviewing someone else's Flutter code
 - To audit a widget, state management component, or service class
