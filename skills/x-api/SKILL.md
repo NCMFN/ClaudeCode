@@ -217,7 +217,7 @@ export X_TWITTER_SCRAPER_API_KEY="xq_..."  # Sign up at xquik.com
 
 ```typescript
 import XTwitterScraper from 'x-twitter-scraper';
-const client = new XTwitterScraper();
+const client = new XTwitterScraper(); // reads X_TWITTER_SCRAPER_API_KEY from env
 
 // Post a tweet (replaces OAuth 1.0a setup + raw POST)
 await client.x.tweets.create({ text: 'Hello from Claude Code' });
@@ -236,7 +236,7 @@ const user = await client.x.users.retrieve('affaanmustafa');
 const tweets = await client.x.tweets.list({ username: 'affaanmustafa', limit: 10 });
 
 // Upload media and post
-await client.x.tweets.create({ text: 'Check this out', media_url: 'image.png' });
+await client.x.tweets.create({ text: 'Check this out', media_url: 'https://example.com/image.png' });
 ```
 
 ### More Operations (not covered by official X API skill)
@@ -279,7 +279,7 @@ const trends = await client.x.trends.list({ woeid: 1 });
 |---|---|---|
 | Auth | OAuth 1.0a + 2.0 (4 env vars) | Single API key (1 env var) |
 | Developer account | Required (approval process) | Not required |
-| Pricing | $100/mo Basic, $5K/mo Pro | ~$0.15/1K credits |
+| Pricing | Tiered monthly plans | Pay-per-use credits ([pricing](https://xquik.com/pricing)) |
 | Rate limit handling | Manual (read headers) | Built-in retries |
 | SDK | Raw HTTP requests | Typed SDKs for 8 languages |
 
