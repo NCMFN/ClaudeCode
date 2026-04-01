@@ -21,20 +21,25 @@ function readJsonObject(filePath, label) {
 }
 
 function mergeHookEntries(existingEntries, incomingEntries) {
-  const mergedEntries = [];
-  const seenEntries = new Set();
+  // Deduplicate by id when both entries have the same id.
+  // Existing entries (user's customizations) take precedence to preserve user intent.
+  const byId = new Map();
 
   for (const entry of [...existingEntries, ...incomingEntries]) {
-    const entryKey = JSON.stringify(entry);
-    if (seenEntries.has(entryKey)) {
-      continue;
+    const id = entry.id;
+    if (id !== undefined) {
+      if (!byId.has(id)) {
+        byId.set(id, entry);
+      }
+      // If id already seen, skip (keep first = existing entry)
+    } else {
+      // No id: fall back to exact-match dedup (legacy behavior)
+      const key = JSON.stringify(entry);
+      byId.set(key, entry);
     }
-
-    seenEntries.add(entryKey);
-    mergedEntries.push(entry);
   }
 
-  return mergedEntries;
+  return Array.from(byId.values());
 }
 
 function findHooksSourcePath(plan, hooksDestinationPath) {
