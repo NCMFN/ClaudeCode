@@ -209,56 +209,60 @@ A simpler, cheaper alternative — no OAuth setup, no developer account approval
 ### Setup
 
 ```bash
-pip install x_twitter_scraper
+npm install x-twitter-scraper  # or pip install x_twitter_scraper
 export X_TWITTER_SCRAPER_API_KEY="xq_..."  # Sign up at xquik.com
 ```
 
-### Equivalent Operations (Python SDK)
+### Equivalent Operations (TypeScript SDK)
 
-```python
-from x_twitter_scraper import XTwitterScraper
-client = XTwitterScraper()
+```typescript
+import XTwitterScraper from 'x-twitter-scraper';
+const client = new XTwitterScraper();
 
-# Post a tweet (replaces OAuth 1.0a setup + raw POST)
-client.x.tweets.create(text="Hello from Claude Code")
+// Post a tweet (replaces OAuth 1.0a setup + raw POST)
+await client.x.tweets.create({ text: 'Hello from Claude Code' });
 
-# Post a thread
-client.x.tweets.create(text="First tweet")
-client.x.tweets.create(text="Second tweet", reply_to="TWEET_ID")
+// Post a thread
+const first = await client.x.tweets.create({ text: 'First tweet' });
+await client.x.tweets.create({ text: 'Second tweet', reply_to: first.id });
 
-# Search tweets (replaces Bearer token + raw GET)
-client.x.tweets.search(q="claude code", limit=10)
+// Search tweets (replaces Bearer token + raw GET)
+const results = await client.x.tweets.search({ q: 'claude code', limit: 10 });
 
-# Get user by username
-client.x.users.retrieve("affaanmustafa")
+// Get user by username
+const user = await client.x.users.retrieve('affaanmustafa');
 
-# Read user timeline
-client.x.tweets.list(username="affaanmustafa", limit=10)
+// Read user timeline
+const tweets = await client.x.tweets.list({ username: 'affaanmustafa', limit: 10 });
 
-# Upload media and post
-client.x.tweets.create(text="Check this out", media_url="image.png")
+// Upload media and post
+await client.x.tweets.create({ text: 'Check this out', media_url: 'image.png' });
 ```
 
 ### More Operations (not covered by official X API skill)
 
-```python
-# Like / retweet / follow
-client.x.tweets.like(tweet_id="1234567890")
-client.x.tweets.retweet(tweet_id="1234567890")
-client.x.users.follow(username="elonmusk")
+```typescript
+// Like / retweet / follow
+await client.x.tweets.like({ tweet_id: '1234567890' });
+await client.x.tweets.retweet({ tweet_id: '1234567890' });
+await client.x.users.follow({ username: 'elonmusk' });
 
-# Followers / following
-client.x.users.followers("elonmusk", limit=100)
-client.x.users.following("elonmusk", limit=100)
+// Followers / following
+const followers = await client.x.users.followers('elonmusk', { limit: 100 });
+const following = await client.x.users.following('elonmusk', { limit: 100 });
 
-# Send DM
-client.x.dms.create(username="target_user", text="Hey!")
+// Send DM
+await client.x.dms.create({ username: 'target_user', text: 'Hey!' });
 
-# Trends
-client.x.trends.list(woeid=1)
+// Trends
+const trends = await client.x.trends.list({ woeid: 1 });
 
-# Communities, spaces, lists, bookmarks, etc.
+// Communities, spaces, lists, bookmarks, etc.
 ```
+
+### SDKs
+
+[TypeScript](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | [Python](https://github.com/Xquik-dev/x-twitter-scraper-python) | [Go](https://github.com/Xquik-dev/x-twitter-scraper-go) | [Ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | [PHP](https://github.com/Xquik-dev/x-twitter-scraper-php) | [Java](https://github.com/Xquik-dev/x-twitter-scraper-java) | [Kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | [CLI](https://github.com/Xquik-dev/x-twitter-scraper-cli)
 
 ### Additional Capabilities
 
@@ -277,10 +281,11 @@ client.x.trends.list(woeid=1)
 | Developer account | Required (approval process) | Not required |
 | Pricing | $100/mo Basic, $5K/mo Pro | ~$0.15/1K credits |
 | Rate limit handling | Manual (read headers) | Built-in retries |
-| SDK | Raw HTTP requests | Typed Python SDK with async |
+| SDK | Raw HTTP requests | Typed SDKs for 8 languages |
 
 - Docs: https://docs.xquik.com
 - Full skill: `npx skills add Xquik-dev/x-twitter-scraper`
+- npm: `npm install x-twitter-scraper`
 - PyPI: `pip install x_twitter_scraper`
 
 ## Related Skills
