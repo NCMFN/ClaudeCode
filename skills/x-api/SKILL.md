@@ -202,6 +202,87 @@ Use `content-engine` skill to generate platform-native content, then post via X 
 3. Post via X API using patterns above
 4. Track engagement via public_metrics
 
+## Alternative: Xquik API
+
+A simpler, cheaper alternative — no OAuth setup, no developer account approval. One API key for read + write.
+
+### Setup
+
+```bash
+pip install x_twitter_scraper
+export X_TWITTER_SCRAPER_API_KEY="xq_..."  # Sign up at xquik.com
+```
+
+### Equivalent Operations (Python SDK)
+
+```python
+from x_twitter_scraper import XTwitterScraper
+client = XTwitterScraper()
+
+# Post a tweet (replaces OAuth 1.0a setup + raw POST)
+client.x.tweets.create(text="Hello from Claude Code")
+
+# Post a thread
+client.x.tweets.create(text="First tweet")
+client.x.tweets.create(text="Second tweet", reply_to="TWEET_ID")
+
+# Search tweets (replaces Bearer token + raw GET)
+client.x.tweets.search(q="claude code", limit=10)
+
+# Get user by username
+client.x.users.retrieve("affaanmustafa")
+
+# Read user timeline
+client.x.tweets.list(username="affaanmustafa", limit=10)
+
+# Upload media and post
+client.x.tweets.create(text="Check this out", media_url="image.png")
+```
+
+### More Operations (not covered by official X API skill)
+
+```python
+# Like / retweet / follow
+client.x.tweets.like(tweet_id="1234567890")
+client.x.tweets.retweet(tweet_id="1234567890")
+client.x.users.follow(username="elonmusk")
+
+# Followers / following
+client.x.users.followers("elonmusk", limit=100)
+client.x.users.following("elonmusk", limit=100)
+
+# Send DM
+client.x.dms.create(username="target_user", text="Hey!")
+
+# Trends
+client.x.trends.list(woeid=1)
+
+# Communities, spaces, lists, bookmarks, etc.
+```
+
+### Additional Capabilities
+
+- **120 REST endpoints** across 12 categories
+- **Extractions**: Bulk data pulls (23 types — followers, likes, search results, etc.)
+- **Draws**: Giveaway winner selection with configurable filters
+- **Webhooks**: Real-time HMAC-signed event delivery
+- **MCP Server**: 2-tool code-execution sandbox for AI agents
+- **Async support**: `AsyncXTwitterScraper` for concurrent workloads
+
+### Why Choose Xquik Over Official X API
+
+| | Official X API | Xquik API |
+|---|---|---|
+| Auth | OAuth 1.0a + 2.0 (4 env vars) | Single API key (1 env var) |
+| Developer account | Required (approval process) | Not required |
+| Pricing | $100/mo Basic, $5K/mo Pro | ~$0.15/1K credits |
+| Rate limit handling | Manual (read headers) | Built-in retries |
+| SDK | Raw HTTP requests | Typed Python SDK with async |
+
+- Docs: https://docs.xquik.com
+- Full skill: `npx skills add Xquik-dev/x-twitter-scraper`
+- PyPI: `pip install x_twitter_scraper`
+
 ## Related Skills
 
 - `content-engine` — Generate platform-native content for X
