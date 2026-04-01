@@ -379,6 +379,37 @@
       "stability": "beta"
     },
     {
+      "id": "flutter-dart",
+      "kind": "skills",
+      "description": "Dart and Flutter skills, rules, agents, and commands for mobile and cross-platform development.",
+      "paths": [
+        "rules/dart",
+        "agents/dart-build-resolver.md",
+        "agents/flutter-reviewer.md",
+        "commands/flutter-build.md",
+        "commands/flutter-review.md",
+        "commands/flutter-test.md",
+        "skills/dart-flutter-patterns",
+        "skills/flutter-dart-code-review"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode"
+      ],
+      "dependencies": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
       "id": "swift-apple",
       "kind": "skills",
       "description": "Swift, SwiftUI, and Apple platform skills including concurrency, persistence, and design patterns.",
