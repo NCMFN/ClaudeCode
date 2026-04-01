@@ -20,9 +20,12 @@ function readJsonObject(filePath, label) {
   return parsed;
 }
 
+// Deduplicates hook entries by id when present (existing entries take precedence).
+// Falls back to exact-match dedup for legacy entries without an id field.
+// Note: first reinstall after upgrading from a pre-id version may retain one
+// duplicate per hook (old entry keyed by JSON, new entry keyed by id).
+// Effective deduplication resumes on the second reinstall.
 function mergeHookEntries(existingEntries, incomingEntries) {
-  // Deduplicate by id when both entries have the same id.
-  // Existing entries (user's customizations) take precedence to preserve user intent.
   const byId = new Map();
 
   for (const entry of [...existingEntries, ...incomingEntries]) {
@@ -31,11 +34,11 @@ function mergeHookEntries(existingEntries, incomingEntries) {
       if (!byId.has(id)) {
         byId.set(id, entry);
       }
-      // If id already seen, skip (keep first = existing entry)
     } else {
-      // No id: fall back to exact-match dedup (legacy behavior)
       const key = JSON.stringify(entry);
-      byId.set(key, entry);
+      if (!byId.has(key)) {
+        byId.set(key, entry);
+      }
     }
   }
 
