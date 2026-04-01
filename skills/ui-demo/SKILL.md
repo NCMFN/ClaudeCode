@@ -217,7 +217,7 @@ async function moveAndClick(page, locator, label, opts = {}) {
     console.error(`WARNING: moveAndClick failed on "${label}": ${e.message}`);
     return false;
   }
-  await page.waitForTimeout(opts.delay || 800);
+  await page.waitForTimeout(opts.postClickDelay ?? 800);
   return true;
 }
 ```
@@ -235,7 +235,7 @@ async function typeSlowly(page, locator, text, label, charDelay = 35) {
   }
   await moveAndClick(page, el, label);
   await el.fill('');
-  await el.type(text, { delay: charDelay });
+  await el.pressSequentially(text, { delay: charDelay });
   await page.waitForTimeout(500);
   return true;
 }
@@ -260,7 +260,9 @@ async function panElements(page, selector, maxCount = 6) {
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 8 });
         await page.waitForTimeout(600);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn(`WARNING: panElements skipped element ${i} (selector: "${selector}"): ${e.message}`);
+    }
   }
 }
 ```
@@ -361,7 +363,10 @@ const REHEARSAL = process.argv.includes('--rehearse');
     await showSubtitle(page, 'Step 1 — Logging in');
     // ... login actions ...
 
-    // CONTEXT
+    // CONTEXT — after navigation, re-inject overlays
+    await page.goto(`${BASE_URL}/dashboard`);
+    await injectCursor(page);
+    await injectSubtitleBar(page);
     await showSubtitle(page, 'Step 2 — Dashboard overview');
     // ... pan dashboard ...
 
@@ -381,8 +386,14 @@ const REHEARSAL = process.argv.includes('--rehearse');
     if (video) {
       const src = await video.path();
       const dest = path.join(VIDEO_DIR, OUTPUT_NAME);
-      try { fs.copyFileSync(src, dest); } catch (e) {}
-      console.log('Video saved:', dest);
+      try {
+        fs.copyFileSync(src, dest);
+        console.log('Video saved:', dest);
+      } catch (e) {
+        console.error('ERROR: Failed to copy video:', e.message);
+        console.error('  Source:', src);
+        console.error('  Destination:', dest);
+      }
     }
     await browser.close();
   }
@@ -427,4 +438,4 @@ node demo-script.cjs
 9. **Assumed field types** — Don't guess `<textarea>` vs `<input>` or `<select>` vs custom dropdown. Run Phase 1 discovery first
 10. **Assumed features** — Don't hardcode comment text without checking if the field supports @mentions, #tags, or other rich features
 11. **Select placeholder trap** — Placeholder options often have `value="0"` not `value=""`. Check `val !== '0'` and skip options with "Select" in the text
-12. **Popup windows not in recording** — Playwright only records the main page. Capture popup HTML and inject as overlay on main page
+12. **Popup windows produce separate videos** — With `recordVideo`, Playwright records one video per page (including popups). Capture the popup via `page.waitForEvent('popup')` and use `popup.video()`; merge videos afterward if you need a single combined output
