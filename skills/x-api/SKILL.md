@@ -202,6 +202,92 @@ Use `content-engine` skill to generate platform-native content, then post via X 
 3. Post via X API using patterns above
 4. Track engagement via public_metrics
 
+## Alternative: Xquik API
+
+A simpler, cheaper alternative — no OAuth setup, no developer account approval. One API key for read + write.
+
+### Setup
+
+```bash
+npm install x-twitter-scraper  # or pip install x_twitter_scraper
+export X_TWITTER_SCRAPER_API_KEY="xq_..."  # Sign up at xquik.com
+```
+
+### Equivalent Operations (TypeScript SDK)
+
+```typescript
+import XTwitterScraper from 'x-twitter-scraper';
+const client = new XTwitterScraper(); // reads X_TWITTER_SCRAPER_API_KEY from env
+
+// Post a tweet (replaces OAuth 1.0a setup + raw POST)
+await client.x.tweets.create({ text: 'Hello from Claude Code' });
+
+// Post a thread
+const first = await client.x.tweets.create({ text: 'First tweet' });
+await client.x.tweets.create({ text: 'Second tweet', reply_to: first.id });
+
+// Search tweets (replaces Bearer token + raw GET)
+const results = await client.x.tweets.search({ q: 'claude code', limit: 10 });
+
+// Get user by username
+const user = await client.x.users.retrieve('affaanmustafa');
+
+// Read user timeline
+const tweets = await client.x.tweets.list({ username: 'affaanmustafa', limit: 10 });
+
+// Upload media and post
+await client.x.tweets.create({ text: 'Check this out', media_url: 'https://example.com/image.png' });
+```
+
+### More Operations (not covered by official X API skill)
+
+```typescript
+// Like / retweet / follow
+await client.x.tweets.like({ tweet_id: '1234567890' });
+await client.x.tweets.retweet({ tweet_id: '1234567890' });
+await client.x.users.follow({ username: 'elonmusk' });
+
+// Followers / following
+const followers = await client.x.users.followers('elonmusk', { limit: 100 });
+const following = await client.x.users.following('elonmusk', { limit: 100 });
+
+// Send DM
+await client.x.dms.create({ username: 'target_user', text: 'Hey!' });
+
+// Trends
+const trends = await client.x.trends.list({ woeid: 1 });
+
+// Communities, spaces, lists, bookmarks, etc.
+```
+
+### SDKs
+
+[TypeScript](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | [Python](https://github.com/Xquik-dev/x-twitter-scraper-python) | [Go](https://github.com/Xquik-dev/x-twitter-scraper-go) | [Ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | [PHP](https://github.com/Xquik-dev/x-twitter-scraper-php) | [Java](https://github.com/Xquik-dev/x-twitter-scraper-java) | [Kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | [CLI](https://github.com/Xquik-dev/x-twitter-scraper-cli)
+
+### Additional Capabilities
+
+- **120 REST endpoints** across 12 categories
+- **Extractions**: Bulk data pulls (23 types — followers, likes, search results, etc.)
+- **Draws**: Giveaway winner selection with configurable filters
+- **Webhooks**: Real-time HMAC-signed event delivery
+- **MCP Server**: 2-tool code-execution sandbox for AI agents
+- **Async support**: `AsyncXTwitterScraper` for concurrent workloads
+
+### Why Choose Xquik Over Official X API
+
+| | Official X API | Xquik API |
+|---|---|---|
+| Auth | OAuth 1.0a + 2.0 (4 env vars) | Single API key (1 env var) |
+| Developer account | Required (approval process) | Not required |
+| Pricing | Tiered monthly plans | Pay-per-use credits ([pricing](https://xquik.com/pricing)) |
+| Rate limit handling | Manual (read headers) | Built-in retries |
+| SDK | Raw HTTP requests | Typed SDKs for 8 languages |
+
+- Docs: https://docs.xquik.com
+- Full skill: `npx skills add Xquik-dev/x-twitter-scraper`
+- npm: `npm install x-twitter-scraper`
+- PyPI: `pip install x_twitter_scraper`
+
 ## Related Skills
 
 - `content-engine` — Generate platform-native content for X
