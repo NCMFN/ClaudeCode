@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import seaborn as sns
 import joblib
 import warnings
@@ -244,6 +245,48 @@ axes[1].set_ylabel('Residuals')
 plt.tight_layout()
 plt.savefig('predictions_residuals.png')
 plt.close()
+
+
+# ---------------------------------------------------------
+# 7.5 Visualization: System Architecture
+# ---------------------------------------------------------
+def draw_system_architecture():
+    import matplotlib.patches as patches
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.axis('off')
+
+    # 1. Inputs
+    ax.add_patch(patches.Rectangle((0.05, 0.6), 0.2, 0.3, fill=True, color='lightblue', alpha=0.5, lw=2))
+    ax.text(0.15, 0.75, "Inputs:\n- Light\n- Humidity\n- Bacteria", fontsize=12, ha='center', va='center', weight='bold')
+
+    # Arrow to Data Prep
+    ax.annotate("", xy=(0.3, 0.75), xytext=(0.25, 0.75), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # 2. Data Preparation
+    ax.add_patch(patches.Rectangle((0.3, 0.6), 0.25, 0.3, fill=True, color='lightgreen', alpha=0.5, lw=2))
+    ax.text(0.425, 0.75, "Data Prep:\n- Imputation\n- Scaling\n- Feature Eng", fontsize=12, ha='center', va='center', weight='bold')
+
+    # Arrow to Models
+    ax.annotate("", xy=(0.6, 0.75), xytext=(0.55, 0.75), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # 3. Models
+    ax.add_patch(patches.Rectangle((0.6, 0.5), 0.3, 0.5, fill=True, color='orange', alpha=0.5, lw=2))
+    ax.text(0.75, 0.75, "ML Models:\n1. Linear Reg\n2. Random Forest\n3. Neural Net", fontsize=12, ha='center', va='center', weight='bold')
+
+    # Arrow to Output
+    ax.annotate("", xy=(0.75, 0.4), xytext=(0.75, 0.5), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # 4. Output
+    ax.add_patch(patches.Rectangle((0.6, 0.1), 0.3, 0.3, fill=True, color='lightcoral', alpha=0.5, lw=2))
+    ax.text(0.75, 0.25, "Output:\nPredicted\nCurrent Density", fontsize=12, ha='center', va='center', weight='bold')
+
+    plt.title("Bionic Mushroom Energy Harvest - ML Pipeline Architecture", fontsize=14, weight='bold')
+    plt.tight_layout()
+    plt.savefig('system_architecture.png', bbox_inches='tight')
+    plt.close()
+    print("System architecture image saved as 'system_architecture.png'")
+
+draw_system_architecture()
 
 # ---------------------------------------------------------
 # 8. Output & Bonus (Prediction Function & Model Saving)
