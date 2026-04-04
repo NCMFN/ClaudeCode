@@ -1,0 +1,114 @@
+Research Proposal Presentation
+Dietary Exposure Risk:  Predicting Blood Microplastic Loads
+A Data-Driven ML Approach to Bioaccumulation Prediction
+Expert Academic Researcher & Data Scientist Perspective
+
+Microplastics (MPs) are ubiquitous environmental contaminants detected in human lungs, liver, and placenta.
+Recent studies (2022-2024) confirm MP presence in the human bloodstream.
+Urgency: Need for individual risk profiling based on daily dietary and lifestyle factors.
+Background & Motivation
+
+Quantification Gap: High variability in MP detection results; lack of direct linkage to dietary source metrics.
+Health Risk: Chronic bioaccumulation is linked to inflammation and oxidative stress, yet exposure levels are unmonitored.
+Accessibility: Current blood testing for MPs is invasive, expensive, and unavailable to the general public.
+Problem Statement
+
+ML Task
+Build a robust multi-class classifier to predict biological MP risk levels.
+Key Pathways
+Map high-risk "entry routes" like plastic-packaged foods and seafood.
+Scalability
+Create a non-invasive screening tool based on dietary intake metadata.
+Research Objectives
+
+Hypothesis 1
+Individuals consuming >4 items of plastic-packaged processed food daily show a 70% higher probability of "High Risk" classification.
+Hypothesis 2
+Fresh, plant-based diets serve as a predictive indicator for "Negligible" or "Low" MP load, regardless of urban proximity.
+Research Hypotheses
+
+ "For the first time, we have shown that microplastics are in human blood. This study suggests that we are ingesting plastic daily through various environmental vectors."
+— Leslie et al. (2022), Environment International
+Gap: Existing studies focus on environmental detection; this research moves toward behavioral prediction.
+Literature Context
+
+Data Category
+Variable Count
+Key Features
+Food Consumption
+12+ Features
+Salt, Honey, Seafood, Bottled Water, Canned Goods
+Packaging Type
+Categorical
+PET, LDPE, HDPE, Non-Plastic (Glass/Paper)
+Demographics
+4 Features
+Age, Urban/Rural Setting, Water Source
+Target Variable
+3 Classes
+Exposure Risk (Negligible, Low, High)
+Dataset Description
+
+Plastic Load Index (PLI): An aggregated score calculated as:
+Encoding Packaging types using Ordinal Encoding (Risk-based).
+Feature Engineering Strategy
+
+Pre-processing
+Outlier removal & Missing value imputation
+Sampling
+SMOTE for class balancing
+Modeling
+Ensemble Tree Training (XGBoost)
+Tuning
+Optuna Hyperparameter Search
+Validation
+K-Fold Cross Validation
+Methodology Pipeline
+
+XGBoost is selected for its superior handling of non-linear dietary interactions and class-weighted optimization.
+Model Choice & Performance
+
+Priority is given to Sensitivity for High Risk to avoid false negatives in clinical profiling.
+Metric Priority Matrix
+
+Key Trend: Anticipate a log-linear relationship between bottled water consumption frequency and blood MP load across the "Urban" demographic segment.
+Anticipated Impact Trends
+
+Bridges the gap between data science and molecular environmental toxicology.
+1st ML Model for MP Blood Load
+90% Risk Precision Potential
+Zero Invasive Tests Required
+Novelty & Contributions
+
+Limitations
+Ethics
+•
+Recall bias in self-reported diet
+•
+Excludes inhalation pathways
+•
+Metabolic variability not modeled
+•
+Data privacy (GDPR compliance)
+•
+Non-diagnostic disclaimer
+•
+Algorithmic bias in food access
+Limitations & Ethics
+
+Next Steps
+Questions?
+Thank you for your attention.
+Contact: research@microplasticpredict.edu
+App integration for consumer risk tracking.
+Longitudinal study on organ health correlation.
+Collaboration with environmental policy makers.
+Conclusion & Future Work
+
+https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/images/technical-documents/articles/environmental-testing-and-industrial-hygiene/comparison-of-filters-for-microplastics-analysis-100x/comparison-of-filters-for-microplastics-analysis-100x.jpg
+Source: www.sigmaaldrich.com
+https://preview.redd.it/im-staying-at-the-mandalay-bay-i-noticed-these-snacks-and-v0-410e6si62g8e1.jpg?width=640&crop=smart&auto=webp&s=d22644d7a7320514ddab5b582a38ffa4165daa29
+Source: www.reddit.com
+https://synthesis-capital.transforms.svdcdn.com/production/images/Screenshot-2025-08-29-164909.png?w=3223&h=1530&auto=compress%2Cformat&fit=crop&dm=1756482605&s=d42982b1e92a51d47c21219d0cd33ddd
+Source: synthesis.capital
+Image Sources
