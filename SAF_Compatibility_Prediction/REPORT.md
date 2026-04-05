@@ -3,7 +3,8 @@
 ## 1. Introduction and Dataset Source
 The dataset utilized for this project consists of 2,000 synthetic samples generated to accurately reflect the rigorous chemical and physical parameters outlined in aviation fuel standards. The generation logic strictly adheres to the properties documented in the baseline literature:
 **Source:** "Evaluation of Bio-Derived Sustainable Aviation Fuels" (DTIC AD1093317).
-**Link:** https://apps.dtic.mil/sti/pdfs/AD1093317.pdf
+**Original Reference Link:** https://apps.dtic.mil/sti/pdfs/AD1093317.pdf
+**Generated Dataset Download Link:** [saf_dataset.csv](https://temp.sh/tFquO/saf_dataset.csv)
 
 Because the original literature is provided in a PDF format containing experimental test tables rather than a structured CSV, the synthetic dataset maps directly to the operational ranges specified in the paper (e.g., Kinematic Viscosity $\leq$ 8.0 mm²/s, Aromatics 8-25% volume).
 
