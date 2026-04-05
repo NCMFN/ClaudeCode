@@ -84,6 +84,7 @@ sns.scatterplot(data=df, x='Bacterial_Density', y='Current_Density', ax=axes[2],
 axes[2].set_title('Bacterial Density vs Current Density')
 plt.tight_layout()
 plt.savefig('eda_scatter_plots.png')
+plt.show()
 plt.close()
 
 # EDA: Correlation Heatmap
@@ -92,6 +93,7 @@ sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
 plt.title('Correlation Heatmap')
 plt.tight_layout()
 plt.savefig('correlation_heatmap.png')
+plt.show()
 plt.close()
 
 # Split Features and Target
@@ -172,6 +174,7 @@ plt.title('Feature Importances (Random Forest)')
 plt.xlabel('Importance Score')
 plt.tight_layout()
 plt.savefig('feature_importance.png')
+plt.show()
 plt.close()
 
 # ---------------------------------------------------------
@@ -209,6 +212,7 @@ plt.ylabel('Loss')
 plt.legend()
 plt.tight_layout()
 plt.savefig('nn_training_history.png')
+plt.show()
 plt.close()
 
 # ---------------------------------------------------------
@@ -244,49 +248,13 @@ axes[1].set_ylabel('Residuals')
 
 plt.tight_layout()
 plt.savefig('predictions_residuals.png')
+plt.show()
 plt.close()
 
 
 # ---------------------------------------------------------
 # 7.5 Visualization: System Architecture
 # ---------------------------------------------------------
-def draw_system_architecture():
-    import matplotlib.patches as patches
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.axis('off')
-
-    # 1. Inputs
-    ax.add_patch(patches.Rectangle((0.05, 0.6), 0.2, 0.3, fill=True, color='lightblue', alpha=0.5, lw=2))
-    ax.text(0.15, 0.75, "Inputs:\n- Light\n- Humidity\n- Bacteria", fontsize=12, ha='center', va='center', weight='bold')
-
-    # Arrow to Data Prep
-    ax.annotate("", xy=(0.3, 0.75), xytext=(0.25, 0.75), arrowprops=dict(arrowstyle="->", lw=2))
-
-    # 2. Data Preparation
-    ax.add_patch(patches.Rectangle((0.3, 0.6), 0.25, 0.3, fill=True, color='lightgreen', alpha=0.5, lw=2))
-    ax.text(0.425, 0.75, "Data Prep:\n- Imputation\n- Scaling\n- Feature Eng", fontsize=12, ha='center', va='center', weight='bold')
-
-    # Arrow to Models
-    ax.annotate("", xy=(0.6, 0.75), xytext=(0.55, 0.75), arrowprops=dict(arrowstyle="->", lw=2))
-
-    # 3. Models
-    ax.add_patch(patches.Rectangle((0.6, 0.5), 0.3, 0.5, fill=True, color='orange', alpha=0.5, lw=2))
-    ax.text(0.75, 0.75, "ML Models:\n1. Linear Reg\n2. Random Forest\n3. Neural Net", fontsize=12, ha='center', va='center', weight='bold')
-
-    # Arrow to Output
-    ax.annotate("", xy=(0.75, 0.4), xytext=(0.75, 0.5), arrowprops=dict(arrowstyle="->", lw=2))
-
-    # 4. Output
-    ax.add_patch(patches.Rectangle((0.6, 0.1), 0.3, 0.3, fill=True, color='lightcoral', alpha=0.5, lw=2))
-    ax.text(0.75, 0.25, "Output:\nPredicted\nCurrent Density", fontsize=12, ha='center', va='center', weight='bold')
-
-    plt.title("Bionic Mushroom Energy Harvest - ML Pipeline Architecture", fontsize=14, weight='bold')
-    plt.tight_layout()
-    plt.savefig('system_architecture.png', bbox_inches='tight')
-    plt.close()
-    print("System architecture image saved as 'system_architecture.png'")
-
-draw_system_architecture()
 
 # ---------------------------------------------------------
 # 8. Output & Bonus (Prediction Function & Model Saving)
@@ -329,4 +297,57 @@ def predict_current_density(light, humidity, bacterial_density):
 print("Testing Prediction Function:")
 predict_current_density(light=5000, humidity=65, bacterial_density=1.2)
 
+
+
+def draw_system_architecture():
+    import matplotlib.patches as patches
+    fig, ax = plt.subplots(figsize=(10, 10))
+    ax.axis('off')
+
+    def add_box(ax, xy, width, height, text, color):
+        ax.add_patch(patches.Rectangle(xy, width, height, fill=True, color=color, alpha=0.5, lw=2, edgecolor='black'))
+        ax.text(xy[0] + width / 2, xy[1] + height / 2, text, fontsize=10, ha='center', va='center', weight='bold')
+
+    # Start
+    add_box(ax, (0.4, 0.9), 0.2, 0.08, "Start", 'lightgray')
+    ax.annotate("", xy=(0.5, 0.88), xytext=(0.5, 0.9), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Load/Simulate Data
+    add_box(ax, (0.35, 0.78), 0.3, 0.1, "Load/Simulate Dataset\n(Light, Humidity, Bacterial Density,\nCurrent Density)", 'lightblue')
+    ax.annotate("", xy=(0.5, 0.74), xytext=(0.5, 0.78), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Preprocessing
+    add_box(ax, (0.35, 0.64), 0.3, 0.1, "Data Preprocessing\n- Handle Missing Values\n- Feature Scaling\n- Create Interaction Features", 'lightgreen')
+    ax.annotate("", xy=(0.5, 0.60), xytext=(0.5, 0.64), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Split
+    add_box(ax, (0.35, 0.50), 0.3, 0.1, "Train-Test Split", 'yellow')
+    ax.annotate("", xy=(0.25, 0.46), xytext=(0.5, 0.50), arrowprops=dict(arrowstyle="->", lw=2))
+    ax.annotate("", xy=(0.5, 0.46), xytext=(0.5, 0.50), arrowprops=dict(arrowstyle="->", lw=2))
+    ax.annotate("", xy=(0.75, 0.46), xytext=(0.5, 0.50), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Models
+    add_box(ax, (0.15, 0.36), 0.2, 0.1, "Train\nLinear Regression", 'orange')
+    add_box(ax, (0.4, 0.36), 0.2, 0.1, "Train & Tune\nRandom Forest", 'orange')
+    add_box(ax, (0.65, 0.36), 0.2, 0.1, "Train\nNeural Network", 'orange')
+    ax.annotate("", xy=(0.5, 0.32), xytext=(0.25, 0.36), arrowprops=dict(arrowstyle="->", lw=2))
+    ax.annotate("", xy=(0.5, 0.32), xytext=(0.5, 0.36), arrowprops=dict(arrowstyle="->", lw=2))
+    ax.annotate("", xy=(0.5, 0.32), xytext=(0.75, 0.36), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Evaluate
+    add_box(ax, (0.35, 0.22), 0.3, 0.1, "Evaluate Models\n(RMSE, MAE, R2)", 'purple')
+    ax.annotate("", xy=(0.5, 0.18), xytext=(0.5, 0.22), arrowprops=dict(arrowstyle="->", lw=2))
+
+    # Output
+    add_box(ax, (0.35, 0.08), 0.3, 0.1, "Select Best Model\n& Output Predictions", 'lightcoral')
+
+    plt.title("Bionic Mushroom Energy Harvest - Flowchart Algorithm", fontsize=14, weight='bold')
+    plt.tight_layout()
+    plt.savefig('system_architecture.png', bbox_inches='tight')
+    plt.show()
+    plt.close()
+    print("System architecture image saved as 'system_architecture.png'")
+
+# Run diagram generation and finish
+draw_system_architecture()
 print("\nPipeline execution complete!")
