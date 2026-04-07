@@ -2,6 +2,45 @@
 
 Based on the provided Jupyter Notebook pipeline, the system architecture for predicting flood probabilities is structured into five distinct layers:
 
+## System Architecture Diagram
+
+```mermaid
+flowchart TD
+    subgraph "1. Data Ingestion Layer"
+        A[Raw Data: flood.csv] --> B(Data Loader: pandas DataFrame)
+    end
+
+    subgraph "2. Data Preprocessing Layer"
+        B --> C[Feature Filter: 14 Features + Target]
+        C --> D[Target Construction: CIRS_Class]
+        D --> E[Data Splitter: 80/20 Stratified Split]
+        E --> F[Feature Scaler: StandardScaler]
+    end
+
+    subgraph "3. Exploratory Data Analysis"
+        C -.-> G[Correlation Analysis]
+        D -.-> H[Class Distribution Analysis]
+        D -.-> I[Feature Distribution Visualization]
+    end
+
+    subgraph "4. Model Training & Tuning Engine"
+        F --> J[Stratified K-Fold Cross-Validation]
+        J --> K[GridSearchCV: Hyperparameter Tuning]
+        K --> L(Model A: Logistic Regression)
+        K --> M(Model B: Random Forest)
+        K --> N(Model C: XGBoost)
+    end
+
+    subgraph "5. Evaluation & Output Module"
+        L --> O[Metrics Computation: F1, ROC-AUC, etc.]
+        M --> O
+        N --> O
+        O --> P[Confusion Matrix Generator]
+        P --> Q[(Result Exporter: model_performance.csv, PNGs)]
+    end
+```
+
+
 ## 1. Data Ingestion Layer
 *   **Component:** Data Loader
 *   **Function:** Loads the raw flood dataset (`flood.csv`) into a structured pandas DataFrame.
