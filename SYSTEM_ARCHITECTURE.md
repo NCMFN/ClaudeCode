@@ -4,6 +4,9 @@ Based on the provided Jupyter Notebook pipeline, the system architecture for pre
 
 ## System Architecture Diagram
 
+[Download System Architecture Diagram PNG](./system_architecture_diagram.png)
+
+
 ```mermaid
 flowchart TD
     subgraph "1. Data Ingestion Layer"
