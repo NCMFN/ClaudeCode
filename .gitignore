@@ -59,7 +59,6 @@ logs/
 *.log
 
 # Python
-__pycache__/
 *.pyc
 
 # Task files (Claude Code teams)
@@ -97,3 +96,8 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+
+# Project specific ignores
+data/
+*.csv
+__pycache__/
