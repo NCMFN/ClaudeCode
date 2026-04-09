@@ -160,7 +160,7 @@ def build_multi_modal_nn(input_shapes):
 
     model = Model(
         inputs=[input_plant, input_soil, input_contaminant, input_climate],
-        outputs=[out_reg, out_cls]
+        outputs={'regression_head': out_reg, 'classification_head': out_cls}
     )
 
     model.compile(
@@ -201,7 +201,7 @@ def train_and_evaluate(X_grouped, X_flat, y, input_shapes):
     rf_reg = RandomForestRegressor(n_estimators=100, random_state=42)
     rf_reg.fit(X_train_flat, y_reg_train[:, 2]) # Predicting efficiency
     rf_pred = rf_reg.predict(X_test_flat)
-    print(f"RF RMSE: {mean_squared_error(y_reg_test[:, 2], rf_pred, squared=False):.4f}")
+    print(f"RF RMSE: {np.sqrt(mean_squared_error(y_reg_test[:, 2], rf_pred)):.4f}")
     print(f"RF R2: {r2_score(y_reg_test[:, 2], rf_pred):.4f}")
 
     # --- Baseline 2: XGBoost (for High Affinity Classification) ---
@@ -280,7 +280,7 @@ def plot_feature_importance(model, feature_names):
     plt.bar(range(15), importances[indices], align='center')
     plt.xticks(range(15), [feature_names[i] for i in indices], rotation=90)
     plt.tight_layout()
-    plt.savefig('feature_importance.png')
+    plt.savefig('phytoremediation_framework/feature_importance.png')
     print("Saved feature_importance.png")
 
 def plot_training_history(history):
@@ -299,7 +299,7 @@ def plot_training_history(history):
     plt.legend()
 
     plt.tight_layout()
-    plt.savefig('training_history.png')
+    plt.savefig('phytoremediation_framework/training_history.png')
     print("Saved training_history.png")
 
 def plot_correlation(X_flat):
@@ -308,7 +308,7 @@ def plot_correlation(X_flat):
     sns.heatmap(corr, annot=False, cmap='coolwarm')
     plt.title('Feature Correlation Heatmap (Subset)')
     plt.tight_layout()
-    plt.savefig('correlation_heatmap.png')
+    plt.savefig('phytoremediation_framework/correlation_heatmap.png')
     print("Saved correlation_heatmap.png")
 
 if __name__ == "__main__":
