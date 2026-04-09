@@ -1,0 +1,32 @@
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    %% Data Input Stage
+    subgraph Data Input
+        A[ACS Provided Dataset]:::plain --> B[Load Data via pandas]:::plain
+    end
+
+    %% Preprocessing Pipeline
+    subgraph Preprocessing Pipeline
+        B --> C[Missing Value Imputation]:::plain
+        C --> D[Feature Encoding]:::plain
+        D -->|One-Hot| E[Demographics: Urban/Rural, Water Source]:::plain
+        D -->|Ordinal| F[Packaging Type: PET, LDPE, HDPE, Non-Plastic]:::plain
+        E & F --> G[Feature Standardization]:::plain
+        G --> H[Class Balancing via SMOTE]:::plain
+    end
+
+    %% Analysis/Modeling
+    subgraph Analysis & Modeling
+        H --> I[Train-Test Split]:::plain
+        I --> J[XGBoost Classifier]:::plain
+        J --> K[Stratified K-Fold Cross Validation]:::plain
+        K --> L[Model Evaluation]:::plain
+    end
+
+    %% Output Stage
+    subgraph Output & Visualization
+        L --> M[Feature Importance Plot]:::plain
+        L --> N[Confusion Matrix]:::plain
+        B --> O[EDA Plots: Distributions & Heatmaps]:::plain
+    end
