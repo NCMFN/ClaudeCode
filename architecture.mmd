@@ -1,0 +1,48 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeLabelBackground':'#ffffff'}}}%%
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    subgraph Data Ingestion
+        A[BTS Flights Data]:::plain
+        B[Iowa Weather Data]:::plain
+        C[FAA ASPM Data]:::plain
+        D[Live Aviation Weather API]:::plain
+    end
+
+    subgraph Data Processing Pipeline
+        E[Data Cleaning & Missing Value Handling]:::plain
+        F[Data Merging & Time Alignment]:::plain
+        G[Feature Engineering]:::plain
+    end
+
+    subgraph Model Training Module
+        H[Classical ML Models]:::plain
+        I[Deep Learning Models]:::plain
+        J[Model Evaluation & Selection]:::plain
+    end
+
+    subgraph Real-Time Inference API
+        K[Data Transformation]:::plain
+        L[Live Model Inference]:::plain
+    end
+
+    subgraph Visualization & Dashboard
+        M[Streamlit Web App]:::plain
+        N[Metrics & Explainability]:::plain
+    end
+
+    A --> E
+    B --> E
+    C --> E
+    E --> F
+    F --> G
+    G --> H
+    G --> I
+    H --> J
+    I --> J
+
+    J --> L
+    D --> K
+    K --> L
+    L --> M
+    L --> N
