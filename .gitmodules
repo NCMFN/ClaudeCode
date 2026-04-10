@@ -1,0 +1,3 @@
+[submodule "mlasf_research/Cisco_Ariel_Uni_API_security_challenge"]
+	path = mlasf_research/Cisco_Ariel_Uni_API_security_challenge
+	url = https://github.com/ArielCyber/Cisco_Ariel_Uni_API_security_challenge.git
