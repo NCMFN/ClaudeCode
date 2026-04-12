@@ -59,9 +59,9 @@ try:
 
         st.subheader("Prediction Result")
         if prediction == 1:
-            st.success(f"✅ Drop-In Compatible! (Probability: {probability:.2%})")
+            st.success(f"[COMPATIBLE] Drop-In Compatible! (Probability: {probability:.2%})")
         else:
-            st.error(f"❌ Not Compatible. (Probability of compatibility: {probability:.2%})")
+            st.error(f"[NON-COMPATIBLE] Not Compatible. (Probability of compatibility: {probability:.2%})")
 
 except Exception as e:
     st.error(f"Error loading models or predicting: {e}")
