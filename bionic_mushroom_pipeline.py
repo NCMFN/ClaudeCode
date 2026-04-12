@@ -301,13 +301,28 @@ predict_current_density(light=5000, humidity=65, bacterial_density=1.2)
 
 def draw_system_architecture():
     import matplotlib.patches as patches
-    fig, ax = plt.subplots(figsize=(12, 12))
+    fig, ax = plt.subplots(figsize=(16, 10))
     ax.axis('off')
 
-    def add_box(ax, xy, width, height, text, color):
-        ax.add_patch(patches.Rectangle(xy, width, height, fill=True, color=color, alpha=0.5, lw=2, edgecolor='black'))
-        ax.text(xy[0] + width / 2, xy[1] + height / 2, text, fontsize=10, ha='center', va='center', weight='bold')
+    # Draw large bounding boxes for the layers
+    # Edge Layer
+    ax.add_patch(patches.FancyBboxPatch((0.02, 0.05), 0.35, 0.85, boxstyle="round,pad=0.02", fill=False, lw=1.5, ls='--'))
+    ax.text(0.195, 0.02, "Edge Layer\n(Data Collection)", fontsize=12, ha='center', va='top', weight='bold')
 
+    # Platform Layer
+    ax.add_patch(patches.FancyBboxPatch((0.42, 0.45), 0.35, 0.45, boxstyle="round,pad=0.02", fill=False, lw=1.5, ls='--'))
+    ax.text(0.595, 0.92, "Platform Layer\n(Machine Learning & Processing)", fontsize=12, ha='center', va='bottom', weight='bold')
+
+    # Enterprise Layer
+    ax.add_patch(patches.FancyBboxPatch((0.42, 0.05), 0.35, 0.35, boxstyle="round,pad=0.02", fill=False, lw=1.5, ls='--'))
+    ax.text(0.595, 0.02, "Enterprise Layer\n(Application & Action)", fontsize=12, ha='center', va='top', weight='bold')
+
+    # Helper function for boxes
+    def add_box(ax, xy, width, height, text, color):
+        ax.add_patch(patches.Rectangle(xy, width, height, fill=True, color=color, alpha=0.6, lw=1.5, edgecolor='black'))
+        ax.text(xy[0] + width / 2, xy[1] + height / 2, text, fontsize=9, ha='center', va='center', weight='bold')
+
+    # Helper function for diamonds
     def add_diamond(ax, center, width, height, text, color):
         x, y = center
         polygon = patches.Polygon([
@@ -315,60 +330,63 @@ def draw_system_architecture():
             [x + width/2, y],
             [x, y - height/2],
             [x - width/2, y]
-        ], closed=True, fill=True, color=color, alpha=0.5, lw=2, edgecolor='black')
+        ], closed=True, fill=True, color=color, alpha=0.6, lw=1.5, edgecolor='black')
         ax.add_patch(polygon)
-        ax.text(x, y, text, fontsize=10, ha='center', va='center', weight='bold')
+        ax.text(x, y, text, fontsize=9, ha='center', va='center', weight='bold')
 
-    # Start
-    add_box(ax, (0.4, 0.92), 0.2, 0.06, "Start", 'lightgray')
-    ax.annotate("", xy=(0.5, 0.90), xytext=(0.5, 0.92), arrowprops=dict(arrowstyle="<-", lw=2))
+    # Edge Layer Components
+    # Group: Bionic Mushroom Array
+    ax.add_patch(patches.Rectangle((0.05, 0.5), 0.29, 0.35, fill=False, lw=1, edgecolor='gray'))
+    ax.text(0.195, 0.48, "Bionic Mushroom Array", fontsize=10, ha='center', va='top', weight='bold')
 
-    # Load/Simulate Data
-    add_box(ax, (0.35, 0.82), 0.3, 0.08, "Load/Simulate Dataset\n(Light, Humidity, Bact. Density)", 'lightblue')
-    ax.annotate("", xy=(0.5, 0.79), xytext=(0.5, 0.82), arrowprops=dict(arrowstyle="<-", lw=2))
+    add_box(ax, (0.07, 0.72), 0.1, 0.08, "Light\nSensor", 'lightyellow')
+    add_box(ax, (0.22, 0.72), 0.1, 0.08, "Humidity\nSensor", 'lightblue')
+    add_box(ax, (0.145, 0.55), 0.1, 0.08, "Bacterial\nDensity Sensor", 'lightgreen')
 
-    # Preprocessing
-    add_box(ax, (0.35, 0.69), 0.3, 0.1, "Data Preprocessing\n- Handle Missing Values\n- Scaling\n- Interaction Features", 'lightgreen')
-    ax.annotate("", xy=(0.5, 0.66), xytext=(0.5, 0.69), arrowprops=dict(arrowstyle="<-", lw=2))
+    add_box(ax, (0.095, 0.15), 0.2, 0.1, "Local Gateway\n& Edge Server", 'lightgray')
 
-    # Split
-    add_box(ax, (0.35, 0.58), 0.3, 0.08, "Train-Test Split", 'yellow')
+    # Arrows in Edge
+    ax.annotate("", xy=(0.195, 0.25), xytext=(0.195, 0.48), arrowprops=dict(arrowstyle="->", lw=1.5, ls='--'))
 
-    # Arrows to models
-    ax.annotate("", xy=(0.25, 0.54), xytext=(0.5, 0.58), arrowprops=dict(arrowstyle="<-", lw=2))
-    ax.annotate("", xy=(0.5, 0.54), xytext=(0.5, 0.58), arrowprops=dict(arrowstyle="<-", lw=2))
-    ax.annotate("", xy=(0.75, 0.54), xytext=(0.5, 0.58), arrowprops=dict(arrowstyle="<-", lw=2))
+    # Arrow from Edge to Platform
+    ax.annotate("", xy=(0.42, 0.65), xytext=(0.295, 0.2), arrowprops=dict(arrowstyle="->", lw=2, ls='--'))
 
-    # Models
-    add_box(ax, (0.15, 0.44), 0.2, 0.1, "Train\nLinear Regression", 'orange')
-    add_box(ax, (0.4, 0.44), 0.2, 0.1, "Train & Tune\nRandom Forest", 'orange')
-    add_box(ax, (0.65, 0.44), 0.2, 0.1, "Train\nNeural Network", 'orange')
+    # Platform Layer Components
+    add_box(ax, (0.45, 0.78), 0.29, 0.08, "Data Preprocessing\n(Missing Values, Scaling, Features)", 'lightcyan')
 
-    # Arrows to evaluation
-    ax.annotate("", xy=(0.5, 0.40), xytext=(0.25, 0.44), arrowprops=dict(arrowstyle="<-", lw=2))
-    ax.annotate("", xy=(0.5, 0.40), xytext=(0.5, 0.44), arrowprops=dict(arrowstyle="<-", lw=2))
-    ax.annotate("", xy=(0.5, 0.40), xytext=(0.75, 0.44), arrowprops=dict(arrowstyle="<-", lw=2))
+    add_box(ax, (0.45, 0.64), 0.08, 0.08, "Linear\nReg", 'orange')
+    add_box(ax, (0.555, 0.64), 0.08, 0.08, "Random\nForest", 'orange')
+    add_box(ax, (0.66, 0.64), 0.08, 0.08, "Neural\nNetwork", 'orange')
 
-    # Evaluate
-    add_box(ax, (0.35, 0.32), 0.3, 0.08, "Evaluate Models\n(RMSE, MAE, R2)", 'purple')
-    ax.annotate("", xy=(0.5, 0.28), xytext=(0.5, 0.32), arrowprops=dict(arrowstyle="<-", lw=2))
+    add_box(ax, (0.45, 0.52), 0.29, 0.08, "Evaluate Models\n(RMSE, MAE, R2)", 'thistle')
 
-    # Decision Node (Diamond)
-    add_diamond(ax, (0.5, 0.20), 0.25, 0.12, "Performance\nAcceptable?\n(e.g., R2 > 0.9)", 'cyan')
+    # Arrows in Platform
+    ax.annotate("", xy=(0.49, 0.72), xytext=(0.595, 0.78), arrowprops=dict(arrowstyle="->", lw=1.5))
+    ax.annotate("", xy=(0.595, 0.72), xytext=(0.595, 0.78), arrowprops=dict(arrowstyle="->", lw=1.5))
+    ax.annotate("", xy=(0.7, 0.72), xytext=(0.595, 0.78), arrowprops=dict(arrowstyle="->", lw=1.5))
 
-    # YES branch
-    ax.annotate("Yes", xy=(0.5, 0.10), xytext=(0.5, 0.14), arrowprops=dict(arrowstyle="<-", lw=2), ha='center', va='center', weight='bold')
+    ax.annotate("", xy=(0.595, 0.60), xytext=(0.49, 0.64), arrowprops=dict(arrowstyle="->", lw=1.5))
+    ax.annotate("", xy=(0.595, 0.60), xytext=(0.595, 0.64), arrowprops=dict(arrowstyle="->", lw=1.5))
+    ax.annotate("", xy=(0.595, 0.60), xytext=(0.7, 0.64), arrowprops=dict(arrowstyle="->", lw=1.5))
 
-    # Output
-    add_box(ax, (0.35, 0.02), 0.3, 0.08, "Select Best Model\n& Output Predictions", 'lightcoral')
+    # Arrow from Platform to Enterprise
+    ax.annotate("", xy=(0.595, 0.40), xytext=(0.595, 0.52), arrowprops=dict(arrowstyle="->", lw=2))
 
-    # NO branch (Feedback Loop)
-    ax.annotate("No", xy=(0.85, 0.20), xytext=(0.625, 0.20), arrowprops=dict(arrowstyle="<-", lw=2), ha='center', va='center', weight='bold')
-    ax.plot([0.85, 0.85], [0.20, 0.74], color="black", lw=2)
-    ax.annotate("", xy=(0.65, 0.74), xytext=(0.85, 0.74), arrowprops=dict(arrowstyle="->", lw=2))
-    ax.text(0.85, 0.47, "Hyperparameter Tuning\n& Feature Engineering", rotation=90, va='center', ha='right', fontsize=10, weight='bold')
+    # Enterprise Layer Components
+    add_diamond(ax, (0.595, 0.30), 0.2, 0.10, "Performance\nAcceptable?\n(R2 > 0.9)", 'cyan')
 
-    plt.title("Bionic Mushroom Energy Harvest - Closed-Loop Flowchart", fontsize=16, weight='bold')
+    add_box(ax, (0.45, 0.10), 0.29, 0.1, "Energy Harvest\nDashboard & Action\n(Optimal Current Density)", 'lightcoral')
+
+    # Arrows in Enterprise
+    ax.annotate("Yes", xy=(0.595, 0.20), xytext=(0.595, 0.25), arrowprops=dict(arrowstyle="->", lw=1.5), ha='left', va='center', weight='bold')
+
+    # Feedback Loop (No)
+    ax.annotate("No", xy=(0.78, 0.30), xytext=(0.695, 0.30), arrowprops=dict(arrowstyle="->", lw=1.5), ha='center', va='bottom', weight='bold')
+    ax.plot([0.78, 0.78], [0.30, 0.82], color="black", lw=1.5)
+    ax.annotate("", xy=(0.74, 0.82), xytext=(0.78, 0.82), arrowprops=dict(arrowstyle="->", lw=1.5))
+    ax.text(0.79, 0.57, "Hyperparameter Tuning & Feature Eng", rotation=90, va='center', ha='left', fontsize=9, weight='bold')
+
+    plt.title("Bionic Mushroom Energy Harvest - Layered System Architecture", fontsize=16, weight='bold')
     plt.tight_layout()
     plt.savefig('system_architecture.png', bbox_inches='tight')
     plt.show()
