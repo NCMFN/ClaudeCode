@@ -1304,22 +1304,28 @@ def create_architecture_diagram():
     fig, ax = plt.subplots(figsize=(14, 12))
     ax.axis('off')
 
-    # Define styles
-    core_box = dict(boxstyle="round,pad=1.5", edgecolor="#BCCCDC", lw=1.5, facecolor="#F0F4F8")
-    ai_box = dict(boxstyle="round,pad=2", edgecolor="#1F3A5E", lw=2, facecolor="#D9E2EC")
+    # Define styles based on requested visual hierarchy
+    # Core pipeline (neutral)
+    core_box = dict(boxstyle="round,pad=1.5", edgecolor="#94A3B8", lw=1.5, facecolor="#F1F5F9")
+    ai_box = dict(boxstyle="round,pad=2", edgecolor="#475569", lw=2, facecolor="#E2E8F0")
 
-    pillar1_box = dict(boxstyle="round,pad=1.5", facecolor="#E6F2EB", edgecolor="#2E9E6E", lw=2)
-    pillar2_box = dict(boxstyle="round,pad=1.5", facecolor="#FEF5E7", edgecolor="#F09C38", lw=2)
-    pillar3_box = dict(boxstyle="round,pad=1.5", facecolor="#E6F2EB", edgecolor="#2E9E6E", lw=2)
+    # Outputs (green) - applied to Policy
+    policy_box = dict(boxstyle="round,pad=1.5", facecolor="#F0FDF4", edgecolor="#22C55E", lw=2)
 
-    arrow_style = dict(arrowstyle="<->", color="#829DB8", lw=2)
-    feedback_style = dict(arrowstyle="->", color="#D97706", lw=2, ls="dashed", connectionstyle="arc3,rad=-0.3")
-    feedback_style_left = dict(arrowstyle="->", color="#D97706", lw=2, ls="dashed", connectionstyle="arc3,rad=0.3")
+    # Analysis (orange) - applied to Pillars
+    pillar1_box = dict(boxstyle="round,pad=1.5", facecolor="#FFF7ED", edgecolor="#F97316", lw=2)
+    pillar2_box = dict(boxstyle="round,pad=1.5", facecolor="#FFF7ED", edgecolor="#F97316", lw=2)
+    pillar3_box = dict(boxstyle="round,pad=1.5", facecolor="#FFF7ED", edgecolor="#F97316", lw=2)
+
+    arrow_style = dict(arrowstyle="->", color="#64748B", lw=2)
+    arrow_bi_style = dict(arrowstyle="<->", color="#64748B", lw=2)
+    feedback_style = dict(arrowstyle="->", color="#EF4444", lw=2, ls="dashed", connectionstyle="arc3,rad=-0.3")
+    feedback_style_left = dict(arrowstyle="->", color="#EF4444", lw=2, ls="dashed", connectionstyle="arc3,rad=0.3")
 
     # Titles and Headers
     ax.text(0.5, 0.98, "Mapping Indigenous Problems to SDGs: Solution Roadmap",
             ha='center', va='center', fontsize=20, fontweight='bold',
-            bbox=dict(boxstyle="round,pad=0.6", facecolor="#1F3A5E", edgecolor="none"), color="white")
+            bbox=dict(boxstyle="round,pad=0.6", facecolor="#0F172A", edgecolor="none"), color="white")
 
     # Core blocks (equal width simulated by padding spaces and centering)
     core_width_str_pad = "                                                                        "
@@ -1336,7 +1342,7 @@ def create_architecture_diagram():
     ax.text(0.5, 0.48, "AI     RoBERTa-Large SDG Classification\n\nMulti-Label AI Model" + "\n" + core_width_str_pad,
             ha='center', va='center', fontsize=14, fontweight='bold', bbox=ai_box)
 
-    # Layer 4: Pillars
+    # Layer 4: Pillars (Analysis - Orange)
     ax.text(0.18, 0.22, "Automated SDG Mapping\n\n• SDG Tagging\n\n• Conflict Detection",
             ha='center', va='center', fontsize=12, fontweight='bold', bbox=pillar1_box)
 
@@ -1346,55 +1352,51 @@ def create_architecture_diagram():
     ax.text(0.82, 0.22, "Solution Framework Generation\n\n• AI Recommender Systems\n\n• Solution & Action Plans\n\n• Custom Scenarios",
             ha='center', va='center', fontsize=12, fontweight='bold', bbox=pillar3_box)
 
-    # Layer 5: Policy Recommendations
+    # Layer 5: Policy Recommendations (Output - Green)
     ax.text(0.5, 0.02, "Policy Recommendations\n\nInteractive Dashboard        Policy Briefs        Engage Communities\nSDG Insights & Maps        Actionable Solutions        Local Feedback" + "\n" + core_width_str_pad,
-            ha='center', va='center', fontsize=12, fontweight='bold', bbox=core_box)
+            ha='center', va='center', fontsize=12, fontweight='bold', bbox=policy_box)
 
-    # Core Vertical Arrows (Bi-directional)
-    ax.annotate('', xy=(0.5, 0.89), xytext=(0.5, 0.94), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.5, 0.74), xytext=(0.5, 0.80), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.5, 0.55), xytext=(0.5, 0.62), arrowprops=arrow_style)
+    # Core Vertical Arrows (Two arrows: forward + backward as requested)
+    # Between Data Collection and Preprocessing
+    ax.annotate('', xy=(0.48, 0.74), xytext=(0.48, 0.80), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
+    ax.annotate('', xy=(0.52, 0.80), xytext=(0.52, 0.74), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
+
+    # Between Preprocessing and AI
+    ax.annotate('', xy=(0.48, 0.55), xytext=(0.48, 0.62), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
+    ax.annotate('', xy=(0.52, 0.62), xytext=(0.52, 0.55), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
 
     # AI to Pillars (Bi-directional)
-    ax.annotate('', xy=(0.25, 0.30), xytext=(0.45, 0.41), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.5, 0.30), xytext=(0.5, 0.41), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.75, 0.30), xytext=(0.55, 0.41), arrowprops=arrow_style)
+    ax.annotate('', xy=(0.25, 0.30), xytext=(0.45, 0.41), arrowprops=arrow_bi_style)
+    ax.annotate('', xy=(0.5, 0.30), xytext=(0.5, 0.41), arrowprops=arrow_bi_style)
+    ax.annotate('', xy=(0.75, 0.30), xytext=(0.55, 0.41), arrowprops=arrow_bi_style)
 
     # Pillars to Policy (Bi-directional)
-    ax.annotate('', xy=(0.25, 0.08), xytext=(0.25, 0.13), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.5, 0.08), xytext=(0.5, 0.13), arrowprops=arrow_style)
-    ax.annotate('', xy=(0.75, 0.08), xytext=(0.75, 0.13), arrowprops=arrow_style)
+    ax.annotate('', xy=(0.25, 0.08), xytext=(0.25, 0.13), arrowprops=arrow_bi_style)
+    ax.annotate('', xy=(0.5, 0.08), xytext=(0.5, 0.13), arrowprops=arrow_bi_style)
+    ax.annotate('', xy=(0.75, 0.08), xytext=(0.75, 0.13), arrowprops=arrow_bi_style)
 
-    # Parallel Pillars Horizontal Interaction (Bi-directional represented by two lines)
+    # Parallel Pillars Horizontal Interaction (Bi-directional between each pair)
     # Mapping <-> Gap Analysis
-    ax.annotate('', xy=(0.33, 0.24), xytext=(0.36, 0.24), arrowprops=dict(arrowstyle="->", color="#829DB8", lw=2))
-    ax.annotate('', xy=(0.36, 0.20), xytext=(0.33, 0.20), arrowprops=dict(arrowstyle="->", color="#829DB8", lw=2))
+    ax.annotate('', xy=(0.34, 0.24), xytext=(0.36, 0.24), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
+    ax.annotate('', xy=(0.36, 0.20), xytext=(0.34, 0.20), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
 
     # Gap Analysis <-> Solution Framework
-    ax.annotate('', xy=(0.64, 0.24), xytext=(0.67, 0.24), arrowprops=dict(arrowstyle="->", color="#829DB8", lw=2))
-    ax.annotate('', xy=(0.67, 0.20), xytext=(0.64, 0.20), arrowprops=dict(arrowstyle="->", color="#829DB8", lw=2))
+    ax.annotate('', xy=(0.64, 0.24), xytext=(0.66, 0.24), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
+    ax.annotate('', xy=(0.66, 0.20), xytext=(0.64, 0.20), arrowprops=dict(arrowstyle="->", color="#64748B", lw=2))
 
-    # --- FEEDBACK LOOPS ---
-    feedback_font = dict(color="#B45309", fontsize=10, fontweight='bold', fontstyle='italic', bbox=dict(facecolor='white', edgecolor='none', alpha=0.8, pad=0.1))
+    # Mapping <-> Solution Framework (Overarching)
+    ax.annotate('', xy=(0.25, 0.30), xytext=(0.75, 0.30), arrowprops=dict(arrowstyle="<->", color="#64748B", lw=2, ls="dotted", connectionstyle="arc3,rad=-0.2"))
 
-    # AI -> Preprocessing
-    ax.annotate('', xy=(0.85, 0.68), xytext=(0.85, 0.48), arrowprops=feedback_style)
-    ax.text(0.92, 0.58, "Feedback Loop", ha='center', va='center', **feedback_font)
+    # --- FEEDBACK LOOPS (Dashed red) ---
+    feedback_font = dict(color="#B91C1C", fontsize=10, fontweight='bold', fontstyle='italic', bbox=dict(facecolor='white', edgecolor='none', alpha=0.8, pad=0.1))
 
     # AI -> Community Data Collection
     ax.annotate('', xy=(0.15, 0.85), xytext=(0.15, 0.48), arrowprops=feedback_style_left)
-    ax.text(0.08, 0.65, "Refinement Loop", ha='center', va='center', **feedback_font)
+    ax.text(0.08, 0.65, "Feedback", ha='center', va='center', **feedback_font)
 
-    # Solution Framework -> Gap Analysis / SDG Mapping
-    ax.annotate('', xy=(0.50, 0.32), xytext=(0.80, 0.32), arrowprops=dict(arrowstyle="->", color="#D97706", lw=2, ls="dashed", connectionstyle="arc3,rad=-0.2"))
-    ax.text(0.65, 0.36, "Feedback", ha='center', va='center', **feedback_font)
-
-    ax.annotate('', xy=(0.20, 0.32), xytext=(0.80, 0.32), arrowprops=dict(arrowstyle="->", color="#D97706", lw=2, ls="dashed", connectionstyle="arc3,rad=0.3"))
-    ax.text(0.50, 0.45, "Feedback", ha='center', va='center', **feedback_font)
-
-    # Policy Recommendations -> Community Data Collection
-    ax.annotate('', xy=(0.02, 0.85), xytext=(0.02, 0.02), arrowprops=feedback_style_left)
-    ax.text(-0.03, 0.45, "Feedback Loop", ha='center', va='center', **feedback_font)
+    # Solution Framework -> Community Data Collection
+    ax.annotate('', xy=(0.85, 0.85), xytext=(0.85, 0.28), arrowprops=feedback_style)
+    ax.text(0.92, 0.55, "Feedback", ha='center', va='center', **feedback_font)
 
     plt.tight_layout()
     plt.savefig('output_figures/plot_07.png', bbox_inches='tight', dpi=300)
