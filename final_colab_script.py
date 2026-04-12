@@ -1,4 +1,7 @@
 # Setup imports
+import os
+import shutil
+os.makedirs('output_figures', exist_ok=True)
 import pandas as pd
 import random
 import matplotlib.pyplot as plt
@@ -748,6 +751,7 @@ plt.xlabel('Sustainable Development Goal')
 plt.ylabel('Frequency of Appearance in Documents')
 plt.xticks(rotation=45, ha='right') # Rotate labels for better readability
 plt.tight_layout()
+plt.savefig('output_figures/plot_01.png', bbox_inches='tight')
 plt.show()
 
 
@@ -770,6 +774,7 @@ if not changed_sdgs_df.empty:
     plt.legend(title='Score Type')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    plt.savefig('output_figures/plot_02.png', bbox_inches='tight')
     plt.show()
 else:
     print('No SDGs experienced a change in the simulated scenario to visualize.')
@@ -794,6 +799,7 @@ if not changed_sdgs_df.empty:
     plt.legend(title='Score Type')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    plt.savefig('output_figures/plot_03.png', bbox_inches='tight')
     plt.show()
 else:
     print('No SDGs experienced a change in the simulated scenario to visualize.')
@@ -819,6 +825,7 @@ if not changed_sdgs_df.empty:
     plt.legend(title='Score Type')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    plt.savefig('output_figures/plot_04.png', bbox_inches='tight')
     plt.show()
 else:
     print('No SDGs experienced a change in the simulated scenario to visualize.')
@@ -1177,6 +1184,7 @@ plt.xlabel('Sustainable Development Goal')
 plt.ylabel('Frequency of Appearance in Documents')
 plt.xticks(rotation=45, ha='right') # Rotate labels for better readability
 plt.tight_layout()
+plt.savefig('output_figures/plot_05.png', bbox_inches='tight')
 plt.show()
 
 # --- Original Cell 36 ---
@@ -1202,6 +1210,7 @@ if not changed_sdgs_df.empty:
     plt.legend(title='Score Type')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    plt.savefig('output_figures/plot_06.png', bbox_inches='tight')
     plt.show()
 else:
     print('No SDGs experienced a change in the simulated scenario to visualize.')
@@ -1357,6 +1366,7 @@ def create_architecture_diagram():
 
     plt.tight_layout()
     plt.title('System Architecture: Mapping Indigenous Problems to SDGs')
+    plt.savefig('output_figures/plot_07.png', bbox_inches='tight')
     plt.show()
 
 # Run architecture generation
@@ -1376,6 +1386,7 @@ plt.xlabel('Sustainable Development Goal')
 plt.ylabel('Frequency of Appearance in Documents')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_08.png', bbox_inches='tight')
 plt.show()
 
 # Plot 2: Impact of What-If Scenario (Baseline vs. Simulated SDG Scores)
@@ -1391,6 +1402,7 @@ if not changed_sdgs_df.empty:
     plt.legend(title='Score Type')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
+    plt.savefig('output_figures/plot_09.png', bbox_inches='tight')
     plt.show()
 
 # Additional Rich Visualizations (>16 more plots)
@@ -1402,6 +1414,7 @@ plt.title('Plot 3: Overall Distribution of Sustainable Development Goals (Horizo
 plt.xlabel('Frequency')
 plt.ylabel('Sustainable Development Goal')
 plt.tight_layout()
+plt.savefig('output_figures/plot_10.png', bbox_inches='tight')
 plt.show()
 
 # Plot 4: Pie Chart of SDG Dimensions (Economic, Social, Environmental)
@@ -1409,6 +1422,7 @@ plt.figure(figsize=(8, 8))
 plt.pie(sdg_balance_df['Average Count per Document'], labels=sdg_balance_df['Dimension'], autopct='%1.1f%%', colors=['#ff9999','#66b3ff','#99ff99'])
 plt.title('Plot 4: Proportion of SDG Dimensions per Document')
 plt.tight_layout()
+plt.savefig('output_figures/plot_11.png', bbox_inches='tight')
 plt.show()
 
 # Plot 5: Scatter Plot of Baseline vs Simulated Scores
@@ -1420,6 +1434,7 @@ plt.xlabel('Baseline Score')
 plt.ylabel('Simulated Score')
 plt.legend()
 plt.tight_layout()
+plt.savefig('output_figures/plot_12.png', bbox_inches='tight')
 plt.show()
 
 # Plot 6: Heatmap of Simulated SDG Co-occurrences
@@ -1434,6 +1449,7 @@ plt.figure(figsize=(12, 10))
 sns.heatmap(co_occurence, cmap='Blues', annot=False)
 plt.title('Plot 6: Heatmap of SDG Co-occurrences in Documents')
 plt.tight_layout()
+plt.savefig('output_figures/plot_13.png', bbox_inches='tight')
 plt.show()
 
 # Plot 7: Distribution of Regions in the Dataset
@@ -1444,6 +1460,7 @@ plt.xlabel('Region')
 plt.ylabel('Count')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_14.png', bbox_inches='tight')
 plt.show()
 
 # Plot 8: Distribution of Issues in the Dataset
@@ -1454,6 +1471,7 @@ plt.xlabel('Issue Category')
 plt.ylabel('Count')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_15.png', bbox_inches='tight')
 plt.show()
 
 # Plot 9: Average SDG Count per Document by Region
@@ -1465,6 +1483,7 @@ plt.xlabel('Region')
 plt.ylabel('Average Number of SDGs')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_16.png', bbox_inches='tight')
 plt.show()
 
 # Plot 10: Top 5 Most Prevalent SDGs (Bar)
@@ -1475,6 +1494,7 @@ plt.xlabel('SDG')
 plt.ylabel('Frequency')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_17.png', bbox_inches='tight')
 plt.show()
 
 # Plot 11: Bottom 5 Least Prevalent SDGs (Bar)
@@ -1485,6 +1505,7 @@ plt.xlabel('SDG')
 plt.ylabel('Frequency')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_18.png', bbox_inches='tight')
 plt.show()
 
 # Plot 12: Box Plot of Baseline SDG Scores
@@ -1493,6 +1514,7 @@ sns.boxplot(y=comparison_df['Baseline Score'], color='lightblue')
 plt.title('Plot 12: Box Plot of Baseline SDG Scores')
 plt.ylabel('Score (0-100)')
 plt.tight_layout()
+plt.savefig('output_figures/plot_19.png', bbox_inches='tight')
 plt.show()
 
 # Plot 13: Box Plot of Simulated SDG Scores
@@ -1501,6 +1523,7 @@ sns.boxplot(y=comparison_df['Simulated Score'], color='lightgreen')
 plt.title('Plot 13: Box Plot of Simulated SDG Scores')
 plt.ylabel('Score (0-100)')
 plt.tight_layout()
+plt.savefig('output_figures/plot_20.png', bbox_inches='tight')
 plt.show()
 
 # Plot 14: Difference in Scores (Line Plot)
@@ -1512,6 +1535,7 @@ plt.ylabel('Score Change')
 plt.xticks(rotation=90)
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
+plt.savefig('output_figures/plot_21.png', bbox_inches='tight')
 plt.show()
 
 # Plot 15: Area Plot of Dimension Counts over mock time/documents
@@ -1521,6 +1545,7 @@ plt.title('Plot 15: Area Plot of SDG Dimensions across Documents')
 plt.xlabel('Document Index')
 plt.ylabel('Number of SDGs')
 plt.tight_layout()
+plt.savefig('output_figures/plot_22.png', bbox_inches='tight')
 plt.show()
 
 # Plot 16: Histogram of Text Lengths
@@ -1531,6 +1556,7 @@ plt.title('Plot 16: Distribution of Document Text Lengths (Characters)')
 plt.xlabel('Text Length')
 plt.ylabel('Frequency')
 plt.tight_layout()
+plt.savefig('output_figures/plot_23.png', bbox_inches='tight')
 plt.show()
 
 # Plot 17: Scatter Plot of Text Length vs Number of SDGs
@@ -1542,6 +1568,7 @@ plt.xlabel('Text Length (Characters)')
 plt.ylabel('Number of SDGs Assigned')
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
+plt.savefig('output_figures/plot_24.png', bbox_inches='tight')
 plt.show()
 
 # Plot 18: Bubble Chart of Region vs Issue (bubble size = document count)
@@ -1553,6 +1580,7 @@ plt.xlabel('Region')
 plt.ylabel('Issue Category')
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
+plt.savefig('output_figures/plot_25.png', bbox_inches='tight')
 plt.show()
 
 # Plot 19: Stacked Bar Chart of Region vs Dimensions
@@ -1564,6 +1592,7 @@ plt.xlabel('Region')
 plt.ylabel('Total SDG Tags')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
+plt.savefig('output_figures/plot_26.png', bbox_inches='tight')
 plt.show()
 
 # Plot 20: Violin Plot of Baseline vs Simulated Scores
@@ -1572,6 +1601,20 @@ plt.figure(figsize=(12, 6))
 sns.violinplot(x='Score Type', y='Score', data=melted_scores, palette='Pastel1')
 plt.title('Plot 20: Violin Plot comparing Baseline and Simulated Score Distributions')
 plt.tight_layout()
+plt.savefig('output_figures/plot_27.png', bbox_inches='tight')
 plt.show()
 
+plt.savefig('output_figures/plot_28.png', bbox_inches='tight')
 print("All plots generated successfully. Uncomment plt.show() statements to display them in interactive environments.")
+
+
+
+# --- Download Logic ---
+import shutil
+shutil.make_archive('all_figures', 'zip', 'output_figures')
+print('All figures have been saved to all_figures.zip')
+try:
+    from google.colab import files
+    files.download('all_figures.zip')
+except ImportError:
+    print('Not running in Google Colab. You can find all_figures.zip in your current directory.')
