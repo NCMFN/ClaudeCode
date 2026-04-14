@@ -93,6 +93,22 @@ sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
 plt.title('Correlation Heatmap')
 plt.tight_layout()
 plt.savefig('correlation_heatmap.png')
+
+# Boxplots for distributions
+plt.figure(figsize=(12, 5))
+plt.subplot(1, 3, 1)
+sns.boxplot(y=df['Light_Intensity'], color='gold')
+plt.title('Light Intensity')
+plt.subplot(1, 3, 2)
+sns.boxplot(y=df['Humidity'], color='lightblue')
+plt.title('Humidity')
+plt.subplot(1, 3, 3)
+sns.boxplot(y=df['Bacterial_Density'], color='lightgreen')
+plt.title('Bacterial Density')
+plt.tight_layout()
+plt.savefig('eda_boxplots.png')
+plt.close()
+
 plt.show()
 plt.close()
 
@@ -219,8 +235,81 @@ plt.close()
 # 7. Visualization: Predictions vs Actual & Residuals
 # ---------------------------------------------------------
 # Determine best model based on R2 on test set
+
+# Model Comparison Bar Chart
+models = list(results.keys())
+r2_scores = [results[m]['R2'] for m in models]
+rmse_scores = [results[m]['RMSE'] for m in models]
+
+fig, ax1 = plt.subplots(figsize=(10, 6))
+x = np.arange(len(models))
+width = 0.35
+
+rects1 = ax1.bar(x - width/2, r2_scores, width, label='R2 Score', color='skyblue')
+ax2 = ax1.twinx()
+rects2 = ax2.bar(x + width/2, rmse_scores, width, label='RMSE', color='salmon')
+
+ax1.set_ylabel('R2 Score')
+ax2.set_ylabel('RMSE')
+ax1.set_title('Model Performance Comparison')
+ax1.set_xticks(x)
+ax1.set_xticklabels(models)
+ax1.legend(loc='upper left')
+ax2.legend(loc='upper right')
+
+plt.tight_layout()
+plt.savefig('model_comparison_bar.png')
+plt.close()
+
+
+# MAE Comparison
+mae_scores = [results[m]['MAE'] for m in models]
+plt.figure(figsize=(8, 5))
+sns.barplot(x=models, y=mae_scores, palette='viridis')
+plt.title('Mean Absolute Error (MAE) Comparison')
+plt.ylabel('MAE')
+plt.savefig('model_comparison_mae.png')
+plt.close()
+
 best_model_name = max(results, key=lambda k: results[k]['R2'])
 print(f"*** Best Model Identified: {best_model_name} ***\n")
+
+
+# Linear Regression Predictions Plot
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+axes[0].scatter(y_test, y_pred_lr, alpha=0.6, color='orange')
+axes[0].plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+axes[0].set_title('Actual vs Predicted (Linear Regression)')
+axes[1].scatter(y_pred_lr, y_test - y_pred_lr, alpha=0.6, color='green')
+axes[1].axhline(y=0, color='r', linestyle='--')
+axes[1].set_title('Residual Plot (Linear Regression)')
+plt.tight_layout()
+plt.savefig('lr_predictions_residuals.png')
+plt.close()
+
+# Random Forest Predictions Plot
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+axes[0].scatter(y_test, y_pred_rf, alpha=0.6, color='blue')
+axes[0].plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+axes[0].set_title('Actual vs Predicted (Random Forest)')
+axes[1].scatter(y_pred_rf, y_test - y_pred_rf, alpha=0.6, color='purple')
+axes[1].axhline(y=0, color='r', linestyle='--')
+axes[1].set_title('Residual Plot (Random Forest)')
+plt.tight_layout()
+plt.savefig('rf_predictions_residuals.png')
+plt.close()
+
+# Neural Network Predictions Plot
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+axes[0].scatter(y_test, y_pred_nn, alpha=0.6, color='cyan')
+axes[0].plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+axes[0].set_title('Actual vs Predicted (Neural Network)')
+axes[1].scatter(y_pred_nn, y_test - y_pred_nn, alpha=0.6, color='brown')
+axes[1].axhline(y=0, color='r', linestyle='--')
+axes[1].set_title('Residual Plot (Neural Network)')
+plt.tight_layout()
+plt.savefig('nn_predictions_residuals.png')
+plt.close()
 
 if best_model_name == 'Linear Regression':
     best_preds = y_pred_lr
