@@ -81,6 +81,9 @@ Describes the "mySkill" capability for ECC.
 ...
 ```
 
+### Add New Workflow Surface
+
+Adds or updates a workflow entrypoint. Default to skills-first; only add a command shim when legacy slash compatibility is still required.
 ---
 
 ### Add or Update Command Workflow
@@ -93,6 +96,18 @@ Describes the "mySkill" capability for ECC.
 4. Update related commands or documentation if part of a workflow.
 5. Document artifact storage locations if applicable.
 
+**Steps**:
+1. Create or update the canonical workflow under skills/{skill-name}/SKILL.md
+2. Only if needed, add or update commands/{command-name}.md as a compatibility shim
+
+**Files typically involved**:
+- `skills/*/SKILL.md`
+- `commands/*.md` (only when a legacy shim is intentionally retained)
+
+**Example commit sequence**:
+```
+Create or update the canonical skill under skills/{skill-name}/SKILL.md
+Only if needed, add or update commands/{command-name}.md as a compatibility shim
 **Example:**
 ```markdown
 ---

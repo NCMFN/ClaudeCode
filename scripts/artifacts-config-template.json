@@ -1,0 +1,32 @@
+{
+  "models": {
+    "example_model": {
+      "url": "<model_download_url>",
+      "description": "Description of the model"
+    }
+  },
+  "datasets": {
+    "example_dataset": {
+      "url": "<dataset_download_url>",
+      "description": "Description of the dataset"
+    }
+  },
+  "images": {
+    "example_image": {
+      "url": "<image_download_url>",
+      "description": "Description of the image"
+    }
+  },
+  "notebooks": {
+    "example_notebook": {
+      "url": "<notebook_download_url>",
+      "description": "Description of the notebook"
+    }
+  },
+  "other_files": {
+    "example_file": {
+      "url": "<other_file_download_url>",
+      "description": "Description of the other file"
+    }
+  }
+}
