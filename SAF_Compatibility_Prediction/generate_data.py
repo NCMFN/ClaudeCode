@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 
 np.random.seed(42)
-n_samples = 2000
+# Doubled the number of samples from 2000 to 4000 to generate twice as many data points
+n_samples = 4000
 
 # Generating realistic chemical composition and physical properties for SAF blends
 data = {
