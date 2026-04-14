@@ -2,6 +2,13 @@
 import os
 import shutil
 os.makedirs('output_figures', exist_ok=True)
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 import random
 import matplotlib.pyplot as plt
@@ -29,6 +36,13 @@ print('Downloading text files:')
 # files.download('traditional_knowledge2.txt')
 
 # --- Original Cell 2 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 import os
 
@@ -313,6 +327,13 @@ for i, labels in enumerate(simulated_sdg_labels[:5]):
 
 # --- Original Cell 11 ---
 import random
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 from collections import defaultdict
 
@@ -478,6 +499,13 @@ print(f"Average Social SDGs per document: {average_social_sdgs:.2f}")
 print(f"Average Environmental SDGs per document: {average_environmental_sdgs:.2f}")
 
 # --- Original Cell 15 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 
 # 5. Calculate the overall frequency of each individual SDG (already done in a previous step)
@@ -648,6 +676,13 @@ def simulate_what_if_scenario(baseline_scores, selected_interventions):
 print("Defined 'simulate_what_if_scenario' function.")
 
 # --- Original Cell 20 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 
 # 4. Demonstrate the prototype by running a 'what-if' scenario
@@ -836,6 +871,13 @@ import sys
 print("langdetect installed successfully.")
 
 # --- Original Cell 31 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 import os
 import glob
@@ -1025,6 +1067,13 @@ sdg_balance_df['Average Count per Document'] = sdg_balance_df['Average Count per
 print(sdg_balance_df.to_string(index=False))
 
 # --- Original Cell 32 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 import random
 
@@ -1088,6 +1137,13 @@ print(comparison_df.to_string())
 
 # --- Original Cell 33 ---
 import itertools
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd # Ensure pandas is imported as df_analysis is a DataFrame
 
 # Re-define a list of known conflicting SDG pairs (from cell 3c2e1949)
@@ -1139,6 +1195,13 @@ else:
     print('No policy conflicts were detected based on the defined pairs.')
 
 # --- Original Cell 34 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 
 # Helper function to flatten list of lists for SDG counting (re-defined from cell 7536372a)
@@ -1216,6 +1279,13 @@ else:
     print('No SDGs experienced a change in the simulated scenario to visualize.')
 
 # --- Original Cell 37 ---
+import subprocess
+try:
+    import langdetect
+except ImportError:
+    print("Installing langdetect...")
+    subprocess.check_call(["pip", "install", "langdetect"])
+
 import pandas as pd
 
 # Re-define underrepresentation_threshold if not already defined (assuming it was 2 in previous steps)
@@ -1640,6 +1710,135 @@ plt.savefig('output_figures/plot_28.png', bbox_inches='tight')
 print("All plots generated successfully. Uncomment plt.show() statements to display them in interactive environments.")
 
 
+
+
+
+def create_flowchart_diagram():
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
+
+    fig, ax = plt.subplots(figsize=(12, 16))
+    ax.axis('off')
+
+    # Helper to draw shapes
+    def draw_ellipse(x, y, w, h, fc):
+        ax.add_patch(patches.Ellipse((x, y), w, h, facecolor=fc, edgecolor='black', zorder=1))
+
+    def draw_rect(x, y, w, h, fc):
+        ax.add_patch(patches.Rectangle((x - w/2, y - h/2), w, h, facecolor=fc, edgecolor='black', zorder=1))
+
+    def draw_diamond(x, y, w, h, fc):
+        ax.add_patch(patches.Polygon([
+            (x, y + h/2), (x + w/2, y), (x, y - h/2), (x - w/2, y)
+        ], facecolor=fc, edgecolor='black', zorder=1))
+
+    def draw_text(x, y, text, fs=11, color='black'):
+        ax.text(x, y, text, ha='center', va='center', fontsize=fs, color=color, zorder=2)
+
+    def draw_arrow(x1, y1, x2, y2, color='black', rad=0.0, ls='solid'):
+        ax.annotate('', xy=(x2, y2), xytext=(x1, y1),
+                    arrowprops=dict(arrowstyle="->", color=color, lw=1.5, ls=ls,
+                                    connectionstyle=f"arc3,rad={rad}"))
+
+    # Title
+    ax.text(0.5, 0.99, "Indigenous SDG Mapping - Advanced Flowchart Algorithm",
+            ha='center', va='center', fontsize=16, fontweight='bold')
+
+    # Draw Shapes
+    draw_ellipse(0.5, 0.95, 0.12, 0.04, '#CCCCCC') # Start
+    draw_text(0.5, 0.95, "Start")
+
+    draw_rect(0.5, 0.86, 0.45, 0.08, '#ADD8E6') # Acq
+    draw_text(0.5, 0.86, "Data Acquisition\nLoad/Simulate Dataset\n(NGO Reports, Surveys, Traditional Knowledge)")
+
+    draw_rect(0.5, 0.75, 0.4, 0.07, '#98FB98') # Preproc
+    draw_text(0.5, 0.75, "Data Preprocessing\n- Text Cleaning & Parsing\n- Language Detection\n- Feature Generation")
+
+    draw_diamond(0.5, 0.63, 0.5, 0.08, '#EEDD82') # Dia1
+    draw_text(0.5, 0.63, "Preprocessing Quality\nInsufficient?")
+
+    draw_rect(0.5, 0.53, 0.25, 0.05, '#F5DEB3') # Split
+    draw_text(0.5, 0.53, "Preparation for\nSDG Mapping")
+
+    # 3 Parallel Boxes
+    draw_rect(0.22, 0.43, 0.22, 0.06, '#F5DEB3')
+    draw_text(0.22, 0.43, "Automated\nSDG Tagging")
+
+    draw_rect(0.5, 0.43, 0.24, 0.06, '#F5DEB3')
+    draw_text(0.5, 0.43, "Coherence &\nGap Analysis")
+
+    draw_rect(0.78, 0.43, 0.22, 0.06, '#F5DEB3')
+    draw_text(0.78, 0.43, "Solution\nFramework Gen")
+
+    draw_rect(0.5, 0.32, 0.35, 0.06, '#DDA0DD') # Eval
+    draw_text(0.5, 0.32, "Mapping Evaluation\n(Prevalence, Conflicts, Impact)")
+
+    draw_diamond(0.5, 0.21, 0.5, 0.08, '#EEDD82') # Dia2
+    draw_text(0.5, 0.21, "Mapping Quality\nAcceptable?")
+
+    draw_rect(0.5, 0.11, 0.35, 0.06, '#FFB6C1') # Out
+    draw_text(0.5, 0.11, "Select Best Scenarios\n& Output Policies")
+
+    draw_diamond(0.5, 0.02, 0.5, 0.08, '#EEDD82') # Dia3
+    draw_text(0.5, 0.02, "Policy Relevance\nDegrades?")
+
+    # Draw Arrows
+    # Forward paths (Black & Green)
+    draw_arrow(0.5, 0.93, 0.5, 0.90) # Start to Acq
+    draw_arrow(0.48, 0.82, 0.48, 0.785) # Acq to Preproc
+    draw_arrow(0.48, 0.715, 0.48, 0.67) # Preproc to Dia1
+
+    draw_arrow(0.5, 0.59, 0.5, 0.555, color='#00FF00') # Dia1 to Split (No)
+    ax.text(0.52, 0.57, "No", color='#00FF00', fontweight='bold')
+
+    # Split to 3 boxes
+    draw_arrow(0.45, 0.505, 0.25, 0.46)
+    draw_arrow(0.5, 0.505, 0.5, 0.46)
+    draw_arrow(0.55, 0.505, 0.75, 0.46)
+
+    # 3 boxes to Eval
+    draw_arrow(0.25, 0.40, 0.45, 0.35)
+    draw_arrow(0.5, 0.40, 0.5, 0.35)
+    draw_arrow(0.75, 0.40, 0.55, 0.35)
+
+    draw_arrow(0.5, 0.29, 0.5, 0.25) # Eval to Dia2
+
+    draw_arrow(0.5, 0.17, 0.5, 0.14, color='#00FF00') # Dia2 to Out (Yes)
+    ax.text(0.52, 0.155, "Yes", color='#00FF00', fontweight='bold')
+
+    draw_arrow(0.5, 0.08, 0.5, 0.06) # Out to Dia3
+
+    # Feedback paths (Red)
+    # Dia1 Yes to Acq
+    draw_arrow(0.75, 0.63, 0.725, 0.86, color='#FF0000', rad=0.2)
+    ax.text(0.74, 0.76, "Yes", color='#FF0000', fontweight='bold')
+
+    # Dia2 No (Retune) to middle models
+    draw_arrow(0.65, 0.24, 0.55, 0.42, color='#FF0000', rad=0.3)
+    ax.text(0.7, 0.27, "No (Retune)", color='#FF0000')
+
+    # Dia2 No (Refine Features) to Split
+    draw_arrow(0.75, 0.21, 0.625, 0.53, color='#FF0000', rad=0.5)
+    ax.text(0.85, 0.38, "No (Refine Features)", color='#FF0000')
+
+    # Dia3 Yes (Retrain) to Split
+    draw_arrow(0.75, 0.02, 0.65, 0.51, color='#FF0000', rad=0.6)
+    ax.text(0.83, 0.18, "Yes (Retrain)", color='#FF0000')
+
+    # Concept loops (Purple dashed)
+    # Eval to Split
+    draw_arrow(0.35, 0.34, 0.38, 0.51, color='blueviolet', rad=-0.4, ls='dashed')
+    ax.text(0.39, 0.38, "Mapping <-> Prep loop", color='black', fontsize=9)
+
+    # Eval to Preproc
+    draw_arrow(0.675, 0.32, 0.65, 0.73, color='blueviolet', rad=0.5, ls='dashed')
+    ax.text(0.73, 0.48, "Preproc <-> Eval loop", color='black', fontsize=9)
+
+    plt.tight_layout()
+    plt.savefig('output_figures/plot_29.png', bbox_inches='tight', dpi=300)
+    plt.show()
+
+create_flowchart_diagram()
 
 # --- Download Logic ---
 import shutil
