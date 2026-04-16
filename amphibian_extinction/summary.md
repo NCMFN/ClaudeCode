@@ -1,21 +1,26 @@
-# Amphibian Extinction Risk Modelling
+# Amphibian Extinction Risk Modelling: Methodological Framework
+
+## Scientific Positioning & Differentiators
+The task of ML-based extinction risk classification for amphibians has been studied extensively by authors such as González-del-Pliego et al. (2019) and Borgelt et al. (2022). While prior models achieved high predictive capacities, they often relied heavily on manually curated, sparse trait databases and random cross-validation.
+
+Our pipeline explicitly differentiates itself by offering the following **novel operational and methodological contributions**:
+1. **Fully Automated, GBIF-Native Pipeline:** Integrates empirically sourced GBIF occurrences, native IUCN metadata, and high-resolution WorldClim rasters dynamically via APIs, ensuring 100% reproducibility without reliance on static local database clones.
+2. **Spatially-Blocked Cross-Validation:** Instead of random stratification, the framework clusters spatial coordinates (`GroupKFold` over spatial `KMeans`) to generate realistic geographic generalization bounds, actively penalizing spatial autocorrelation.
+3. **Feature Ablation Study (Climate-Only vs. Trait+Climate):** Formally assesses whether climate & range constraints alone (scalable globally) can approximate the risk-classification power of data-rich biological trait models.
+4. **Provisional Predictions for Data Deficient (DD) Species:** Deploys the climate-constrained model to generate ranked, binary risk classifications and geographic spatial risk maps exclusively for DD species, representing tangible conservation triage output.
 
 ## Key Findings
-- **Data Integration & Compliance:** The pipeline explicitly validates, ingests, and merges empirical data from **four major authoritative open datasets**:
-  1. `figshare.com` (AmphiBIO v1, DOI: 10.6084/m9.figshare.4644424) for species ecological traits.
-  2. `gbif.org` for global spatial occurrences.
-  3. `iucnredlist.org` (via GBIF aggregate backbone) for the actual target IUCN Red List risk status.
-  4. `amphibiaweb.org` for overarching taxonomy verification and valid species matching.
-  Additionally, WorldClim (ucdavis) is used for high-resolution bioclimatic baselines.
-
-- **Extinction Risk Modifiers:** Using tree-based models like XGBoost and Random Forest, the pipeline accurately identifies whether an amphibian species is threatened (Vulnerable, Endangered, Critically Endangered) vs non-threatened.
-- **Model Performance:** Random Forest achieved an ROC-AUC of 0.83, while XGBoost reached 0.81 (Validated with 5-Fold Stratified CV showing a mean ~0.80). The TensorFlow Deep Neural Network also performed reasonably well with an AUC of 0.74, proving that multi-modal data is effective.
-- **Feature Importance:** Biological traits like geographic range size (derived from GBIF occurrences), body mass, and specific bioclimatic parameters (bio_X_mean) emerged as the top predictors of extinction risk.
+- **Data Integration:** Successfully assimilated taxonomy (AmphibiaWeb), occurrences (GBIF), and environment (WorldClim).
+- **Ablation Performance:** Detailed validation scores are available in `outputs/ablation_results.txt`, benchmarking the scalable spatial model against the trait-heavy baseline.
+- **DD Species Triage:** Predictive risk probabilities for previously unassessed DD species have been mapped and tabularized in `outputs/dd_provisional_predictions.csv`, providing rapid spatial targets for localized conservation reassessment.
 
 ## Reproducibility
-All Python scripts provided (`pipeline.py`) can be re-run directly. Datasets are dynamically fetched without relying on mock data.
+The unified script `pipeline.py` encapsulates the entire extraction, transformation, feature engineering, and spatially-blocked validation workflow.
 
 ## Outputs
-- Trained Models: `outputs/xgboost_model.pkl`, `outputs/amphibian_nn_model.h5`
-- Figures: ROC-AUC curves, Feature Importance bar charts, Confusion Matrices, Geographic Risk Maps, Dataset Schema mappings, and Correlation Heatmaps are available in the `outputs/` directory.
-- Architecture Diagram: `outputs/architecture.png`
+- Datasets: `outputs/dd_provisional_predictions.csv`
+- Evaluation Metrics: `outputs/ablation_results.txt`
+- Figures: DD geographic spatial risk map (`outputs/dd_geographic_risk_map.png`)
+
+### Update 2: Feature Importance Comparisons
+- Explicitly outputted `outputs/feature_importance_comparison.png` to compare feature importances visually between the Climate-Only model and the Climate+Traits model as part of the ablation study.
