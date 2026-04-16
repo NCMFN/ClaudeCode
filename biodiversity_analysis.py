@@ -1,8 +1,3 @@
-import nbformat as nbf
-
-nb = nbf.v4.new_notebook()
-
-code = """
 import pandas as pd
 import numpy as np
 import requests
@@ -28,7 +23,7 @@ print(f"Loaded {len(amphi_df)} records from AmphiBIO.")
 np.random.seed(42)
 sample_species = amphi_df['Species'].dropna().sample(150, random_state=42).tolist()
 
-def fetch_gbif_data(species_list, limit_per_species=20):
+def fetch_gbif_data(species_list, limit_per_species=10):
     print("Fetching GBIF occurrences and taxonomy...")
     records = []
     consistency_log = []
@@ -71,7 +66,7 @@ df_occ, df_consistency = fetch_gbif_data(sample_species)
 print(f"Retrieved {len(df_occ)} occurrence records from GBIF.")
 
 if not df_consistency.empty:
-    print("\\nCross-Dataset Consistency Check (Taxonomy Mismatches):")
+    print("\nCross-Dataset Consistency Check (Taxonomy Mismatches):")
     print(df_consistency.head())
     df_consistency.to_csv('taxonomy_consistency_issues.csv', index=False)
 
@@ -96,8 +91,9 @@ plt.title("Species Occurrence per IUCN Conservation Status", fontsize=16)
 plt.xlabel("IUCN Status", fontsize=12)
 plt.ylabel("Number of Occurrences", fontsize=12)
 plt.tight_layout()
+plt.savefig("conservation_status_bar.png", dpi=300)
 plt.savefig("figures/conservation_status_bar.png", dpi=300)
-plt.show()
+plt.close()
 
 # 2. Time-series Plot
 recent_years = df_merged[(df_merged['year'] >= 1970) & (df_merged['year'] <= 2026)]
@@ -107,8 +103,9 @@ plt.title("Species Occurrences Recorded Over Time (1970-Present)", fontsize=16)
 plt.xlabel("Year", fontsize=12)
 plt.ylabel("Frequency", fontsize=12)
 plt.tight_layout()
+plt.savefig("temporal_trends_timeseries.png", dpi=300)
 plt.savefig("figures/temporal_trends_timeseries.png", dpi=300)
-plt.show()
+plt.close()
 
 # 3. Geographic Maps (Datasets)
 print("Downloading Natural Earth data for maps...")
@@ -126,8 +123,9 @@ for status, color in status_colors.items():
 plt.title("Global Species Occurrences by Conservation Status", fontsize=18)
 plt.legend(title="IUCN Status")
 plt.tight_layout()
+plt.savefig("global_species_map.png", dpi=300)
 plt.savefig("figures/global_species_map.png", dpi=300)
-plt.show()
+plt.close()
 
 # 4. Heatmap: Species Density (Methods)
 fig, ax = plt.subplots(figsize=(15, 10))
@@ -137,8 +135,9 @@ plt.title("Global Species Density Heatmap", fontsize=18)
 plt.xlim(-180, 180)
 plt.ylim(-90, 90)
 plt.tight_layout()
+plt.savefig("species_density_heatmap.png", dpi=300)
 plt.savefig("figures/species_density_heatmap.png", dpi=300)
-plt.show()
+plt.close()
 
 # --- 4. System Architecture Diagram ---
 print("Generating System Architecture Diagram...")
@@ -146,12 +145,12 @@ def draw_architecture():
     fig, ax = plt.subplots(figsize=(14, 8), dpi=300)
     ax.axis('off')
     nodes = {
-        'APIs': {'pos': (0.1, 0.7), 'text': 'Data Sources\\n(GBIF API,\\nAmphiBIO Figshare)', 'color': '#e0f7fa'},
-        'Ingestion': {'pos': (0.4, 0.7), 'text': 'Data Ingestion Layer\\n(Requests, wget)', 'color': '#b2ebf2'},
-        'ETL': {'pos': (0.4, 0.4), 'text': 'Processing Layer\\n(Pandas: Clean,\\nMerge, Check Consistency)', 'color': '#80deea'},
-        'Storage': {'pos': (0.7, 0.4), 'text': 'Storage Layer\\n(CSV Files,\\nGeoDataFrames)', 'color': '#4dd0e1'},
-        'Analysis': {'pos': (0.7, 0.1), 'text': 'Analysis Layer\\n(Geospatial, Stats,\\nTaxonomy Matching)', 'color': '#26c6da'},
-        'Visualization': {'pos': (1.0, 0.1), 'text': 'Visualization Layer\\n(Matplotlib, Seaborn,\\nGeoPandas)', 'color': '#00bcd4'}
+        'APIs': {'pos': (0.1, 0.7), 'text': 'Data Sources\n(GBIF API,\nAmphiBIO Figshare)', 'color': '#e0f7fa'},
+        'Ingestion': {'pos': (0.4, 0.7), 'text': 'Data Ingestion Layer\n(Requests, wget)', 'color': '#b2ebf2'},
+        'ETL': {'pos': (0.4, 0.4), 'text': 'Processing Layer\n(Pandas: Clean,\nMerge, Check Consistency)', 'color': '#80deea'},
+        'Storage': {'pos': (0.7, 0.4), 'text': 'Storage Layer\n(CSV Files,\nGeoDataFrames)', 'color': '#4dd0e1'},
+        'Analysis': {'pos': (0.7, 0.1), 'text': 'Analysis Layer\n(Geospatial, Stats,\nTaxonomy Matching)', 'color': '#26c6da'},
+        'Visualization': {'pos': (1.0, 0.1), 'text': 'Visualization Layer\n(Matplotlib, Seaborn,\nGeoPandas)', 'color': '#00bcd4'}
     }
     for key, info in nodes.items():
         x, y = info['pos']
@@ -165,8 +164,9 @@ def draw_architecture():
         ax.annotate("", xy=(x2, y2), xytext=(x1, y1), arrowprops=dict(arrowstyle="->", lw=2.5, color='black', shrinkA=35, shrinkB=35))
     plt.title("Biodiversity Pipeline System Architecture", fontsize=16, fontweight='bold')
     plt.tight_layout()
+    plt.savefig("system_architecture.png", dpi=400)
     plt.savefig("figures/system_architecture.png", dpi=400)
-    plt.show()
+    plt.close()
 
 draw_architecture()
 
@@ -182,10 +182,3 @@ except ImportError:
     print("Not running in Google Colab. The figures are available locally in 'biodiversity_figures.zip'.")
 
 print("Pipeline execution completed successfully.")
-"""
-
-nb.cells.append(nbf.v4.new_code_cell("!pip install geopandas requests matplotlib seaborn folium networkx"))
-nb.cells.append(nbf.v4.new_code_cell(code))
-
-with open('biodiversity_analysis.ipynb', 'w') as f:
-    nbf.write(nb, f)
