@@ -117,8 +117,14 @@ nn.fit(X_train_scaled, y_train, epochs=50, batch_size=8, validation_split=0.2, v
 y_pred_rf = rf.predict(X_test_scaled)
 y_pred_nn = nn.predict(X_test_scaled).flatten()
 
-print(f"RF RMSE: {np.sqrt(mean_squared_error(y_test, y_pred_rf)):.2f}")
-print(f"NN RMSE: {np.sqrt(mean_squared_error(y_test, y_pred_nn)):.2f}")
+metrics = {
+    'Model': ['Random Forest', 'Deep Learning (FNN)'],
+    'RMSE': [np.sqrt(mean_squared_error(y_test, y_pred_rf)), np.sqrt(mean_squared_error(y_test, y_pred_nn))],
+    'MAE': [mean_absolute_error(y_test, y_pred_rf), mean_absolute_error(y_test, y_pred_nn)],
+    'R2': [r2_score(y_test, y_pred_rf), r2_score(y_test, y_pred_nn)]
+}
+results_df = pd.DataFrame(metrics)
+print(results_df.to_string(index=False))
 """)
 
 eval_cell = nbf.v4.new_code_cell("""
@@ -126,17 +132,17 @@ eval_cell = nbf.v4.new_code_cell("""
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-plt.figure(figsize=(12, 5))
+plt.figure(figsize=(15, 10))
 
 # Plot 1: Feature Importance
-plt.subplot(1, 2, 1)
+plt.subplot(2, 2, 1)
 importances = rf.feature_importances_
 indices = np.argsort(importances)[::-1][:10]
 sns.barplot(x=importances[indices], y=[X.columns[i] for i in indices], palette='viridis')
 plt.title("Top Microbial Taxa Predictors")
 
 # Plot 2: Prediction vs Actual
-plt.subplot(1, 2, 2)
+plt.subplot(2, 2, 2)
 plt.scatter(y_test, y_pred_rf, label='RF Predictions', alpha=0.7)
 min_v = min(min(y_test), min(y_pred_rf))
 max_v = max(max(y_test), max(y_pred_rf))
@@ -146,7 +152,31 @@ plt.xlabel("Actual Nitrogen")
 plt.ylabel("Predicted Nitrogen")
 plt.legend()
 
+# Plot 3: Residuals Distribution
+plt.subplot(2, 2, 3)
+sns.kdeplot(y_test - y_pred_rf, fill=True, label='RF Residuals', color='blue')
+sns.kdeplot(y_test - y_pred_nn, fill=True, label='NN Residuals', color='orange')
+plt.axvline(0, color='red', linestyle='--')
+plt.title("Distribution of Errors")
+plt.xlabel("Residuals")
+plt.legend()
+
+# Plot 4: Diversity vs Nitrogen
+plt.subplot(2, 2, 4)
+if 'shannon_entropy' in df_final.columns:
+    sns.regplot(data=df_final, x='shannon_entropy', y='total_nitrogen', scatter_kws={'alpha':0.6}, line_kws={'color': 'red'})
+    plt.title('Alpha Diversity vs Soil Nitrogen')
+else:
+    plt.text(0.5, 0.5, 'Alpha Diversity Feature Missing', ha='center')
+
 plt.tight_layout()
+plt.show()
+
+# Plot 5: Model Metrics Comparison
+plt.figure(figsize=(8, 4))
+metrics_melted = results_df.melt(id_vars='Model', var_name='Metric', value_name='Score')
+sns.barplot(data=metrics_melted, x='Metric', y='Score', hue='Model', palette='coolwarm')
+plt.title('Comparison of Evaluation Metrics')
 plt.show()
 """)
 
