@@ -1,0 +1,2 @@
+Climate-Only Spatial CV ROC-AUC: 0.8106
+Climate+Traits Spatial CV ROC-AUC: 0.8012

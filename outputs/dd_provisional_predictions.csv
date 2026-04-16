@@ -1,0 +1,18 @@
+Species,Predicted_Risk_Probability,Predicted_Threat_Status
+Telmatobius halli,0.99941826,Threatened
+Truebella skoptes,0.999141,Threatened
+Atelopus mandingues,0.99440914,Threatened
+Incilius karenlipsae,0.9936911,Threatened
+Colostethus furviventris,0.8916781,Threatened
+Rhinella fissipes,0.8916781,Threatened
+Rhinella amboroensis,0.8916781,Threatened
+Rhinella gnustae,0.8916781,Threatened
+Mertensophryne mocquardi,0.8916781,Threatened
+Colostethus lynchi,0.8916781,Threatened
+Haddadus plicifer,0.8916781,Threatened
+Mertensophryne schmidti,0.86807704,Threatened
+Atelopus dimorphus,0.6721567,Threatened
+Alsodes monticola,0.36940694,Non-Threatened
+Craugastor cuaquero,0.20916018,Non-Threatened
+Alsodes vittatus,0.155779,Non-Threatened
+Platymantis bayani,0.13888666,Non-Threatened
