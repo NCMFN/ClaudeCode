@@ -1,0 +1,6 @@
+SurveyID,Question1,Question2,RespondentAge,Income
+101,Good,5,45,50000.0
+102,Neutral,3,32,30000.0
+103,Bad,1,60,
+104,Good,4,28,75000.0
+105,Good,5,51,40000.0
