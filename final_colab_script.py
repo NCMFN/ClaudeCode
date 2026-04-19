@@ -1718,136 +1718,128 @@ def create_flowchart_diagram():
     import matplotlib.pyplot as plt
     import matplotlib.patches as patches
 
-    # Matching the exact style of the uploaded Bionic Mushroom flowchart
-    # Optimization for LaTeX inclusion (high DPI, vectorization, compact frame)
-
-    # Use a more compact figure size to fit within a smaller frame
-    fig, ax = plt.subplots(figsize=(10, 14), dpi=600)
+    # High DPI and smaller frame for compact, crisp layout
+    fig, ax = plt.subplots(figsize=(8, 12), dpi=600)
     ax.axis('off')
 
-    # Helper to draw shapes
+    # Helper functions for drawing shapes
     def draw_ellipse(x, y, w, h, fc):
         ax.add_patch(patches.Ellipse((x, y), w, h, facecolor=fc, edgecolor='black', lw=1.5, zorder=1))
 
     def draw_rect(x, y, w, h, fc):
         ax.add_patch(patches.Rectangle((x - w/2, y - h/2), w, h, facecolor=fc, edgecolor='black', lw=1.5, zorder=1))
 
+    def draw_parallelogram(x, y, w, h, fc, offset=0.05):
+        # x, y is center
+        ax.add_patch(patches.Polygon([
+            (x - w/2 + offset, y - h/2),
+            (x + w/2 + offset, y - h/2),
+            (x + w/2 - offset, y + h/2),
+            (x - w/2 - offset, y + h/2)
+        ], facecolor=fc, edgecolor='black', lw=1.5, zorder=1))
+
     def draw_diamond(x, y, w, h, fc):
         ax.add_patch(patches.Polygon([
             (x, y + h/2), (x + w/2, y), (x, y - h/2), (x - w/2, y)
         ], facecolor=fc, edgecolor='black', lw=1.5, zorder=1))
 
-    def draw_text(x, y, text, fs=11, color='black', fontfamily='serif', fontweight='bold'):
+    def draw_text(x, y, text, fs=11, color='black', fontfamily='sans-serif', fontweight='normal'):
         ax.text(x, y, text, ha='center', va='center', fontsize=fs, color=color,
                 fontfamily=fontfamily, fontweight=fontweight, zorder=2)
 
-    def draw_arrow(x1, y1, x2, y2, color='black', rad=0.0, ls='solid'):
+    def draw_arrow(x1, y1, x2, y2, color='black', rad=0.0, ls='solid', lw=1.5):
         ax.annotate('', xy=(x2, y2), xytext=(x1, y1),
-                    arrowprops=dict(arrowstyle="-|>", color=color, lw=1.5, ls=ls,
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=lw, ls=ls,
                                     connectionstyle=f"arc3,rad={rad}"))
 
-    # Title - Bold Sans-serif
-    ax.text(0.5, 0.98, "Indigenous SDG Mapping - Advanced Flowchart Algorithm",
-            ha='center', va='center', fontsize=14, fontweight='bold', fontfamily='sans-serif')
+    # Colors
+    c_start = '#90EE90' # Light green
+    c_io = '#FFFACD' # Lemon chiffon (yellow)
+    c_proc = '#ADD8E6' # Light blue
+    c_train = '#FFE4B5' # Moccasin (orange-ish)
+    c_eval = '#FFB6C1' # Light pink
+    c_cond = '#F08080' # Light coral (red)
+    c_tune = '#DDA0DD' # Plum (purple)
+
+    # Coords
+    x_c = 0.5
+    y_start = 0.95
+    y_in = 0.85
+    y_prep = 0.74
+    y_split = 0.63
+    y_train = 0.52
+    y_eval = 0.41
+    y_cond = 0.28
+
+    x_out = 0.3
+    y_out = 0.12
+    y_end = 0.03
+
+    x_tune = 0.75
+    y_tune = 0.12
 
     # Draw Shapes
-    draw_ellipse(0.5, 0.94, 0.15, 0.04, 'lightgrey') # Start
-    draw_text(0.5, 0.94, "Start")
+    draw_ellipse(x_c, y_start, 0.15, 0.04, c_start)
+    draw_text(x_c, y_start, "Start", fs=12, fontweight='bold')
 
-    draw_rect(0.5, 0.85, 0.60, 0.08, 'lightblue') # Acq
-    draw_text(0.5, 0.85, "Data Acquisition\nLoad/Simulate Dataset\n(NGO Reports, Surveys, Traditional Knowledge)")
+    draw_parallelogram(x_c, y_in, 0.5, 0.08, c_io, offset=0.08)
+    draw_text(x_c, y_in, "Input: Raw Dataset\n(SAF Features)", fs=11)
 
-    draw_rect(0.5, 0.74, 0.55, 0.08, 'palegreen') # Preproc
-    draw_text(0.5, 0.74, "Data Preprocessing\n- Text Cleaning & Parsing\n- Language Detection\n- Feature Generation")
+    draw_rect(x_c, y_prep, 0.5, 0.06, c_proc)
+    draw_text(x_c, y_prep, "Data Preprocessing\n(Missing Values, Standardization)", fs=11)
 
-    draw_diamond(0.5, 0.61, 0.60, 0.08, 'khaki') # Dia1
-    draw_text(0.5, 0.61, "Preprocessing Quality\nInsufficient?")
+    draw_rect(x_c, y_split, 0.45, 0.06, c_proc)
+    draw_text(x_c, y_split, "Train-Test Split & SMOTE\n(Class Balancing)", fs=11)
 
-    draw_rect(0.5, 0.51, 0.35, 0.05, 'khaki') # Split
-    draw_text(0.5, 0.51, "Preparation for\nSDG Mapping")
+    draw_rect(x_c, y_train, 0.45, 0.06, c_train)
+    draw_text(x_c, y_train, "Model Training\n(LogReg, RF, XGBoost, NN)", fs=11)
 
-    # 3 Parallel Boxes (Wheat)
-    draw_rect(0.20, 0.41, 0.30, 0.06, 'wheat')
-    draw_text(0.20, 0.41, "Automated\nSDG Tagging", fs=10)
+    draw_rect(x_c, y_eval, 0.4, 0.06, c_eval)
+    draw_text(x_c, y_eval, "Model Evaluation\n(Metrics & SHAP)", fs=11)
 
-    draw_rect(0.5, 0.41, 0.28, 0.06, 'wheat')
-    draw_text(0.5, 0.41, "Coherence &\nGap Analysis", fs=10)
+    draw_diamond(x_c, y_cond, 0.4, 0.08, c_cond)
+    draw_text(x_c, y_cond, "Is Model\nOptimal?", fs=11)
 
-    draw_rect(0.80, 0.41, 0.30, 0.06, 'wheat')
-    draw_text(0.80, 0.41, "Solution\nFramework Gen", fs=10)
+    # Left branch
+    draw_parallelogram(x_out, y_out, 0.45, 0.08, c_io, offset=0.08)
+    draw_text(x_out, y_out, "Output: Prediction via\nStreamlit App", fs=11)
 
-    draw_rect(0.5, 0.30, 0.45, 0.06, 'plum') # Eval
-    draw_text(0.5, 0.30, "Mapping Evaluation\n(Prevalence, Conflicts, Impact)")
+    draw_ellipse(x_out, y_end, 0.15, 0.04, c_start)
+    draw_text(x_out, y_end, "End", fs=12, fontweight='bold')
 
-    draw_diamond(0.5, 0.19, 0.60, 0.08, 'khaki') # Dia2
-    draw_text(0.5, 0.19, "Mapping Quality\nAcceptable?")
+    # Right branch
+    draw_rect(x_tune, y_tune, 0.4, 0.06, c_tune)
+    draw_text(x_tune, y_tune, "Hyperparameter Tuning\n(GridSearchCV)", fs=11)
 
-    draw_rect(0.5, 0.09, 0.45, 0.06, 'lightpink') # Out
-    draw_text(0.5, 0.09, "Select Best Scenarios\n& Output Policies")
+    # Arrows
+    draw_arrow(x_c, y_start - 0.02, x_c, y_in + 0.04)
+    draw_arrow(x_c, y_in - 0.04, x_c, y_prep + 0.03)
+    draw_arrow(x_c, y_prep - 0.03, x_c, y_split + 0.03)
+    draw_arrow(x_c, y_split - 0.03, x_c, y_train + 0.03)
+    draw_arrow(x_c, y_train - 0.03, x_c, y_eval + 0.03)
+    draw_arrow(x_c, y_eval - 0.03, x_c, y_cond + 0.04)
 
-    draw_diamond(0.5, 0.02, 0.60, 0.06, 'khaki') # Dia3
-    draw_text(0.5, 0.02, "Policy Relevance\nDegrades?")
+    # Yes branch
+    draw_arrow(x_c - 0.1, y_cond - 0.02, x_out, y_out + 0.04, color='forestgreen')
+    draw_text((x_c - 0.1 + x_out)/2 - 0.02, (y_cond - 0.02 + y_out + 0.04)/2 + 0.02, "Yes", color='forestgreen', fontweight='bold')
 
-    # Draw Arrows
-    # Forward paths (Black & Bright Green)
-    draw_arrow(0.5, 0.92, 0.5, 0.89) # Start to Acq
-    draw_arrow(0.48, 0.81, 0.48, 0.78) # Acq to Preproc
-    draw_arrow(0.48, 0.70, 0.48, 0.65) # Preproc to Dia1
+    # Output to End
+    draw_arrow(x_out, y_out - 0.04, x_out, y_end + 0.02)
 
-    draw_arrow(0.5, 0.57, 0.5, 0.535, color='#00AA00') # Dia1 to Split (No)
-    draw_text(0.53, 0.55, "No", color='#00AA00')
+    # No branch
+    draw_arrow(x_c + 0.1, y_cond - 0.02, x_tune - 0.05, y_tune + 0.03, color='red')
+    draw_text((x_c + 0.1 + x_tune - 0.05)/2 + 0.03, (y_cond - 0.02 + y_tune + 0.03)/2 + 0.02, "No", color='red', fontweight='bold')
 
-    # Split to 3 boxes
-    draw_arrow(0.35, 0.485, 0.25, 0.44)
-    draw_arrow(0.5, 0.485, 0.5, 0.44)
-    draw_arrow(0.65, 0.485, 0.75, 0.44)
-
-    # 3 boxes to Eval
-    draw_arrow(0.25, 0.38, 0.40, 0.33)
-    draw_arrow(0.5, 0.38, 0.5, 0.33)
-    draw_arrow(0.75, 0.38, 0.60, 0.33)
-
-    draw_arrow(0.5, 0.27, 0.5, 0.23) # Eval to Dia2
-
-    draw_arrow(0.5, 0.15, 0.5, 0.12, color='#00AA00') # Dia2 to Out (Yes)
-    draw_text(0.53, 0.135, "Yes", color='#00AA00')
-
-    draw_arrow(0.5, 0.06, 0.5, 0.05) # Out to Dia3
-
-    # Feedback paths (Red)
-    # Dia1 Yes to Acq
-    draw_arrow(0.80, 0.61, 0.75, 0.85, color='red', rad=0.2)
-    draw_text(0.74, 0.73, "Yes", color='red')
-
-    # Dia2 No (Retune) to middle models
-    draw_arrow(0.68, 0.22, 0.62, 0.39, color='red', rad=0.3)
-    draw_text(0.78, 0.28, "No (Retune)", color='red')
-
-    # Dia2 No (Refine Features) to Split
-    draw_arrow(0.80, 0.19, 0.65, 0.51, color='red', rad=0.5)
-    draw_text(0.90, 0.35, "No (Refine Features)", color='red')
-
-    # Dia3 Yes (Retrain) to Split
-    draw_arrow(0.80, 0.02, 0.65, 0.49, color='red', rad=0.6)
-    draw_text(0.90, 0.15, "Yes (Retrain)", color='red')
-
-    # Concept loops (Purple dashed)
-    # Eval to Split
-    draw_arrow(0.28, 0.30, 0.32, 0.51, color='blueviolet', rad=-0.4, ls='dashed')
-    draw_text(0.25, 0.42, "Mapping <-> Prep loop", color='black', fs=9)
-
-    # Eval to Preproc
-    draw_arrow(0.72, 0.30, 0.70, 0.74, color='blueviolet', rad=0.5, ls='dashed')
-    draw_text(0.85, 0.53, "Preproc <-> Eval loop", color='black', fs=9)
+    # Tuning to Model Training
+    draw_arrow(x_tune + 0.05, y_tune + 0.03, x_c + 0.1, y_train - 0.03, color='red', rad=-0.2)
 
     plt.tight_layout()
-    # Save as PNG, SVG (vectorized), and PDF (ideal for LaTeX)
+    # Save as PNG, SVG, and PDF
     plt.savefig('output_figures/plot_29.png', bbox_inches='tight', dpi=600)
     plt.savefig('output_figures/plot_29.svg', bbox_inches='tight', format='svg')
     plt.savefig('output_figures/plot_29.pdf', bbox_inches='tight', format='pdf')
     plt.close()
 
-create_flowchart_diagram()
 
 # --- Download Logic ---
 import shutil
