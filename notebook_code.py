@@ -1,0 +1,1221 @@
+from google.colab import files
+
+print('Downloading CSV files:')
+files.download('ngo_data.csv')
+files.download('community_survey.csv')
+from google.colab import files
+
+print('Downloading text files:')
+files.download('traditional_knowledge1.txt')
+files.download('traditional_knowledge2.txt')
+import pandas as pd
+import os
+
+# Create dummy CSV files
+csv_data1 = {
+    'ID': [1, 2, 3, 4, 5],
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': [24, 27, 22, 32, 29],
+    'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
+    'Score': [85, 92, 78, 88, 95]
+}
+df1 = pd.DataFrame(csv_data1)
+df1.to_csv('ngo_data.csv', index=False)
+
+csv_data2 = {
+    'SurveyID': [101, 102, 103, 104, 105],
+    'Question1': ['Good', 'Neutral', 'Bad', 'Good', 'Good'],
+    'Question2': [5, 3, 1, 4, 5],
+    'RespondentAge': [45, 32, 60, 28, 51],
+    'Income': [50000, 30000, None, 75000, 40000]
+}
+df2 = pd.DataFrame(csv_data2)
+df2.to_csv('community_survey.csv', index=False)
+
+# Create dummy text files
+with open('traditional_knowledge1.txt', 'w') as f:
+    f.write('This document contains traditional knowledge related to sustainable farming practices.')
+with open('traditional_knowledge2.txt', 'w') as f:
+    f.write('This document details local remedies using indigenous plants.')
+
+print("Dummy data files created successfully.")
+import glob
+
+# --- Load and review CSV files ---
+csv_files = glob.glob('*.csv')
+loaded_dataframes = {}
+
+print('--- Reviewing CSV Files ---\n')
+for csv_file in csv_files:
+    print(f'Loading and reviewing: {csv_file}')
+    df_name = os.path.splitext(csv_file)[0] # Use filename as df name
+    df = pd.read_csv(csv_file)
+    loaded_dataframes[df_name] = df
+
+    print(f'\n{csv_file} - First 5 rows:')
+    print(df.head())
+
+    print(f'\n{csv_file} - Column names:')
+    print(df.columns.tolist())
+
+    print(f'\n{csv_file} - Data types and non-null values:')
+    df.info()
+
+    print(f'\n{csv_file} - Missing values:')
+    print(df.isnull().sum())
+    print('\n' + '-'*50 + '\n')
+
+# --- Load and review text files ---
+text_files = glob.glob('*.txt')
+text_documents = []
+
+print('--- Reviewing Text Files ---\n')
+for txt_file in text_files:
+    with open(txt_file, 'r') as f:
+        content = f.read()
+        text_documents.append(content)
+    print(f'Loaded text file: {txt_file}')
+
+print(f'\nTotal number of text documents loaded: {len(text_documents)}')
+
+if text_documents:
+    print(f'\nFirst 200 characters of the first document:')
+    print(text_documents[0][:200])
+else:
+    print('No text documents were found or loaded.')
+
+import re
+import string
+
+# 1. Combine all textual data
+all_texts = []
+
+# Add text documents
+all_texts.extend(text_documents)
+
+# Add relevant string columns from DataFrames
+# From 'ngo_data'
+if 'ngo_data' in loaded_dataframes:
+    df_ngo = loaded_dataframes['ngo_data']
+    all_texts.extend(df_ngo['Name'].astype(str).tolist())
+    all_texts.extend(df_ngo['City'].astype(str).tolist())
+
+# From 'community_survey'
+if 'community_survey' in loaded_dataframes:
+    df_community = loaded_dataframes['community_survey']
+    all_texts.extend(df_community['Question1'].astype(str).tolist())
+
+print(f"Total number of combined text entries: {len(all_texts)}")
+print("First 5 raw text entries:")
+for i, text in enumerate(all_texts[:5]):
+    print(f"  {i+1}. {text[:100]}...")
+
+# 2. Define a text cleaning function
+def clean_text(text):
+    text = str(text).lower()  # Convert to lowercase and ensure string type
+    text = text.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
+    text = re.sub(r'[^a-z\s]', '', text)  # Remove special characters and numbers (keeping only letters and spaces)
+    text = re.sub(r'\s+', ' ', text).strip()  # Remove extra whitespace
+    return text
+
+# 3. Apply the cleaning function
+cleaned_texts = [clean_text(text) for text in all_texts]
+
+# 4. Print the first 200 characters of the first few cleaned texts
+print('\n--- Verification of Cleaned Texts ---\n')
+print(f'Total number of cleaned text entries: {len(cleaned_texts)}')
+
+if cleaned_texts:
+    print('\nFirst 3 cleaned text entries (first 200 characters each):')
+    for i, cleaned_text in enumerate(cleaned_texts[:3]):
+        print(f'Entry {i+1}: {cleaned_text[:200]}')
+else:
+    print('No cleaned texts to display.')
+
+import sys
+
+# Install langdetect
+!{sys.executable} -m pip install langdetect
+
+# Install NLTK
+!{sys.executable} -m pip install nltk
+
+import nltk
+
+# Download necessary NLTK data
+try:
+    nltk.data.find('tokenizers/punkt')
+except nltk.downloader.DownloadError:
+    nltk.download('punkt')
+try:
+    nltk.data.find('corpora/stopwords')
+except nltk.downloader.DownloadError:
+    nltk.download('stopwords')
+try:
+    nltk.data.find('corpora/wordnet')
+except nltk.downloader.DownloadError:
+    nltk.download('wordnet')
+
+print("Required libraries and NLTK data downloaded.")
+import sys
+import nltk
+
+# Install langdetect
+!{sys.executable} -m pip install langdetect
+
+# Install NLTK (if not already satisfied)
+!{sys.executable} -m pip install nltk
+
+# Download necessary NLTK data. nltk.download() checks if already present.
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+
+print("Required libraries and NLTK data installed/downloaded.")
+from langdetect import detect, DetectorFactory
+
+# Ensure reproducibility for langdetect
+DetectorFactory.seed = 0
+
+# 1. Identify the language of each text string
+text_languages = []
+for text in cleaned_texts:
+    try:
+        lang = detect(text)
+        text_languages.append(lang)
+    except Exception as e:
+        text_languages.append('unknown') # Handle cases where language detection fails
+
+print(f"Detected languages for the first 10 texts: {text_languages[:10]}")
+print(f"Language distribution: {pd.Series(text_languages).value_counts()}")
+
+# 2. Simulate translation for non-English texts
+translated_texts = []
+for i, text in enumerate(cleaned_texts):
+    if text_languages[i] != 'en':
+        # Simulate translation. In a real scenario, use a translation API.
+        translated_texts.append(f"[Translated to English] {text}")
+    else:
+        translated_texts.append(text)
+
+print('\n--- Simulated Translation Verification ---\n')
+print(f'Total number of texts after simulated translation: {len(translated_texts)}')
+print('\nFirst 5 original texts and their translated versions (if applicable):')
+for i in range(min(5, len(cleaned_texts))):
+    print(f'Original [{text_languages[i]}]: {cleaned_texts[i][:100]}')
+    print(f'Translated: {translated_texts[i][:100]}\n')
+
+# Store the English/translated texts for the next steps
+english_texts = translated_texts
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import nltk
+
+# Ensure punkt_tab is downloaded for word_tokenize
+nltk.download('punkt_tab', quiet=True)
+
+# Initialize NLTK components
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+
+processed_texts = []
+
+print('--- Performing Tokenization, Stopword Removal, and Lemmatization ---\n')
+for i, text in enumerate(english_texts):
+    # 1. Tokenization
+    tokens = word_tokenize(text)
+
+    # 2. Stopword Removal and Lowercasing (already lowercased, but good practice)
+    filtered_tokens = [word for word in tokens if word not in stop_words and word.isalpha()] # .isalpha() to remove non-alphabetic tokens
+
+    # 3. Lemmatization
+    lemmas = [lemmatizer.lemmatize(word) for word in filtered_tokens]
+    processed_texts.append(lemmas)
+
+print(f'Total number of processed text documents: {len(processed_texts)}')
+print('\nFirst 5 processed text entries (lemmatized tokens):')
+for i, tokens in enumerate(processed_texts[:5]):
+    print(f'Entry {i+1}: {tokens}')
+final_prepared_texts = []
+
+for doc_tokens in processed_texts:
+    # Join the lemmatized tokens back into a single string
+    rejoined_text = ' '.join(doc_tokens)
+    final_prepared_texts.append(rejoined_text)
+
+print(f'Total number of prepared documents: {len(final_prepared_texts)}')
+
+print('\nFirst 3 prepared documents:')
+for i, doc in enumerate(final_prepared_texts[:3]):
+    print(f'Document {i+1}: {doc}')
+import random
+
+# 1. Define a list of dummy Sustainable Development Goals (SDGs)
+dummy_sdgs = [
+    'SDG 1: No Poverty',
+    'SDG 2: Zero Hunger',
+    'SDG 3: Good Health and Well-being',
+    'SDG 4: Quality Education',
+    'SDG 5: Gender Equality',
+    'SDG 6: Clean Water and Sanitation',
+    'SDG 7: Affordable and Clean Energy',
+    'SDG 8: Decent Work and Economic Growth',
+    'SDG 9: Industry, Innovation, and Infrastructure',
+    'SDG 10: Reduced Inequalities',
+    'SDG 11: Sustainable Cities and Communities',
+    'SDG 12: Responsible Consumption and Production',
+    'SDG 13: Climate Action',
+    'SDG 14: Life Below Water',
+    'SDG 15: Life On Land',
+    'SDG 16: Peace, Justice, and Strong Institutions',
+    'SDG 17: Partnerships for the Goals'
+]
+
+# 2. Initialize an empty list to store simulated SDG labels
+simulated_sdg_labels = []
+
+# 3. Iterate through each document in final_prepared_texts
+for doc_text in final_prepared_texts:
+    # 4. For each document, randomly select a subset of 1 to 3 SDGs
+    num_sdgs_to_assign = random.randint(1, 3) # Randomly choose between 1 and 3 SDGs
+    selected_sdgs = random.sample(dummy_sdgs, num_sdgs_to_assign)
+
+    # 5. Append the list of selected SDG labels for the current document
+    simulated_sdg_labels.append(selected_sdgs)
+
+# 6. Print the total number of documents for which SDG labels were generated
+print(f"Total number of documents with simulated SDG labels: {len(simulated_sdg_labels)}")
+
+# 7. Print the first 5 entries of simulated_sdg_labels
+print('\nFirst 5 simulated SDG label assignments:')
+for i, labels in enumerate(simulated_sdg_labels[:5]):
+    print(f'Document {i+1}: {labels}')
+import random
+import pandas as pd
+from collections import defaultdict
+
+# 1. Create a list of dummy geographical regions
+dummy_regions = ['East Africa', 'West Africa', 'Southern Africa', 'Central Africa', 'North Africa']
+simulated_regions = [random.choice(dummy_regions) for _ in range(len(final_prepared_texts))]
+
+# 2. Create a list of dummy issues
+dummy_issues = ['Agriculture', 'Education', 'Health', 'Infrastructure', 'Governance', 'Environment']
+simulated_issues = [random.choice(dummy_issues) for _ in range(len(final_prepared_texts))]
+
+# 3. Create a Pandas DataFrame
+data_for_df = {
+    'text': final_prepared_texts,
+    'sdg_labels': simulated_sdg_labels,
+    'region': simulated_regions,
+    'issue': simulated_issues
+}
+df_analysis = pd.DataFrame(data_for_df)
+
+print("DataFrame created with text, SDG labels, regions, and issues.")
+print("First 5 rows of the analysis DataFrame:")
+print(df_analysis.head())
+
+# Helper function to flatten list of lists for SDG counting
+def flatten_sdg_labels(list_of_lists):
+    flat_list = []
+    for sublist in list_of_lists:
+        for item in sublist:
+            flat_list.append(item)
+    return flat_list
+
+# 4. Calculate the overall frequency of each SDG
+all_sdgs_flat = flatten_sdg_labels(df_analysis['sdg_labels'])
+overall_sdg_frequency = pd.Series(all_sdgs_flat).value_counts()
+
+print('\n--- Overall SDG Frequency ---\n')
+print("Top 5 most frequent SDGs:")
+print(overall_sdg_frequency.head(5))
+
+# 5. Group by 'region' and calculate SDG frequency within each region
+print('\n--- SDG Frequency by Region ---\n')
+for region in df_analysis['region'].unique():
+    region_df = df_analysis[df_analysis['region'] == region]
+    region_sdgs_flat = flatten_sdg_labels(region_df['sdg_labels'])
+    if region_sdgs_flat:
+        region_sdg_frequency = pd.Series(region_sdgs_flat).value_counts()
+        print(f'\nTop 3 SDGs for {region}:')
+        print(region_sdg_frequency.head(3))
+    else:
+        print(f'\nNo SDGs found for {region}.')
+
+# 6. Group by 'issue' and calculate SDG frequency within each issue
+print('\n--- SDG Frequency by Issue ---\n')
+for issue in df_analysis['issue'].unique():
+    issue_df = df_analysis[df_analysis['issue'] == issue]
+    issue_sdgs_flat = flatten_sdg_labels(issue_df['sdg_labels'])
+    if issue_sdgs_flat:
+        issue_sdg_frequency = pd.Series(issue_sdgs_flat).value_counts()
+        print(f'\nTop 3 SDGs for {issue}:')
+        print(issue_sdg_frequency.head(3))
+    else:
+        print(f'\nNo SDGs found for {issue}.')
+
+import itertools
+
+# 1. Define a list of known conflicting SDG pairs or individual SDGs in tension
+# These are illustrative examples; real-world conflicts are complex and numerous.
+conflicting_sdg_pairs = [
+    ('SDG 8: Decent Work and Economic Growth', 'SDG 13: Climate Action'), # Economic growth vs. environmental protection
+    ('SDG 9: Industry, Innovation, and Infrastructure', 'SDG 15: Life On Land'), # Industrial expansion vs. ecosystem preservation
+    ('SDG 2: Zero Hunger', 'SDG 12: Responsible Consumption and Production'), # Increased food production often unsustainable
+    ('SDG 1: No Poverty', 'SDG 10: Reduced Inequalities') # Poverty reduction might not always reduce inequality proportionally
+]
+
+detected_conflicts = []
+
+# 2. Iterate through each document's sdg_labels in the df_analysis DataFrame
+for index, row in df_analysis.iterrows():
+    doc_sdgs = set(row['sdg_labels'])
+    document_conflicts = []
+
+    # 3. Check if any of the predefined conflicting SDG pairs co-occur
+    for conflict_pair in conflicting_sdg_pairs:
+        sdg1, sdg2 = conflict_pair
+        if sdg1 in doc_sdgs and sdg2 in doc_sdgs:
+            document_conflicts.append(conflict_pair)
+
+    # 4. Store the identified conflicts
+    if document_conflicts:
+        detected_conflicts.append({
+            'document_index': index,
+            'document_text_sample': row['text'][:100] + '...', # Store a sample of the text
+            'assigned_sdgs': list(doc_sdgs),
+            'conflicting_pairs': document_conflicts
+        })
+
+# 5. Print a summary of the detected conflicts
+print(f"Total number of documents analyzed: {len(df_analysis)}")
+print(f"Total number of documents with detected conflicts: {len(detected_conflicts)}")
+
+if detected_conflicts:
+    print('\n--- Examples of Detected Conflicts ---')
+    for i, conflict_info in enumerate(detected_conflicts[:5]): # Print up to 5 examples
+        print(f"\nDocument Index: {conflict_info['document_index']}")
+        print(f"  Text Sample: {conflict_info['document_text_sample']}")
+        print(f"  Assigned SDGs: {conflict_info['assigned_sdgs']}")
+        print(f"  Conflicting Pairs: {conflict_info['conflicting_pairs']}")
+else:
+    print('\nNo policy conflicts were detected based on the defined pairs.')
+
+import re
+
+# 1. Define three sets of SDG categories
+# These categorizations are typical but can be adapted based on specific analytical needs.
+ECONOMIC_SDGS = {'SDG 1', 'SDG 8', 'SDG 9', 'SDG 10', 'SDG 12', 'SDG 17'}
+SOCIAL_SDGS = {'SDG 1', 'SDG 2', 'SDG 3', 'SDG 4', 'SDG 5', 'SDG 6', 'SDG 7', 'SDG 11', 'SDG 16', 'SDG 17'}
+ENVIRONMENTAL_SDGS = {'SDG 2', 'SDG 6', 'SDG 7', 'SDG 12', 'SDG 13', 'SDG 14', 'SDG 15', 'SDG 17'}
+
+# Note: Some SDGs (e.g., SDG 1, 2, 6, 7, 12, 16, 17) can overlap across categories due to their interconnected nature.
+# For example, SDG 1 (No Poverty) has economic and social aspects.
+# SDG 17 (Partnerships for the Goals) supports all dimensions.
+
+print("SDG categories defined: ECONOMIC_SDGS, SOCIAL_SDGS, ENVIRONMENTAL_SDGS")
+def count_sdg_dimensions(sdg_labels):
+    economic_count = 0
+    social_count = 0
+    environmental_count = 0
+
+    for label in sdg_labels:
+        # Extract SDG number (e.g., 'SDG 1') from 'SDG 1: No Poverty'
+        sdg_number = label.split(':')[0].strip()
+
+        if sdg_number in ECONOMIC_SDGS:
+            economic_count += 1
+        if sdg_number in SOCIAL_SDGS:
+            social_count += 1
+        if sdg_number in ENVIRONMENTAL_SDGS:
+            environmental_count += 1
+
+    return economic_count, social_count, environmental_count
+
+# Apply the function to df_analysis
+df_analysis[['economic_sdgs', 'social_sdgs', 'environmental_sdgs']] = df_analysis['sdg_labels'].apply(lambda x: pd.Series(count_sdg_dimensions(x)))
+
+print("Calculated Economic, Social, and Environmental SDG counts for each document.")
+print("First 5 rows with new SDG dimension counts:")
+print(df_analysis[['sdg_labels', 'economic_sdgs', 'social_sdgs', 'environmental_sdgs']].head())
+
+# Calculate average counts per dimension
+average_economic_sdgs = df_analysis['economic_sdgs'].mean()
+average_social_sdgs = df_analysis['social_sdgs'].mean()
+average_environmental_sdgs = df_analysis['environmental_sdgs'].mean()
+
+print(f"\nAverage Economic SDGs per document: {average_economic_sdgs:.2f}")
+print(f"Average Social SDGs per document: {average_social_sdgs:.2f}")
+print(f"Average Environmental SDGs per document: {average_environmental_sdgs:.2f}")
+import pandas as pd
+
+# 5. Calculate the overall frequency of each individual SDG (already done in a previous step)
+#    The `overall_sdg_frequency` Series was created previously.
+print('--- Overall SDG Frequency (Top 5) ---\n')
+print(overall_sdg_frequency.head(5))
+
+# 6. Set a threshold for 'underrepresentation'
+#    For demonstration, we will consider an SDG underrepresented if it appears less than 2 times.
+underrepresentation_threshold = 2
+
+# 7. Identify and print SDGs that fall below this frequency threshold
+underrepresented_sdgs = overall_sdg_frequency[overall_sdg_frequency < underrepresentation_threshold]
+
+print(f'\n--- Underrepresented SDGs (frequency < {underrepresentation_threshold}) ---\n')
+if not underrepresented_sdgs.empty:
+    print(underrepresented_sdgs)
+else:
+    print('No SDGs found below the underrepresentation threshold.')
+print('\n--- Underrepresented Regions and Issues (by document count) ---\n')
+
+# Group by 'region' and count documents
+region_document_counts = df_analysis['region'].value_counts()
+underrepresented_regions = region_document_counts[region_document_counts < underrepresentation_threshold]
+
+if not underrepresented_regions.empty:
+    print(f'Regions with fewer than {underrepresentation_threshold} documents:')
+    print(underrepresented_regions)
+else:
+    print('No regions found below the document count threshold.')
+
+print('\n' + '-'*50 + '\n')
+
+# Group by 'issue' and count documents
+issue_document_counts = df_analysis['issue'].value_counts()
+underrepresented_issues = issue_document_counts[issue_document_counts < underrepresentation_threshold]
+
+if not underrepresented_issues.empty:
+    print(f'Issues with fewer than {underrepresentation_threshold} documents:')
+    print(underrepresented_issues)
+else:
+    print('No issues found below the document count threshold.')
+print('\n--- Context-Specific Underrepresented SDGs (by Region and Issue) ---\n')
+
+all_dummy_sdgs = [sdg.split(':')[0].strip() for sdg in dummy_sdgs] # Extract 'SDG 1' from 'SDG 1: No Poverty'
+
+# Identify underrepresented SDGs per region
+for region in df_analysis['region'].unique():
+    region_df = df_analysis[df_analysis['region'] == region]
+    region_sdgs_flat = flatten_sdg_labels(region_df['sdg_labels'])
+
+    if not region_sdgs_flat:
+        print(f'\nRegion: {region} - No SDGs found.')
+        continue
+
+    region_sdg_frequency = pd.Series(region_sdgs_flat).value_counts().apply(lambda x: x if isinstance(x, (int, float)) else 0)
+
+    # Convert full SDG names to SDG numbers for comparison with all_dummy_sdgs
+    region_sdg_numbers_present = {sdg.split(':')[0].strip() for sdg in region_sdg_frequency.index}
+
+    missing_sdgs_region = [sdg for sdg in all_dummy_sdgs if sdg not in region_sdg_numbers_present]
+
+    underrepresented_in_region = region_sdg_frequency[region_sdg_frequency < underrepresentation_threshold]
+    underrepresented_in_region_names = [sdg for sdg in underrepresented_in_region.index if sdg.split(':')[0].strip() not in missing_sdgs_region]
+
+    if missing_sdgs_region or underrepresented_in_region_names:
+        print(f'\nRegion: {region}')
+        if missing_sdgs_region:
+            print(f'  Completely Missing SDGs: {missing_sdgs_region}')
+        if underrepresented_in_region_names:
+            print(f'  Underrepresented SDGs (count < {underrepresentation_threshold}): {underrepresented_in_region_names}')
+    else:
+        print(f'\nRegion: {region} - No specific underrepresentation detected beyond overall.')
+
+print('\n' + '-'*50 + '\n')
+
+# Identify underrepresented SDGs per issue
+for issue in df_analysis['issue'].unique():
+    issue_df = df_analysis[df_analysis['issue'] == issue]
+    issue_sdgs_flat = flatten_sdg_labels(issue_df['sdg_labels'])
+
+    if not issue_sdgs_flat:
+        print(f'\nIssue: {issue} - No SDGs found.')
+        continue
+
+    issue_sdg_frequency = pd.Series(issue_sdgs_flat).value_counts().apply(lambda x: x if isinstance(x, (int, float)) else 0)
+
+    # Convert full SDG names to SDG numbers for comparison with all_dummy_sdgs
+    issue_sdg_numbers_present = {sdg.split(':')[0].strip() for sdg in issue_sdg_frequency.index}
+
+    missing_sdgs_issue = [sdg for sdg in all_dummy_sdgs if sdg not in issue_sdg_numbers_present]
+
+    underrepresented_in_issue = issue_sdg_frequency[issue_sdg_frequency < underrepresentation_threshold]
+    underrepresented_in_issue_names = [sdg for sdg in underrepresented_in_issue.index if sdg.split(':')[0].strip() not in missing_sdgs_issue]
+
+    if missing_sdgs_issue or underrepresented_in_issue_names:
+        print(f'\nIssue: {issue}')
+        if missing_sdgs_issue:
+            print(f'  Completely Missing SDGs: {missing_sdgs_issue}')
+        if underrepresented_in_issue_names:
+            print(f'  Underrepresented SDGs (count < {underrepresentation_threshold}): {underrepresented_in_issue_names}')
+    else:
+        print(f'\nIssue: {issue} - No specific underrepresentation detected beyond overall.')
+import random
+
+# 1. Define a baseline scenario for SDG attainment
+# For simplicity, let's use the SDG numbers as keys and assign random initial scores.
+# We'll use all 17 SDGs.
+baseline_sdg_scores = {
+    f'SDG {i}': random.randint(30, 70) for i in range(1, 18)
+}
+
+print("Baseline SDG Scores (initial attainment levels):")
+for sdg, score in baseline_sdg_scores.items():
+    print(f"  {sdg}: {score}")
+
+# 2. Define several hypothetical 'policy interventions' or 'investments'
+# Each intervention will have a name and a dictionary of SDG impacts.
+policy_interventions = [
+    {
+        'name': 'Investment in Education Programs',
+        'impact': {'SDG 4': 15, 'SDG 1': 5, 'SDG 5': 7} # Quality Education, No Poverty, Gender Equality
+    },
+    {
+        'name': 'Sustainable Agriculture Initiative',
+        'impact': {'SDG 2': 20, 'SDG 13': 10, 'SDG 15': 8} # Zero Hunger, Climate Action, Life On Land
+    },
+    {
+        'name': 'Healthcare Infrastructure Project',
+        'impact': {'SDG 3': 18, 'SDG 6': 5, 'SDG 1': 3} # Good Health, Clean Water, No Poverty
+    },
+    {
+        'name': 'Renewable Energy Transition',
+        'impact': {'SDG 7': 25, 'SDG 13': 12, 'SDG 9': 5} # Clean Energy, Climate Action, Industry & Innovation
+    },
+    {
+        'name': 'Water Conservation Policy',
+        'impact': {'SDG 6': 20, 'SDG 12': 8, 'SDG 14': 5} # Clean Water, Responsible Consumption, Life Below Water
+    }
+]
+
+print('\nDefined Policy Interventions:')
+for intervention in policy_interventions:
+    print(f"  - {intervention['name']}: {intervention['impact']}")
+def simulate_what_if_scenario(baseline_scores, selected_interventions):
+    # Create a copy of the baseline scores to simulate changes
+    simulated_scores = baseline_scores.copy()
+
+    print(f"\n--- Simulating What-If Scenario with {len(selected_interventions)} Interventions ---")
+    for intervention in selected_interventions:
+        print(f"Applying intervention: {intervention['name']}")
+        for sdg, impact_value in intervention['impact'].items():
+            current_score = simulated_scores.get(sdg, 0) # Get current score, default to 0 if SDG not in baseline
+            new_score = current_score + impact_value
+            # Ensure score does not exceed 100
+            simulated_scores[sdg] = min(new_score, 100)
+
+    return simulated_scores
+
+print("Defined 'simulate_what_if_scenario' function.")
+import pandas as pd
+
+# 4. Demonstrate the prototype by running a 'what-if' scenario
+
+# Choose a few interventions for the scenario
+selected_interventions_scenario1 = [
+    policy_interventions[0], # Investment in Education Programs
+    policy_interventions[2]  # Healthcare Infrastructure Project
+]
+
+# Run the simulation
+simulated_sdg_scores_scenario1 = simulate_what_if_scenario(baseline_sdg_scores, selected_interventions_scenario1)
+
+# Prepare data for comparison
+comparison_df = pd.DataFrame({
+    'Baseline Score': baseline_sdg_scores,
+    'Simulated Score': simulated_sdg_scores_scenario1
+})
+
+print('\n--- What-If Scenario 1 Results ---')
+print('\nInterventions Applied:')
+for intervention in selected_interventions_scenario1:
+    print(f"- {intervention['name']}")
+
+print('\nComparison of SDG Scores (Baseline vs. Simulated):')
+print(comparison_df)
+
+print('\nChanges in SDG Scores:')
+comparison_df['Change'] = comparison_df['Simulated Score'] - comparison_df['Baseline Score']
+print(comparison_df[comparison_df['Change'] != 0])
+print('--- Summary of Overall SDG Prevalence ---\n')
+print(f"Total unique SDGs identified: {len(overall_sdg_frequency)}")
+print(f"Total SDG tags across all documents: {overall_sdg_frequency.sum()}\n")
+
+print('Top 5 Most Prevalent SDGs:')
+print(overall_sdg_frequency.head())
+
+print('\nBottom 5 Least Prevalent SDGs:')
+print(overall_sdg_frequency.tail())
+print('\n--- Summary of SDG Dimension Balance ---\n')
+print(f"Average Economic SDGs per document: {average_economic_sdgs:.2f}")
+print(f"Average Social SDGs per document: {average_social_sdgs:.2f}")
+print(f"Average Environmental SDGs per document: {average_environmental_sdgs:.2f}")
+print('\n--- Summary of Underrepresented SDGs, Regions, and Issues ---\n')
+
+if not underrepresented_sdgs.empty:
+    print(f'Underrepresented SDGs (frequency < {underrepresentation_threshold}):')
+    print(underrepresented_sdgs)
+else:
+    print('No SDGs found below the underrepresentation threshold.')
+
+print('\n' + '-'*50 + '\n')
+
+if not underrepresented_regions.empty:
+    print(f'Underrepresented Regions (document count < {underrepresentation_threshold}):')
+    print(underrepresented_regions)
+else:
+    print('No regions found below the document count threshold.')
+
+print('\n' + '-'*50 + '\n')
+
+if not underrepresented_issues.empty:
+    print(f'Underrepresented Issues (document count < {underrepresentation_threshold}):')
+    print(underrepresented_issues)
+else:
+    print('No issues found below the document count threshold.')
+print('\n--- Summary of Detected Policy Conflicts and Trade-offs ---\n')
+
+if detected_conflicts:
+    print(f'Total number of documents with detected conflicts: {len(detected_conflicts)}')
+    print('\nExamples of Detected Conflicts (first 5 if available):')
+    for i, conflict_info in enumerate(detected_conflicts[:5]):
+        print(f"\nDocument Index: {conflict_info['document_index']}")
+        print(f"  Text Sample: {conflict_info['document_text_sample']}")
+        print(f"  Assigned SDGs: {conflict_info['assigned_sdgs']}")
+        print(f"  Conflicting Pairs: {conflict_info['conflicting_pairs']}")
+else:
+    print('No policy conflicts were detected based on the defined pairs.')
+print('\n--- Summary of What-If Scenario (Baseline vs. Simulated SDG Scores) ---\n')
+print(comparison_df.to_string())
+import matplotlib.pyplot as plt
+
+print('\n--- Visualization of Overall SDG Distribution ---\n')
+
+plt.figure(figsize=(12, 7))
+overall_sdg_frequency.sort_values(ascending=False).plot(kind='bar', color='skyblue')
+plt.title('Overall Distribution of Sustainable Development Goals')
+plt.xlabel('Sustainable Development Goal')
+plt.ylabel('Frequency of Appearance in Documents')
+plt.xticks(rotation=45, ha='right') # Rotate labels for better readability
+plt.tight_layout()
+plt.show()
+
+print('
+--- Visualization of What-If Scenario Impact (Baseline vs. Simulated) ---
+')
+
+# Filter for SDGs where a change occurred
+changed_sdgs_df = comparison_df[comparison_df['Change'] != 0].copy()
+
+if not changed_sdgs_df.empty:
+    # Prepare data for plotting
+    plot_data = changed_sdgs_df[['Baseline Score', 'Simulated Score']]
+
+    plt.figure(figsize=(14, 8))
+    plot_data.plot(kind='bar', figsize=(14, 8), width=0.8, colormap='viridis')
+    plt.title('Impact of What-If Scenario: Baseline vs. Simulated SDG Scores for Changed SDGs')
+    plt.xlabel('Sustainable Development Goal')
+    plt.ylabel('Score (0-100)')
+    plt.xticks(rotation=45, ha='right')
+    plt.legend(title='Score Type')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+else:
+    print('No SDGs experienced a change in the simulated scenario to visualize.')
+
+print('
+--- Visualization of What-If Scenario Impact (Baseline vs. Simulated) ---
+')
+
+# Filter for SDGs where a change occurred
+changed_sdgs_df = comparison_df[comparison_df['Change'] != 0].copy()
+
+if not changed_sdgs_df.empty:
+    # Prepare data for plotting
+    plot_data = changed_sdgs_df[['Baseline Score', 'Simulated Score']]
+
+    plt.figure(figsize=(14, 8))
+    plot_data.plot(kind='bar', figsize=(14, 8), width=0.8, colormap='viridis')
+    plt.title('Impact of What-If Scenario: Baseline vs. Simulated SDG Scores for Changed SDGs')
+    plt.xlabel('Sustainable Development Goal')
+    plt.ylabel('Score (0-100)')
+    plt.xticks(rotation=45, ha='right')
+    plt.legend(title='Score Type')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+else:
+    print('No SDGs experienced a change in the simulated scenario to visualize.')
+print('''
+--- Visualization of What-If Scenario Impact (Baseline vs. Simulated) ---
+''')
+
+# Filter for SDGs where a change occurred
+changed_sdgs_df = comparison_df[comparison_df['Change'] != 0].copy()
+
+if not changed_sdgs_df.empty:
+    # Prepare data for plotting
+    plot_data = changed_sdgs_df[['Baseline Score', 'Simulated Score']]
+
+    plt.figure(figsize=(14, 8))
+    plot_data.plot(kind='bar', figsize=(14, 8), width=0.8, colormap='viridis')
+    plt.title('Impact of What-If Scenario: Baseline vs. Simulated SDG Scores for Changed SDGs')
+    plt.xlabel('Sustainable Development Goal')
+    plt.ylabel('Score (0-100)')
+    plt.xticks(rotation=45, ha='right')
+    plt.legend(title='Score Type')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+else:
+    print('No SDGs experienced a change in the simulated scenario to visualize.')
+import sys
+!{sys.executable} -m pip install langdetect
+print("langdetect installed successfully.")
+import pandas as pd
+import os
+import glob
+import re
+import string
+from langdetect import detect, DetectorFactory
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import random
+
+# Ensure reproducibility for langdetect
+DetectorFactory.seed = 0
+
+# --- Re-create dummy data files (from cell f3f5b176) ---
+csv_data1 = {
+    'ID': [1, 2, 3, 4, 5],
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': [24, 27, 22, 32, 29],
+    'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
+    'Score': [85, 92, 78, 88, 95]
+}
+df1 = pd.DataFrame(csv_data1)
+df1.to_csv('ngo_data.csv', index=False)
+
+csv_data2 = {
+    'SurveyID': [101, 102, 103, 104, 105],
+    'Question1': ['Good', 'Neutral', 'Bad', 'Good', 'Good'],
+    'Question2': [5, 3, 1, 4, 5],
+    'RespondentAge': [45, 32, 60, 28, 51],
+    'Income': [50000, 30000, None, 75000, 40000]
+}
+df2 = pd.DataFrame(csv_data2)
+df2.to_csv('community_survey.csv', index=False)
+
+with open('traditional_knowledge1.txt', 'w') as f:
+    f.write('This document contains traditional knowledge related to sustainable farming practices.')
+with open('traditional_knowledge2.txt', 'w') as f:
+    f.write('This document details local remedies using indigenous plants.')
+
+# --- Load DataFrames and Text Documents (from cell 4348b007) ---
+csv_files = glob.glob('*.csv')
+loaded_dataframes = {}
+for csv_file in csv_files:
+    df_name = os.path.splitext(csv_file)[0]
+    df = pd.read_csv(csv_file)
+    loaded_dataframes[df_name] = df
+
+text_files = glob.glob('*.txt')
+text_documents = []
+for txt_file in text_files:
+    with open(txt_file, 'r') as f:
+        content = f.read()
+        text_documents.append(content)
+
+# --- Text Cleaning and Normalization (from cell 9a42f3c6) ---
+all_texts = []
+all_texts.extend(text_documents)
+if 'ngo_data' in loaded_dataframes:
+    df_ngo = loaded_dataframes['ngo_data']
+    all_texts.extend(df_ngo['Name'].astype(str).tolist())
+    all_texts.extend(df_ngo['City'].astype(str).tolist())
+if 'community_survey' in loaded_dataframes:
+    df_community = loaded_dataframes['community_survey']
+    all_texts.extend(df_community['Question1'].astype(str).tolist())
+
+def clean_text(text):
+    text = str(text).lower()
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = re.sub(r'[^a-z\s]', '', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+cleaned_texts = [clean_text(text) for text in all_texts]
+
+# --- Multilingual Text Processing (from cell 603a18ce) ---
+text_languages = []
+for text in cleaned_texts:
+    try:
+        lang = detect(text)
+        text_languages.append(lang)
+    except:
+        text_languages.append('unknown')
+english_texts = []
+for i, text in enumerate(cleaned_texts):
+    if text_languages[i] != 'en':
+        english_texts.append(f"[Translated to English] {text}")
+    else:
+        english_texts.append(text)
+
+# --- Tokenization, Stopword Removal, Lemmatization (from cell 9fb9a06b) ---
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+processed_texts = []
+for i, text in enumerate(english_texts):
+    tokens = word_tokenize(text)
+    filtered_tokens = [word for word in tokens if word not in stop_words and word.isalpha()]
+    lemmas = [lemmatizer.lemmatize(word) for word in filtered_tokens]
+    processed_texts.append(lemmas)
+
+# --- Prepare Data for SDG Classification (from cell bc820512) ---
+final_prepared_texts = []
+for doc_tokens in processed_texts:
+    rejoined_text = ' '.join(doc_tokens)
+    final_prepared_texts.append(rejoined_text)
+
+# --- Apply Multi-Label SDG Classification (from cell f1d7f910) ---
+dummy_sdgs = [
+    'SDG 1: No Poverty', 'SDG 2: Zero Hunger', 'SDG 3: Good Health and Well-being',
+    'SDG 4: Quality Education', 'SDG 5: Gender Equality', 'SDG 6: Clean Water and Sanitation',
+    'SDG 7: Affordable and Clean Energy', 'SDG 8: Decent Work and Economic Growth',
+    'SDG 9: Industry, Innovation, and Infrastructure', 'SDG 10: Reduced Inequalities',
+    'SDG 11: Sustainable Cities and Communities', 'SDG 12: Responsible Consumption and Production',
+    'SDG 13: Climate Action', 'SDG 14: Life Below Water', 'SDG 15: Life On Land',
+    'SDG 16: Peace, Justice, and Strong Institutions', 'SDG 17: Partnerships for the Goals'
+]
+simulated_sdg_labels = []
+for doc_text in final_prepared_texts:
+    num_sdgs_to_assign = random.randint(1, 3)
+    selected_sdgs = random.sample(dummy_sdgs, num_sdgs_to_assign)
+    simulated_sdg_labels.append(selected_sdgs)
+
+# --- Analyze SDG Tagging by Region and Issue (creation of df_analysis from cell 7536372a) ---
+dummy_regions = ['East Africa', 'West Africa', 'Southern Africa', 'Central Africa', 'North Africa']
+simulated_regions = [random.choice(dummy_regions) for _ in range(len(final_prepared_texts))]
+dummy_issues = ['Agriculture', 'Education', 'Health', 'Infrastructure', 'Governance', 'Environment']
+simulated_issues = [random.choice(dummy_issues) for _ in range(len(final_prepared_texts))]
+
+data_for_df = {
+    'text': final_prepared_texts,
+    'sdg_labels': simulated_sdg_labels,
+    'region': simulated_regions,
+    'issue': simulated_issues
+}
+df_analysis = pd.DataFrame(data_for_df)
+
+# --- Coherence and Gap Analysis (SDG categories and function from cells 25b6541f and 1ba7c7d1) ---
+ECONOMIC_SDGS = {'SDG 1', 'SDG 8', 'SDG 9', 'SDG 10', 'SDG 12', 'SDG 17'}
+SOCIAL_SDGS = {'SDG 1', 'SDG 2', 'SDG 3', 'SDG 4', 'SDG 5', 'SDG 6', 'SDG 7', 'SDG 11', 'SDG 16', 'SDG 17'}
+ENVIRONMENTAL_SDGS = {'SDG 2', 'SDG 6', 'SDG 7', 'SDG 12', 'SDG 13', 'SDG 14', 'SDG 15', 'SDG 17'}
+
+def count_sdg_dimensions(sdg_labels):
+    economic_count = 0
+    social_count = 0
+    environmental_count = 0
+
+    for label in sdg_labels:
+        sdg_number = label.split(':')[0].strip()
+
+        if sdg_number in ECONOMIC_SDGS:
+            economic_count += 1
+        if sdg_number in SOCIAL_SDGS:
+            social_count += 1
+        if sdg_number in ENVIRONMENTAL_SDGS:
+            environmental_count += 1
+
+    return economic_count, social_count, environmental_count
+
+# Apply the function to df_analysis to get dimension counts
+df_analysis[['economic_sdgs', 'social_sdgs', 'environmental_sdgs']] = df_analysis['sdg_labels'].apply(lambda x: pd.Series(count_sdg_dimensions(x)))
+
+# Recalculate average counts per dimension
+average_economic_sdgs = df_analysis['economic_sdgs'].mean()
+average_social_sdgs = df_analysis['social_sdgs'].mean()
+average_environmental_sdgs = df_analysis['environmental_sdgs'].mean()
+
+# --- Produce the SDG Dimensional Balance Table ---
+print('\n--- SDG Dimensional Balance Table (Average Counts Per Document) ---\n')
+
+# Instructions 1, 2, 3: Print the value of each average
+print(f"Average Economic SDGs per document: {average_economic_sdgs:.2f}")
+print(f"Average Social SDGs per document: {average_social_sdgs:.2f}")
+print(f"Average Environmental SDGs per document: {average_environmental_sdgs:.2f}\n")
+
+sdg_balance_data = {
+    'Dimension': ['Economic', 'Social', 'Environmental'],
+    'Average Count per Document': [average_economic_sdgs, average_social_sdgs, average_environmental_sdgs]
+}
+sdg_balance_df = pd.DataFrame(sdg_balance_data)
+sdg_balance_df['Average Count per Document'] = sdg_balance_df['Average Count per Document'].round(2)
+
+print(sdg_balance_df.to_string(index=False))
+import pandas as pd
+import random
+
+# Re-define baseline_sdg_scores (from cell 930fdfe1)
+baseline_sdg_scores = {
+    f'SDG {i}': random.randint(30, 70) for i in range(1, 18)
+}
+
+# Re-define policy_interventions (from cell 930fdfe1)
+policy_interventions = [
+    {
+        'name': 'Investment in Education Programs',
+        'impact': {'SDG 4': 15, 'SDG 1': 5, 'SDG 5': 7}
+    },
+    {
+        'name': 'Sustainable Agriculture Initiative',
+        'impact': {'SDG 2': 20, 'SDG 13': 10, 'SDG 15': 8}
+    },
+    {
+        'name': 'Healthcare Infrastructure Project',
+        'impact': {'SDG 3': 18, 'SDG 6': 5, 'SDG 1': 3}
+    },
+    {
+        'name': 'Renewable Energy Transition',
+        'impact': {'SDG 7': 25, 'SDG 13': 12, 'SDG 9': 5}
+    },
+    {
+        'name': 'Water Conservation Policy',
+        'impact': {'SDG 6': 20, 'SDG 12': 8, 'SDG 14': 5}
+    }
+]
+
+# Re-define simulate_what_if_scenario function (from cell a635719d)
+def simulate_what_if_scenario(baseline_scores, selected_interventions):
+    simulated_scores = baseline_scores.copy()
+    for intervention in selected_interventions:
+        for sdg, impact_value in intervention['impact'].items():
+            current_score = simulated_scores.get(sdg, 0)
+            new_score = current_score + impact_value
+            simulated_scores[sdg] = min(new_score, 100)
+    return simulated_scores
+
+# Re-run the demonstration of the prototype (from cell 350ef127)
+selected_interventions_scenario1 = [
+    policy_interventions[0],
+    policy_interventions[2]
+]
+
+simulated_sdg_scores_scenario1 = simulate_what_if_scenario(baseline_sdg_scores, selected_interventions_scenario1)
+
+# Re-create comparison_df
+comparison_df = pd.DataFrame({
+    'Baseline Score': baseline_sdg_scores,
+    'Simulated Score': simulated_sdg_scores_scenario1
+})
+comparison_df['Change'] = comparison_df['Simulated Score'] - comparison_df['Baseline Score']
+
+
+print('\n--- What-If Scenario Comparison Table (Baseline vs. Simulated SDG Scores) ---\n')
+print(comparison_df.to_string())
+import itertools
+import pandas as pd # Ensure pandas is imported as df_analysis is a DataFrame
+
+# Re-define a list of known conflicting SDG pairs (from cell 3c2e1949)
+conflicting_sdg_pairs = [
+    ('SDG 8: Decent Work and Economic Growth', 'SDG 13: Climate Action'),
+    ('SDG 9: Industry, Innovation, and Infrastructure', 'SDG 15: Life On Land'),
+    ('SDG 2: Zero Hunger', 'SDG 12: Responsible Consumption and Production'),
+    ('SDG 1: No Poverty', 'SDG 10: Reduced Inequalities')
+]
+
+detected_conflicts = []
+
+# Iterate through each document's sdg_labels in the df_analysis DataFrame
+# df_analysis is assumed to be defined from previous successful execution (e.g., cell 7c6907f1)
+for index, row in df_analysis.iterrows():
+    doc_sdgs = set(row['sdg_labels'])
+    document_conflicts = []
+
+    # Check if any of the predefined conflicting SDG pairs co-occur
+    for conflict_pair in conflicting_sdg_pairs:
+        sdg1, sdg2 = conflict_pair
+        if sdg1 in doc_sdgs and sdg2 in doc_sdgs:
+            document_conflicts.append(conflict_pair)
+
+    # Store the identified conflicts
+    if document_conflicts:
+        detected_conflicts.append({
+            'document_index': index,
+            'document_text_sample': row['text'][:100] + '...', # Store a sample of the text
+            'assigned_sdgs': list(doc_sdgs),
+            'conflicting_pairs': document_conflicts
+        })
+
+print('\n--- Policy Conflicts Summary Table ---\n')
+
+# Check if the detected_conflicts list is not empty
+if detected_conflicts:
+    # Print the total number of documents with conflicts
+    print(f'Total number of documents with detected conflicts: {len(detected_conflicts)}')
+    print('\nExamples of Detected Conflicts (first 5 if available):')
+    # Iterate through the first few entries (e.g., 5) in detected_conflicts
+    for i, conflict_info in enumerate(detected_conflicts[:5]):
+        print(f"\nDocument Index: {conflict_info['document_index']}")
+        print(f"  Text Sample: {conflict_info['document_text_sample']}")
+        print(f"  Assigned SDGs: {conflict_info['assigned_sdgs']}")
+        print(f"  Conflicting Pairs: {conflict_info['conflicting_pairs']}")
+else:
+    # Print a message stating that no policy conflicts were found
+    print('No policy conflicts were detected based on the defined pairs.')
+import pandas as pd
+
+# Helper function to flatten list of lists for SDG counting (re-defined from cell 7536372a)
+def flatten_sdg_labels(list_of_lists):
+    flat_list = []
+    for sublist in list_of_lists:
+        for item in sublist:
+            flat_list.append(item)
+    return flat_list
+
+# Recalculate the overall frequency of each SDG (from cell 7536372a)
+# df_analysis is assumed to be defined from previous successful execution (e.g., cell 7c6907f1)
+all_sdgs_flat = flatten_sdg_labels(df_analysis['sdg_labels'])
+overall_sdg_frequency = pd.Series(all_sdgs_flat).value_counts()
+
+print('\n--- Overall SDG Prevalence Table ---\n')
+
+# Convert the Series to a DataFrame for better table formatting
+ovr_sdg_freq_df = overall_sdg_frequency.reset_index()
+ovr_sdg_freq_df.columns = ['SDG', 'Frequency']
+
+print('Total unique SDGs identified:', len(ovr_sdg_freq_df))
+print('Total SDG tags across all documents:', ovr_sdg_freq_df['Frequency'].sum(), '\n')
+
+print('Overall SDG Frequency (All SDGs):')
+print(ovr_sdg_freq_df.to_string(index=False))
+
+print('\nTop 5 Most Prevalent SDGs:')
+print(ovr_sdg_freq_df.head(5).to_string(index=False))
+
+print('\nBottom 5 Least Prevalent SDGs:')
+print(ovr_sdg_freq_df.tail(5).to_string(index=False))
+import matplotlib.pyplot as plt
+
+print('\n--- Visualization of Overall SDG Distribution ---\n')
+
+plt.figure(figsize=(12, 7))
+overall_sdg_frequency.sort_values(ascending=False).plot(kind='bar', color='skyblue')
+plt.title('Overall Distribution of Sustainable Development Goals')
+plt.xlabel('Sustainable Development Goal')
+plt.ylabel('Frequency of Appearance in Documents')
+plt.xticks(rotation=45, ha='right') # Rotate labels for better readability
+plt.tight_layout()
+plt.show()
+import matplotlib.pyplot as plt
+
+print('''
+--- Visualization of What-If Scenario Impact (Baseline vs. Simulated) ---
+''')
+
+# Filter for SDGs where a change occurred
+changed_sdgs_df = comparison_df[comparison_df['Change'] != 0].copy()
+
+if not changed_sdgs_df.empty:
+    # Prepare data for plotting
+    plot_data = changed_sdgs_df[['Baseline Score', 'Simulated Score']]
+
+    plt.figure(figsize=(14, 8))
+    plot_data.plot(kind='bar', figsize=(14, 8), width=0.8, colormap='viridis')
+    plt.title('Impact of What-If Scenario: Baseline vs. Simulated SDG Scores for Changed SDGs')
+    plt.xlabel('Sustainable Development Goal')
+    plt.ylabel('Score (0-100)')
+    plt.xticks(rotation=45, ha='right')
+    plt.legend(title='Score Type')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+else:
+    print('No SDGs experienced a change in the simulated scenario to visualize.')
+import pandas as pd
+
+# Re-define underrepresentation_threshold if not already defined (assuming it was 2 in previous steps)
+# This value should be consistent with the previous analysis.
+underrepresentation_threshold = 2
+
+# Re-calculate overall_sdg_frequency, underrepresented_sdgs (from cell b39bf6be)
+# Requires `flatten_sdg_labels` and `df_analysis` to be defined from previous steps.
+# Assuming df_analysis and flatten_sdg_labels are already in scope from the last full execution.
+def flatten_sdg_labels(list_of_lists):
+    flat_list = []
+    for sublist in list_of_lists:
+        for item in sublist:
+            flat_list.append(item)
+    return flat_list
+
+# Check if df_analysis is defined, otherwise create a dummy to prevent errors.
+# In a real scenario, this would rely on prior execution.
+if 'df_analysis' not in locals():
+    print("Warning: df_analysis not found, creating dummy for demonstration. This might affect results.")
+    # Create dummy df_analysis if it somehow got lost (should not happen if preceding cells ran)
+    df_analysis = pd.DataFrame({
+        'sdg_labels': [['SDG 1: No Poverty', 'SDG 17: Partnerships for the Goals'], ['SDG 1: No Poverty']],
+        'region': ['East Africa', 'West Africa'],
+        'issue': ['Education', 'Health']
+    })
+
+all_sdgs_flat = flatten_sdg_labels(df_analysis['sdg_labels'])
+overall_sdg_frequency = pd.Series(all_sdgs_flat).value_counts()
+underrepresented_sdgs = overall_sdg_frequency[overall_sdg_frequency < underrepresentation_threshold]
+
+# Re-calculate underrepresented_regions and underrepresented_issues (from cell 68ce1dfd)
+region_document_counts = df_analysis['region'].value_counts()
+underrepresented_regions = region_document_counts[region_document_counts < underrepresentation_threshold]
+
+issue_document_counts = df_analysis['issue'].value_counts()
+underrepresented_issues = issue_document_counts[issue_document_counts < underrepresentation_threshold]
+
+print('\n--- Underrepresentation Summary Table ---\n')
+
+# 1. Print a header for the 'Underrepresented SDGs' section.
+print(f'Underrepresented SDGs (frequency < {underrepresentation_threshold}):')
+# 2. If the `underrepresented_sdgs` Series is not empty, convert it to a DataFrame with columns 'SDG' and 'Frequency', and then print this DataFrame.
+if not underrepresented_sdgs.empty:
+    underrepresented_sdgs_df = underrepresented_sdgs.reset_index()
+    underrepresented_sdgs_df.columns = ['SDG', 'Frequency']
+    print(underrepresented_sdgs_df.to_string(index=False))
+# 3. If `underrepresented_sdgs` is empty, print a message indicating no SDGs were found below the threshold.
+else:
+    print('No SDGs found below the underrepresentation threshold.')
+
+# 4. Print a separator line.
+print('\n' + '-'*50 + '\n')
+
+# 5. Print a header for the 'Underrepresented Regions' section.
+print(f'Underrepresented Regions (document count < {underrepresentation_threshold}):')
+# 6. If the `underrepresented_regions` Series is not empty, convert it to a DataFrame with columns 'Region' and 'Document Count', and then print this DataFrame.
+if not underrepresented_regions.empty:
+    underrepresented_regions_df = underrepresented_regions.reset_index()
+    underrepresented_regions_df.columns = ['Region', 'Document Count']
+    print(underrepresented_regions_df.to_string(index=False))
+# 7. If `underrepresented_regions` is empty, print a message indicating no regions were found below the threshold.
+else:
+    print('No regions found below the document count threshold.')
+
+# 8. Print a separator line.
+print('\n' + '-'*50 + '\n')
+
+# 9. Print a header for the 'Underrepresented Issues' section.
+print(f'Underrepresented Issues (document count < {underrepresentation_threshold}):')
+# 10. If the `underrepresented_issues` Series is not empty, convert it to a DataFrame with columns 'Issue' and 'Document Count', and then print this DataFrame.
+if not underrepresented_issues.empty:
+    underrepresented_issues_df = underrepresented_issues.reset_index()
+    underrepresented_issues_df.columns = ['Issue', 'Document Count']
+    print(underrepresented_issues_df.to_string(index=False))
+# 11. If `underrepresented_issues` is empty, print a message indicating no issues were found below the threshold.
+else:
+    print('No issues found below the document count threshold.')
