@@ -158,3 +158,32 @@ if __name__ == '__main__':
     plt.close()
 
     print("Generated and saved plots.")
+
+    # Package outputs into a zip archive
+    import shutil
+    import os
+
+    files_to_zip = [
+        "erev_synthetic_dataset.csv",
+        "erev_train.csv",
+        "erev_test.csv",
+        "summary_statistics.csv",
+        "correlation_heatmap.png",
+        "bsfc_surface.png"
+    ]
+
+    # Create a temporary directory for zipping
+    os.makedirs("erev_dataset", exist_ok=True)
+    for f in files_to_zip:
+        if os.path.exists(f):
+            shutil.copy(f, os.path.join("erev_dataset", f))
+
+    shutil.make_archive("erev_dataset", 'zip', "erev_dataset")
+    shutil.rmtree("erev_dataset")
+    print("Packaged outputs into erev_dataset.zip")
+
+    try:
+        from google.colab import files
+        files.download("erev_dataset.zip")
+    except ImportError:
+        pass
