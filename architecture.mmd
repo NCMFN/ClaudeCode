@@ -1,0 +1,40 @@
+graph TD
+    Start([Start])
+    Input[/"Input: Raw Datasets <br> (NGO, Survey, Trad. Knowledge)"/]
+    Clean["Text Cleaning & <br> Multilingual Processing"]
+    Prep["Data Preparation"]
+    Classify["Model Classification <br> (RoBERTA-Large SDG)"]
+    Analyze["Policy Analysis <br> (Conflicts, Gaps, Scenario)"]
+    Optimal{"Is Policy <br> Optimal?"}
+    Output[/"Output: Actionable <br> Policy Recommendations"/]
+    Tune["Optimization <br> (ILP Solvers)"]
+    End([End])
+
+    Start --> Input
+    Input --> Clean
+    Clean --> Prep
+    Prep --> Classify
+    Classify --> Analyze
+    Analyze --> Optimal
+    Optimal -- Yes --> Output
+    Optimal -- No --> Tune
+    Tune --> Analyze
+    Output --> End
+
+    classDef plain fill:transparent,stroke:none,color:#000;
+    class Start,End plain;
+
+    style Start fill:#90EE90,stroke:#000,stroke-width:1px
+    style End fill:#90EE90,stroke:#000,stroke-width:1px
+    style Input fill:#FFFACD,stroke:#000,stroke-width:1px
+    style Clean fill:#ADD8E6,stroke:#000,stroke-width:1px
+    style Prep fill:#ADD8E6,stroke:#000,stroke-width:1px
+    style Classify fill:#FFDEAD,stroke:#000,stroke-width:1px
+    style Analyze fill:#FFB6C1,stroke:#000,stroke-width:1px
+    style Optimal fill:#FA8072,stroke:#000,stroke-width:1px
+    style Tune fill:#DDA0DD,stroke:#000,stroke-width:1px
+    style Output fill:#FFFACD,stroke:#000,stroke-width:1px
+
+    linkStyle 6 stroke:green
+    linkStyle 7 stroke:red
+    linkStyle 8 stroke:red
