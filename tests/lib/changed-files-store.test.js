@@ -8,11 +8,11 @@ const storePath = path.join(repoRoot, '.opencode', 'dist', 'plugins', 'lib', 'ch
 function test(name, fn) {
   try {
     fn()
-    console.log(`  ✓ ${name}`)
+    console.log(`   ${name}`)
     return true
-  } catch (err) {
-    console.log(`  ✗ ${name}`)
-    console.log(`    Error: ${err.message}`)
+  } catch (_err) {
+    console.log(`   ${name}`)
+    console.log(`    Error: ${_err.message}`)
     return false
   }
 }
@@ -24,8 +24,8 @@ async function runTests() {
   let store
   try {
     store = await import(pathToFileURL(storePath).href)
-  } catch (err) {
-    console.log('\n⚠ Skipping: build .opencode first (cd .opencode && npm run build)\n')
+  } catch (_err) {
+    console.log('\n Skipping: build .opencode first (cd .opencode && npm run build)\n')
     process.exit(0)
   }
 

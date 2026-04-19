@@ -22,7 +22,7 @@
 
 set -euo pipefail
 
-# ─── Configuration ───────────────────────────────────────────────────────────
+#  Configuration
 
 BRIEF="${1:?Usage: ./scripts/gan-harness.sh \"description of what to build\"}"
 MAX_ITERATIONS="${GAN_MAX_ITERATIONS:-15}"
@@ -50,13 +50,13 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-# ─── Helpers ─────────────────────────────────────────────────────────────────
+#  Helpers
 
 log()    { echo -e "${BLUE}[GAN-HARNESS]${NC} $*"; }
-ok()     { echo -e "${GREEN}[✓]${NC} $*"; }
-warn()   { echo -e "${YELLOW}[⚠]${NC} $*"; }
-fail()   { echo -e "${RED}[✗]${NC} $*"; }
-phase()  { echo -e "\n${PURPLE}═══════════════════════════════════════════════${NC}"; echo -e "${PURPLE}  $*${NC}"; echo -e "${PURPLE}═══════════════════════════════════════════════${NC}\n"; }
+ok()     { echo -e "${GREEN}[]${NC} $*"; }
+warn()   { echo -e "${YELLOW}[]${NC} $*"; }
+fail()   { echo -e "${RED}[]${NC} $*"; }
+phase()  { echo -e "\n${PURPLE}${NC}"; echo -e "${PURPLE}  $*${NC}"; echo -e "${PURPLE}${NC}\n"; }
 
 extract_score() {
   # Extract the TOTAL weighted score from a feedback file
@@ -80,7 +80,7 @@ elapsed() {
   printf '%dh %dm %ds' $((diff/3600)) $((diff%3600/60)) $((diff%60))
 }
 
-# ─── Setup ───────────────────────────────────────────────────────────────────
+#  Setup
 
 phase "GAN-STYLE HARNESS — Setup"
 
@@ -118,7 +118,7 @@ EOF
 
 ok "Harness directory created: $HARNESS_DIR"
 
-# ─── Phase 1: Planning ──────────────────────────────────────────────────────
+#  Phase 1: Planning
 
 if [ "$SKIP_PLANNER" = "true" ] && [ -f "${HARNESS_DIR}/spec.md" ]; then
   phase "PHASE 1: Planning — SKIPPED (spec.md exists)"
@@ -146,7 +146,7 @@ Be ambitious. Push for 12-16 features. Specify exact colors, fonts, and layouts.
   fi
 fi
 
-# ─── Phase 2: Generator-Evaluator Loop ──────────────────────────────────────
+#  Phase 2: Generator-Evaluator Loop
 
 phase "PHASE 2: Generator-Evaluator Loop"
 
@@ -156,10 +156,10 @@ PLATEAU_COUNT=0
 
 for (( i=1; i<=MAX_ITERATIONS; i++ )); do
   echo ""
-  log "━━━ Iteration $i / $MAX_ITERATIONS ━━━"
+  log " Iteration $i / $MAX_ITERATIONS "
 
-  # ── GENERATE ──
-  echo -e "${GREEN}▶ GENERATOR (iteration $i)${NC}"
+  #  GENERATE
+  echo -e "${GREEN} GENERATOR (iteration $i)${NC}"
 
   FEEDBACK_CONTEXT=""
   if [ $i -gt 1 ] && [ -f "${FEEDBACK_DIR}/feedback-$(printf '%03d' $((i-1))).md" ]; then
@@ -180,8 +180,8 @@ Update gan-harness/generator-state.md." \
 
   ok "Generator completed iteration $i"
 
-  # ── EVALUATE ──
-  echo -e "${RED}▶ EVALUATOR (iteration $i)${NC}"
+  #  EVALUATE
+  echo -e "${RED} EVALUATOR (iteration $i)${NC}"
 
   claude -p --model "$EVALUATOR_MODEL" \
     --allowedTools "Read,Write,Bash,Grep,Glob" \
@@ -214,14 +214,14 @@ Include the weighted TOTAL score in the format: | **TOTAL** | | | **X.X** |" \
     SCORES+=("0.0")
   fi
 
-  # ── CHECK PASS ──
+  #  CHECK PASS
   if score_passes "$SCORE" "$PASS_THRESHOLD"; then
     echo ""
-    ok "🎉 PASSED at iteration $i with score $SCORE (threshold: $PASS_THRESHOLD)"
+    ok " PASSED at iteration $i with score $SCORE (threshold: $PASS_THRESHOLD)"
     break
   fi
 
-  # ── CHECK PLATEAU ──
+  #  CHECK PLATEAU
   SCORE_DIFF=$(awk -v s="$SCORE" -v p="$PREV_SCORE" 'BEGIN { printf "%.1f", s - p }')
   if [ $i -ge 3 ] && awk -v d="$SCORE_DIFF" 'BEGIN { exit !(d <= 0.2) }'; then
     PLATEAU_COUNT=$((PLATEAU_COUNT + 1))
@@ -237,7 +237,7 @@ Include the weighted TOTAL score in the format: | **TOTAL** | | | **X.X** |" \
   PREV_SCORE="$SCORE"
 done
 
-# ─── Phase 3: Summary ───────────────────────────────────────────────────────
+#  Phase 3: Summary
 
 phase "PHASE 3: Build Report"
 
@@ -256,7 +256,7 @@ cat > "${HARNESS_DIR}/build-report.md" << EOF
 # GAN Harness Build Report
 
 **Brief:** $BRIEF
-**Result:** $(score_passes "$FINAL_SCORE" "$PASS_THRESHOLD" && echo "✅ PASS" || echo "❌ FAIL")
+**Result:** $(score_passes "$FINAL_SCORE" "$PASS_THRESHOLD" && echo " PASS" || echo " FAIL")
 **Iterations:** $NUM_ITERATIONS / $MAX_ITERATIONS
 **Final Score:** $FINAL_SCORE / 10.0 (threshold: $PASS_THRESHOLD)
 **Elapsed:** $ELAPSED
@@ -285,11 +285,11 @@ EOF
 ok "Report written to ${HARNESS_DIR}/build-report.md"
 
 echo ""
-log "━━━ Final Results ━━━"
+log " Final Results "
 if score_passes "$FINAL_SCORE" "$PASS_THRESHOLD"; then
-  echo -e "${GREEN}  Result:     PASS ✅${NC}"
+  echo -e "${GREEN}  Result:     PASS ${NC}"
 else
-  echo -e "${RED}  Result:     FAIL ❌${NC}"
+  echo -e "${RED}  Result:     FAIL ${NC}"
 fi
 echo -e "  Score:      ${CYAN}${FINAL_SCORE}${NC} / 10.0"
 echo -e "  Iterations: ${NUM_ITERATIONS} / ${MAX_ITERATIONS}"

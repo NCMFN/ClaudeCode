@@ -115,7 +115,7 @@ For each task in **Step-by-Step Tasks**:
    ```
    If type-check fails → fix the error before moving to the next file.
 
-4. **Track progress** — Log: `✅ Task N: [task name] — complete`
+4. **Track progress** — Log: ` Task N: [task name] — complete`
 
 ### Handling Deviations
 
@@ -234,18 +234,18 @@ Write report to `.claude/PRPs/reports/{plan-name}-report.md`:
 
 | # | Task | Status | Notes |
 |---|---|---|---|
-| 1 | [task name] | ✅ Complete | |
-| 2 | [task name] | ✅ Complete | Deviated — [reason] |
+| 1 | [task name] |  Complete | |
+| 2 | [task name] |  Complete | Deviated — [reason] |
 
 ## Validation Results
 
 | Level | Status | Notes |
 |---|---|---|
-| Static Analysis | ✅ Pass | |
-| Unit Tests | ✅ Pass | N tests written |
-| Build | ✅ Pass | |
-| Integration | ✅ Pass | or N/A |
-| Edge Cases | ✅ Pass | |
+| Static Analysis |  Pass | |
+| Unit Tests |  Pass | N tests written |
+| Build |  Pass | |
+| Integration |  Pass | or N/A |
+| Edge Cases |  Pass | |
 
 ## Files Changed
 
@@ -297,17 +297,17 @@ Report to user:
 
 - **Plan**: [plan file path] → archived to completed/
 - **Branch**: [current branch name]
-- **Status**: ✅ All tasks complete
+- **Status**:  All tasks complete
 
 ### Validation Summary
 
 | Check | Status |
 |---|---|
-| Type Check | ✅ |
-| Lint | ✅ |
-| Tests | ✅ (N written) |
-| Build | ✅ |
-| Integration | ✅ or N/A |
+| Type Check |  |
+| Lint |  |
+| Tests |  (N written) |
+| Build |  |
+| Integration |  or N/A |
 
 ### Files Changed
 - [N] files created, [M] files updated
@@ -322,8 +322,8 @@ Report to user:
 ### PRD Progress (if applicable)
 | Phase | Status |
 |---|---|
-| Phase 1 | ✅ Complete |
-| Phase 2 | ⏳ Next |
+| Phase 1 |  Complete |
+| Phase 2 |  Next |
 | ... | ... |
 
 > Next step: Run `/prp-pr` to create a pull request, or `/code-review` to review changes first.
