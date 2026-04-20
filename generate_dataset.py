@@ -124,7 +124,7 @@ if __name__ == '__main__':
 
     # Generate Summary Statistics
     summary_stats = df.describe().T[['mean', 'std', 'min', 'max']]
-    summary_stats.to_csv("summary_statistics.csv")
+    summary_stats.to_csv("summary_stats.csv")
     print("\nSummary Statistics:\n", summary_stats)
 
     # 1. Correlation Heatmap
@@ -167,7 +167,7 @@ if __name__ == '__main__':
         "erev_synthetic_dataset.csv",
         "erev_train.csv",
         "erev_test.csv",
-        "summary_statistics.csv",
+        "summary_stats.csv",
         "correlation_heatmap.png",
         "bsfc_surface.png"
     ]
