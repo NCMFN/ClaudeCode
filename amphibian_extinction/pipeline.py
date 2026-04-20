@@ -383,7 +383,7 @@ if 'Order' in amphibio.columns:
 # GAP 6: Narrow-Range Performance
 print("\n--- Out-of-Fold Narrow Range Evaluation ---")
 try:
-    df_assessed['range_tertile'] = pd.qcut(df_assessed['n_grid_cells'].fillna(0), q=3, labels=['Narrow', 'Medium', 'Wide'], duplicates='drop')
+    df_assessed['range_tertile'] = pd.qcut(df_assessed['n_grid_cells'].fillna(0).rank(method='first'), q=3, labels=['Narrow', 'Medium', 'Wide'])
     oof_probs = cross_val_predict(xgb_model, X_a_scaled, y_assessed, groups=spatial_groups_full, cv=gkf, method='predict_proba')[:, 1]
     df_assessed['oof_prob'] = oof_probs
 
