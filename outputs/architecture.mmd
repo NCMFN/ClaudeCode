@@ -1,0 +1,32 @@
+
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    A[Data Ingestion Layer] -->|Figshare API| B(AmphiBIO Dataset - Traits)
+    A -->|GBIF API Queries| C(GBIF Occurrences & IUCN Status)
+    A -->|Raster Extraction| D(WorldClim Climate Data)
+    A -->|Taxonomy Validation| E(AmphibiaWeb Dataset)
+
+    B --> F[Data Processing Pipeline]
+    C --> F
+    D --> F
+    E --> F
+
+    F -->|Merge & Raster Sampling| G(Feature Engineering)
+    G -->|Imputation & Scaling| H(Data Splitting)
+
+    H -->|SMOTE Oversampling| I[Model Training Layer]
+    I -->|Train & 5-Fold CV| J(Random Forest)
+    I -->|Train & 5-Fold CV| K(XGBoost)
+    I -->|Train| L(Deep Neural Network - Keras)
+
+    J --> M[Evaluation & Visualization Layer]
+    K --> M
+    L --> M
+
+    M --> N(Feature Importance)
+    M --> O(Geographic Risk Maps)
+    M --> P(ROC-AUC Curves)
+    M --> Q(Dataset Schema & Confusion Matrix)
+
+    class A,F,I,M plain
