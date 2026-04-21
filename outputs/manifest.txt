@@ -1,0 +1,10 @@
+run_pipeline/architecture.png	351.74 KB	Generated output file
+run_pipeline/tfidf_vectorizer.pkl	199.87 KB	Generated output file
+run_pipeline/feature_importance_rf.png	160.04 KB	Generated output file
+run_pipeline/best_model.pkl	1821.19 KB	Generated output file
+run_pipeline/confusion_matrix_mlp_classifier.png	100.64 KB	Generated output file
+run_pipeline/confusion_matrix_random_forest.png	94.65 KB	Generated output file
+run_pipeline/results_summary.csv	0.32 KB	Generated output file
+run_pipeline/scaler.pkl	1.06 KB	Generated output file
+run_pipeline/confusion_matrix_xgboost_(smote).png	102.55 KB	Generated output file
+run_pipeline/confusion_matrix_xgboost.png	98.06 KB	Generated output file
