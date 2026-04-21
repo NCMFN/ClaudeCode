@@ -1,3 +1,4 @@
+run_pipeline/architecture.png	351.74 KB	Generated output file
 run_pipeline/tfidf_vectorizer.pkl	199.87 KB	Generated output file
 run_pipeline/feature_importance_rf.png	160.04 KB	Generated output file
 run_pipeline/best_model.pkl	1821.19 KB	Generated output file
