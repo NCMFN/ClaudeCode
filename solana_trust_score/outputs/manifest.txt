@@ -1,0 +1,61 @@
+=== Output Manifest ===
+
+File: main/experiment_summary.txt
+Size: 1.45 KB
+Description: Final summary text report including dataset stats, top features, and metrics compared against paper baselines.
+
+File: main/class_distribution.png
+Size: 90.29 KB
+Description: Plot of class distribution before and after SMOTE oversampling.
+
+File: evaluation/confusion_matrix_xgb.png
+Size: 65.72 KB
+Description: Confusion matrix heatmap for the XGBoost model predictions.
+
+File: evaluation/roc_curve_comparison.png
+Size: 219.00 KB
+Description: ROC curves overlaying all trained models.
+
+File: evaluation/precision_recall_curve.png
+Size: 124.47 KB
+Description: Precision-Recall curves for XGBoost and Random Forest.
+
+File: evaluation/model_comparison_table.csv
+Size: 0.45 KB
+Description: Table of test set evaluation metrics for XGBoost, Random Forest, Logistic Regression, and Isolation Forest.
+
+File: evaluation/feature_importance_xgb.png
+Size: 208.48 KB
+Description: Bar plot of top 15 features ranked by XGBoost gain importance.
+
+File: feature_engineering/features_engineered.csv
+Size: 18350.35 KB
+Description: Engineered feature dataset ready for modeling.
+
+File: models/xgboost_best_model.pkl
+Size: 610.17 KB
+Description: Serialized XGBoost model optimized via GridSearchCV.
+
+File: trust_score/trust_score_distribution.png
+Size: 101.54 KB
+Description: Histogram of the Trust Score distribution stratified by the true label.
+
+File: trust_score/test_trust_scores.csv
+Size: 47.53 KB
+Description: Computed Trust Scores and risk tiers alongside probabilities for the test set.
+
+File: shap_analysis/shap_summary_beeswarm.png
+Size: 453.87 KB
+Description: Beeswarm plot of SHAP values illustrating directional impact.
+
+File: shap_analysis/shap_waterfall_sample.png
+Size: 241.64 KB
+Description: Waterfall SHAP explanation plot for a single high-confidence prediction.
+
+File: shap_analysis/shap_summary_bar.png
+Size: 293.53 KB
+Description: Bar plot of mean absolute SHAP values for top features.
+
+File: data_loader/data_audit.txt
+Size: 1.79 KB
+Description: Data audit report including shapes, duplicates, and missing values.
