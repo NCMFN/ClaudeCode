@@ -98,5 +98,5 @@ ecc2/target/
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
 solana_trust_score/data/*.csv
-solana_trust_score/outputs/
+
 solana_trust_score/data/

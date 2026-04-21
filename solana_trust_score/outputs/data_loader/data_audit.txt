@@ -1,0 +1,55 @@
+=== Data Audit Report ===
+Shape: (116308, 12)
+--- Dtypes ---
+LIQUIDITY_POOL_ADDRESS               str
+MINT                                 str
+TOTAL_ADDED_LIQUIDITY            float64
+TOTAL_REMOVED_LIQUIDITY          float64
+NUM_LIQUIDITY_ADDS               float64
+NUM_LIQUIDITY_REMOVES            float64
+ADD_TO_REMOVE_RATIO              float64
+LAST_POOL_ACTIVITY_TIMESTAMP         str
+FIRST_POOL_ACTIVITY_TIMESTAMP        str
+LAST_SWAP_TIMESTAMP                  str
+LAST_SWAP_TX_ID                      str
+INACTIVITY_STATUS                    str
+dtype: object
+
+--- Null Counts ---
+LIQUIDITY_POOL_ADDRESS             0
+MINT                               4
+TOTAL_ADDED_LIQUIDITY              4
+TOTAL_REMOVED_LIQUIDITY            4
+NUM_LIQUIDITY_ADDS                 4
+NUM_LIQUIDITY_REMOVES              4
+ADD_TO_REMOVE_RATIO                4
+LAST_POOL_ACTIVITY_TIMESTAMP       4
+FIRST_POOL_ACTIVITY_TIMESTAMP      4
+LAST_SWAP_TIMESTAMP              623
+LAST_SWAP_TX_ID                  623
+INACTIVITY_STATUS                  4
+dtype: int64
+
+--- Target Class Distribution ---
+INACTIVITY_STATUS
+Active      93749
+Inactive    22555
+NaN             4
+Name: count, dtype: int64
+
+--- Descriptive Statistics ---
+       TOTAL_ADDED_LIQUIDITY  ...  ADD_TO_REMOVE_RATIO
+count           1.163040e+05  ...         1.163040e+05
+mean            4.701548e+13  ...         6.613697e+04
+std             1.023856e+16  ...         8.720293e+06
+min             1.000000e-09  ...         1.800672e-17
+25%             5.702012e+01  ...         4.482402e-01
+50%             5.928520e+04  ...         9.140659e-01
+75%             4.420064e+06  ...         1.134797e+00
+max             3.451333e+18  ...         1.988868e+09
+
+[8 rows x 5 columns]
+
+--- Duplicates ---
+Duplicate LIQUIDITY_POOL_ADDRESS entries: 52787
+Dropped duplicates. New shape: (63521, 12)

@@ -1,0 +1,36 @@
+=== IEEE Paper Reproduction: Solana Rug Pull Detection ===
+
+--- Dataset Statistics ---
+Original Rows: 63521, Columns: 12
+Engineered Features: 23
+Class Balance (Pre-SMOTE Train Set):
+INACTIVITY_STATUS
+0    3500
+1    3500
+Name: count, dtype: int64
+Class Balance (Post-SMOTE Train Set):
+INACTIVITY_STATUS
+0    3500
+1    3500
+Name: count, dtype: int64
+
+--- Model Evaluation Metrics ---
+              Model  Precision   Recall  F1-Score  Accuracy  AUC-ROC
+            XGBoost   0.814621 0.832000  0.823219  0.821333 0.905703
+      Random Forest   0.792621 0.830667  0.811198  0.806667 0.895824
+Logistic Regression   0.725907 0.773333  0.748870  0.740667 0.826569
+   Isolation Forest   0.441441 0.130667  0.201646  0.482667      NaN
+
+--- Top 5 Features (SHAP Importance) ---
+1. liquidity_to_pool_ratio
+2. swap_to_close_gap_hours
+3. add_volume_per_event
+4. NUM_LIQUIDITY_ADDS
+5. NUM_LIQUIDITY_REMOVES
+
+--- Notes on Limitations vs Paper ---
+The paper describes 23 total features. SolRPDS provides raw transaction and liquidity logs. Smart contract authority flags (e.g., mint authority, freeze authority) and social media metadata could not be derived exclusively from SolRPDS. Extracting these would require direct Solana RPC API integration or secondary datasets. The engineered features here represent the maximum expressible proxy features from the given data.
+
+--- Target Metrics Comparison ---
+XGBoost Test F1: 0.8232 (Paper Target: 0.904)
+XGBoost Test AUC-ROC: 0.9057 (Paper Target: 0.941)
