@@ -1,73 +1,90 @@
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import graphviz
+import os
 
-def draw_architecture():
-    fig, ax = plt.subplots(figsize=(14, 10), dpi=400)
-    ax.set_xlim(0, 100)
-    ax.set_ylim(0, 100)
-    ax.axis('off')
+def create_architecture():
+    # Create a new directed graph
+    dot = graphviz.Digraph(format='png')
+    dot.attr(rankdir='TB')  # Top to Bottom vertical flow
+    dot.attr(dpi='400')
+    dot.attr('node', shape='box', style='solid', fontname='Arial', fontsize='12', margin='0.3,0.2')
 
-    plt.title("End-to-End ML Framework: Soil Nutrient Forecasting", fontsize=18, fontweight='bold', pad=20)
+    # Root level Data sources
+    dot.node('A', 'Earth Microbiome Project\n(EMP Zenodo Archive)')
+    dot.node('B', 'NEON Soil Microbe Data\n(REST API)')
 
-    # Styling params
-    box_style = "round,pad=0.5"
+    # Data Processing
+    dot.node('C', 'Data Preprocessing\nFilter to Study Area (Soil)')
+    dot.node('D', 'Feature Engineering')
 
-    def add_block(x, y, w, h, text, color, text_color='black'):
-        fancy_box = patches.FancyBboxPatch((x, y), w, h, boxstyle=box_style,
-                                           linewidth=2.5, edgecolor='black', facecolor=color)
-        ax.add_patch(fancy_box)
-        ax.text(x + w/2, y + h/2, text, ha='center', va='center',
-                fontsize=11, fontweight='bold', color=text_color, wrap=True)
+    # Feature extraction split
+    dot.node('E', '16S rRNA Sequences\nTaxonomic Resolution & CLR')
+    dot.node('F', 'Alpha Diversity Proxies\n(Shannon, Simpson)')
 
-    def draw_arrow(x1, y1, x2, y2, label=""):
-        ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
-                    arrowprops=dict(arrowstyle="->", lw=2.5, color='black'))
-        if label:
-            # Adjust label position slightly above the line
-            mx, my = (x1+x2)/2, (y1+y2)/2
-            ax.text(mx, my + 1.5, label, ha='center', fontsize=9, fontweight='bold',
-                    bbox=dict(facecolor='white', edgecolor='none', alpha=0.8))
+    # Construction / Integration
+    dot.node('G', 'Composite Construction\nTop 150 Taxa + Covariates')
+    dot.node('H', 'Target Variable Integration\nTotal Soil Nitrogen')
 
-    # Phase 1: Data Acquisition (Left)
-    add_block(5, 75, 20, 15, "Earth Microbiome Project\n(EMP FTP / Zenodo)\n- 16S rRNA Sequences\n- EMP Mapping metadata", '#E8F5E9')
-    add_block(5, 55, 20, 15, "NEON Soil Microbe Data\n(REST API)\n- Soil Chemical Properties\n- Ground Truth Labels", '#E8F5E9')
+    # ML Models
+    dot.node('I', 'Model Training & CV\n(Spatial Block K-Fold)')
 
-    # Phase 2: Preprocessing & Engineering (Center-Left)
-    add_block(35, 65, 20, 25, "Feature Engineering\n\n1. Filter Soil Samples\n2. Extract BIOM Matrix\n3. CLR Transformation\n4. PCA Reduction (150 comp)\n5. Alpha Diversity (Shannon,\nSimpson, Observed)", '#FFF9C4')
+    dot.node('J', 'Null Baseline\n(DummyRegressor)')
+    dot.node('K', 'Random Forest Regressor')
+    dot.node('L', 'Gradient Boosting Regressor')
+    dot.node('M', 'Ridge Regression')
 
-    # Data Fusion (NEON Merge)
-    add_block(35, 45, 20, 12, "Data Integration\n\nProximity & Seasonal Merge\n(EMP abundance ⇄ NEON soil)", '#FFE0B2')
+    # Ground truth validation node (side dependency)
+    dot.node('N', 'NEON Validation Points\nGround Truth (Holdout)', style='solid')
 
-    # Phase 3: Model Development (Center-Right)
-    add_block(65, 65, 20, 25, "Model Development\n\n- Random Forest Regressor\n- Gradient Boosting\n- Ridge Regression\n\n*Spatial Block Cross-Val\n*Target: Total Nitrogen", '#E1F5FE')
+    # Evaluation
+    dot.node('O', 'Evaluation & SHAP')
 
-    # Phase 4: Output & Evaluation (Right)
-    add_block(65, 45, 20, 12, "Model Evaluation\n\nRMSE, MAE, R2\n95% Prediction Intervals", '#F3E5F5')
+    # Outputs
+    dot.node('P', 'Outputs\nFigures & Metrics')
 
-    add_block(65, 25, 20, 12, "Reporting\n\nKaggle-structured\nJupyter Notebook", '#FCE4EC')
+    # Define edges based on the image's flow style
+    # A -> C
+    dot.edge('A', 'C')
+    # B doesn't strictly flow into C in the preprocessing stage yet but supplies truth later or co-location
 
-    # Flow arrows
-    # EMP -> Feature Engineering
-    draw_arrow(25, 82.5, 35, 82.5)
-    # NEON -> Data Integration
-    draw_arrow(25, 62.5, 35, 51)
+    # C -> D
+    dot.edge('C', 'D')
 
-    # Feature Engineering -> Data Integration
-    draw_arrow(45, 65, 45, 57)
+    # D -> E and D -> F
+    dot.edge('D', 'E')
+    dot.edge('D', 'F')
 
-    # Data Integration -> Model Dev
-    draw_arrow(55, 51, 65, 65, "Joined Matrix (X, y)")
+    # E -> G and F -> G
+    dot.edge('E', 'G')
+    dot.edge('F', 'G')
 
-    # Model Dev -> Evaluation
-    draw_arrow(75, 65, 75, 57)
+    # G -> H
+    dot.edge('G', 'H')
 
-    # Evaluation -> Reporting
-    draw_arrow(75, 45, 75, 37)
+    # H -> I
+    dot.edge('H', 'I')
 
-    plt.tight_layout()
-    plt.savefig('system_architecture.png', dpi=400)
-    plt.close()
-    print("Architecture diagram generated as 'system_architecture.png'")
+    # I -> ML models
+    dot.edge('I', 'J')
+    dot.edge('I', 'K')
+    dot.edge('I', 'L')
+    dot.edge('I', 'M')
+
+    # ML Models -> Evaluation
+    dot.edge('J', 'O')
+    dot.edge('K', 'O')
+    dot.edge('L', 'O')
+    dot.edge('M', 'O')
+
+    # N -> O (Ground truth into evaluation as a dotted line or separate feed)
+    dot.edge('N', 'O', style='dotted')
+
+    # O -> P
+    dot.edge('O', 'P')
+
+    # Render to file
+    output_path = 'system_architecture'
+    dot.render(output_path, cleanup=True)
+    print("Graphviz diagram generated as system_architecture.png")
 
 if __name__ == "__main__":
-    draw_architecture()
+    create_architecture()
