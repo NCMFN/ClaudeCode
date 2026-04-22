@@ -1,0 +1,4 @@
+Model,Accuracy,Macro_F1,Weighted_F1,ROC_AUC,Kappa
+Logistic Regression,0.7142857142857143,0.5555555555555555,0.619047619047619,1.0,0.5625
+Random Forest,1.0,1.0,1.0,1.0,1.0
+XGBoost,1.0,1.0,1.0,1.0,1.0

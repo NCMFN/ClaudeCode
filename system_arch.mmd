@@ -1,0 +1,28 @@
+graph TD
+    classDef plain fill:transparent,stroke:#000,color:#000,stroke-width:2px;
+
+    A[Global Flood Database<br/>MODIS Archive]:::plain --> B[Data Preprocessing<br/>Filter to Study Area]:::plain
+
+    B --> C[Feature Engineering]:::plain
+
+    C --> D[OSMnx API<br/>True Road Density]:::plain
+    C --> E[Extract Flood Area &<br/>Duration Proxy]:::plain
+
+    D --> F[Composite Construction]:::plain
+    E --> F
+
+    F --> G[CIRS Target Variable<br/>Non-circular Tertiles]:::plain
+
+    G --> H[Model Training & CV]:::plain
+
+    H --> I[Logistic Regression]:::plain
+    H --> J[Random Forest]:::plain
+    H --> K[XGBoost]:::plain
+
+    I --> L[Evaluation & SHAP]:::plain
+    J --> L
+    K --> L
+
+    L --> M[Outputs<br/>Figures & Metrics]:::plain
+
+    N[GFD Validation Points<br/>Ground Truth]:::plain -.-> L
