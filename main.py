@@ -18,14 +18,14 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-os.makedirs('outputs', exist_ok=True)
+os.makedirs('outputs/figures', exist_ok=True)
 np.random.seed(42)
 
 def main():
-    print("=== TASK 1: Data Loading & Exploration ===")
+    print("\n=== TASK 1: Data Loading & Exploration ===")
     df = pd.read_csv('data/data/gfd_qcdatabase_2019_08_01.csv')
-    print("Shape:", df.shape)
-    print("Columns:", df.columns.tolist())
+    print("\nShape:", df.shape)
+    print("\nColumns:", df.columns.tolist())
 
     if 'GlideNumber' in df.columns:
         df['GlideNumber'] = df['GlideNumber'].fillna('None')
@@ -36,7 +36,7 @@ def main():
     df_africa = df[is_africa].copy()
     print(f"Summary of Africa subset: {len(df_africa)} rows.")
 
-    print("\n=== TASK 2: Feature Engineering (Independent Proxy Variables) ===")
+    print("\n\n=== TASK 2: Feature Engineering (Independent Proxy Variables) ===")
     df_africa['Began'] = pd.to_datetime(df_africa['Began'], errors='coerce')
     df_africa['Ended'] = pd.to_datetime(df_africa['Ended'], errors='coerce')
     df_africa['flood_duration_days'] = (df_africa['Ended'] - df_africa['Began']).dt.days.fillna(0)
@@ -51,7 +51,7 @@ def main():
 
     df_africa.to_csv('outputs/features_engineered.csv', index=False)
 
-    print("\n=== TASK 3: Construct a Non-Circular CIRS Target Variable ===")
+    print("\n\n=== TASK 3: Construct a Non-Circular CIRS Target Variable ===")
     scaler = MinMaxScaler()
     norm_duration = scaler.fit_transform(df_africa[['flood_duration_days']]).flatten()
     norm_area = scaler.fit_transform(df_africa[['flood_area_km2']]).flatten()
@@ -74,11 +74,11 @@ def main():
     plt.xlabel('CIRS Class')
     plt.ylabel('Count')
     plt.tight_layout()
-    plt.savefig('outputs/cirs_class_distribution.png', dpi=150, bbox_inches='tight')
+    plt.savefig('outputs/figures/cirs_class_distribution.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
-    print("Saved: outputs/cirs_class_distribution.png")
+    print('Saved: /outputs/figures/cirs_class_distribution.png')
 
-    print("\n=== TASK 4: Train-Test Split and Scaling ===")
+    print("\n\n=== TASK 4: Train-Test Split and Scaling ===")
     features = [
         'flood_duration_days',
         'road_density_km_per_km2',
@@ -95,7 +95,7 @@ def main():
     X_train_scaled = std_scaler.fit_transform(X_train)
     X_test_scaled = std_scaler.transform(X_test)
 
-    print("\n=== TASK 5: Model Training & Tuning ===")
+    print("\n\n=== TASK 5: Model Training & Tuning ===")
     rf_param_grid = {
         'n_estimators': [100, 200, 300],
         'max_depth': [None, 10, 20],
@@ -117,7 +117,7 @@ def main():
 def run_external_validation_and_sensitivity():
     X_train_scaled, X_test_scaled, y_train, y_test, features, rf_grid, xgb_grid, df_africa = main()
 
-    print("\n=== TASK 7: Final Evaluation on Test Set ===")
+    print("\n\n=== TASK 7: Final Evaluation on Test Set ===")
     models = {
         'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
         'Random Forest': rf_grid.best_estimator_,
@@ -129,9 +129,9 @@ def run_external_validation_and_sensitivity():
     results = []
 
     cm_filenames = {
-        'Logistic Regression': 'confusion_matrix_lr.png',
-        'Random Forest': 'confusion_matrix_rf.png',
-        'XGBoost': 'confusion_matrix_xgb.png'
+        'Logistic Regression': 'confusion_matrix_logreg.png',
+        'Random Forest': 'confusion_matrix_random_forest.png',
+        'XGBoost': 'confusion_matrix_xgboost.png'
     }
 
     for name, model in models.items():
@@ -160,14 +160,14 @@ def run_external_validation_and_sensitivity():
         plt.ylabel('Actual')
         plt.xlabel('Predicted')
         plt.tight_layout()
-        plt.savefig(f"outputs/{cm_filenames[name]}", dpi=150, bbox_inches='tight')
+        plt.savefig(f"outputs/figures/{cm_filenames[name]}", dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print(f"Saved: outputs/{cm_filenames[name]}")
+        print(f"Saved: /outputs/figures/{cm_filenames[name]}")
 
     res_df = pd.DataFrame(results)
     res_df.to_csv("outputs/model_evaluation_results.csv", index=False)
 
-    print("\n=== TASK 8: Feature Importance & SHAP Analysis ===")
+    print("\n\n=== TASK 8: Feature Importance & SHAP Analysis ===")
     best_model_name = res_df.loc[res_df['Macro_F1'].idxmax(), 'Model']
     best_model = models[best_model_name]
 
@@ -180,9 +180,9 @@ def run_external_validation_and_sensitivity():
         plt.bar(range(len(features)), importances[indices], align="center")
         plt.xticks(range(len(features)), [features[i] for i in indices], rotation=45, ha='right')
         plt.tight_layout()
-        plt.savefig("outputs/feature_importance.png", dpi=150, bbox_inches='tight')
+        plt.savefig('outputs/figures/feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print("Saved: outputs/feature_importance.png")
+        print('Saved: /outputs/figures/feature_importance.png')
 
         explainer = shap.TreeExplainer(best_model)
         shap_values = explainer.shap_values(X_test_scaled)
@@ -192,9 +192,9 @@ def run_external_validation_and_sensitivity():
             shap.summary_plot(shap_values[1], X_test_scaled, feature_names=features, show=False)
         else:
             shap.summary_plot(shap_values, X_test_scaled, feature_names=features, show=False)
-        plt.savefig("outputs/shap_summary.png", dpi=150, bbox_inches='tight')
+        plt.savefig('outputs/figures/shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print("Saved: outputs/shap_summary.png")
+        print('Saved: /outputs/figures/shap_summary.png')
 
     elif hasattr(best_model, 'coef_'):
         importances = np.abs(best_model.coef_).mean(axis=0)
@@ -205,25 +205,25 @@ def run_external_validation_and_sensitivity():
         plt.bar(range(len(features)), importances[indices], align="center")
         plt.xticks(range(len(features)), [features[i] for i in indices], rotation=45, ha='right')
         plt.tight_layout()
-        plt.savefig("outputs/feature_importance.png", dpi=150, bbox_inches='tight')
+        plt.savefig('outputs/figures/feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print("Saved: outputs/feature_importance.png")
+        print('Saved: /outputs/figures/feature_importance.png')
 
         explainer = shap.LinearExplainer(best_model, X_train_scaled)
         shap_values = explainer.shap_values(X_test_scaled)
 
         plt.figure()
         shap.summary_plot(shap_values, X_test_scaled, feature_names=features, show=False)
-        plt.savefig("outputs/shap_summary.png", dpi=150, bbox_inches='tight')
+        plt.savefig('outputs/figures/shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print("Saved: outputs/shap_summary.png")
+        print('Saved: /outputs/figures/shap_summary.png')
 
-    print("\n=== TASK 9: External Validation Against Ground Truth ===")
+    print("\n\n=== TASK 9: External Validation Against Ground Truth ===")
     df_val = pd.read_csv('data/data/gfd_validation_points_2018_12_17.csv')
     matched_records = sum([1 for _, row in df_africa.iterrows() if not df_val[(np.abs(df_val['point_lat'] - row['lat']) <= 0.5) & (np.abs(df_val['point_lon'] - row['long']) <= 0.5)].empty])
     print(f"Matched {matched_records} validation points.")
 
-    print("\n=== TASK 10: Sensitivity Analysis ===")
+    print("\n\n=== TASK 10: Sensitivity Analysis ===")
     scenarios = {
         'Scenario A (baseline)': [0.40, 0.35, 0.25],
         'Scenario B (road-heavy)': [0.25, 0.55, 0.20],
@@ -271,17 +271,19 @@ def run_external_validation_and_sensitivity():
     plt.title('Sensitivity Analysis: Impact of CIRS Weights on Model Performance')
     plt.ylim(0, 1)
     plt.tight_layout()
-    plt.savefig('outputs/sensitivity_analysis.png', dpi=150, bbox_inches='tight')
+    plt.savefig('outputs/figures/sensitivity_analysis_bar.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
-    print("Saved: outputs/sensitivity_analysis.png")
+    print('Saved: /outputs/figures/sensitivity_analysis_bar.png')
 
     report = f"# RESULTS SUMMARY\nGenerated."
     with open("outputs/RESULTS_SUMMARY.md", "w") as f:
         f.write(report)
 
-    print("\n=== FINAL FILES SAVED ===")
-    for f in os.listdir('outputs'):
-        print(f"  → outputs/{f}")
 
 if __name__ == "__main__":
     run_external_validation_and_sensitivity()
+    import glob
+    saved = glob.glob("outputs/figures/*.png")
+    print("\n=== SAVED FIGURES ===")
+    for f in saved:
+        print(f"/{f}")
