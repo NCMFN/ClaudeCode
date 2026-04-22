@@ -1,0 +1,46 @@
+graph TD
+    classDef default fill:#efedff,stroke:#c8bce4,stroke-width:1px,color:#333,rx:5px,ry:5px;
+
+    API["B2B Cisco Ariel API"]
+    Gateway["API Gateway"]
+
+    AuthPass["Authentication: Pass"]
+    AuthBlock["Authentication: Block"]
+    MaliciousDB["Malicious Traffic Database"]
+
+    FeatureExt["Feature Extraction"]
+    RFModel["Random Forest Anomaly Detection"]
+    Allow["Clean Traffic"]
+    Reject["Anomalies Detected"]
+
+    Endpoint["API Backend / Endpoint"]
+    DB["Database"]
+
+    ThreatLogs["Threat Logs"]
+    SIEM_API["SIEM / Syslog API"]
+
+    APM["Application Performance Monitoring"]
+    SIEM_Int["SIEM Integration"]
+    Heatmap["Traffic Heatmap Analytics"]
+    SIEM_DB["Cisco Ariel Splunk Database"]
+
+    API --> Gateway
+    Gateway --> AuthPass
+    Gateway --> AuthBlock
+    AuthBlock --> MaliciousDB
+
+    AuthPass --> FeatureExt
+    FeatureExt --> RFModel
+    RFModel --> Allow
+    RFModel --> Reject
+
+    Allow --> Endpoint
+    Endpoint --> DB
+
+    Reject --> ThreatLogs
+    ThreatLogs --> SIEM_API
+
+    SIEM_API --> SIEM_DB
+    SIEM_DB --> APM
+    SIEM_DB --> SIEM_Int
+    SIEM_DB --> Heatmap
