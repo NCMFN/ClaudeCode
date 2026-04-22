@@ -1,2 +1,2 @@
 # RESULTS SUMMARY
-Generated.
+Generated Path B Implementation.
