@@ -3,7 +3,7 @@ graph TD
 
     A[BTS Flight Data] --> D[Data Preprocessing & Integration]
     B[Iowa Mesonet Weather] --> D
-    C[FAA ASPM Traffic] --> D
+    C[FAA ASPM Traffic Proxy] --> D
 
     D --> E[Feature Engineering]
     E --> F[Exploratory Data Analysis]
@@ -14,11 +14,13 @@ graph TD
     G --> J[XGBoost]
     G --> K[LSTM / Deep Learning]
 
-    H --> L[Model Evaluation]
+    H --> L[Model Evaluation & Cross-Validation]
     I --> L
     J --> L
     K --> L
 
+    L --> P[SHAP / Explainability]
+
     M[Real-Time API: Aviation Weather] --> N[Real-Time Inference Pipeline]
-    L --> N
-    N --> O[Delay Prediction Output]
+    P --> N
+    N --> O[Delay Prediction Output w/ Probability]
