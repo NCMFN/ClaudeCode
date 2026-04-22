@@ -18,7 +18,7 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-os.makedirs('outputs/figures', exist_ok=True)
+os.makedirs('figures', exist_ok=True)
 np.random.seed(42)
 
 def main():
@@ -49,7 +49,7 @@ def main():
     df_africa['road_density_km_per_km2'] = np.random.lognormal(mean=0, sigma=1, size=len(df_africa))
     df_africa['dist_to_nearest_major_road_km'] = np.random.lognormal(mean=1, sigma=0.5, size=len(df_africa))
 
-    df_africa.to_csv('outputs/features_engineered.csv', index=False)
+    df_africa.to_csv('features_engineered.csv', index=False)
 
     print("\n\n=== TASK 3: Construct a Non-Circular CIRS Target Variable ===")
     scaler = MinMaxScaler()
@@ -74,9 +74,9 @@ def main():
     plt.xlabel('CIRS Class')
     plt.ylabel('Count')
     plt.tight_layout()
-    plt.savefig('outputs/figures/cirs_class_distribution.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.savefig('cirs_class_distribution.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
-    print('Saved: /outputs/figures/cirs_class_distribution.png')
+    print('Saved: cirs_class_distribution.png')
 
     print("\n\n=== TASK 4: Train-Test Split and Scaling ===")
     features = [
@@ -160,12 +160,12 @@ def run_external_validation_and_sensitivity():
         plt.ylabel('Actual')
         plt.xlabel('Predicted')
         plt.tight_layout()
-        plt.savefig(f"outputs/figures/{cm_filenames[name]}", dpi=300, bbox_inches='tight', facecolor='white')
+        plt.savefig(f"{cm_filenames[name]}", dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print(f"Saved: /outputs/figures/{cm_filenames[name]}")
+        print(f"Saved: {cm_filenames[name]}")
 
     res_df = pd.DataFrame(results)
-    res_df.to_csv("outputs/model_evaluation_results.csv", index=False)
+    res_df.to_csv("model_evaluation_results.csv", index=False)
 
     print("\n\n=== TASK 8: Feature Importance & SHAP Analysis ===")
     best_model_name = res_df.loc[res_df['Macro_F1'].idxmax(), 'Model']
@@ -180,9 +180,9 @@ def run_external_validation_and_sensitivity():
         plt.bar(range(len(features)), importances[indices], align="center")
         plt.xticks(range(len(features)), [features[i] for i in indices], rotation=45, ha='right')
         plt.tight_layout()
-        plt.savefig('outputs/figures/feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
+        plt.savefig('feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print('Saved: /outputs/figures/feature_importance.png')
+        print('Saved: feature_importance.png')
 
         explainer = shap.TreeExplainer(best_model)
         shap_values = explainer.shap_values(X_test_scaled)
@@ -192,9 +192,9 @@ def run_external_validation_and_sensitivity():
             shap.summary_plot(shap_values[1], X_test_scaled, feature_names=features, show=False)
         else:
             shap.summary_plot(shap_values, X_test_scaled, feature_names=features, show=False)
-        plt.savefig('outputs/figures/shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
+        plt.savefig('shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print('Saved: /outputs/figures/shap_summary.png')
+        print('Saved: shap_summary.png')
 
     elif hasattr(best_model, 'coef_'):
         importances = np.abs(best_model.coef_).mean(axis=0)
@@ -205,18 +205,18 @@ def run_external_validation_and_sensitivity():
         plt.bar(range(len(features)), importances[indices], align="center")
         plt.xticks(range(len(features)), [features[i] for i in indices], rotation=45, ha='right')
         plt.tight_layout()
-        plt.savefig('outputs/figures/feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
+        plt.savefig('feature_importance.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print('Saved: /outputs/figures/feature_importance.png')
+        print('Saved: feature_importance.png')
 
         explainer = shap.LinearExplainer(best_model, X_train_scaled)
         shap_values = explainer.shap_values(X_test_scaled)
 
         plt.figure()
         shap.summary_plot(shap_values, X_test_scaled, feature_names=features, show=False)
-        plt.savefig('outputs/figures/shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
+        plt.savefig('shap_summary.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.close()
-        print('Saved: /outputs/figures/shap_summary.png')
+        print('Saved: shap_summary.png')
 
     print("\n\n=== TASK 9: External Validation Against Ground Truth ===")
     df_val = pd.read_csv('data/data/gfd_validation_points_2018_12_17.csv')
@@ -271,19 +271,19 @@ def run_external_validation_and_sensitivity():
     plt.title('Sensitivity Analysis: Impact of CIRS Weights on Model Performance')
     plt.ylim(0, 1)
     plt.tight_layout()
-    plt.savefig('outputs/figures/sensitivity_analysis_bar.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.savefig('sensitivity_analysis_bar.png', dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
-    print('Saved: /outputs/figures/sensitivity_analysis_bar.png')
+    print('Saved: sensitivity_analysis_bar.png')
 
     report = f"# RESULTS SUMMARY\nGenerated."
-    with open("outputs/RESULTS_SUMMARY.md", "w") as f:
+    with open("RESULTS_SUMMARY.md", "w") as f:
         f.write(report)
 
 
 if __name__ == "__main__":
     run_external_validation_and_sensitivity()
     import glob
-    saved = glob.glob("outputs/figures/*.png")
+    saved = glob.glob("*.png")
     print("\n=== SAVED FIGURES ===")
     for f in saved:
         print(f"/{f}")
