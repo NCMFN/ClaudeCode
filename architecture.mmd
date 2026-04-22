@@ -1,0 +1,26 @@
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    A[BTS Flight Data] --> D[Data Preprocessing & Integration]
+    B[Iowa Mesonet Weather] --> D
+    C[FAA ASPM Traffic Proxy] --> D
+
+    D --> E[Feature Engineering]
+    E --> F[Exploratory Data Analysis]
+    F --> G[Model Training]
+
+    G --> H[Logistic Regression]
+    G --> I[Random Forest]
+    G --> J[XGBoost]
+    G --> K[LSTM / Deep Learning]
+
+    H --> L[Model Evaluation & Cross-Validation]
+    I --> L
+    J --> L
+    K --> L
+
+    L --> P[SHAP / Explainability]
+
+    M[Real-Time API: Aviation Weather] --> N[Real-Time Inference Pipeline]
+    P --> N
+    N --> O[Delay Prediction Output w/ Probability]
