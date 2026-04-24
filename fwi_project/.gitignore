@@ -1,0 +1,5 @@
+data/
+*.nc
+*.pkl
+__pycache__/
+venv/

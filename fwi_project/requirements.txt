@@ -1,0 +1,12 @@
+xarray
+netCDF4
+pandas
+geopandas
+scikit-learn
+xgboost
+shap
+optuna
+cdsapi
+matplotlib
+cartopy
+dask
