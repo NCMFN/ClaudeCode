@@ -1,52 +1,82 @@
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import graphviz
+import os
 
-plt.rcParams.update({'font.size': 11, 'axes.titlesize': 13, 'axes.labelsize': 11, 'xtick.labelsize': 10, 'ytick.labelsize': 10, 'figure.dpi': 300, 'savefig.dpi': 300})
+def create_architecture_diagram():
+    # Use graphviz to generate a diagram resembling the user's provided sample
 
-def draw_arch():
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.axis('off')
+    # Global settings
+    dot = graphviz.Digraph('Architecture', format='png')
+    dot.attr(rankdir='TB', nodesep='0.5', ranksep='0.7')
 
-    # Device Boundary
-    device_box = patches.FancyBboxPatch((0.1, 0.1), 0.8, 0.8, boxstyle="round,pad=0.05", edgecolor="black", facecolor="#f0f0f0", lw=2)
-    ax.add_patch(device_box)
-    ax.text(0.5, 0.95, 'DePIN Device', ha='center', va='center', fontsize=14, fontweight='bold')
+    # Node styling
+    dot.attr('node', shape='box', style='rounded,filled', fillcolor='#f0f0ff',
+             color='#d0d0f0', fontname='Helvetica', fontsize='11', height='0.6')
+    dot.attr('edge', color='#555555')
 
-    # Hardware/Battery
-    hw_box = patches.FancyBboxPatch((0.15, 0.15), 0.25, 0.2, boxstyle="round,pad=0.05", edgecolor="black", facecolor="#e0e0e0", lw=1.5)
-    ax.add_patch(hw_box)
-    ax.text(0.275, 0.25, 'Battery / Hardware\n(SoC Sensor)', ha='center', va='center')
+    # Define Nodes
+    dot.node('b2b', 'B2B Cisco Ariel API')
+    dot.node('gateway', 'API Gateway')
 
-    # Primary Task
-    pt_box = patches.FancyBboxPatch((0.6, 0.15), 0.25, 0.2, boxstyle="round,pad=0.05", edgecolor="black", facecolor="#d0d0ff", lw=1.5)
-    ax.add_patch(pt_box)
-    ax.text(0.725, 0.25, 'Primary Task\n(Always Active)', ha='center', va='center')
+    dot.node('auth_block', 'Authentication: Block')
+    dot.node('auth_pass', 'Authentication: Pass')
 
-    # FSM Controller
-    fsm_box = patches.FancyBboxPatch((0.35, 0.45), 0.3, 0.2, boxstyle="round,pad=0.05", edgecolor="black", facecolor="#d0ffd0", lw=1.5)
-    ax.add_patch(fsm_box)
-    ax.text(0.5, 0.55, 'FSM Controller\n(S1, S2, S3, S4)', ha='center', va='center', fontweight='bold')
+    dot.node('malicious_db', 'Malicious Traffic Database')
 
-    # Blockchain Module
-    bc_box = patches.FancyBboxPatch((0.35, 0.75), 0.3, 0.15, boxstyle="round,pad=0.05", edgecolor="black", facecolor="#ffd0d0", lw=1.5)
-    ax.add_patch(bc_box)
-    ax.text(0.5, 0.825, 'Blockchain Operations\n(PoC, TX, Relay)', ha='center', va='center')
+    dot.node('feature_ext', 'Feature Extraction')
 
-    # Arrows
-    ax.annotate('', xy=(0.35, 0.55), xytext=(0.275, 0.35), arrowprops=dict(arrowstyle='->', lw=2))
-    ax.text(0.25, 0.45, 'SoC %', ha='center', va='center', rotation=45)
+    dot.node('rf_anomaly', 'Random Forest Anomaly\nDetection', height='0.8')
 
-    ax.annotate('', xy=(0.5, 0.75), xytext=(0.5, 0.65), arrowprops=dict(arrowstyle='->', lw=2))
-    ax.text(0.55, 0.7, 'Control Ops', ha='left', va='center')
+    dot.node('clean_traffic', 'Clean Traffic')
+    dot.node('anomalies', 'Anomalies Detected')
 
-    # Network
-    ax.annotate('', xy=(0.8, 0.825), xytext=(0.65, 0.825), arrowprops=dict(arrowstyle='<->', lw=2))
-    ax.text(0.85, 0.825, 'DePIN Network', ha='left', va='center', fontsize=12, fontweight='bold', bbox=dict(boxstyle='round', facecolor='white'))
+    dot.node('api_backend', 'API Backend / Endpoint')
+    dot.node('threat_logs', 'Threat Logs')
 
-    plt.tight_layout()
-    plt.savefig('results/figures/system_architecture.png')
-    plt.savefig('results/figures/system_architecture.pdf')
-    plt.close()
+    dot.node('database', 'Database')
+    dot.node('siem_api', 'SIEM / Syslog API')
+
+    dot.node('splunk_db', 'Cisco Ariel Splunk\nDatabase', height='0.8')
+
+    dot.node('apm', 'Application Performance\nMonitoring', height='0.8')
+    dot.node('siem_integ', 'SIEM Integration')
+    dot.node('heatmap', 'Traffic Heatmap Analytics')
+
+    # Define Edges
+    dot.edge('b2b', 'gateway')
+
+    # Split from Gateway
+    dot.edge('gateway', 'auth_block')
+    dot.edge('gateway', 'auth_pass')
+
+    # Block path
+    dot.edge('auth_block', 'malicious_db')
+
+    # Pass path
+    dot.edge('auth_pass', 'feature_ext')
+    dot.edge('feature_ext', 'rf_anomaly')
+
+    # Split from RF Anomaly
+    dot.edge('rf_anomaly', 'clean_traffic')
+    dot.edge('rf_anomaly', 'anomalies')
+
+    # Clean path
+    dot.edge('clean_traffic', 'api_backend')
+    dot.edge('api_backend', 'database')
+
+    # Anomalies path
+    dot.edge('anomalies', 'threat_logs')
+    dot.edge('threat_logs', 'siem_api')
+    dot.edge('siem_api', 'splunk_db')
+
+    # Splunk splits
+    dot.edge('splunk_db', 'apm')
+    dot.edge('splunk_db', 'siem_integ')
+    dot.edge('splunk_db', 'heatmap')
+
+    # Save the diagram
+    os.makedirs('results/figures', exist_ok=True)
+    dot.render('results/figures/system_architecture_new', cleanup=True)
+    print("Generated results/figures/system_architecture_new.png")
 
 if __name__ == '__main__':
-    draw_arch()
+    create_architecture_diagram()
