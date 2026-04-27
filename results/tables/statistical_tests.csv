@@ -1,0 +1,10 @@
+Test,Comparison,Statistic,P-Value
+Shapiro-Wilk,Baseline,1.0,1.0
+Shapiro-Wilk,EP-DePIN FSM,1.0,1.0
+Shapiro-Wilk,EP-DePIN Aggressive,1.0,1.0
+Shapiro-Wilk,EP-DePIN Conservative,1.0,1.0
+Shapiro-Wilk,No blockchain,1.0,1.0
+Paired t-test,EP-DePIN vs Baseline Lifetime,,
+One-way ANOVA,All Scenarios Lifetime,,
+Wilcoxon signed-rank,EP-DePIN vs Baseline Proofs,0.0,0.001953125
+Cohen's d,EP-DePIN vs Baseline Lifetime,,
