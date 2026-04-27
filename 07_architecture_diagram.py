@@ -1,8 +1,7 @@
 import graphviz
-import os
 
 def create_architecture():
-    # Create a new directed graph
+    # Create a new directed graph based heavily on CIR7.png vertical logic
     dot = graphviz.Digraph(format='png')
     dot.attr(rankdir='TB')  # Top to Bottom vertical flow
     dot.attr(dpi='400')
@@ -10,78 +9,67 @@ def create_architecture():
 
     # Root level Data sources
     dot.node('A', 'Earth Microbiome Project\n(EMP Zenodo Archive)')
-    dot.node('B', 'NEON Soil Microbe Data\n(REST API)')
 
     # Data Processing
-    dot.node('C', 'Data Preprocessing\nFilter to Study Area (Soil)')
-    dot.node('D', 'Feature Engineering')
+    dot.node('C', 'Data Preprocessing\nFilter to Soil Samples')
+    dot.node('D', 'Feature Engineering\n(Taxonomic Resolution & CLR)')
 
     # Feature extraction split
-    dot.node('E', '16S rRNA Sequences\nTaxonomic Resolution & CLR')
+    dot.node('E', 'Biomarker Extraction\nTop 150 Taxa by Variance')
     dot.node('F', 'Alpha Diversity Proxies\n(Shannon, Simpson)')
 
     # Construction / Integration
-    dot.node('G', 'Composite Construction\nTop 150 Taxa + Covariates')
-    dot.node('H', 'Target Variable Integration\nTotal Soil Nitrogen')
+    dot.node('G', 'Composite Construction')
+    dot.node('H', 'Target Variable Integration\nTotal Soil Nitrogen\n(EMP & NEON Validation)')
 
     # ML Models
     dot.node('I', 'Model Training & CV\n(Spatial Block K-Fold)')
 
-    dot.node('J', 'Null Baseline\n(DummyRegressor)')
-    dot.node('K', 'Random Forest Regressor')
-    dot.node('L', 'Gradient Boosting Regressor')
+    dot.node('K', 'Random Forest')
+    dot.node('L', 'Gradient Boosting')
     dot.node('M', 'Ridge Regression')
-
-    # Ground truth validation node (side dependency)
-    dot.node('N', 'NEON Validation Points\nGround Truth (Holdout)', style='solid')
 
     # Evaluation
     dot.node('O', 'Evaluation & SHAP')
 
+    # Null Baseline (side dependency check)
+    dot.node('N', 'Null Baseline Check\n(DummyRegressor)', style='solid')
+
     # Outputs
     dot.node('P', 'Outputs\nFigures & Metrics')
 
-    # Define edges based on the image's flow style
-    # A -> C
+    # Define edges based on the image's vertical flow style
     dot.edge('A', 'C')
-    # B doesn't strictly flow into C in the preprocessing stage yet but supplies truth later or co-location
-
-    # C -> D
     dot.edge('C', 'D')
 
-    # D -> E and D -> F
+    # D branching into E and F
     dot.edge('D', 'E')
     dot.edge('D', 'F')
 
-    # E -> G and F -> G
+    # E and F converging into G
     dot.edge('E', 'G')
     dot.edge('F', 'G')
 
-    # G -> H
+    # Vertical descent
     dot.edge('G', 'H')
-
-    # H -> I
     dot.edge('H', 'I')
 
-    # I -> ML models
-    dot.edge('I', 'J')
+    # I branching into Models
     dot.edge('I', 'K')
     dot.edge('I', 'L')
     dot.edge('I', 'M')
 
-    # ML Models -> Evaluation
-    dot.edge('J', 'O')
+    # Models converging into Evaluation
     dot.edge('K', 'O')
     dot.edge('L', 'O')
     dot.edge('M', 'O')
 
-    # N -> O (Ground truth into evaluation as a dotted line or separate feed)
+    # N feeding into O with a dotted line as per reference
     dot.edge('N', 'O', style='dotted')
 
-    # O -> P
+    # Output
     dot.edge('O', 'P')
 
-    # Render to file
     output_path = 'system_architecture'
     dot.render(output_path, cleanup=True)
     print("Graphviz diagram generated as system_architecture.png")

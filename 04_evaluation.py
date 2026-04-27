@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import shap
+import warnings
+warnings.filterwarnings('ignore')
 
 def evaluate_models():
     print("Loading test data and models...")
@@ -48,8 +50,8 @@ def evaluate_models():
     results_df = pd.DataFrame(metrics)
     print(results_df.to_string(index=False))
 
-    # -------------------- Plot 1: SHAP Feature Importance --------------------
-    print("Calculating SHAP values...")
+    # -------------------- Plot 1: SHAP Feature Importance (Fix 5) --------------------
+    print("Calculating SHAP values for biological interpretability...")
     explainer = shap.TreeExplainer(rf_model)
     shap_values = explainer.shap_values(X_test_scaled)
 
@@ -57,7 +59,7 @@ def evaluate_models():
     shap.summary_plot(shap_values, X_test_scaled, feature_names=feature_names, show=False)
     plt.title('SHAP Values: Taxa Importance on Soil Nitrogen')
     plt.tight_layout()
-    plt.savefig('fig1_feature_importance.png', dpi=400)
+    plt.savefig('fig1_feature_importance.png', dpi=400, bbox_inches='tight')
     plt.close()
 
     # -------------------- Plot 2: Prediction vs Actual --------------------

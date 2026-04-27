@@ -12,7 +12,7 @@ def train_models():
     print("Loading engineered features...")
     df = pd.read_csv('engineered_features.csv', index_col=0)
 
-    # We enforce STRICT use of real labels
+    # We enforce STRICT use of real labels (Fix 1 continued)
     df = df[df['total_nitrogen'].notna() & (df['total_nitrogen'] > 0)]
     y = df['total_nitrogen']
 
@@ -38,9 +38,9 @@ def train_models():
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_imp)
 
-    print("Evaluating models with Spatial Block Cross-Validation...")
+    print("Evaluating models with Spatial Block Cross-Validation (Fix 2)...")
     models = {
-        'Null Baseline (Mean)': DummyRegressor(strategy='mean'),
+        'Null Baseline (Mean)': DummyRegressor(strategy='mean'), # Fix 4
         'Random Forest': RandomForestRegressor(n_estimators=100, random_state=42),
         'Gradient Boosting': GradientBoostingRegressor(n_estimators=100, random_state=42),
         'Ridge': Ridge(alpha=1.0)
