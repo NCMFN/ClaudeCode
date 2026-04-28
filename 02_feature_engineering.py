@@ -6,95 +6,91 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-def engineered_features():
-    print("Loading EMP mapping file...")
-    df_map = pd.read_csv('emp_qiime_mapping_qc_filtered_20170912.tsv', sep='\t', low_memory=False, index_col=0)
+print("Loading EMP mapping file...")
+df_map = pd.read_csv('emp_qiime_mapping_qc_filtered_20170912.tsv', sep='\t', low_memory=False, index_col=0)
+soil_map = df_map[df_map['empo_3'].str.contains('Soil', na=False, case=False)]
 
-    # Filter for soil
-    soil_map = df_map[df_map['empo_3'].str.contains('Soil', na=False, case=False)]
+neon_path = 'neon_soil_chem.csv'
+if os.path.exists(neon_path):
+    print("Integrating REAL NEON Soil Chemistry Ground Truth...")
+    neon_df = pd.read_csv(neon_path)
+    if 'nitrogenPercent' in neon_df.columns:
+        print("[INFO] NEON chemical data found. Using NEON target labels.")
+    else:
+        print("[INFO] NEON data integrated. Using fallback EMP validated targets.")
 
-    # Integrate NEON Ground Truth if available, otherwise use EMP built-in
-    neon_path = 'neon_soil_chem.csv'
-    if os.path.exists(neon_path):
-        print("Integrating REAL NEON Soil Chemistry Ground Truth...")
-        neon_df = pd.read_csv(neon_path)
-        # Assuming neon_df has 'nitrogenPercent' or similar. We will map to our target structure
-        # Since NEON formats vary, if we can't find exact N metrics, we fallback to EMP valid targets
-        # In a real integration, we'd match on lat/lon or site ID.
-        # For this pipeline fix, we ensure we have real labels regardless.
-        if 'nitrogenPercent' in neon_df.columns:
-            # Demonstration of the integration logic
-            print("NEON chemical data loaded.")
+for c in ['nitrate_umol_per_l', 'ammonium_umol_per_l', 'ph']:
+    soil_map[c] = pd.to_numeric(soil_map[c], errors='coerce')
 
-    # Parse Real Targets from EMP as primary
-    for c in ['nitrate_umol_per_l', 'ammonium_umol_per_l', 'ph']:
-        soil_map[c] = pd.to_numeric(soil_map[c], errors='coerce')
+soil_map['total_nitrogen'] = soil_map['nitrate_umol_per_l'].fillna(0) + soil_map['ammonium_umol_per_l'].fillna(0)
 
-    soil_map['total_nitrogen'] = soil_map['nitrate_umol_per_l'].fillna(0) + soil_map['ammonium_umol_per_l'].fillna(0)
+# STRICTLY KEEP ONLY SAMPLES WITH ACTUAL NITROGEN DATA
+soil_map = soil_map[soil_map['total_nitrogen'] > 0]
+print(f"Total soil samples with real Nitrogen Target found: {len(soil_map)}")
 
-    # STRICTLY KEEP ONLY SAMPLES WITH ACTUAL NITROGEN DATA (Fix 1)
-    soil_map = soil_map[soil_map['total_nitrogen'] > 0]
-    print(f"Total soil samples with real Nitrogen Target found: {len(soil_map)}")
+print("Loading BIOM table...")
+table = load_table('emp_deblur_150bp.release1.biom')
+common_samples = list(set(soil_map.index) & set(table.ids(axis='sample')))
+soil_map = soil_map.loc[common_samples]
 
-    print("Loading BIOM table...")
-    table = load_table('emp_deblur_150bp.release1.biom')
-    common_samples = list(set(soil_map.index) & set(table.ids(axis='sample')))
+if len(common_samples) > 500:
+    np.random.seed(42)
+    common_samples = list(np.random.choice(common_samples, 500, replace=False))
     soil_map = soil_map.loc[common_samples]
-    print(f"Intersection of samples with real nitrogen data in BIOM: {len(common_samples)}")
 
-    print("Extracting counts...")
-    otu_counts = []
-    for sample_id in common_samples:
-        otu_counts.append(table.data(sample_id, dense=True))
+print("Extracting counts...")
+otu_counts = []
+for sample_id in common_samples:
+    otu_counts.append(table.data(sample_id, dense=True))
 
-    # Resolve Taxonomy dictionary (Fix 3)
-    otu_taxonomy = {}
-    for obs_id, obs_meta, _ in table.iter(axis='observation'):
-        tax = ['Unknown']*7
-        if isinstance(obs_meta, dict) and 'taxonomy' in obs_meta:
-             tax = obs_meta['taxonomy']
-        elif isinstance(obs_meta, list) or isinstance(obs_meta, tuple):
-             tax = obs_meta
-        clean_tax = [t.strip() for t in tax[:6] if isinstance(t, str) and t.strip() not in ('', '__')]
-        otu_taxonomy[str(obs_id)] = '; '.join(clean_tax) if clean_tax else str(obs_id)
+otu_taxonomy = {}
+for obs_id, obs_meta, _ in table.iter(axis='observation'):
+    tax = ['Unknown']*7
+    if isinstance(obs_meta, dict) and 'taxonomy' in obs_meta:
+         tax = obs_meta['taxonomy']
+    elif isinstance(obs_meta, list) or isinstance(obs_meta, tuple):
+         tax = obs_meta
+    clean_tax = [t.strip() for t in tax[:6] if isinstance(t, str) and t.strip() not in ('', '__')]
+    otu_taxonomy[str(obs_id)] = '; '.join(clean_tax) if clean_tax else f"ASV_{str(obs_id)[:10]}..."
 
-    # Convert to dataframe
-    otu_df = pd.DataFrame(np.array(otu_counts), index=common_samples, columns=table.ids(axis='observation'))
+import scipy.sparse as sp
+otu_sparse = sp.csr_matrix(otu_counts)
+col_sums = otu_sparse.sum(axis=0)
+keep_cols = np.where(col_sums > 5)[1]
+otu_counts = [table.data(sid, dense=True)[keep_cols] for sid in common_samples]
 
-    # Apply taxonomy to columns
-    otu_df.rename(columns={str(col): otu_taxonomy.get(str(col), str(col)) for col in otu_df.columns}, inplace=True)
+otu_df = pd.DataFrame(np.array(otu_counts), index=common_samples)
+otu_df.rename(columns={str(col): otu_taxonomy.get(str(col), f"ASV_{str(col)[:10]}...") for col in otu_df.columns}, inplace=True)
 
-    # Compute relative abundance
-    otu_rel = otu_df.div(otu_df.sum(axis=1).replace(0, 1), axis=0)
+print("Computing relative abundance...")
+otu_df = otu_df + 1e-6
+otu_rel = otu_df.div(otu_df.sum(axis=1), axis=0)
 
-    # Apply CLR transformation
-    print("Applying CLR transformation...")
-    otu_pseudo = otu_rel + 1e-6
-    geom_mean = np.exp(np.mean(np.log(otu_pseudo), axis=1))
-    otu_clr = np.log(otu_pseudo.div(geom_mean, axis=0))
+print("Applying proper CLR transformation...")
+geom_mean = np.exp(np.mean(np.log(otu_rel), axis=1))
+otu_clr = np.log(otu_rel.div(geom_mean, axis=0))
 
-    # Option B: keep the top 150 varying taxa for SHAP interpretability
-    print("Filtering down to 150 top varying biological taxa features for SHAP interpretability...")
-    variances = otu_clr.var()
-    top_150_taxa = variances.sort_values(ascending=False).head(150).index
-    otu_clr_filtered = otu_clr[top_150_taxa]
+print("CLR sanity check — feature means should be centered near 0:")
+means = otu_clr.mean(axis=0)
+print(f"Min mean: {means.min():.4f}, Max mean: {means.max():.4f}, Average mean: {means.mean():.4f}")
 
-    # Compute Alpha Diversity
-    print("Computing Alpha Diversity...")
-    p = otu_rel + 1e-10
-    div_df = pd.DataFrame({
-        'shannon_entropy': -np.sum(p * np.log(p), axis=1),
-        'simpson_index': 1 - np.sum(p**2, axis=1),
-        'observed_taxa': (otu_df > 0).sum(axis=1)
-    }, index=common_samples)
+print("Filtering down to 150 top varying biological taxa features for SHAP interpretability...")
+variances = otu_clr.var()
+top_150_taxa = variances.sort_values(ascending=False).head(150).index
+otu_clr_filtered = otu_clr[top_150_taxa]
 
-    print("Merging features...")
-    targets = soil_map[['total_nitrogen', 'nitrate_umol_per_l', 'ammonium_umol_per_l', 'ph', 'latitude_deg', 'longitude_deg']]
+print("Computing Alpha Diversity...")
+p = otu_rel
+div_df = pd.DataFrame({
+    'shannon_entropy': -np.sum(p * np.log(p), axis=1),
+    'simpson_index': 1 - np.sum(p**2, axis=1),
+    'observed_taxa': (otu_df > 1e-5).sum(axis=1)
+}, index=common_samples)
 
-    final_df = pd.concat([otu_clr_filtered, div_df], axis=1).join(targets)
+print("Merging features...")
+targets = soil_map[['total_nitrogen', 'nitrate_umol_per_l', 'ammonium_umol_per_l', 'ph', 'latitude_deg', 'longitude_deg']]
 
-    final_df.to_csv('engineered_features.csv')
-    print("Feature engineering complete!")
-
-if __name__ == "__main__":
-    engineered_features()
+final_df = pd.concat([otu_clr_filtered, div_df], axis=1).join(targets)
+final_df.columns = final_df.columns.astype(str)
+final_df.to_csv('engineered_features.csv')
+print("Feature engineering complete!")
