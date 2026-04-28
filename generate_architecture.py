@@ -3,82 +3,125 @@ import matplotlib.patches as mpatches
 import networkx as nx
 
 def generate_architecture():
-    fig, ax = plt.subplots(figsize=(14, 10), dpi=400)
+    fig, ax = plt.subplots(figsize=(10, 14), dpi=400)
     ax.axis('off')
 
-    # Define node positions
+    # Define node positions (y goes from top to bottom)
     pos = {
-        # Data Sources
-        "NEON/GBIF API\n(Tick Counts)": (0, 4),
-        "NASA POWER API\n(Climate)": (0, 3),
-        "MODIS LP DAAC\n(NDVI)": (0, 2),
-        "SMAP / GEDI\n(Soil & Canopy)": (0, 1),
+        "VectAbundance Data": (3, 10),
+        "ERA5-Land NetCDF": (7, 10),
 
-        # Ingestion
-        "Data Ingestion Layer\n(src/ingest/)": (1.5, 2.5),
+        "Data Loader / Spatial Join": (5, 8.5),
 
-        # Feature Eng
-        "Spatial Join &\nFeature Engineering\n(src/features/)": (3.5, 2.5),
+        "Processed Merged Dataset": (5, 7.2),
 
-        # Modeling
-        "XGBoost Regression Model\n(src/models/)": (5.5, 2.5),
+        "Feature Engineering": (5, 5.9),
 
-        # Output Maps & Forecast
-        "Spatial Mapping\n(GeoTIFFs)\n(src/mapping/)": (7.5, 3.5),
-        "Folium Heatmap\nDashboard": (7.5, 2.5),
-        "Climate Scenario\nForecasting (SSP2/5)\n(src/forecast/)": (7.5, 1.5),
+        "Climate Lags & Thermal\nAccumulation": (3, 4.4),
+        "Spatial & Seasonality\nFeatures": (7, 4.4),
 
-        "Outputs\n(.tif, .html, .pkl)": (9.5, 2.5)
+        "Model Training": (5, 2.9),
+
+        "Random Forest Baseline": (2, 1.4),
+        "XGBoost with Spatial CV": (5, 1.4),
+        "LSTM 4-week Sliding\nWindow": (8, 1.4),
+
+        "Model Evaluation": (5, 0),
+
+        "SHAP Importance &\nResiduals": (3, -1.4),
+        "Spatial-Temporal Forecast\nGrid": (7, -1.4),
+
+        "GeoTIFF Raster Outputs": (5, -2.8),
+        "Animated Seasonal GIF": (9, -2.8)
     }
 
     # Define explicit graph
     G = nx.DiGraph()
     edges = [
-        ("NEON/GBIF API\n(Tick Counts)", "Data Ingestion Layer\n(src/ingest/)"),
-        ("NASA POWER API\n(Climate)", "Data Ingestion Layer\n(src/ingest/)"),
-        ("MODIS LP DAAC\n(NDVI)", "Data Ingestion Layer\n(src/ingest/)"),
-        ("SMAP / GEDI\n(Soil & Canopy)", "Data Ingestion Layer\n(src/ingest/)"),
+        ("VectAbundance Data", "Data Loader / Spatial Join"),
+        ("ERA5-Land NetCDF", "Data Loader / Spatial Join"),
 
-        ("Data Ingestion Layer\n(src/ingest/)", "Spatial Join &\nFeature Engineering\n(src/features/)"),
-        ("Spatial Join &\nFeature Engineering\n(src/features/)", "XGBoost Regression Model\n(src/models/)"),
+        ("Data Loader / Spatial Join", "Processed Merged Dataset"),
 
-        ("XGBoost Regression Model\n(src/models/)", "Spatial Mapping\n(GeoTIFFs)\n(src/mapping/)"),
-        ("XGBoost Regression Model\n(src/models/)", "Folium Heatmap\nDashboard"),
-        ("XGBoost Regression Model\n(src/models/)", "Climate Scenario\nForecasting (SSP2/5)\n(src/forecast/)"),
+        ("Processed Merged Dataset", "Feature Engineering"),
 
-        ("Spatial Mapping\n(GeoTIFFs)\n(src/mapping/)", "Outputs\n(.tif, .html, .pkl)"),
-        ("Folium Heatmap\nDashboard", "Outputs\n(.tif, .html, .pkl)"),
-        ("Climate Scenario\nForecasting (SSP2/5)\n(src/forecast/)", "Outputs\n(.tif, .html, .pkl)"),
+        ("Feature Engineering", "Climate Lags & Thermal\nAccumulation"),
+        ("Feature Engineering", "Spatial & Seasonality\nFeatures"),
+
+        ("Climate Lags & Thermal\nAccumulation", "Model Training"),
+        ("Spatial & Seasonality\nFeatures", "Model Training"),
+
+        ("Model Training", "Random Forest Baseline"),
+        ("Model Training", "XGBoost with Spatial CV"),
+        ("Model Training", "LSTM 4-week Sliding\nWindow"),
+
+        ("Random Forest Baseline", "Model Evaluation"),
+        ("XGBoost with Spatial CV", "Model Evaluation"),
+        ("LSTM 4-week Sliding\nWindow", "Model Evaluation"),
+
+        ("Model Evaluation", "SHAP Importance &\nResiduals"),
+        ("Model Evaluation", "Spatial-Temporal Forecast\nGrid"),
+
+        ("Spatial-Temporal Forecast\nGrid", "GeoTIFF Raster Outputs"),
+        ("Spatial-Temporal Forecast\nGrid", "Animated Seasonal GIF"),
     ]
     G.add_edges_from(edges)
 
     # Draw arrows manually for solid primary flow
+    # Using a curve or straight line depending on the node positions
     for edge in G.edges():
         start = pos[edge[0]]
         end = pos[edge[1]]
+
+        # Determine connection style based on node position to mimic the image
+        if edge[0] == "Model Training" and edge[1] == "Random Forest Baseline":
+            connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "Model Training" and edge[1] == "LSTM 4-week Sliding\nWindow":
+            connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "Random Forest Baseline" and edge[1] == "Model Evaluation":
+            connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "LSTM 4-week Sliding\nWindow" and edge[1] == "Model Evaluation":
+            connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "Model Evaluation" and edge[1] == "SHAP Importance &\nResiduals":
+            connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "Model Evaluation" and edge[1] == "Spatial-Temporal Forecast\nGrid":
+            connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "Spatial-Temporal Forecast\nGrid" and edge[1] == "GeoTIFF Raster Outputs":
+            connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "Spatial-Temporal Forecast\nGrid" and edge[1] == "Animated Seasonal GIF":
+            connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "VectAbundance Data" and edge[1] == "Data Loader / Spatial Join":
+             connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "ERA5-Land NetCDF" and edge[1] == "Data Loader / Spatial Join":
+             connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "Feature Engineering" and edge[1] == "Climate Lags & Thermal\nAccumulation":
+             connectionstyle = "arc3,rad=0.2"
+        elif edge[0] == "Feature Engineering" and edge[1] == "Spatial & Seasonality\nFeatures":
+             connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "Climate Lags & Thermal\nAccumulation" and edge[1] == "Model Training":
+             connectionstyle = "arc3,rad=-0.2"
+        elif edge[0] == "Spatial & Seasonality\nFeatures" and edge[1] == "Model Training":
+             connectionstyle = "arc3,rad=0.2"
+        else:
+            connectionstyle = "arc3,rad=0"
+
         ax.annotate("",
                     xy=end, xycoords='data',
                     xytext=start, textcoords='data',
-                    arrowprops=dict(arrowstyle="->", color="black", lw=2.5, shrinkA=35, shrinkB=35))
+                    arrowprops=dict(arrowstyle="->", color="gray", lw=1.5, shrinkA=30, shrinkB=30, connectionstyle=connectionstyle))
 
     # Draw Nodes as rounded rectangles (fancybox)
     for node, (x, y) in pos.items():
-        if "API" in node or "MODIS" in node or "SMAP" in node:
-            color = "#D9EAD3"  # light green
-        elif "Output" in node or "Dashboard" in node or "GeoTIFF" in node:
-            color = "#FCE5CD"  # light orange
-        else:
-            color = "#CFE2F3"  # light blue
+        color = "#EEF2FF"  # very light purple/blue
 
-        box = mpatches.FancyBboxPatch((x - 0.7, y - 0.3), 1.4, 0.6,
-                                      boxstyle="round,pad=0.1,rounding_size=0.1",
-                                      ec="black", fc=color, lw=2.0)
+        box = mpatches.FancyBboxPatch((x - 1.4, y - 0.4), 2.8, 0.8,
+                                      boxstyle="round,pad=0.1,rounding_size=0.2",
+                                      ec="#D0D7F4", fc=color, lw=1.5)
         ax.add_patch(box)
-        ax.text(x, y, node, ha="center", va="center", fontsize=11, fontweight='bold', zorder=10)
+        ax.text(x, y, node, ha="center", va="center", fontsize=11, fontweight='normal', zorder=10, color='black')
 
-    plt.title("Climate-Driven Tick Density Prediction Pipeline Architecture", fontsize=18, fontweight='bold', pad=20)
-    plt.xlim(-1.5, 10.5)
-    plt.ylim(0, 5)
+    plt.xlim(0, 10)
+    plt.ylim(-4, 11)
 
     plt.savefig("system_architecture.png", bbox_inches='tight')
     print("Generated system_architecture.png")
