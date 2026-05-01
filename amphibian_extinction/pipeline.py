@@ -26,6 +26,16 @@ import pandas as pd
 import numpy as np
 import rasterio
 import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.size': 11,
+    'axes.titlesize': 13,
+    'axes.labelsize': 11,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'figure.dpi': 300,
+    'savefig.dpi': 300
+})
 import seaborn as sns
 from concurrent.futures import ThreadPoolExecutor
 

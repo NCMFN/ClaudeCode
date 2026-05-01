@@ -1,4 +1,3 @@
-Climate-Only CV ROC-AUC: 0.6833
-Climate+Traits CV ROC-AUC: 0.7233
-High-Confidence Labels Only AUC: 0.9034
-Anura Spatial CV AUC: 0.6833 (N=165)
+Climate-Only CV ROC-AUC: 0.8286
+Climate+Traits CV ROC-AUC: 0.7833
+Anura Spatial CV AUC: 0.8286 (N=35)
