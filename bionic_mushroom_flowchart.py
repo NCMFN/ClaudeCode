@@ -22,6 +22,7 @@ dot.node('eval', 'Model Evaluation\n(RMSE, MAE, R²)', fillcolor='plum')
 dot.node('eval_check', 'Model Performance\nAcceptable?', shape='diamond', fillcolor='lightgoldenrod')
 dot.node('output', 'Select Best Model\n& Output Predictions', fillcolor='pink')
 dot.node('deploy_check', 'Deployment Performance\nDegrades?', shape='diamond', fillcolor='lightgoldenrod')
+dot.node('end', 'End', shape='ellipse', fillcolor='lightgrey')
 
 # Edges (Main flow)
 dot.edge('start', 'acquire')
@@ -47,8 +48,6 @@ dot.edge('eval', 'eval_check')
 dot.edge('eval_check', 'output', label='Yes', color='green', fontcolor='green')
 
 # Eval Feedback Loops
-# Bi-directional arrows indicated by user: Evaluation <-> Model Training, Evaluation <-> Preprocessing
-# We implement the "No" paths mapping to those loops.
 dot.edge('eval_check', 'train_rf', label='No (Retune)', color='red', fontcolor='red', constraint='false')
 dot.edge('eval_check', 'preprocess', label='No (Refine Features)', color='red', fontcolor='red', constraint='false')
 
@@ -59,6 +58,7 @@ dot.edge('preprocess', 'eval', dir='both', label='Preproc <-> Eval loop', color=
 # Final Deployment Loop
 dot.edge('output', 'deploy_check')
 dot.edge('deploy_check', 'split', label='Yes (Retrain)', color='red', fontcolor='red', constraint='false')
+dot.edge('deploy_check', 'end', label='No (Stable)', color='green', fontcolor='green')
 
 # Title
 dot.attr(label='Bionic Mushroom Energy Harvest - Advanced Flowchart Algorithm\n', labelloc='t', fontsize='20', fontname='Helvetica-Bold')
