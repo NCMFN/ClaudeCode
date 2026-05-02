@@ -1,0 +1,3 @@
+Climate-Only CV ROC-AUC: 0.8286
+Climate+Traits CV ROC-AUC: 0.7833
+Anura Spatial CV AUC: 0.8286 (N=35)
