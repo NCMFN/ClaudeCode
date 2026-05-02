@@ -1,6 +1,5 @@
 heart_mind_cvd/data/nhis_raw/*.csv
 __pycache__/
 *.joblib
-*.png
 *.csv
 .ipynb_checkpoints
