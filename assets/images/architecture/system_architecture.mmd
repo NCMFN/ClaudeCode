@@ -1,0 +1,48 @@
+flowchart TD
+    %% Define Classes for Styling as per memory constraints
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    %% EMP Database
+    EMP["fa:fa-database Earth Microbiome Project\n(EMP FTP / Zenodo)\n- 16S rRNA Sequences\n- EMP Mapping metadata"]:::plain
+
+    %% NEON API
+    NEON["fa:fa-cloud NEON Soil Microbe Data\n(REST API)\n- Soil Chemical Properties\n- Ground Truth Labels"]:::plain
+
+    %% Feature Engineering Node
+    subgraph FE[Feature Engineering]
+        direction TB
+        fe_steps["fa:fa-cogs 1. Filter Soil Samples\n2. Extract BIOM Matrix\n3. CLR Transformation\n4. PCA Reduction (150 comp)\n5. Alpha Diversity (Shannon, Simpson, Observed)"]:::plain
+    end
+
+    %% Joined Matrix
+    JM["fa:fa-table Joined Matrix (X, y)"]:::plain
+
+    %% Data Integration Node
+    DI["fa:fa-object-group Data Integration\nProximity & Seasonal Merge\n(EMP abundance 2 NEON soil)"]:::plain
+
+    %% Model Development Node
+    subgraph MD[Model Development]
+        direction TB
+        md_models["fa:fa-brain - Random Forest Regressor\n- Gradient Boosting\n- Ridge Regression\n\n*Spatial Block Cross-Val\n*Target: Total Nitrogen"]:::plain
+    end
+
+    %% Model Evaluation Node
+    subgraph ME[Model Evaluation]
+        direction TB
+        me_metrics["fa:fa-chart-line RMSE, MAE, R2\n95% Prediction Intervals"]:::plain
+    end
+
+    %% Reporting Node
+    subgraph RP[Reporting]
+        direction TB
+        rp_format["fa:fa-file-alt Kaggle-structured\nJupyter Notebook"]:::plain
+    end
+
+    %% Connections
+    EMP --> fe_steps
+    fe_steps --> DI
+    NEON --> DI
+    DI --> JM
+    JM --> md_models
+    md_models --> me_metrics
+    me_metrics --> rp_format
