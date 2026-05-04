@@ -1,0 +1,39 @@
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000;
+
+    subgraph Data_Ingestion ["fa:fa-cloud-download Data Ingestion"]
+        AQ["fa:fa-smog OpenAQ API<br>PM2.5, NO2, O3<br>(fetch_openaq.py)"]
+        MET["fa:fa-temperature-high ERA5 Weather<br>Temp, Humidity, Wind<br>(fetch_era5.py)"]
+        HLTH["fa:fa-heartbeat Cardiac Events<br>ER Admissions<br>(fetch_health.py)"]
+    end
+
+    subgraph Alignment_Features ["fa:fa-cogs Alignment & Features"]
+        ALIGN["fa:fa-object-group Spatial-Temporal Join<br>(align.py)"]
+        FEAT["fa:fa-bolt Pollution-Heat Index (PHI)<br>(features.py)"]
+    end
+
+    subgraph Model_Training ["fa:fa-brain Model Training"]
+        OLS["fa:fa-chart-line OLS Baseline"]
+        XGB["fa:fa-project-diagram XGBoost & Optuna<br>(train.py)"]
+    end
+
+    subgraph Evaluation ["fa:fa-chart-bar Evaluation & Output"]
+        METRICS["fa:fa-balance-scale Metrics (R², RMSE)"]
+        SHAP["fa:fa-eye SHAP Explainability"]
+        ALERT["fa:fa-bell Alert Simulation<br>(evaluate.py)"]
+    end
+
+    AQ --> ALIGN
+    MET --> ALIGN
+    HLTH --> ALIGN
+
+    ALIGN --> FEAT
+    FEAT --> OLS
+    FEAT --> XGB
+
+    OLS --> METRICS
+    XGB --> METRICS
+    XGB --> SHAP
+    XGB --> ALERT
+
+    class AQ,MET,HLTH,ALIGN,FEAT,OLS,XGB,METRICS,SHAP,ALERT plain

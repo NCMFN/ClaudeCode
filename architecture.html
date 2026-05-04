@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End-to-End ML Framework: Soil Nutrient Forecasting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .diagram-container {
+            width: 1200px;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: #666666;
+        }
+
+        .pipeline-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        /* Top row pills */
+        .stage-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 23%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .stage-pill {
+            background-color: #f8f9fa;
+            border-radius: 40px;
+            padding: 20px 20px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: #111;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Horizontal arrows */
+        .h-arrow-container {
+            position: absolute;
+            top: 75px;
+            width: 100%;
+            height: 0;
+            display: flex;
+            z-index: 1;
+        }
+        .h-line {
+            position: absolute;
+            height: 2px;
+            background-color: #ccc;
+            top: 0;
+        }
+        .h-line::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #ccc;
+        }
+
+        .hl-1 { left: 23%; width: 5%; }
+        .hl-2 { left: 48.5%; width: 5%; }
+        .hl-3 { left: 74%; width: 5%; }
+
+        /* Vertical arrows */
+        .v-arrow {
+            width: 2px;
+            height: 30px;
+            background-color: #000;
+            margin: 15px 0;
+            position: relative;
+        }
+        .v-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: -4px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 8px solid #000;
+        }
+
+        /* Cards Row */
+        .cards-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .card {
+            width: 23%;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        /* Colors based on earthy tones */
+        /* Column 1: Data Integration (Brown/Purple) */
+        .col1-icon { color: #8a2be2; }
+        .col1-pill { border: 2px solid #e0cffc; background-color: #f7f3fe; }
+        .col1-card { border: 2px solid #e0cffc; background-color: #fcfbfe; }
+        .col1-divider { border-top: 2px dotted #e0cffc; width: 80%; margin: 25px 0; }
+
+        /* Column 2: Feature Engineering (Green) */
+        .col2-icon { color: #2ecc71; }
+        .col2-pill { border: 2px solid #bcead0; background-color: #f0fdf4; }
+        .col2-card { border: 2px solid #bcead0; background-color: #f9fefb; }
+        .col2-divider { border-top: 2px dotted #bcead0; width: 80%; margin: 25px 0; }
+
+        /* Column 3: Model Development (Blue) */
+        .col3-icon { color: #3498db; }
+        .col3-pill { border: 2px solid #cce1f6; background-color: #f0f7fd; }
+        .col3-card { border: 2px solid #cce1f6; background-color: #f8fbfe; }
+        .col3-divider { border-top: 2px dotted #cce1f6; width: 80%; margin: 25px 0; }
+
+        /* Column 4: Model Evaluation (Orange/Amber) */
+        .col4-icon { color: #e67e22; }
+        .col4-pill { border: 2px solid #fadbc2; background-color: #fff6ef; }
+        .col4-card { border: 2px solid #fadbc2; background-color: #fffbfa; }
+        .col4-divider { border-top: 2px dotted #fadbc2; width: 80%; margin: 25px 0; }
+
+        .card-inner-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .card-item {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .card-subitem {
+            font-size: 13px;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="diagram-container">
+    <div class="header">
+        <div class="title">End-to-End ML Framework: Soil Nutrient Forecasting</div>
+        <div class="subtitle">A high-level overview of the end-to-end soil nutrient machine learning pipeline</div>
+    </div>
+
+    <!-- Top Row: Icons and Pills -->
+    <div class="pipeline-row">
+        <div class="h-arrow-container">
+            <div class="h-line hl-1"></div>
+            <div class="h-line hl-2"></div>
+            <div class="h-line hl-3"></div>
+        </div>
+
+        <div class="stage-container">
+            <i class="fas fa-database stage-icon col1-icon"></i>
+            <div class="stage-pill col1-pill">Data Integration</div>
+            <div class="v-arrow"></div>
+        </div>
+
+        <div class="stage-container">
+            <i class="fas fa-cogs stage-icon col2-icon"></i>
+            <div class="stage-pill col2-pill">Feature Engineering</div>
+            <div class="v-arrow"></div>
+        </div>
+
+        <div class="stage-container">
+            <i class="fas fa-network-wired stage-icon col3-icon"></i>
+            <div class="stage-pill col3-pill">Model Development</div>
+            <div class="v-arrow"></div>
+        </div>
+
+        <div class="stage-container">
+            <i class="fas fa-chart-bar stage-icon col4-icon"></i>
+            <div class="stage-pill col4-pill">Model Evaluation & Reporting</div>
+            <div class="v-arrow"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Row: Cards -->
+    <div class="cards-row">
+        <!-- Column 1 Card -->
+        <div class="card col1-card">
+            <i class="fas fa-leaf card-inner-icon col1-icon"></i>
+            <div class="card-item">Earth Microbiome Project</div>
+            <div class="card-item">+</div>
+            <div class="card-item">NEON Soil Microbe Data</div>
+
+            <div class="col1-divider"></div>
+
+            <i class="fas fa-object-group card-inner-icon col1-icon"></i>
+            <div class="card-item">Data Integration</div>
+        </div>
+
+        <!-- Column 2 Card -->
+        <div class="card col2-card">
+            <i class="fas fa-filter card-inner-icon col2-icon"></i>
+            <div class="card-item">Filter Soil Samples</div>
+            <div class="card-item">Extract BIOM Matrix</div>
+
+            <div class="col2-divider"></div>
+
+            <i class="fas fa-project-diagram card-inner-icon col2-icon"></i>
+            <div class="card-item">CLR Transformation</div>
+            <div class="card-item">PCA Reduction (150 comp)</div>
+            <div class="card-item">Alpha Diversity</div>
+            <div class="card-subitem">(Shannon, Simpson, Observed)</div>
+        </div>
+
+        <!-- Column 3 Card -->
+        <div class="card col3-card">
+            <i class="fas fa-brain card-inner-icon col3-icon"></i>
+            <div class="card-item">Random Forest Regressor</div>
+            <div class="card-item">Gradient Boosting</div>
+            <div class="card-item">Ridge Regression</div>
+
+            <div class="col3-divider"></div>
+
+            <i class="fas fa-crosshairs card-inner-icon col3-icon"></i>
+            <div class="card-item">Spatial Block Cross-Val</div>
+            <div class="card-item" style="color: #c0392b; margin-top: 15px;">Target: Total Nitrogen</div>
+        </div>
+
+        <!-- Column 4 Card -->
+        <div class="card col4-card">
+            <i class="fas fa-clipboard-check card-inner-icon col4-icon"></i>
+            <div class="card-item">RMSE & MAE</div>
+            <div class="card-item">R² Score</div>
+            <div class="card-item">95% Prediction Intervals</div>
+
+            <div class="col4-divider"></div>
+
+            <i class="fas fa-file-code card-inner-icon col4-icon"></i>
+            <div class="card-item">Reporting</div>
+            <div class="card-subitem">Kaggle-structured</div>
+            <div class="card-subitem">Jupyter Notebook</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

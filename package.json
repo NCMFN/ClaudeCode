@@ -116,6 +116,7 @@
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "ajv": "^8.18.0",
+    "puppeteer": "^24.42.0",
     "sql.js": "^1.14.1"
   },
   "devDependencies": {
