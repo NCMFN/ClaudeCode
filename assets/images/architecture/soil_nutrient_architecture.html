@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Architecture: Soil Nutrient Forecasting Pipeline</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+    :root {
+        --c1-main: #795548; /* Brown */
+        --c1-bg: #EFEBE9;
+
+        --c2-main: #388E3C; /* Green */
+        --c2-bg: #F1F8E9;
+
+        --c3-main: #F57C00; /* Amber */
+        --c3-bg: #FFF8E1;
+
+        --c4-main: #00796B; /* Teal */
+        --c4-bg: #E0F2F1;
+
+        --c5-main: #D32F2F; /* Rust */
+        --c5-bg: #FFEBEE;
+
+        --c6-main: #616161; /* Grey */
+        --c6-bg: #F5F5F5;
+    }
+
+    body {
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 50px;
+        color: #333;
+        display: flex;
+        justify-content: center;
+    }
+
+    .diagram-container {
+        width: 1500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+        color: #1a1a1a;
+    }
+
+    .header p {
+        font-size: 18px;
+        color: #666;
+        margin: 0;
+    }
+
+    .pipeline-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .stage-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 15%;
+        position: relative;
+    }
+
+    .top-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .pill {
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 40px;
+        padding: 15px 10px;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        box-sizing: border-box;
+        color: #000;
+    }
+
+    .down-arrow {
+        font-size: 24px;
+        color: #000;
+        margin-top: 15px;
+    }
+
+    .right-arrow {
+        font-size: 20px;
+        color: #000;
+        margin-top: 30px; /* offset to align with pill */
+    }
+
+    .cards-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .card {
+        border-radius: 20px;
+        padding: 30px 20px;
+        width: 15%;
+        text-align: center;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card i.card-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .card h3 {
+        font-size: 16px;
+        margin: 0 0 15px 0;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .card .divider {
+        width: 80%;
+        border-top: 2px dashed;
+        margin: 15px 0;
+        opacity: 0.4;
+    }
+
+    .card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 500;
+    }
+
+    .card ul li {
+        margin-bottom: 10px;
+    }
+
+    /* Colors mapping */
+    .c1-text { color: var(--c1-main); }
+    .c1-border { border: 2px solid var(--c1-main); }
+    .c1-bg { background-color: var(--c1-bg); }
+
+    .c2-text { color: var(--c2-main); }
+    .c2-border { border: 2px solid var(--c2-main); }
+    .c2-bg { background-color: var(--c2-bg); }
+
+    .c3-text { color: var(--c3-main); }
+    .c3-border { border: 2px solid var(--c3-main); }
+    .c3-bg { background-color: var(--c3-bg); }
+
+    .c4-text { color: var(--c4-main); }
+    .c4-border { border: 2px solid var(--c4-main); }
+    .c4-bg { background-color: var(--c4-bg); }
+
+    .c5-text { color: var(--c5-main); }
+    .c5-border { border: 2px solid var(--c5-main); }
+    .c5-bg { background-color: var(--c5-bg); }
+
+    .c6-text { color: var(--c6-main); }
+    .c6-border { border: 2px solid var(--c6-main); }
+    .c6-bg { background-color: var(--c6-bg); }
+
+</style>
+</head>
+<body>
+
+<div class="diagram-container">
+
+    <div class="header">
+        <h1>System Architecture: End-to-End ML Framework for Soil Nutrient Forecasting</h1>
+        <p>A high-level overview of the end-to-end soil nutrient machine learning pipeline</p>
+    </div>
+
+    <div class="pipeline-row">
+        <!-- Stage 1 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-database top-icon c1-text"></i>
+            <div class="pill">Data Sources</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+
+        <i class="fa-solid fa-caret-right right-arrow"></i>
+
+        <!-- Stage 2 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-cogs top-icon c2-text"></i>
+            <div class="pill">Feature Engineering</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+
+        <i class="fa-solid fa-caret-right right-arrow"></i>
+
+        <!-- Stage 3 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-layer-group top-icon c3-text"></i>
+            <div class="pill">Data Integration</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+
+        <i class="fa-solid fa-caret-right right-arrow"></i>
+
+        <!-- Stage 4 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-brain top-icon c4-text"></i>
+            <div class="pill">Model Development</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+
+        <i class="fa-solid fa-caret-right right-arrow"></i>
+
+        <!-- Stage 5 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-chart-line top-icon c5-text"></i>
+            <div class="pill">Model Evaluation</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+
+        <i class="fa-solid fa-caret-right right-arrow"></i>
+
+        <!-- Stage 6 -->
+        <div class="stage-col">
+            <i class="fa-solid fa-file-alt top-icon c6-text"></i>
+            <div class="pill">Reporting</div>
+            <i class="fa-solid fa-caret-down down-arrow"></i>
+        </div>
+    </div>
+
+    <div class="cards-row">
+
+        <!-- Card 1 -->
+        <div class="card c1-border c1-bg">
+            <i class="fa-solid fa-seedling card-icon c1-text"></i>
+            <h3 class="c1-text">Earth Microbiome Project + NEON Soil Microbe Data</h3>
+            <div class="divider c1-text"></div>
+            <ul>
+                <li>Raw Microbiome Data</li>
+                <li>Environmental Measurements</li>
+            </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card c2-border c2-bg">
+            <i class="fa-solid fa-flask card-icon c2-text"></i>
+            <h3 class="c2-text">Processing & Transformation</h3>
+            <div class="divider c2-text"></div>
+            <ul>
+                <li>Filter Soil Samples</li>
+                <li>Extract BIOM Matrix</li>
+                <li>CLR Transformation</li>
+                <li>PCA Reduction (150 comp)</li>
+                <li>Alpha Diversity (Shannon, Simpson, Observed)</li>
+            </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card c3-border c3-bg">
+            <i class="fa-solid fa-object-ungroup card-icon c3-text"></i>
+            <h3 class="c3-text">Dataset Alignment</h3>
+            <div class="divider c3-text"></div>
+            <ul>
+                <li>Spatial Mapping</li>
+                <li>Feature Integration</li>
+                <li>Consolidated DataFrame</li>
+            </ul>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card c4-border c4-bg">
+            <i class="fa-solid fa-project-diagram card-icon c4-text"></i>
+            <h3 class="c4-text">Algorithm Training</h3>
+            <div class="divider c4-text"></div>
+            <ul>
+                <li>Random Forest Regressor</li>
+                <li>Gradient Boosting</li>
+                <li>Ridge Regression</li>
+                <li>Spatial Block Cross-Val</li>
+                <li><b>Target:</b> Total Nitrogen</li>
+            </ul>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card c5-border c5-bg">
+            <i class="fa-solid fa-chart-bar card-icon c5-text"></i>
+            <h3 class="c5-text">Performance Metrics</h3>
+            <div class="divider c5-text"></div>
+            <ul>
+                <li>RMSE</li>
+                <li>MAE</li>
+                <li>R²</li>
+                <li>95% Prediction Intervals</li>
+            </ul>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card c6-border c6-bg">
+            <i class="fa-brands fa-kaggle card-icon c6-text"></i>
+            <h3 class="c6-text">Research Outputs</h3>
+            <div class="divider c6-text"></div>
+            <ul>
+                <li>Kaggle-structured</li>
+                <li>Jupyter Notebook</li>
+                <li>Publishable Findings</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
