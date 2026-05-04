@@ -1,26 +1,49 @@
-flowchart TD
-    %% Define Classes for Styling as per memory constraints
+---
+title: System Architecture Soil Nutrient Forecasting Pipeline
+---
+flowchart LR
+    classDef source fill:#f8f9fa,stroke:#ced4da,stroke-width:2px,color:#212529
+    classDef processing fill:#e8f5e9,stroke:#81c784,stroke-width:2px,color:#1b5e20
+    classDef integration fill:#fff3e0,stroke:#ffb74d,stroke-width:2px,color:#e65100
+    classDef ml fill:#e3f2fd,stroke:#64b5f6,stroke-width:2px,color:#0d47a1
+    classDef evaluation fill:#f3e5f5,stroke:#ba68c8,stroke-width:2px,color:#4a148c
+    classDef reporting fill:#eceff1,stroke:#90a4ae,stroke-width:2px,color:#263238
     classDef plain fill:transparent,stroke:none,color:#000
-    classDef mainbox fill:transparent,stroke:#ddd,stroke-width:2px,color:#000
 
-    %% Main Stages (Top Row)
-    DP_TOP["fa:fa-database Data Processing Pipeline"]:::plain
-    IS_TOP["fa:fa-th Imputation & Scaling"]:::plain
-    SO_TOP["fa:fa-network-wired SMOTE Oversampling"]:::plain
-    EV_TOP["fa:fa-chart-bar Evaluation & Visualization Layer"]:::plain
+    subgraph Sources
+        direction TB
+        EO["fa:fa-satellite Earth Observation Data<br>---<br>- EMIT hyperspectral imagery<br>- PRISMA imagery<br>- ESA Sentinel products<br>- Environmental covariates"]:::source
+        FIELD["fa:fa-flask Field & Soil Data<br>---<br>- NEON soil measurements<br>- Soil nutrient properties<br>- Ground truth labels<br>- Sampling coordinates"]:::source
+    end
 
-    DP_TOP --> IS_TOP
-    IS_TOP --> SO_TOP
-    SO_TOP --> EV_TOP
+    subgraph Processing
+        direction TB
+        DP["fa:fa-cogs Data Engineering<br>---<br>- Raster preprocessing<br>- Spatial alignment<br>- Feature engineering<br>- Spectral index extraction<br>- PCA dimensionality reduction<br>- Seasonal aggregation<br>- Soil-region stratification"]:::processing
+    end
 
-    %% Details
-    DP_BOT["fa:fa-th-large Merge & Raster Sampling<br>---<br>fa:fa-cogs Feature Engineering"]:::plain
-    IS_BOT["fa:fa-th-large Data Splitting<br>---<br>fa:fa-sliders-h Imputation & Scaling"]:::plain
-    SO_BOT["fa:fa-project-diagram Model Training Layer<br>---<br>fa:fa-brain SMOTE Oversampling"]:::plain
-    EV_BOT["fa:fa-chart-line Feature Importance,<br>Geographic Risk Maps,<br>ROC-AUC Curves,<br>Dataset Schema &<br>Confusion Matrix"]:::plain
+    subgraph Integration
+        direction TB
+        DI["fa:fa-layer-group Data Integration<br>---<br>- Spatial joins<br>- Raster-to-point sampling<br>- Temporal matching<br>- EMIT abundance merging<br>- Final ML-ready dataset creation"]:::integration
+    end
 
-    %% Connections
-    DP_TOP --> DP_BOT
-    IS_TOP --> IS_BOT
-    SO_TOP --> SO_BOT
-    EV_TOP --> EV_BOT
+    subgraph ML
+        direction TB
+        ML_MODELS["fa:fa-brain Model Training<br>---<br>- Random Forest Regressor<br>- Ridge Regression<br>- Spatial block cross-validation<br>- Hyperparameter tuning"]:::ml
+    end
+
+    subgraph Evaluation
+        direction TB
+        EVAL["fa:fa-chart-line Evaluation Metrics<br>---<br>- RMSE, MAE, R2 Score<br>- Confidence intervals<br>- Feature importance<br>- Spatial prediction maps"]:::evaluation
+    end
+
+    subgraph Reporting
+        direction TB
+        REP["fa:fa-file-alt Reporting / Notebooks<br>---<br>- Kaggle-ready notebook<br>- Research reporting<br>- Figures & export artifacts"]:::reporting
+    end
+
+    EO --> DP
+    FIELD --> DP
+    DP --> DI
+    DI --> ML_MODELS
+    ML_MODELS --> EVAL
+    EVAL --> REP
