@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EREV Dataset Generator</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0d1b2a;
+            --bg-card: #1b263b;
+            --accent: #00f5a0;
+            --text-main: #e0e1dd;
+            --text-muted: #778da9;
+            --border: #415a77;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 24px;
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--accent);
+            transition: width 0.1s linear;
+        }
+
+        .status-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        button {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        button:disabled {
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--accent);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>EREV Synthetic Dataset Generator</h1>
+        <p style="color: var(--text-muted)">Client-side generation for Range-Extended Electric Vehicle optimization.</p>
+    </header>
+
+    <!-- Generation Panel -->
+    <div class="card" id="generation-card">
+        <h2>Dataset Generation Status</h2>
+        <div class="status-text" id="status-text">Ready to generate 50,000 rows...</div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="btn-group">
+            <button id="btn-generate" onclick="startGeneration()">Start Generation</button>
+            <button id="btn-dl-full" disabled onclick="downloadFull()">⬇ Download Full Dataset (50k rows)</button>
+            <button id="btn-dl-train" disabled onclick="downloadTrain()">⬇ Download Training Set (80%)</button>
+            <button id="btn-dl-test" disabled onclick="downloadTest()">⬇ Download Test Set (20%)</button>
+        </div>
+    </div>
+
+    <!-- Analytics Dashboard (Hidden initially) -->
+    <div id="analytics-panel" class="hidden">
+        <!-- Summary Stats Table -->
+        <div class="card">
+            <h2>Summary Statistics</h2>
+            <div class="table-responsive">
+                <table id="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Mean</th>
+                            <th>Std Dev</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="card charts-grid">
+            <div>
+                <h3>Efficiency vs SoC</h3>
+                <div class="chart-container">
+                    <canvas id="scatterChart"></canvas>
+                </div>
+            </div>
+            <div>
+                <h3>Avg Efficiency by RPM Band</h3>
+                <div class="chart-container">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Config
+    const TOTAL_ROWS = 50000;
+    const CHUNK_SIZE = 1000; // rows per animation frame for non-blocking UI
+
+    // Dataset storage
+    let fullDataset = [];
+    let trainSet = [];
+    let testSet = [];
+    let headers = [
+        'battery_soc', 'vehicle_speed_kmh', 'road_incline_deg', 'ambient_temp_c',
+        'engine_load_pct', 'altitude_m', 'trip_duration_min', 'avg_speed_last_5min',
+        'elevation_gain_m', 'generator_rpm', 'efficiency_ratio_kwh_per_l',
+        'optimal_trigger_soc', 'generator_active'
+    ];
+
+    // Math Utils
+    const randomUniform = (min, max) => Math.random() * (max - min) + min;
+
+    // Box-Muller transform for normal distribution
+    const randomNormal = (mean = 0, stdDev = 1) => {
+        let u1 = 1 - Math.random(); // (0, 1]
+        let u2 = 1 - Math.random(); // (0, 1]
+        let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+        return z0 * stdDev + mean;
+    };
+
+    // EREV Logic Matches Python exactly
+    function compute_bsfc(engine_load_pct, generator_rpm) {
+        const load_factor = Math.abs(engine_load_pct - 67.5) / 67.5;
+        const rpm_factor = Math.abs(generator_rpm - 2250) / 2250;
+        const bsfc_base = 220;
+        return bsfc_base + (load_factor * 80) + (rpm_factor * 60);
+    }
+
+    function compute_efficiency_ratio(bsfc) {
+        const fuel_density_g_per_L = 745;
+        return +(fuel_density_g_per_L / bsfc).toFixed(4);
+    }
+
+    function compute_optimal_trigger_soc(vehicle_speed, road_incline, ambient_temp, altitude) {
+        const base_soc = 30.0;
+        const speed_adjustment = (vehicle_speed / 130) * 15;
+        const incline_adjustment = Math.abs(road_incline) * 1.2;
+        const temp_adjustment = Math.max(0, (10 - ambient_temp) * 0.4);
+        const altitude_adjustment = -(altitude / 2500) * 5;
+        let optimal_soc = base_soc + speed_adjustment + incline_adjustment + temp_adjustment + altitude_adjustment;
+        return +(Math.min(Math.max(optimal_soc, 15.0), 70.0)).toFixed(2);
+    }
+
+    function generateRow(index, total) {
+        // Base uniform distributions
+        let battery_soc = randomUniform(5.0, 95.0);
+        let vehicle_speed_kmh = randomUniform(0, 130);
+        let road_incline_deg = randomUniform(-15.0, 15.0);
+        let ambient_temp_c = randomUniform(-10.0, 45.0);
+        let engine_load_pct = randomUniform(10.0, 100.0);
+        let altitude_m = randomUniform(0, 2500);
+        let trip_duration_min = randomUniform(1, 180);
+        let avg_speed_last_5min = randomUniform(0, 130);
+        let elevation_gain_m = randomUniform(0, 500);
+        let generator_rpm = randomUniform(1500, 4000);
+
+        // Inject edge cases based on index roughly
+        let ratio = index / total;
+        if (ratio < 0.05) {
+            // Cold start
+            ambient_temp_c = randomUniform(-10.0, -1.0);
+            vehicle_speed_kmh = 0;
+            avg_speed_last_5min = 0;
+        } else if (ratio >= 0.05 && ratio < 0.20) {
+            // Highway cruise
+            vehicle_speed_kmh = randomUniform(100, 130);
+            road_incline_deg = randomUniform(-1.0, 1.0);
+            avg_speed_last_5min = randomUniform(90, 130);
+        } else if (ratio >= 0.20 && ratio < 0.25) {
+            // Mountain climb
+            road_incline_deg = randomUniform(8.0, 15.0);
+            battery_soc = randomUniform(5.0, 25.0);
+            elevation_gain_m = randomUniform(200, 500);
+        }
+
+        // Round inputs
+        battery_soc = +battery_soc.toFixed(2);
+        vehicle_speed_kmh = +vehicle_speed_kmh.toFixed(2);
+        road_incline_deg = +road_incline_deg.toFixed(2);
+        ambient_temp_c = +ambient_temp_c.toFixed(2);
+        engine_load_pct = +engine_load_pct.toFixed(2);
+        altitude_m = +altitude_m.toFixed(2);
+        trip_duration_min = +trip_duration_min.toFixed(2);
+        avg_speed_last_5min = +avg_speed_last_5min.toFixed(2);
+        elevation_gain_m = +elevation_gain_m.toFixed(2);
+        generator_rpm = +generator_rpm.toFixed(2);
+
+        // Core logic
+        const bsfc = compute_bsfc(engine_load_pct, generator_rpm);
+        const efficiency_ratio_base = compute_efficiency_ratio(bsfc);
+
+        const altitude_penalty = 1 - (altitude_m * 0.00003);
+        const temp_penalty = 1 - (Math.abs(ambient_temp_c - 27.5) * 0.003);
+        const incline_penalty = 1 - (Math.abs(road_incline_deg) * 0.008);
+        const η_corrected = efficiency_ratio_base * altitude_penalty * temp_penalty * incline_penalty;
+
+        // Noise
+        const noise_scale = 0.02;
+        let efficiency_ratio_kwh_per_l = η_corrected * (1 + randomNormal(0, noise_scale));
+
+        // Clip to range [2.5, 4.2] and round
+        efficiency_ratio_kwh_per_l = +(Math.max(2.5, Math.min(4.2, efficiency_ratio_kwh_per_l))).toFixed(4);
+
+        const optimal_trigger_soc = compute_optimal_trigger_soc(vehicle_speed_kmh, road_incline_deg, ambient_temp_c, altitude_m);
+
+        let generator_active = battery_soc <= optimal_trigger_soc ? 1 : 0;
+
+        return {
+            battery_soc, vehicle_speed_kmh, road_incline_deg, ambient_temp_c,
+            engine_load_pct, altitude_m, trip_duration_min, avg_speed_last_5min,
+            elevation_gain_m, generator_rpm, efficiency_ratio_kwh_per_l,
+            optimal_trigger_soc, generator_active
+        };
+    }
+
+    function startGeneration() {
+        document.getElementById('btn-generate').disabled = true;
+        document.getElementById('status-text').innerText = "Generating dataset...";
+        fullDataset = [];
+
+        let currentRow = 0;
+
+        function processChunk() {
+            let limit = Math.min(currentRow + CHUNK_SIZE, TOTAL_ROWS);
+            for (let i = currentRow; i < limit; i++) {
+                fullDataset.push(generateRow(i, TOTAL_ROWS));
+            }
+            currentRow = limit;
+
+            // Update Progress
+            let pct = Math.round((currentRow / TOTAL_ROWS) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('status-text').innerText = `Generating: ${currentRow.toLocaleString()} / ${TOTAL_ROWS.toLocaleString()} rows (${pct}%)`;
+
+            if (currentRow < TOTAL_ROWS) {
+                requestAnimationFrame(processChunk);
+            } else {
+                finalizeGeneration();
+            }
+        }
+
+        requestAnimationFrame(processChunk);
+    }
+
+    function finalizeGeneration() {
+        // Enforce ~35% generator active if needed (simplified global adjustment)
+        let activeCount = fullDataset.filter(r => r.generator_active === 1).length;
+        let currentRatio = activeCount / TOTAL_ROWS;
+
+        if (currentRatio < 0.35) {
+            let targetAdd = Math.floor((0.35 - currentRatio) * TOTAL_ROWS);
+            let added = 0;
+            for(let r of fullDataset) {
+                if(r.generator_active === 0 && added < targetAdd) {
+                    r.battery_soc = +(r.optimal_trigger_soc - randomUniform(0.1, 5.0)).toFixed(2);
+                    r.battery_soc = Math.max(5.0, r.battery_soc);
+                    r.generator_active = 1;
+                    added++;
+                }
+            }
+        } else if (currentRatio > 0.35) {
+            let targetRemove = Math.floor((currentRatio - 0.35) * TOTAL_ROWS);
+            let removed = 0;
+            for(let r of fullDataset) {
+                if(r.generator_active === 1 && removed < targetRemove) {
+                    r.battery_soc = +(r.optimal_trigger_soc + randomUniform(0.1, 5.0)).toFixed(2);
+                    r.battery_soc = Math.min(95.0, r.battery_soc);
+                    r.generator_active = 0;
+                    removed++;
+                }
+            }
+        }
+
+        // Shuffle dataset for train/test split (Fisher-Yates)
+        for (let i = fullDataset.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [fullDataset[i], fullDataset[j]] = [fullDataset[j], fullDataset[i]];
+        }
+
+        let splitIdx = Math.floor(TOTAL_ROWS * 0.8);
+        trainSet = fullDataset.slice(0, splitIdx);
+        testSet = fullDataset.slice(splitIdx);
+
+        document.getElementById('status-text').innerText = "Generation complete! Select a file to download.";
+
+        // Enable buttons
+        document.getElementById('btn-dl-full').disabled = false;
+        document.getElementById('btn-dl-train').disabled = false;
+        document.getElementById('btn-dl-test').disabled = false;
+
+        calculateAndRenderStats();
+        renderCharts();
+
+        document.getElementById('analytics-panel').classList.remove('hidden');
+    }
+
+    // Exact JS CSV Download Pattern
+    function downloadCSV(filename, rows, headers) {
+        const csvContent = [headers.join(',')]
+            .concat(rows.map(r => headers.map(h => r[h]).join(',')))
+            .join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function downloadFull() { downloadCSV('erev_synthetic_dataset.csv', fullDataset, headers); }
+    function downloadTrain() { downloadCSV('erev_train.csv', trainSet, headers); }
+    function downloadTest() { downloadCSV('erev_test.csv', testSet, headers); }
+
+    function calculateAndRenderStats() {
+        let tbody = document.querySelector('#stats-table tbody');
+        tbody.innerHTML = '';
+
+        headers.forEach(h => {
+            let vals = fullDataset.map(r => r[h]);
+            let sum = vals.reduce((a, b) => a + b, 0);
+            let mean = sum / TOTAL_ROWS;
+            let variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / TOTAL_ROWS;
+            let std = Math.sqrt(variance);
+            let min = Math.min(...vals);
+            let max = Math.max(...vals);
+
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${h}</td>
+                <td>${mean.toFixed(2)}</td>
+                <td>${std.toFixed(2)}</td>
+                <td>${min.toFixed(2)}</td>
+                <td>${max.toFixed(2)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderCharts() {
+        Chart.defaults.color = '#e0e1dd';
+        Chart.defaults.borderColor = '#415a77';
+
+        // 1. Scatter Plot (sample 1000 points to keep UI responsive)
+        let sampleData = fullDataset.slice(0, 1000);
+        let activePoints = sampleData.filter(r => r.generator_active === 1).map(r => ({x: r.battery_soc, y: r.efficiency_ratio_kwh_per_l}));
+        let inactivePoints = sampleData.filter(r => r.generator_active === 0).map(r => ({x: r.battery_soc, y: r.efficiency_ratio_kwh_per_l}));
+
+        new Chart(document.getElementById('scatterChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Gen ON',
+                        data: activePoints,
+                        backgroundColor: '#00f5a0',
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Gen OFF',
+                        data: inactivePoints,
+                        backgroundColor: '#778da9',
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: 'Battery SoC (%)' } },
+                    y: { title: { display: true, text: 'Efficiency (kWh/L)' } }
+                }
+            }
+        });
+
+        // 2. Bar Chart: Avg Efficiency by RPM Band
+        let bands = { '1500-2000':[], '2000-2500':[], '2500-3000':[], '3000-4000':[] };
+
+        fullDataset.forEach(r => {
+            if (r.generator_rpm < 2000) bands['1500-2000'].push(r.efficiency_ratio_kwh_per_l);
+            else if (r.generator_rpm < 2500) bands['2000-2500'].push(r.efficiency_ratio_kwh_per_l);
+            else if (r.generator_rpm < 3000) bands['2500-3000'].push(r.efficiency_ratio_kwh_per_l);
+            else bands['3000-4000'].push(r.efficiency_ratio_kwh_per_l);
+        });
+
+        let avg = (arr) => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
+        let bandData = Object.keys(bands).map(k => avg(bands[k]));
+
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(bands),
+                datasets: [{
+                    label: 'Avg Efficiency (kWh/L)',
+                    data: bandData,
+                    backgroundColor: '#00f5a0',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 2.0,
+                        title: { display: true, text: 'Efficiency (kWh/L)' }
+                    }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

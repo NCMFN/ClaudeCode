@@ -1,0 +1,14 @@
+,mean,std,min,max
+battery_soc,51.1781,24.6478,5.0,95.0
+vehicle_speed_kmh,69.305,41.2384,0.0,130.0
+road_incline_deg,0.6442,8.1598,-15.0,15.0
+ambient_temp_c,16.3842,16.262,-10.0,45.0
+engine_load_pct,55.0243,26.0459,10.0,100.0
+altitude_m,1252.4467,720.5521,0.02,2499.78
+trip_duration_min,90.283,51.6099,1.0,180.0
+avg_speed_last_5min,68.4291,40.6728,0.0,130.0
+elevation_gain_m,255.0066,143.612,0.02,499.99
+generator_rpm,2754.9317,720.1784,1500.05,4000.0
+efficiency_ratio_kwh_per_l,2.5696,0.1249,2.5,3.3573
+optimal_trigger_soc,45.1613,6.8708,25.95,70.0
+generator_active,0.35,0.477,0.0,1.0
