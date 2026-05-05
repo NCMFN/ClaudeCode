@@ -1,0 +1,62 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': 'transparent' }}}%%
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    subgraph Data Ingestion
+        A[Historical Flight Data - BTS]:::plain
+        B[Historical Weather Data - IEM]:::plain
+        C[Real-Time Weather - Aviation Weather API]:::plain
+    end
+
+    subgraph Data Processing
+        D[Data Cleaning & Filtering]:::plain
+        E[Feature Engineering: Traffic proxy, Time]:::plain
+        F[Merge Flight & Weather Data]:::plain
+    end
+
+    subgraph Model Training
+        G[Train-Test Split & Scaling]:::plain
+        H[Linear Regression]:::plain
+        I[Random Forest]:::plain
+        J[XGBoost]:::plain
+        K[Feedforward Neural Network]:::plain
+        L[LSTM]:::plain
+    end
+
+    subgraph Real-Time Inference
+        M[Input: Flight Details]:::plain
+        N[Fetch Real-Time METAR]:::plain
+        O[Predict Delay]:::plain
+    end
+
+    subgraph Visualization & Dashboard
+        P[EDA Plots & Heatmaps]:::plain
+        Q[Model Evaluation Charts]:::plain
+        R[Final Output: Predicted Minutes]:::plain
+    end
+
+    A --> D
+    B --> D
+    D --> E
+    E --> F
+    F --> G
+
+    G --> H
+    G --> I
+    G --> J
+    G --> K
+    G --> L
+
+    J -.-> O
+
+    C --> N
+    M --> N
+    N --> O
+    O --> R
+
+    F --> P
+    H --> Q
+    I --> Q
+    J --> Q
+    K --> Q
+    L --> Q

@@ -97,3 +97,15 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+flights_2023_01.zip\nflights_data/\nweather_2023_01.csv\naviation_weather_sample.json\n*.html
+
+flights_2023_01.zip
+flights_data/
+weather_2023_01.csv
+aviation_weather_sample.json
+*.html
+*.csv
+*.zip
+
+ffnn_model.h5
+lstm_model.h5
