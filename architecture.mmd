@@ -1,0 +1,24 @@
+
+graph TD
+    classDef plain fill:transparent,stroke:none,color:#000
+
+    A[Real-Time Thermal Sensor Feed] --> B[Data Preprocessing]
+    B --> |Frame Extraction| C[Time-Series Features]
+    C --> D{Temporal Deep Learning Model}
+
+    subgraph Model
+        D --> E(LSTM / GRU Layer)
+        E --> F(Dense Layer)
+        F --> G(Sigmoid Activation)
+    end
+
+    G --> |Probability Output| H{Threshold Check}
+    H --> |Exceeds Threshold| I[Proactive Early Warning]
+    H --> |Below Threshold| J[Normal Operation]
+
+    I --> K[System Shutdown / Cooling]
+
+    C -.-> |Historical Data| L[Offline Training]
+    L -.-> |Weights| D
+
+    class A,B,C,D,E,F,G,H,I,J,K,L plain
