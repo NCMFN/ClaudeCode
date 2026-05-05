@@ -1,0 +1,47 @@
+graph TD
+    classDef plain fill:transparent,stroke:#333,color:#000
+
+    subgraph Data Sources
+        P[Plant Traits X1]:::plain
+        S[Soil Features X2]:::plain
+        C[Contaminant X3]:::plain
+        CL[Climate Data X4]:::plain
+    end
+
+    subgraph Feature Engineering
+        P_E[Plant Embeddings & Scaling]:::plain
+        S_E[Soil Normalization]:::plain
+        C_E[Contaminant Descriptors]:::plain
+        CL_E[Climate Encoding]:::plain
+    end
+
+    P --> P_E
+    S --> S_E
+    C --> C_E
+    CL --> CL_E
+
+    subgraph Multi-Modal Neural Network
+        P_B[Plant Branch]:::plain
+        S_B[Soil Branch]:::plain
+        C_B[Contaminant Branch]:::plain
+        CL_B[Climate Branch]:::plain
+
+        P_E --> P_B
+        S_E --> S_B
+        C_E --> C_B
+        CL_E --> CL_B
+
+        F[Concatenation / Fusion Layer]:::plain
+        P_B --> F
+        S_B --> F
+        C_B --> F
+        CL_B --> F
+
+        subgraph Output Heads
+            Reg[Regression Head: BCF, TF, Efficiency]:::plain
+            Cls[Classification Head: Affinity, Hyperaccumulator]:::plain
+        end
+
+        F --> Reg
+        F --> Cls
+    end
