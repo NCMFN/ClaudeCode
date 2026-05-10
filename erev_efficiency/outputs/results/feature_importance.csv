@@ -1,0 +1,17 @@
+Feature,SHAP_Importance
+speed_kmh,0.0
+incline_deg,0.0
+ambient_temp_c,0.0
+battery_temp_c,0.0
+power_demand_kw,0.0
+speed_x_incline,0.0
+thermal_stress,0.0
+soc_rolling_mean,0.0
+soc_rolling_std,0.0
+power_rolling_mean,0.0
+power_rolling_max,0.0
+speed_rolling_mean,0.0
+soc_delta,0.0
+discharge_rate_pct_per_min,0.0
+charge_rate_kw,0.0
+energy_consumed_kwh,0.0

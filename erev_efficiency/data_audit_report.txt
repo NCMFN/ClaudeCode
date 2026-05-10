@@ -1,0 +1,198 @@
+--- Dataset: uci_secondary_storage.csv ---
+Shape: (500, 10)
+Data Types:
+trip_id                    str
+timestamp                  str
+soc_pct                float64
+speed_kmh              float64
+incline_deg            float64
+ambient_temp_c         float64
+battery_temp_c         float64
+power_demand_kw        float64
+energy_consumed_kwh    float64
+charge_rate_kw         float64
+dtype: object
+Describe:
+          soc_pct   speed_kmh  ...  energy_consumed_kwh  charge_rate_kw
+count  500.000000  500.000000  ...           500.000000      500.000000
+mean    30.021175   72.161941  ...            66.878706        3.372079
+std     21.842773   28.750007  ...            38.986643       10.596852
+min     10.000000   20.321826  ...             0.421294        0.000000
+25%     10.122871   47.225829  ...            33.478075        0.000000
+50%     22.271963   73.342386  ...            66.055608        0.000000
+75%     46.521925   97.507373  ...           101.508635        0.000000
+max     79.578706  119.834751  ...           144.041192       49.066336
+
+[8 rows x 8 columns]
+Missing Values:
+trip_id                0
+timestamp              0
+soc_pct                0
+speed_kmh              0
+incline_deg            0
+ambient_temp_c         0
+battery_temp_c         0
+power_demand_kw        0
+energy_consumed_kwh    0
+charge_rate_kw         0
+dtype: int64
+
+
+--- Dataset: ev_charging_load.csv ---
+Shape: (300, 10)
+Data Types:
+trip_id                    str
+timestamp                  str
+soc_pct                float64
+speed_kmh              float64
+ElevationAngle         float64
+ambient_temp_c         float64
+battery_temp_c         float64
+power_demand_kw        float64
+energy_consumed_kwh    float64
+charge_rate_kw         float64
+dtype: object
+Describe:
+          soc_pct   speed_kmh  ...  energy_consumed_kwh  charge_rate_kw
+count  300.000000  300.000000  ...           300.000000      300.000000
+mean    42.823346   69.459196  ...            41.356970        3.040587
+std     18.931077   29.374081  ...            23.867301       10.228597
+min     10.000000   20.187274  ...             0.506758        0.000000
+25%     26.475971   44.880792  ...            20.060401        0.000000
+50%     38.750104   69.354167  ...            41.249896        0.000000
+75%     59.939599   92.736430  ...            62.483749        0.000000
+max     79.493242  119.585643  ...            87.270205       49.929510
+
+[8 rows x 8 columns]
+Missing Values:
+trip_id                0
+timestamp              0
+soc_pct                0
+speed_kmh              0
+ElevationAngle         0
+ambient_temp_c         0
+battery_temp_c         0
+power_demand_kw        0
+energy_consumed_kwh    0
+charge_rate_kw         0
+dtype: int64
+
+
+--- Dataset: ev_battery_charging.csv ---
+Shape: (600, 10)
+Data Types:
+trip_id                    str
+timestamp                  str
+soc_pct                float64
+speed_kmh              float64
+incline_deg            float64
+ambient_temp_c         float64
+battery_temp_c         float64
+power_demand_kw        float64
+energy_consumed_kwh    float64
+ChargingPower          float64
+dtype: object
+Describe:
+          soc_pct   speed_kmh  ...  energy_consumed_kwh  ChargingPower
+count  600.000000  600.000000  ...           600.000000     600.000000
+mean    27.414316   71.764026  ...            82.500349       4.982878
+std     20.447334   29.237383  ...            47.655075      12.498046
+min     10.000000   20.015774  ...             0.564195       0.000000
+25%     10.182023   46.502223  ...            40.934484       0.000000
+50%     19.081391   73.407322  ...            81.656238       0.000000
+75%     39.065516   96.755871  ...           122.424596       0.000000
+max     79.435805  119.778439  ...           173.203002      49.646105
+
+[8 rows x 8 columns]
+Missing Values:
+trip_id                0
+timestamp              0
+soc_pct                0
+speed_kmh              0
+incline_deg            0
+ambient_temp_c         0
+battery_temp_c         0
+power_demand_kw        0
+energy_consumed_kwh    0
+ChargingPower          0
+dtype: int64
+
+
+--- Dataset: ev_energy_consumption.csv ---
+Shape: (750, 10)
+Data Types:
+trip_id                    str
+timestamp                  str
+SOC                    float64
+Velocity               float64
+incline_deg            float64
+ambient_temp_c         float64
+battery_temp_c         float64
+Power                  float64
+energy_consumed_kwh    float64
+charge_rate_kw         float64
+dtype: object
+Describe:
+              SOC    Velocity  ...  energy_consumed_kwh  charge_rate_kw
+count  750.000000  750.000000  ...           750.000000      750.000000
+mean    23.920688   70.096949  ...           104.587552        5.220032
+std     19.257784   28.391328  ...            60.187887       12.755724
+min     10.000000   20.003072  ...             0.337592        0.000000
+25%     10.000000   45.512667  ...            52.449126        0.000000
+50%     13.560978   69.173139  ...           103.372431        0.000000
+75%     31.165712   93.794515  ...           157.983488        0.000000
+max     79.662408  119.920730  ...           215.697246       49.507016
+
+[8 rows x 8 columns]
+Missing Values:
+trip_id                0
+timestamp              0
+SOC                    0
+Velocity               0
+incline_deg            0
+ambient_temp_c         0
+battery_temp_c         0
+Power                  0
+energy_consumed_kwh    0
+charge_rate_kw         0
+dtype: int64
+
+
+--- Dataset: battery_heating_data.csv ---
+Shape: (400, 10)
+Data Types:
+trip_id                    str
+timestamp                  str
+soc_pct                float64
+speed_kmh              float64
+incline_deg            float64
+AmbTemp                float64
+BattTemp               float64
+power_demand_kw        float64
+energy_consumed_kwh    float64
+charge_rate_kw         float64
+dtype: object
+Describe:
+          soc_pct   speed_kmh  ...  energy_consumed_kwh  charge_rate_kw
+count  400.000000  400.000000  ...           400.000000      400.000000
+mean    35.964571   66.529748  ...            52.027279        3.353206
+std     21.591766   27.241919  ...            30.513348       10.682215
+min     10.000000   20.234747  ...             0.265273        0.000000
+25%     15.845085   43.999599  ...            26.048378        0.000000
+50%     30.782821   65.181790  ...            50.941270        0.000000
+75%     53.951622   88.706181  ...            78.708624        0.000000
+max     79.734727  119.890470  ...           115.560244       48.373242
+
+[8 rows x 8 columns]
+Missing Values:
+trip_id                0
+timestamp              0
+soc_pct                0
+speed_kmh              0
+incline_deg            0
+AmbTemp                0
+BattTemp               0
+power_demand_kw        0
+energy_consumed_kwh    0
+charge_rate_kw         0
+dtype: int64
