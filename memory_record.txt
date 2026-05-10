@@ -1,0 +1,3 @@
+For regression modeling on time-series battery data, strictly shift dependent rolling features by 1 row to prevent perfectly leaking the target variable across time-series sequences.
+When generating SHAP plots, always instantiate explainer using type-specific classes dynamically (TreeExplainer for XGBoost/RF vs LinearExplainer for LinearRegression).
+Never mask API/URL failures by silently generating synthetic surrogate data in testing suites; scripts must physically raise the exception according to system prompts while utilizing local caches when viable.

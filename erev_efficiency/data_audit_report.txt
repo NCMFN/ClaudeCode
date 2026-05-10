@@ -1,0 +1,229 @@
+--- Dataset: EV Energy Consumption ---
+Shape: (5000, 10)
+<class 'pandas.DataFrame'>
+RangeIndex: 5000 entries, 0 to 4999
+Data columns (total 10 columns):
+ #   Column               Non-Null Count  Dtype
+---  ------               --------------  -----
+ 0   soc_pct              5000 non-null   float64
+ 1   speed_kmh            5000 non-null   float64
+ 2   incline_deg          0 non-null      float64
+ 3   ambient_temp_c       5000 non-null   float64
+ 4   battery_temp_c       5000 non-null   float64
+ 5   power_demand_kw      0 non-null      float64
+ 6   energy_consumed_kwh  5000 non-null   float64
+ 7   charge_rate_kw       0 non-null      float64
+ 8   trip_id              5000 non-null   int64
+ 9   timestamp            5000 non-null   str
+dtypes: float64(8), int64(1), str(1)
+memory usage: 390.8 KB
+
+
+Summary Statistics:
+           soc_pct    speed_kmh  incline_deg  ambient_temp_c  battery_temp_c  power_demand_kw  energy_consumed_kwh  charge_rate_kw      trip_id
+count  5000.000000  5000.000000          0.0     5000.000000     5000.000000              0.0          5000.000000             0.0  5000.000000
+mean     60.214465    59.312952          NaN       17.312654       27.510130              NaN             8.437983             NaN  1505.701200
+std      23.128262    34.517605          NaN       13.005106       10.015385              NaN             2.184809             NaN   290.836902
+min      20.020196     0.001396          NaN       -4.995288       10.003858              NaN             1.881426             NaN  1000.000000
+25%      40.088318    29.515400          NaN        5.950476       18.884742              NaN             6.771081             NaN  1253.000000
+50%      60.490283    58.646794          NaN       17.330798       27.581710              NaN             8.455746             NaN  1510.000000
+75%      80.409928    89.030001          NaN       28.624021       35.920162              NaN            10.031938             NaN  1761.000000
+max      99.993986   119.946924          NaN       39.998063       44.985943              NaN            14.660528             NaN  1999.000000
+
+Missing values:
+soc_pct                   0
+speed_kmh                 0
+incline_deg            5000
+ambient_temp_c            0
+battery_temp_c            0
+power_demand_kw        5000
+energy_consumed_kwh       0
+charge_rate_kw         5000
+trip_id                   0
+timestamp                 0
+
+==================================================
+
+--- Dataset: EV Battery Charging ---
+Shape: (1000, 10)
+<class 'pandas.DataFrame'>
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 10 columns):
+ #   Column               Non-Null Count  Dtype
+---  ------               --------------  -----
+ 0   soc_pct              1000 non-null   float64
+ 1   speed_kmh            0 non-null      float64
+ 2   incline_deg          0 non-null      float64
+ 3   ambient_temp_c       1000 non-null   float64
+ 4   battery_temp_c       1000 non-null   float64
+ 5   power_demand_kw      0 non-null      float64
+ 6   energy_consumed_kwh  0 non-null      float64
+ 7   charge_rate_kw       1000 non-null   float64
+ 8   trip_id              1000 non-null   str
+ 9   timestamp            0 non-null      float64
+dtypes: float64(9), str(1)
+memory usage: 78.3 KB
+
+
+Summary Statistics:
+           soc_pct  speed_kmh  incline_deg  ambient_temp_c  battery_temp_c  power_demand_kw  energy_consumed_kwh  charge_rate_kw  timestamp
+count  1000.000000        0.0          0.0     1000.000000     1000.000000              0.0                  0.0     1000.000000        0.0
+mean     54.123090        NaN          NaN       24.882106       29.807501              NaN                  NaN        0.213001        NaN
+std      26.292363        NaN          NaN        5.736199        5.729787              NaN                  NaN        0.102142        NaN
+min      10.416882        NaN          NaN       15.000614       20.013068              NaN                  NaN        0.035529        NaN
+25%      31.237594        NaN          NaN       19.899480       24.838015              NaN                  NaN        0.128162        NaN
+50%      54.712664        NaN          NaN       24.891962       29.685586              NaN                  NaN        0.210648        NaN
+75%      76.988763        NaN          NaN       29.799869       34.750816              NaN                  NaN        0.299215        NaN
+max      99.974591        NaN          NaN       34.954988       39.991154              NaN                  NaN        0.407455        NaN
+
+Missing values:
+soc_pct                   0
+speed_kmh              1000
+incline_deg            1000
+ambient_temp_c            0
+battery_temp_c            0
+power_demand_kw        1000
+energy_consumed_kwh    1000
+charge_rate_kw            0
+trip_id                   0
+timestamp              1000
+
+==================================================
+
+--- Dataset: EV Charging Load ---
+Shape: (64945, 10)
+<class 'pandas.DataFrame'>
+RangeIndex: 64945 entries, 0 to 64944
+Data columns (total 10 columns):
+ #   Column               Non-Null Count  Dtype
+---  ------               --------------  -----
+ 0   soc_pct              64945 non-null  float64
+ 1   speed_kmh            0 non-null      float64
+ 2   incline_deg          0 non-null      float64
+ 3   ambient_temp_c       64945 non-null  float64
+ 4   battery_temp_c       0 non-null      float64
+ 5   power_demand_kw      0 non-null      float64
+ 6   energy_consumed_kwh  64945 non-null  float64
+ 7   charge_rate_kw       64945 non-null  float64
+ 8   trip_id              64945 non-null  int64
+ 9   timestamp            64945 non-null  str
+dtypes: float64(8), int64(1), str(1)
+memory usage: 5.0 MB
+
+
+Summary Statistics:
+            soc_pct  speed_kmh  incline_deg  ambient_temp_c  battery_temp_c  power_demand_kw  energy_consumed_kwh  charge_rate_kw  trip_id
+count  64945.000000        0.0          0.0    64945.000000             0.0              0.0         64945.000000    64945.000000  64945.0
+mean      28.480992        NaN          NaN       24.654049             NaN              NaN            39.966987       50.055922    106.0
+std       15.939754        NaN          NaN        9.409490             NaN              NaN            10.007163       10.006593      0.0
+min        0.099346        NaN          NaN        0.000000             NaN              NaN             0.000000       10.173855    106.0
+25%       15.972907        NaN          NaN       18.140208             NaN              NaN            33.225937       43.306200    106.0
+50%       26.420173        NaN          NaN       24.921663             NaN              NaN            39.957916       50.120279    106.0
+75%       38.853891        NaN          NaN       31.751901             NaN              NaN            46.637083       56.847913    106.0
+max       89.662865        NaN          NaN       40.000000             NaN              NaN            75.000000       94.064857    106.0
+
+Missing values:
+soc_pct                    0
+speed_kmh              64945
+incline_deg            64945
+ambient_temp_c             0
+battery_temp_c         64945
+power_demand_kw        64945
+energy_consumed_kwh        0
+charge_rate_kw             0
+trip_id                    0
+timestamp                  0
+
+==================================================
+
+--- Dataset: UCI Secondary Storage ---
+Shape: (0, 10)
+<class 'pandas.DataFrame'>
+RangeIndex: 0 entries
+Data columns (total 10 columns):
+ #   Column               Non-Null Count  Dtype
+---  ------               --------------  -----
+ 0   soc_pct              0 non-null      float64
+ 1   speed_kmh            0 non-null      float64
+ 2   incline_deg          0 non-null      float64
+ 3   ambient_temp_c       0 non-null      float64
+ 4   battery_temp_c       0 non-null      float64
+ 5   power_demand_kw      0 non-null      float64
+ 6   energy_consumed_kwh  0 non-null      float64
+ 7   charge_rate_kw       0 non-null      float64
+ 8   trip_id              0 non-null      float64
+ 9   timestamp            0 non-null      float64
+dtypes: float64(10)
+memory usage: 132.0 bytes
+
+
+Summary Statistics:
+       soc_pct  speed_kmh  incline_deg  ambient_temp_c  battery_temp_c  power_demand_kw  energy_consumed_kwh  charge_rate_kw  trip_id  timestamp
+count      0.0        0.0          0.0             0.0             0.0              0.0                  0.0             0.0      0.0        0.0
+mean       NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+std        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+min        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+25%        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+50%        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+75%        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+max        NaN        NaN          NaN             NaN             NaN              NaN                  NaN             NaN      NaN        NaN
+
+Missing values:
+soc_pct                0
+speed_kmh              0
+incline_deg            0
+ambient_temp_c         0
+battery_temp_c         0
+power_demand_kw        0
+energy_consumed_kwh    0
+charge_rate_kw         0
+trip_id                0
+timestamp              0
+
+==================================================
+
+--- Dataset: Battery and Heating (Combined Trips) ---
+Shape: (1094793, 10)
+<class 'pandas.DataFrame'>
+RangeIndex: 1094793 entries, 0 to 1094792
+Data columns (total 10 columns):
+ #   Column               Non-Null Count    Dtype
+---  ------               --------------    -----
+ 0   soc_pct              1064000 non-null  float64
+ 1   speed_kmh            1078364 non-null  float64
+ 2   incline_deg          1094793 non-null  float64
+ 3   ambient_temp_c       1094793 non-null  float64
+ 4   battery_temp_c       1094793 non-null  float64
+ 5   power_demand_kw      1094793 non-null  float64
+ 6   energy_consumed_kwh  0 non-null        float64
+ 7   charge_rate_kw       0 non-null        float64
+ 8   trip_id              1094793 non-null  str
+ 9   timestamp            1094793 non-null  float64
+dtypes: float64(9), str(1)
+memory usage: 83.5 MB
+
+
+Summary Statistics:
+            soc_pct     speed_kmh   incline_deg  ambient_temp_c  battery_temp_c  power_demand_kw  energy_consumed_kwh  charge_rate_kw     timestamp
+count  1.064000e+06  1.078364e+06  1.094793e+06    1.094793e+06    1.094793e+06     1.094793e+06                  0.0             0.0  1.094793e+06
+mean   6.510476e+01  4.469790e+01  3.284182e-04    1.306448e+01    1.541675e+01    -6.225519e+00                  NaN             NaN  1.030379e+03
+std    1.511465e+01  3.548308e+01  2.750469e-02    9.622983e+00    7.430944e+00     1.617705e+01                  NaN             NaN  8.948726e+02
+min    0.000000e+00  0.000000e+00 -1.550000e+00   -3.500000e+00   -1.000000e+00    -1.404904e+02                  NaN             NaN  0.000000e+00
+25%    5.647000e+01  1.419000e+01  0.000000e+00    5.000000e+00    9.000000e+00    -1.169817e+01                  NaN             NaN  3.915000e+02
+50%    6.820000e+01  4.089000e+01  0.000000e+00    9.500000e+00    1.400000e+01    -4.336054e+00                  NaN             NaN  8.121000e+02
+75%    7.650000e+01  6.790000e+01  0.000000e+00    2.150000e+01    2.100000e+01    -6.440448e-01                  NaN             NaN  1.380900e+03
+max    8.850000e+01  1.522600e+02  2.752000e+01    3.350000e+01    3.200000e+01     5.564228e+01                  NaN             NaN  5.610100e+03
+
+Missing values:
+soc_pct                  30793
+speed_kmh                16429
+incline_deg                  0
+ambient_temp_c               0
+battery_temp_c               0
+power_demand_kw              0
+energy_consumed_kwh    1094793
+charge_rate_kw         1094793
+trip_id                      0
+timestamp                    0
+
+==================================================

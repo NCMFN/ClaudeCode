@@ -1,0 +1,6 @@
+data/
+*.csv
+*.tsv
+*.biom
+*.zip
+*.log
