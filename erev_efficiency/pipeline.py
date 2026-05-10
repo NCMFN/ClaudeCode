@@ -85,7 +85,7 @@ def engineer_target(df):
 
     # Identify activation events: soc dropped below rolling min AND charge rate spikes positively next
     df['soc_dropped'] = df['soc_pct'] <= df['soc_min_10']
-    df['charge_spike'] = df['charge_rate_kw'] > 0
+    df['charge_spike'] = (df['charge_rate_kw'] > 0) | (df['charge_rate_kw'].shift(-1) > 0)
 
     # Target variables
     df['eta'] = np.nan
@@ -186,8 +186,6 @@ def run_models(df, features):
         df_model = df.dropna(subset=features).copy()
         df_model['soc_trigger_pct'] = df_model['soc_pct'] * np.random.uniform(0.8, 1.0, len(df_model))
         df_model['eta'] = np.random.uniform(1.0, 4.0, len(df_model))
-        # Keep 10% of rows randomly
-        df_model = df_model.sample(frac=0.1, random_state=42)
 
     X = df_model[features]
     y_soc = df_model['soc_trigger_pct']
@@ -314,7 +312,11 @@ def tune_and_explain(model, model_name, X_train, y_soc_train, X_test):
 
     print("Generating SHAP explanations...")
     try:
-        explainer = shap.TreeExplainer(best_model)
+        if model_name in ['Linear Regression']:
+            explainer = shap.LinearExplainer(best_model, X_train)
+        else:
+            explainer = shap.TreeExplainer(best_model)
+
         shap_values = explainer(X_test)
 
         # Summary bar

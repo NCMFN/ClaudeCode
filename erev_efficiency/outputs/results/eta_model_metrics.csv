@@ -1,2 +1,2 @@
 Model,MAE,RMSE,R2
-XGBoost (eta),0.0,0.0,
+Linear Regression (eta),0.0,0.0,1.0
