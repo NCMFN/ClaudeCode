@@ -19,6 +19,10 @@ def draw_system_architecture():
     ax.axis('off')
     ax.set_title("Multi-Agent Autonomous Framework Architecture", pad=20, weight='bold')
 
+    # FIX: Set limits so the patches are visible
+    ax.set_xlim(0, 12)
+    ax.set_ylim(0, 8)
+
     # Define colors
     colors = {
         'coordinator': '#1F3864',  # Dark Blue
@@ -76,6 +80,7 @@ def draw_system_architecture():
                 arrowprops=dict(arrowstyle="-|>", color='red', lw=2, connectionstyle="arc3,rad=0.3", mutation_scale=20))
     ax.text(6.0, 3.0, "Feedback Loop\n(Fixes needed)", color='red', weight='bold')
 
+    plt.tight_layout()
     plt.savefig('system_architecture.png', bbox_inches='tight')
     plt.close()
 
