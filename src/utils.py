@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-def plot_degradation_trends(df, output_dir='outputs/figures/'):
+def plot_degradation_trends(df, output_dir='.'):
     if df.empty:
         return
 

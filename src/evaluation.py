@@ -21,7 +21,7 @@ plt.rcParams.update({
     'savefig.dpi': 300
 })
 
-def evaluate_regression(model, X_test, y_test, model_name, output_dir='outputs/figures/'):
+def evaluate_regression(model, X_test, y_test, model_name, output_dir='.'):
     if X_test.empty or model is None:
         return {'MAE': 0, 'RMSE': 0, 'R2': 0}
 
@@ -43,7 +43,7 @@ def evaluate_regression(model, X_test, y_test, model_name, output_dir='outputs/f
 
     return {'MAE': mae, 'RMSE': rmse, 'R2': r2}
 
-def evaluate_classification(model, X_test, y_test, model_name, output_dir='outputs/figures/'):
+def evaluate_classification(model, X_test, y_test, model_name, output_dir='.'):
     if X_test.empty or model is None:
         return {'Accuracy': 0, 'F1': 0, 'AUC': 0}
 
@@ -82,7 +82,7 @@ def evaluate_classification(model, X_test, y_test, model_name, output_dir='outpu
 
     return {'Accuracy': acc, 'F1': f1, 'AUC': auc}
 
-def generate_shap_plots(model, X_test, output_dir='outputs/figures/'):
+def generate_shap_plots(model, X_test, output_dir='.'):
     if X_test.empty or model is None:
         return
 
@@ -127,7 +127,7 @@ def generate_shap_plots(model, X_test, output_dir='outputs/figures/'):
     except Exception as e:
         print(f"SHAP explainer failed: {e}")
 
-def run_evaluation(data_dir='data/processed', models_dir='outputs/models/', output_dir='outputs/results/', fig_dir='outputs/figures/'):
+def run_evaluation(data_dir='data/processed', models_dir='outputs/models/', output_dir='outputs/results/', fig_dir='.'):
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(fig_dir, exist_ok=True)
 

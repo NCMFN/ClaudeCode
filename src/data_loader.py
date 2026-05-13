@@ -100,7 +100,7 @@ def load_data(raw_dir='data/raw', processed_dir='data/processed'):
 
     return dfs
 
-def run_eda(dfs, output_dir='outputs/figures/'):
+def run_eda(dfs, output_dir='.'):
     os.makedirs(output_dir, exist_ok=True)
 
     if not dfs or all(df.empty for df in dfs.values()):

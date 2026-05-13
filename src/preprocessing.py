@@ -97,7 +97,7 @@ def run_preprocessing(input_dir='data/processed', output_dir='data/processed'):
     # Find main dataset
     target_file = None
     for filename in os.listdir(input_dir):
-        if filename.endswith('.csv') and 'iot_device_failure' in filename:
+        if filename.endswith('.csv') and 'mock_data' in filename:
             target_file = filename
             break
 
