@@ -173,3 +173,11 @@ tests/           — Test suite
 * **Error Reporting:** If a link is broken or restricted, report the specific HTTP error code instead of falling back to a simulated dataset.
 
 
+IMAGE_OUTPUT_PATH=outputs/figures/
+RESULTS_OUTPUT_PATH=outputs/results/
+MODELS_OUTPUT_PATH=outputs/models/
+RANDOM_SEED=42
+THERMAL_THRESHOLD_CELSIUS=85
+SMOTE_RANDOM_STATE=42
+OPTUNA_TRIALS=50
+CV_FOLDS=5
