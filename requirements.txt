@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+torch
+tensorflow
+matplotlib
+seaborn
+imbalanced-learn
+tqdm
+scipy
+requests

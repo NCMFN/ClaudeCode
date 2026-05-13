@@ -1,99 +1,54 @@
-# Environment files
+# Ignore data files
+data/raw/*
+data/processed/*
+*.csv
+*.tsv
+*.biom
+*.zip
+*.tar.gz
+*.pcap
+
+# Ignore models
+models/*.pt
+models/*.pth
+models/*.h5
+models/*.pkl
+
+# Ignore environments
+venv/
 .env
-.env.local
-.env.*.local
-.env.development
-.env.test
-.env.production
-
-# API keys and secrets
-*.key
-*.pem
-secrets.json
-config/secrets.yml
-.secrets
-
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-Desktop.ini
-
-# Editor files
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-.project
-.classpath
-.settings/
-*.sublime-project
-*.sublime-workspace
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-.yarn/
-lerna-debug.log*
-
-# Build outputs
-dist/
-build/
-*.tsbuildinfo
-.cache/
-
-# Test coverage
-coverage/
-.nyc_output/
-
-# Logs
-logs/
-*.log
-
-# Python
 __pycache__/
 *.pyc
 
-# Task files (Claude Code teams)
-tasks/
+# Allow keeping directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!results/.gitkeep
+git-lfs-linux-amd64-v3.4.0.tar.gz
+git-lfs-3.4.0/
 
-# Personal configs (if any)
-personal/
-private/
+# Ignore data files
+data/raw/*
+data/processed/*
+*.csv
+*.tsv
+*.biom
+*.zip
+*.tar.gz
+*.pcap
 
-# Session templates (not committed)
-examples/sessions/*.tmp
+# Ignore models
+models/*.pt
+models/*.pth
+models/*.h5
+models/*.pkl
 
-# Local drafts
-marketing/
-.dmux/
-.dmux-hooks/
-.claude/worktrees/
-.claude/scheduled_tasks.lock
+# Ignore environments
+venv/
 
-# Temporary files
-tmp/
-temp/
-*.tmp
-*.bak
-*.backup
-
-# Observer temp files (continuous-learning-v2)
-.observer-tmp/
-
-# Rust build artifacts
-ecc2/target/
-
-# Bootstrap pipeline outputs
-# Generated lock files in tool subdirectories
-.opencode/package-lock.json
-.opencode/node_modules/
-assets/images/security/badrudi-exploit.mp4
+# Allow keeping directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!results/.gitkeep

@@ -1,0 +1,10 @@
+Run started at: 2026-05-13 08:56:53.395115
+Parameters: seed=42, models=[IF, OCSVM, AE, LSTM-AE, CNN-BiLSTM]
+Summary Results:
+Model
+AE                 0.001471
+CNN-BiLSTM-Attn    0.020050
+IF                 0.049329
+LSTM-AE            0.019658
+OCSVM              0.053907
+Run ended at: 2026-05-13 08:56:53.400388
