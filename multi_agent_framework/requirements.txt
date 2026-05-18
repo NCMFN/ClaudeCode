@@ -1,0 +1,9 @@
+pyautogen==0.2.20
+pytest==8.0.0
+pylint==3.0.3
+sphinx==7.2.6
+pandas==2.2.0
+requests==2.31.0
+datasets==2.17.0
+openai==1.12.0
+anthropic==0.18.1
