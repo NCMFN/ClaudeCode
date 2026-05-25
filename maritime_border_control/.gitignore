@@ -1,0 +1,6 @@
+data/
+models/
+outputs/
+*.zip
+*.log
+__pycache__/
