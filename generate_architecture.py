@@ -50,7 +50,9 @@ def main():
     ax.annotate('', xy=(4, 5.5), xytext=(3, 5), arrowprops=dict(facecolor='black', width=2, headwidth=8))
 
     # NOAA to Phase 5
-    ax.annotate('', xy=(7.5, 3.25), xytext=(3, 3.5), arrowprops=dict(facecolor='black', width=2, headwidth=8))
+    # To avoid crossing Phase 4, we route underneath: down, right, then up
+    ax.plot([1.75, 1.75, 8.75, 8.75], [3.0, 1.8, 1.8, 2.5], color='black', linewidth=2)
+    ax.annotate('', xy=(8.75, 2.5), xytext=(8.75, 2.49), arrowprops=dict(facecolor='black', width=2, headwidth=8))
 
     # Processing to ML
     ax.annotate('', xy=(7.5, 6), xytext=(6.5, 6), arrowprops=dict(facecolor='black', width=2, headwidth=8))
