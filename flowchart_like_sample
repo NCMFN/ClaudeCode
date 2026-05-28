@@ -1,0 +1,57 @@
+digraph flowchart {
+	dpi=300 nodesep=0.6 rankdir=TB ranksep=0.6
+	node [color=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=filled]
+	edge [arrowhead=normal color=black fontname=Arial fontsize=10 penwidth=1.5]
+	start [label=Start fillcolor="#a8e6cf" shape=oval]
+	collect [label="Collect historical price
+data for the selected
+cryptocurrency" fillcolor="#fff2cc" shape=parallelogram]
+	analysis [label="Perform Market
+Analysis" fillcolor="#add8e6" shape=box]
+	buy [label="Decision
+to buy" fillcolor="#f08080" shape=diamond]
+	drop [label=Drop fillcolor="#add8e6" shape=box]
+	exchange [label="Choose a Cryptocurrency
+Exchange" fillcolor="#add8e6" shape=box]
+	account [label="Create an
+Account" fillcolor="#add8e6" shape=box]
+	fund [label="Fund the
+Account" fillcolor="#add8e6" shape=box]
+	order [label="Place an Order" fillcolor="#add8e6" shape=box]
+	pool [label="Pool of cryptocurrencies" fillcolor="#add8e6" shape=box]
+	wavelet [label="Wavelet Analysis (DWT, MWT, Wavelet Coherence)" fillcolor="#add8e6" shape=box]
+	intensity [label="Assess frequency
+intensity" fillcolor="#f08080" shape=diamond]
+	short [label="Short term portfolio" fillcolor="#dda0dd" shape=box]
+	medium [label="Medium Term Portfolio" fillcolor="#dda0dd" shape=box]
+	long [label="Long Term Horizon" fillcolor="#dda0dd" shape=box]
+	risk [label="Risk Analysis" fillcolor="#ffb6c1" shape=box]
+	sell_crit [label="Meet
+Selling
+Criteria" fillcolor="#f08080" shape=diamond]
+	sell [label=SELL fillcolor="#fff2cc" shape=parallelogram]
+	relevant [label=Relevant fillcolor="#f08080" shape=diamond]
+	exit [label=Exit fillcolor="#a8e6cf" shape=oval]
+	start -> collect
+	collect -> analysis
+	analysis -> buy
+	buy -> drop [label=No color=red fontcolor=red]
+	buy -> exchange [label=Yes color=green fontcolor=green]
+	exchange -> account
+	account -> fund
+	fund -> order
+	order -> pool
+	pool -> wavelet
+	wavelet -> intensity
+	intensity -> short [label="Period 64 to 256"]
+	intensity -> medium [label="Period 8 to 32"]
+	intensity -> long [label="Period 0 to 8"]
+	short -> risk
+	medium -> risk
+	long -> risk
+	risk -> sell_crit
+	sell_crit -> sell [label=Yes color=green fontcolor=green]
+	sell_crit -> relevant [label=No color=red fontcolor=red]
+	relevant -> wavelet [label=Yes color=green fontcolor=green]
+	relevant -> exit [label=No color=red fontcolor=red]
+}
