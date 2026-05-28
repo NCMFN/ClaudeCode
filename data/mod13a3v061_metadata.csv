@@ -1,0 +1,107 @@
+metadata
+Ask the Earthdata Forum
+Platforms
+NASA operates state-of-the-art platforms that collect critical information about our home planet. Drill down to the data and tools you need by exploring platforms on Earth and in the sky.
+Instruments
+"From the ground and into space, instruments aboard NASA platforms collect a vast array of Earth science data."
+Space Geodesy Techniques
+"These data are used to support scientific and societal applications Earth observations, positioning, navigation, and timing."
+Atmosphere
+The atmosphere is a gaseous envelope surrounding and protecting our planet from the intense radiation of the Sun.
+Biosphere
+The biosphere encompasses all life on Earth and extends from root systems to mountaintops and all depths of the ocean.
+Climate Indicators
+"Climate Indicators hold key information for the most relevant domains of climate change: temperature and energy, atmospheric composition, ocean and water as well as the cryosphere."
+Cryosphere
+"The cryosphere encompasses the frozen parts of Earth, including glaciers and ice sheets, sea ice, and any other frozen body of water."
+Human Dimensions
+The human dimensions discipline includes ways humans interact with the environment and how these interactions impact Earth’s systems.
+Land Surface
+"The land surface discipline includes research into areas such as shrinking forests, warming land, and eroding soils."
+Ocean
+"This vast, critical reservoir supports a diversity of life and helps regulate Earth’s climate."
+Solid Earth
+Processes occurring deep within Earth constantly are shaping landforms.
+Sun-Earth Interactions
+The Sun influences physical and chemical processes in Earth’s atmosphere.
+Terrestrial Hydrosphere
+"The terrestrial hydrosphere includes water on the land surface and underground in the form of lakes, rivers, and groundwater along with total water storage."
+Earth Observation Data Basics
+Learn key terms and concepts like remote sensing and processing levels.
+GIS Resources
+"Explore resources for the Geographic Information Systems (GIS) community, including StoryMaps."
+Earthdata Forum
+Connect with researchers and data users to discover tools and uses for Earth science data.
+Data in Action
+Data in Action demonstrates Earth science data applications with interactive explanations as to how the work was accomplished.
+Data Recipes
+"Data Recipes are code-based instructions that help data scientists accomplish a specific task, such as converting data into a specific format for analysis or visualization."
+Trainings
+Trainings are interactive opportunities to develop technical skills with NASA Earth science data.
+Tutorials
+"Tutorials are step by step “how to” content that cover a broad range of tasks, from data collection to visualization."
+Webinars
+"Webinars are video seminars featuring experts in various disciplines who share their knowledge in a particular subject area, from data in the cloud to specific data tools."
+Publications
+Access publications citing NASA Earth science data.
+Distributed Active Archive Centers (DAACs)
+Science Investigator-led Processing Systems (SIPS)
+Airborne and Field Data Resource Center
+All of the resources for the airborne and field data community within our program can be found here.
+"Open Data, Services, and Software Policies"
+Open Science and Data Management Plan
+ESDS Leadership
+Meet the Earth Science Data Systems Program leadership team.
+Organizational Chart
+View the internal structure of the ESDS Program.
+Multi-Mission Data Processing System Study
+We are considering the right data processing system for open-source data.
+Program Performance and Metrics
+"Access overall ingest, archive, and distribution metrics for the ESDS program."
+News
+View the latest updates from Earthdata.
+Events
+Sign up or watch a past recording of events covering Earth science data topics.
+Worldview Image of the Week
+Learn about the Earth through the lens of NASA’s Worldview.
+Data Alerts System
+Subscribe to the Earthdata Newsletter
+Feature Articles
+Read stories inspired by NASA Earth science data.
+Data User Stories
+Discover how people are researching with NASA Earth science data.
+Earthdata Blog
+Take a deeper dive into NASA Earth science data.
+Cloud Enabled Dataset
+CMR Concept ID:
+c2327962326-lpcloud
+Share
+"N: 90
+S: -90
+E: 180
+W: -180"
+"The Terra Moderate Resolution Imaging Spectroradiometer (MODIS) Vegetation Indices Monthly (MOD13A3) Version 6.1 data are provided monthly at 1 kilometer (km) spatial resolution as a gridded Level 3 product in the sinusoidal projection. In generating this monthly product, the algorithm ingests all the MOD13A2 products that overlap the month and employs a weighted temporal average."
+"The MODIS Normalized Difference Vegetation Index (NDVI) complements NOAA's Advanced Very High Resolution Radiometer (AVHRR) NDVI products and provides continuity for time series historical applications. MODIS also includes an Enhanced Vegetation Index (EVI) that minimizes canopy background variations and maintains sensitivity over dense vegetation conditions. The EVI uses the blue band to remove residual atmosphere contamination caused by smoke and sub-pixel thin clouds. The MODIS NDVI and EVI products are computed from surface reflectances corrected for molecular scattering, ozone absorption, and aerosols."
+"Vegetation indices are used for global monitoring of vegetation conditions and are used in products displaying land cover and land cover changes. These data may be used as input for modeling global biogeochemical and hydrologic processes as well as global and regional climate. Additional applications include characterizing land surface biophysical properties and processes, such as primary production and land cover conversion."
+"Provided along with the vegetation layers and the two quality assurance (QA) layers are reflectance bands 1 (red), 2 (near-infrared), 3 (blue), and 7 (mid-infrared), as well as three observation layers."
+Known Issues
+"N: 90
+S: -90
+E: 180
+W: -180"
+"Citation is critically important for dataset documentation and discovery. This dataset is openly shared, without restriction, in accordance with the EOSDIS Data Use and Citation Guidance."
+"The table below lists the variables contained within a single granule for this
+dataset. Variables often contain observed or derived geophysical measurements
+collected from a variety of sources, including remote sensing instruments on
+satellite and airborne platforms, field campaigns, in situ measurements, and
+model outputs. The terms variable, parameter, scientific data set, layer, and band
+have been used across NASA’s Earth science disciplines; however, variable is the
+designated nomenclature in NASA’s Common Metadata Repository (CMR).
+Variable metadata attributes such as Name, Description, Units, Data Type, Fill
+Value, Valid Range, and Scale Factor allow users to efficiently process and analyze
+the data. The full range of attributes may not be applicable to all variables.
+Additional information on variable attributes is typically available in the data,
+user guide, and/or other product documentation."
+"For questions on a specific variable, please use the Earthdata Forum."
+"Site last Updated:May 21, 2026"
+NASA Official:Katie Baynes

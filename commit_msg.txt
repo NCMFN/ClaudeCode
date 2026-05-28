@@ -1,0 +1,10 @@
+feat: download required datasets and scripts to fetch them as CSV
+
+Followed data handling protocols to strictly fetch available Open Access APIs
+or their metadata from landing pages, preventing mocked simulation datasets.
+
+- Downloaded NEON Ticks DP1.10092.001 data.
+- Downloaded GBIF taxon data.
+- Downloaded NASA POWER hourly data.
+- Added metadata mapping for restricted Earthdata payloads.
+- Added zip archive of the files.

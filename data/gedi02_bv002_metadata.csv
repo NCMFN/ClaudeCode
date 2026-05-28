@@ -1,0 +1,107 @@
+metadata
+Ask the Earthdata Forum
+Platforms
+NASA operates state-of-the-art platforms that collect critical information about our home planet. Drill down to the data and tools you need by exploring platforms on Earth and in the sky.
+Instruments
+"From the ground and into space, instruments aboard NASA platforms collect a vast array of Earth science data."
+Space Geodesy Techniques
+"These data are used to support scientific and societal applications Earth observations, positioning, navigation, and timing."
+Atmosphere
+The atmosphere is a gaseous envelope surrounding and protecting our planet from the intense radiation of the Sun.
+Biosphere
+The biosphere encompasses all life on Earth and extends from root systems to mountaintops and all depths of the ocean.
+Climate Indicators
+"Climate Indicators hold key information for the most relevant domains of climate change: temperature and energy, atmospheric composition, ocean and water as well as the cryosphere."
+Cryosphere
+"The cryosphere encompasses the frozen parts of Earth, including glaciers and ice sheets, sea ice, and any other frozen body of water."
+Human Dimensions
+The human dimensions discipline includes ways humans interact with the environment and how these interactions impact Earth’s systems.
+Land Surface
+"The land surface discipline includes research into areas such as shrinking forests, warming land, and eroding soils."
+Ocean
+"This vast, critical reservoir supports a diversity of life and helps regulate Earth’s climate."
+Solid Earth
+Processes occurring deep within Earth constantly are shaping landforms.
+Sun-Earth Interactions
+The Sun influences physical and chemical processes in Earth’s atmosphere.
+Terrestrial Hydrosphere
+"The terrestrial hydrosphere includes water on the land surface and underground in the form of lakes, rivers, and groundwater along with total water storage."
+Earth Observation Data Basics
+Learn key terms and concepts like remote sensing and processing levels.
+GIS Resources
+"Explore resources for the Geographic Information Systems (GIS) community, including StoryMaps."
+Earthdata Forum
+Connect with researchers and data users to discover tools and uses for Earth science data.
+Data in Action
+Data in Action demonstrates Earth science data applications with interactive explanations as to how the work was accomplished.
+Data Recipes
+"Data Recipes are code-based instructions that help data scientists accomplish a specific task, such as converting data into a specific format for analysis or visualization."
+Trainings
+Trainings are interactive opportunities to develop technical skills with NASA Earth science data.
+Tutorials
+"Tutorials are step by step “how to” content that cover a broad range of tasks, from data collection to visualization."
+Webinars
+"Webinars are video seminars featuring experts in various disciplines who share their knowledge in a particular subject area, from data in the cloud to specific data tools."
+Publications
+Access publications citing NASA Earth science data.
+Distributed Active Archive Centers (DAACs)
+Science Investigator-led Processing Systems (SIPS)
+Airborne and Field Data Resource Center
+All of the resources for the airborne and field data community within our program can be found here.
+"Open Data, Services, and Software Policies"
+Open Science and Data Management Plan
+ESDS Leadership
+Meet the Earth Science Data Systems Program leadership team.
+Organizational Chart
+View the internal structure of the ESDS Program.
+Multi-Mission Data Processing System Study
+We are considering the right data processing system for open-source data.
+Program Performance and Metrics
+"Access overall ingest, archive, and distribution metrics for the ESDS program."
+News
+View the latest updates from Earthdata.
+Events
+Sign up or watch a past recording of events covering Earth science data topics.
+Worldview Image of the Week
+Learn about the Earth through the lens of NASA’s Worldview.
+Data Alerts System
+Subscribe to the Earthdata Newsletter
+Feature Articles
+Read stories inspired by NASA Earth science data.
+Data User Stories
+Discover how people are researching with NASA Earth science data.
+Earthdata Blog
+Take a deeper dive into NASA Earth science data.
+Cloud Enabled Dataset
+CMR Concept ID:
+c2142776747-lpcloud
+Share
+"N: 54
+S: -54
+E: 180
+W: -180"
+The Global Ecosystem Dynamics Investigation (GEDI) mission aims to characterize ecosystem structure and dynamics to enable radically improved quantification and understanding of the Earth’s carbon cycle and biodiversity. The GEDI instrument produces high resolution laser ranging observations of the 3-dimensional structure of the Earth. GEDI is attached to the International Space Station (ISS) and collects data globally between 51.6° N and 51.6° S latitudes at the highest resolution and densest sampling of any light detection and ranging (lidar) instrument in orbit to date. Each GEDI Version 2 granule encompasses one-fourth of an ISS orbit and includes georeferenced metadata to allow for spatial querying and subsetting.
+"The GEDI instrument was removed from the ISS and placed into storage on March 17, 2023. No data were acquired during the hibernation period from March 17, 2023, to April 24, 2024. GEDI has since been reinstalled on the ISS and resumed operations as of April 26, 2024."
+"The purpose of the GEDI Level 2B Canopy Cover and Vertical Profile Metrics product (GEDI02_B) is to extract biophysical metrics from each GEDI waveform. These metrics are based on the directional gap probability profile derived from the L1B waveform. Metrics provided include canopy cover, Plant Area Index (PAI), Plant Area Volume Density (PAVD), and Foliage Height Diversity (FHD). The GEDI02_B product is provided in HDF5 format and has a spatial resolution (average footprint) of 25 meters."
+"The GEDI02_B data product contains 96 layers for each of the eight-beam ground transects (or laser footprints located on the land surface). Datasets provided include precise latitude, longitude, elevation, height, canopy cover, and vertical profile metrics. Additional information for the layers can be found in the GEDI Level 2B Data Dictionary."
+Known Issues
+"N: 54
+S: -54
+E: 180
+W: -180"
+"Citation is critically important for dataset documentation and discovery. This dataset is openly shared, without restriction, in accordance with the EOSDIS Data Use and Citation Guidance."
+"The table below lists the variables contained within a single granule for this
+dataset. Variables often contain observed or derived geophysical measurements
+collected from a variety of sources, including remote sensing instruments on
+satellite and airborne platforms, field campaigns, in situ measurements, and
+model outputs. The terms variable, parameter, scientific data set, layer, and band
+have been used across NASA’s Earth science disciplines; however, variable is the
+designated nomenclature in NASA’s Common Metadata Repository (CMR).
+Variable metadata attributes such as Name, Description, Units, Data Type, Fill
+Value, Valid Range, and Scale Factor allow users to efficiently process and analyze
+the data. The full range of attributes may not be applicable to all variables.
+Additional information on variable attributes is typically available in the data,
+user guide, and/or other product documentation."
+"For questions on a specific variable, please use the Earthdata Forum."
+"Site last Updated:May 21, 2026"
+NASA Official:Katie Baynes

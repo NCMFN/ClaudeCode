@@ -1,0 +1,2 @@
+URL: https://ipt.gbif.us/resource?r=neon-tick-abundance-diversity-pathogen-data
+Status Code: 404
