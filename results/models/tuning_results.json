@@ -1,0 +1,14 @@
+{
+    "best_params": {
+        "subsample": 0.6,
+        "n_estimators": 300,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "colsample_bytree": 1.0
+    },
+    "test_metrics": {
+        "RMSE": 0.06992827366302368,
+        "MAE": 0.055306020723235934,
+        "R2": 0.999805537881356
+    }
+}
