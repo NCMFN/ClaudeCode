@@ -31,7 +31,7 @@ def run_eda(df: pd.DataFrame, out_dir: str):
     print("Generating correlation heatmap...")
     plt.figure(figsize=(12, 10))
     corr = df[numeric_cols].corr()
-    sns.heatmap(corr, annot=False, cmap='coolwarm', fmt=".2f")
+    sns.heatmap(corr, annot=True, annot_kws={'size': 7}, cmap='coolwarm', fmt=".2f")
     plt.title('Feature Correlation Heatmap')
     plt.tight_layout()
     plt.savefig(os.path.join(out_dir, 'correlation_heatmap.png'))
