@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
+import matplotlib.patches as patches
 import os
 
 # Standard rcParams for clear plots
@@ -8,58 +8,69 @@ plt.rcParams.update({'font.size': 11, 'axes.titlesize': 13, 'axes.labelsize': 11
 def draw_architecture(out_dir="results/figures"):
     os.makedirs(out_dir, exist_ok=True)
 
-    fig, ax = plt.subplots(figsize=(12, 8))
+    # Create figure
+    fig, ax = plt.subplots(figsize=(14, 8))
+
+    # Set axis limits and turn off axes
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 8)
     ax.axis('off')
 
-    # Define colors
-    color_ingestion = '#8cbfdb' # Light blue
-    color_processing = '#a8e6cf' # Light green
-    color_ml = '#ffd3b6' # Light orange
-    color_sim = '#ffaaa5' # Light coral
+    # Define colors matching the palette conventions
+    c_blue = '#8cbfdb'    # ML / Data
+    c_green = '#a8e6cf'   # Processing
+    c_orange = '#ffd3b6'  # Integration
+    c_purple = '#cbaacb'  # Evaluation
 
     # Draw boxes
-    boxes = {
-        'Data Ingestion': mpatches.FancyBboxPatch((1, 6), 3, 1.5, boxstyle="round,pad=0.2", fc=color_ingestion, ec="black", lw=2),
-        'Data Preprocessing': mpatches.FancyBboxPatch((5, 6), 3, 1.5, boxstyle="round,pad=0.2", fc=color_processing, ec="black", lw=2),
-        'Feature Engineering': mpatches.FancyBboxPatch((9, 6), 3, 1.5, boxstyle="round,pad=0.2", fc=color_processing, ec="black", lw=2),
-        'Model Training\n(XGBoost, RF, SVR)': mpatches.FancyBboxPatch((5, 3), 3, 1.5, boxstyle="round,pad=0.2", fc=color_ml, ec="black", lw=2),
-        'APC Simulation\nLoop': mpatches.FancyBboxPatch((9, 3), 3, 1.5, boxstyle="round,pad=0.2", fc=color_sim, ec="black", lw=2)
-    }
+    # Data Ingestion
+    ax.add_patch(patches.FancyBboxPatch((0.5, 5.5), 2.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_blue, ec="black", lw=2))
+    ax.text(1.75, 6.1, "Data Ingestion\n(Kaggle WSN Datasets)", ha='center', va='center', fontweight='bold')
 
-    for label, box in boxes.items():
-        ax.add_patch(box)
-        rx, ry = box.get_x() + box.get_width()/2., box.get_y() + box.get_height()/2.
-        ax.text(rx, ry, label, ha='center', va='center', fontsize=12, fontweight='bold', color='black')
+    # Preprocessing
+    ax.add_patch(patches.FancyBboxPatch((4.0, 5.5), 2.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_green, ec="black", lw=2))
+    ax.text(5.25, 6.1, "Data Preprocessing\n(Missing, Outliers, Scale)", ha='center', va='center', fontweight='bold')
 
-    # Draw arrows
-    arrows = [
-        # Ingestion -> Preprocessing
-        ((4, 6.75), (5, 6.75)),
-        # Preprocessing -> Feature Engineering
-        ((8, 6.75), (9, 6.75)),
-        # Feature Engineering -> Model Training
-        ((10.5, 6), (10.5, 4.5)), # Down from FE to Sim, wait let's make it FE -> Model Training
-        # Actually: FE -> Model Training
-        ((7.5, 5.5), (6.5, 4.5)), # Diagonal from Preprocessing/FE to Training
-    ]
+    # Feature Engineering
+    ax.add_patch(patches.FancyBboxPatch((7.5, 5.5), 2.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_green, ec="black", lw=2))
+    ax.text(8.75, 6.1, "Feature Engineering\n(ENR, SDF, Noise Smooth)", ha='center', va='center', fontweight='bold')
 
-    # Add an arrow from Feature Engineering to Model Training
-    ax.annotate('', xy=(6.5, 4.5), xytext=(10.5, 6), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
+    # Model Training
+    ax.add_patch(patches.FancyBboxPatch((11.0, 5.5), 2.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_blue, ec="black", lw=2))
+    ax.text(12.25, 6.1, "Model Training\n(XGBoost, RF, SVR)", ha='center', va='center', fontweight='bold')
+
+    # Evaluation
+    ax.add_patch(patches.FancyBboxPatch((11.0, 2.5), 2.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_purple, ec="black", lw=2))
+    ax.text(12.25, 3.1, "Evaluation & SHAP\n(Feature Importances)", ha='center', va='center', fontweight='bold')
+
+    # APC Simulation
+    ax.add_patch(patches.FancyBboxPatch((5.75, 2.5), 3.5, 1.2, boxstyle="round,pad=0.1,rounding_size=0.1", fc=c_orange, ec="black", lw=2))
+    ax.text(7.5, 3.1, "APC Simulation Loop\n(Trigger +10% Power if Acc < 75%)", ha='center', va='center', fontweight='bold')
+
+    # Draw arrows (Flow)
+    arrow_props = dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0)
+
     # Ingestion -> Preprocessing
-    ax.annotate('', xy=(5, 6.75), xytext=(4, 6.75), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
+    ax.annotate("", xy=(4.0, 6.1), xytext=(3.0, 6.1), arrowprops=arrow_props)
+
     # Preprocessing -> Feature Engineering
-    ax.annotate('', xy=(9, 6.75), xytext=(8, 6.75), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
+    ax.annotate("", xy=(7.5, 6.1), xytext=(6.5, 6.1), arrowprops=arrow_props)
 
-    # Model Training -> Simulation
-    ax.annotate('', xy=(9, 3.75), xytext=(8, 3.75), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
+    # Feature Engineering -> Training
+    ax.annotate("", xy=(11.0, 6.1), xytext=(10.0, 6.1), arrowprops=arrow_props)
 
-    # Feedback loop in Simulation
-    ax.annotate('', xy=(10.5, 4.5), xytext=(10.5, 4.5),
-                arrowprops=dict(arrowstyle="->", lw=2, color="black", connectionstyle="arc3,rad=.5"))
-    ax.text(10.5, 4.9, 'Adjust Trans. Power\n(if Accuracy < 75%)', ha='center', va='center', fontsize=10, style='italic')
+    # Training -> Evaluation
+    ax.annotate("", xy=(12.25, 3.7), xytext=(12.25, 5.5), arrowprops=arrow_props)
 
-    plt.title("System Architecture: WSN Signal Detection & Adaptive Power Control", fontsize=16, fontweight='bold', pad=20)
-    plt.tight_layout()
+    # Training -> APC Simulation
+    # Arrow from Model Training to APC Simulation
+    ax.annotate("", xy=(9.25, 3.1), xytext=(11.0, 5.5), arrowprops=dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0, connectionstyle="arc3,rad=-0.2"))
+
+    # Feedback loop in Simulation (Internal feedback for the loop)
+    ax.annotate("", xy=(7.5, 3.7), xytext=(7.5, 2.5), arrowprops=dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0, connectionstyle="arc3,rad=1.5"))
+    ax.text(7.5, 4.2, "Modulate Power & Re-evaluate", ha='center', va='center', fontweight='bold', color='darkred')
+
+    plt.title("System Architecture: WSN Signal Detection Accuracy & APC Pipeline", fontsize=16, fontweight='bold')
     plt.savefig(os.path.join(out_dir, 'system_architecture.png'), bbox_inches='tight')
     plt.close()
 
