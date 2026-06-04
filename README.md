@@ -1,40 +1,44 @@
-# Claude Code Resources 🚀
+# Early-Stage Anomaly Detection and Downtime Risk Scoring in Cloud-Integrated Industrial Sensors
 
-> A curated collection of the best GitHub repositories to supercharge your Claude Code workflow in 2026.
+This project implements an end-to-end Machine Learning pipeline to predict maintenance requirements and calculate proactive downtime risk scores for cloud-integrated industrial sensors.
 
----
+## Features
+- **Data Ingestion & EDA**: Handling missing values, parsing timestamps, and generating visual reports.
+- **Feature Engineering**: Computing rolling window statistics across multimodal sensors (Vibration, Pressure, Energy, Humidity, Temperature). Includes correlation between vibration and energy spikes.
+- **Micro-Anomaly Detection**: Using Isolation Forest and LSTM Autoencoders to flag anomalies before major failures occur.
+- **Proactive Risk Scoring**: A weighted scoring formula that fuses anomaly rates, pressure variance, and energy spikes to output a 0-100 risk score, transmitting only critical metrics to simulate Cloud-Edge systems.
+- **Predictive Maintenance**: Using Random Forest, XGBoost, and LSTM Sequence models evaluated with GroupKFold.
+- **Visuals**: Auto-generates system architecture diagram using `networkx` and `matplotlib`.
 
-## 📚 Top 12 Repos That Will 10x Your Next Project
+## Deliverables
+- `pipeline.py`: Main execution script that orchestrates the entire workflow.
+- `pipeline_utils.py`, `anomaly_scoring.py`, `classification_sim.py`: Modular files.
+- `eda_report.ipynb`: Exploratory data analysis notebook.
+- `models/`: Pickled / Keras saved models.
+- `outputs/`: CSV scores and the final classification report.
+- `*.png`: All generated plots (ROC curves, confusion matrices, timelines, system architecture) are saved directly to the repository root directory.
 
-| # | Repository | Description |
-|---|------------|-------------|
-| 1 | [Claude Mem](https://github.com/thedotmack/claude-mem) | Persistent memory across sessions — stop re-teaching Claude your codebase |
-| 2 | [UI UX Pro Max](https://github.com/czlonkowski/n8n-mcp) | 50+ styles, 161 color palettes, 99 UX guidelines — Claude stops building ugly UIs |
-| 3 | [n8n-MCP](https://github.com/czlonkowski/n8n-mcp) | Connect Claude Code to 400+ n8n integrations via MCP |
-| 4 | [LightRAG](https://github.com/hkuds/lightrag) | Graph + vector RAG — lets Claude understand large codebases structurally |
-| 5 | [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) | Skills, instincts, security scanning, multi-language coverage — full agent harness |
-| 6 | [Awesome Claude Code](https://github.com/sickn33/antigravity) | Community bible — curated skills, hooks, slash commands, orchestrators |
-| 7 | [Superpowers](https://github.com/obra/superpowers) | Forces structured thinking before writing a single line of code |
-| 8 | [Claude Code Ultimate Guide](https://github.com/FlorianBruniau/claude-code-ultimate-guide) | 23K+ lines of docs, 219 templates, 271 quizzes — beginner to power user |
-| 9 | [Antigravity Awesome Skills](https://github.com/sickn33/antigravity) | 1,200+ ready-to-use skills — one of the largest collections |
-| 10 | [Claude Agent Blueprints](https://github.com/danielrosehill/claude-agent-blueprints) | 75+ agent workspace templates beyond coding |
-| 11 | [VoiceMode MCP](https://github.com/mbailey/voicemode) | Natural voice conversations with Claude Code via Whisper + Kokoro |
-| 12 | [Awesome Claude Plugins](https://github.com/ComposioHQ/awesome-claude-plugins) | 9,000+ repos indexed with adoption metrics — find what people actually install |
+## How to Run
 
----
+1. **Install requirements:**
+   ```bash
+   pip install kagglehub xgboost tensorflow scikit-learn matplotlib seaborn jupyter nbformat nbconvert imbalanced-learn pytest networkx
+   ```
+2. **Download data:**
+   Ensure the data is in the `data/` directory named `smart_manufacturing_data.csv`. You can use `download_data.py` to fetch it.
+   ```bash
+   python download_data.py
+   ```
+3. **Run the pipeline:**
+   ```bash
+   python pipeline.py
+   ```
+4. **View results:**
+   Image outputs (ROC curves, timelines, matrices) will be located in the root folder. The `classification_report.txt` and raw `risk_scores.csv` will be located in the `outputs/` folder.
+   Logs are recorded in `results/logs/pipeline.log`.
 
-## 🗂️ How to Update This Repo
-
-See [RESOURCES.md](./RESOURCES.md) for the full step-by-step guide on keeping this repository up to date.
-
----
-
-## 🔗 Official Claude Code Links
-
-- 📖 [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
-- 📦 [npm Package](https://www.npmjs.com/package/@anthropic-ai/claude-code)
-- 🌐 [Anthropic](https://www.anthropic.com)
-
----
-
-*Last updated: April 2026*
+## Tests
+Run the test suite using pytest. The tests are located in `tests/test_pipeline.py`.
+```bash
+pytest tests/test_pipeline.py -v
+```
