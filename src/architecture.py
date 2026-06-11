@@ -66,9 +66,9 @@ def draw_architecture(out_dir="results/figures"):
     # Arrow from Model Training to APC Simulation
     ax.annotate("", xy=(9.25, 3.1), xytext=(11.0, 5.5), arrowprops=dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0, connectionstyle="arc3,rad=-0.2"))
 
-    # Feedback loop in Simulation (Internal feedback for the loop)
-    ax.annotate("", xy=(7.5, 3.7), xytext=(7.5, 2.5), arrowprops=dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0, connectionstyle="arc3,rad=1.5"))
-    ax.text(7.5, 4.2, "Modulate Power & Re-evaluate", ha='center', va='center', fontweight='bold', color='darkred')
+    # Feedback loop in Simulation (Fixed to be above the box, not crossing inside)
+    ax.annotate("", xy=(6.5, 3.7), xytext=(8.5, 3.7), arrowprops=dict(facecolor='black', edgecolor='black', width=2, headwidth=10, shrink=0.0, connectionstyle="arc3,rad=0.5"))
+    ax.text(7.5, 4.4, "Modulate Power & Re-evaluate", ha='center', va='center', fontweight='bold', color='darkred')
 
     plt.title("System Architecture: WSN Signal Detection Accuracy & APC Pipeline", fontsize=16, fontweight='bold')
     plt.savefig(os.path.join(out_dir, 'system_architecture.png'), bbox_inches='tight')
