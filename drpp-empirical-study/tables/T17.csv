@@ -1,0 +1,4 @@
+Component,Spec,Est. Cost (USD)
+Accelerometer,"100Hz, 3-axis, ±2g",$0.50
+Capacitive Array,"12x12 grid, 50Hz",$2.00
+Camera,"1080p, 30fps, IR-capable",$5.00

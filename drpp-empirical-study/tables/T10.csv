@@ -1,0 +1,5 @@
+Config,P_attack
+Full DRPP,0.0009765625
+- Liveness Detection,0.15
+- Temporal Variability,0.45
+- Cryptographic Challenge,0.85

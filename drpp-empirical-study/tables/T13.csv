@@ -1,0 +1,4 @@
+Modality,Effective bits (k),Encoding Scheme
+Knock-pattern,~8-12,Timing intervals
+Capacitive touch,~10-16,Spatial sequence
+Visual gesture,~16-24,3D Trajectory

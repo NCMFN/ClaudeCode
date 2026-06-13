@@ -1,0 +1,9 @@
+Symbol,Definition
+V,Verifier
+P,Prover
+A1,Adversary (Denial)
+A2,Adversary (Injection)
+B,Physical Barrier
+c,Challenge
+r,Response
+k,Challenge bit-length
