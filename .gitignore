@@ -101,6 +101,5 @@ assets/images/security/badrudi-exploit.mp4
 drpp-empirical-study/data/
 drpp-empirical-study/figures/
 !drpp-empirical-study/data/*.csv
-!drpp-empirical-study/figures/*.png
 !drpp-empirical-study/figures/*.svg
 !drpp-empirical-study/tables/*
