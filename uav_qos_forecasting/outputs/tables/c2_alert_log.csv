@@ -1,0 +1,621 @@
+True_Class,Predicted_Class,Alert_Message,Alert_Color
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+2,2,🟢 GREEN: All systems nominal,green
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+1,1,🟡 AMBER: Reduce payload data rate,orange
+1,1,🟡 AMBER: Reduce payload data rate,orange
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
+0,0,🔴 RED ALERT: Switch to autonomous failsafe,red
