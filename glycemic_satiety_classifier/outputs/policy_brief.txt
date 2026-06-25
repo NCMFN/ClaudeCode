@@ -1,0 +1,14 @@
+Policy Brief: Predictive Satiety Modeling Findings
+
+Summary:
+Our analysis investigated the drivers of short-term dietary satiety, comparing the predictive power of glycemic load (GL) against physical bulk features such as water and fiber content. We found that a food's physical volume-to-energy ratio is a stronger predictor of satiety than its glycemic index or load. High water and fiber contents significantly improve the sensation of fullness without adding caloric density, challenging the traditional emphasis placed solely on glycemic metrics.
+
+Top 3 High-Satiety Food Recommendations (per calorie):
+1. Boiled Potatoes (due to high water content, resistant starch, and low energy density)
+2. Lean White Fish (high protein-to-energy fraction driving peptide-YY satiety signaling)
+3. Fibrous Vegetables & Apples (high fiber-to-carb ratio and substantial water volume)
+
+Implications:
+(a) Diabetic meal planning should prioritize physical bulk and fiber over exclusively minimizing GL to prevent compensatory overeating.
+(b) Weight loss apps can improve user success by calculating and surfacing a 'Satiety Efficiency' score based on our engineered features.
+(c) Front-of-pack food labelling policy should consider introducing a mandatory physical bulk or satiety index metric alongside the traditional calorie and macronutrient counts.
