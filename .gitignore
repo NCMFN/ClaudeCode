@@ -97,3 +97,10 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+venv/
+dementia_geospatial_risk/data/raw/
+venv/
+dementia_geospatial_risk/data/interim/
+dementia_geospatial_risk/data/processed/
+dementia_geospatial_risk/outputs/
+dementia_geospatial_risk/results/
