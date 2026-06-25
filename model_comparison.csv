@@ -1,0 +1,4 @@
+Model,Macro-F1 Score,Balanced Accuracy,Cohen Kappa
+XGBoost,1.0,1.0,1.0
+Random Forest,0.9962528086204532,0.9938901601830663,0.9925059147616675
+SVM,1.0,1.0,1.0
