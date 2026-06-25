@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_14d9d051939a64d9446587ef6923e676 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+
+</head>
+<body>
+
+
+            <div class="folium-map" id="map_14d9d051939a64d9446587ef6923e676" ></div>
+
+</body>
+<script>
+
+
+            var map_14d9d051939a64d9446587ef6923e676 = L.map(
+                "map_14d9d051939a64d9446587ef6923e676",
+                {
+                    center: [54.0, -2.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+
+
+
+
+            var tile_layer_399983df8d1f52697537a3d82231c8c4 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+
+
+            tile_layer_399983df8d1f52697537a3d82231c8c4.addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+            var circle_marker_209facd99979ef352c2966eb8d8a7aec = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_5b4ee4a2e683607835798660a8ef2bee = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_3cf13f6f1a6e5eb98dee7f8afba27dee = $(`<div id="html_3cf13f6f1a6e5eb98dee7f8afba27dee" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Coventry: Low Elasticity</div>`)[0];
+                popup_5b4ee4a2e683607835798660a8ef2bee.setContent(html_3cf13f6f1a6e5eb98dee7f8afba27dee);
+
+
+
+        circle_marker_209facd99979ef352c2966eb8d8a7aec.bindPopup(popup_5b4ee4a2e683607835798660a8ef2bee)
+        ;
+
+
+
+
+            var circle_marker_de8f7b911aa4123329470ce97c70aa23 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_5251b14b4567e0b7dfa1dc51dabc85f5 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_c05e69ac305a7da20da0a264f83d5adc = $(`<div id="html_c05e69ac305a7da20da0a264f83d5adc" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Liverpool Lime Street: High Elasticity</div>`)[0];
+                popup_5251b14b4567e0b7dfa1dc51dabc85f5.setContent(html_c05e69ac305a7da20da0a264f83d5adc);
+
+
+
+        circle_marker_de8f7b911aa4123329470ce97c70aa23.bindPopup(popup_5251b14b4567e0b7dfa1dc51dabc85f5)
+        ;
+
+
+
+
+            var circle_marker_cf32360aa4ae41b8fd25e77fb0b80782 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_115c9c0c703d230f165eb37507192a55 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_388b603cc4c243bd3768e5917b3280a1 = $(`<div id="html_388b603cc4c243bd3768e5917b3280a1" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> London Euston: High Elasticity</div>`)[0];
+                popup_115c9c0c703d230f165eb37507192a55.setContent(html_388b603cc4c243bd3768e5917b3280a1);
+
+
+
+        circle_marker_cf32360aa4ae41b8fd25e77fb0b80782.bindPopup(popup_115c9c0c703d230f165eb37507192a55)
+        ;
+
+
+
+
+            var circle_marker_0cf25896b652e291eb784b00faa5a192 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_40bc0a95a28e48996828417253bb907d = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_227b9bbb45d920ebc7459951b128ab20 = $(`<div id="html_227b9bbb45d920ebc7459951b128ab20" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> London Paddington: High Elasticity</div>`)[0];
+                popup_40bc0a95a28e48996828417253bb907d.setContent(html_227b9bbb45d920ebc7459951b128ab20);
+
+
+
+        circle_marker_0cf25896b652e291eb784b00faa5a192.bindPopup(popup_40bc0a95a28e48996828417253bb907d)
+        ;
+
+
+
+
+            var circle_marker_19a2960b2befdc6bcd3f14f555cb3942 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_e947b258f73e85d0b6fce1d99793739e = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_70669b4102309dd5cb06de358826dd2c = $(`<div id="html_70669b4102309dd5cb06de358826dd2c" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> London St Pancras: High Elasticity</div>`)[0];
+                popup_e947b258f73e85d0b6fce1d99793739e.setContent(html_70669b4102309dd5cb06de358826dd2c);
+
+
+
+        circle_marker_19a2960b2befdc6bcd3f14f555cb3942.bindPopup(popup_e947b258f73e85d0b6fce1d99793739e)
+        ;
+
+
+
+
+            var circle_marker_6e7e2f22796fcc3745dbb4ed2b8b2369 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_bbf6a1244c5bdb82cbf87b37d2860f79 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_6fb99ddae2d8605f2861ad009f6d0102 = $(`<div id="html_6fb99ddae2d8605f2861ad009f6d0102" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Manchester Piccadilly: High Elasticity</div>`)[0];
+                popup_bbf6a1244c5bdb82cbf87b37d2860f79.setContent(html_6fb99ddae2d8605f2861ad009f6d0102);
+
+
+
+        circle_marker_6e7e2f22796fcc3745dbb4ed2b8b2369.bindPopup(popup_bbf6a1244c5bdb82cbf87b37d2860f79)
+        ;
+
+
+
+
+            var circle_marker_794436b18fa4e1f60e66454515b359f8 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_6910baa320eb84f3f5c38052f2aee259 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_bec3577c43c51ed311fad56e76ddee81 = $(`<div id="html_bec3577c43c51ed311fad56e76ddee81" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Nuneaton: Medium Elasticity</div>`)[0];
+                popup_6910baa320eb84f3f5c38052f2aee259.setContent(html_bec3577c43c51ed311fad56e76ddee81);
+
+
+
+        circle_marker_794436b18fa4e1f60e66454515b359f8.bindPopup(popup_6910baa320eb84f3f5c38052f2aee259)
+        ;
+
+
+
+
+            var circle_marker_c4ab4bf285e146c7210266ae1faba2d7 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_a0b0ec5c1077da2b5cee26c74b21d503 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_915b8a8b0417aa1902db7d47dd13f4b2 = $(`<div id="html_915b8a8b0417aa1902db7d47dd13f4b2" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Reading: Low Elasticity</div>`)[0];
+                popup_a0b0ec5c1077da2b5cee26c74b21d503.setContent(html_915b8a8b0417aa1902db7d47dd13f4b2);
+
+
+
+        circle_marker_c4ab4bf285e146c7210266ae1faba2d7.bindPopup(popup_a0b0ec5c1077da2b5cee26c74b21d503)
+        ;
+
+
+
+
+            var circle_marker_db89ec6489845a05b77e595c4e87b607 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_3f519c7beff6068da6a4e390d22f6b0b = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_36bec1eb3d425d0244433a07e0ed00a0 = $(`<div id="html_36bec1eb3d425d0244433a07e0ed00a0" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Stafford: Low Elasticity</div>`)[0];
+                popup_3f519c7beff6068da6a4e390d22f6b0b.setContent(html_36bec1eb3d425d0244433a07e0ed00a0);
+
+
+
+        circle_marker_db89ec6489845a05b77e595c4e87b607.bindPopup(popup_3f519c7beff6068da6a4e390d22f6b0b)
+        ;
+
+
+
+
+            var circle_marker_b631430029d6702e53294dea62dd9a26 = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_d843c0f04eaf524770713cdfd95f2753 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_319c01d7e60b11135a35a8fd949b3c68 = $(`<div id="html_319c01d7e60b11135a35a8fd949b3c68" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Tamworth: Medium Elasticity</div>`)[0];
+                popup_d843c0f04eaf524770713cdfd95f2753.setContent(html_319c01d7e60b11135a35a8fd949b3c68);
+
+
+
+        circle_marker_b631430029d6702e53294dea62dd9a26.bindPopup(popup_d843c0f04eaf524770713cdfd95f2753)
+        ;
+
+
+
+
+            var circle_marker_6319550bb7b0cd749bf48bda89ea714f = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_c3408fbb60976475069355f5964179c1 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_7593ac3e816edd6dba50dbf4b416999f = $(`<div id="html_7593ac3e816edd6dba50dbf4b416999f" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> Wolverhampton: High Elasticity</div>`)[0];
+                popup_c3408fbb60976475069355f5964179c1.setContent(html_7593ac3e816edd6dba50dbf4b416999f);
+
+
+
+        circle_marker_6319550bb7b0cd749bf48bda89ea714f.bindPopup(popup_c3408fbb60976475069355f5964179c1)
+        ;
+
+
+
+
+            var circle_marker_741402068063e8ac749c5557d8fb31ba = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_c744fbd5ff3f25f9826b2a26f3047238 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_1a268dce240005dbe0256393666b6a06 = $(`<div id="html_1a268dce240005dbe0256393666b6a06" style="width: 100.0%; height: 100.0%;">Birmingham New Street -> York: High Elasticity</div>`)[0];
+                popup_c744fbd5ff3f25f9826b2a26f3047238.setContent(html_1a268dce240005dbe0256393666b6a06);
+
+
+
+        circle_marker_741402068063e8ac749c5557d8fb31ba.bindPopup(popup_c744fbd5ff3f25f9826b2a26f3047238)
+        ;
+
+
+
+
+            var circle_marker_b7b3a8ff289f3c0aae200ee6a1bb5021 = L.circleMarker(
+                [55.952442, -3.188236],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_80e888328f6f6f69d9ad0cd3264364fb = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_496fa880613b77aa6f2bd19753a180ac = $(`<div id="html_496fa880613b77aa6f2bd19753a180ac" style="width: 100.0%; height: 100.0%;">Edinburgh Waverley -> London Kings Cross: Medium Elasticity</div>`)[0];
+                popup_80e888328f6f6f69d9ad0cd3264364fb.setContent(html_496fa880613b77aa6f2bd19753a180ac);
+
+
+
+        circle_marker_b7b3a8ff289f3c0aae200ee6a1bb5021.bindPopup(popup_80e888328f6f6f69d9ad0cd3264364fb)
+        ;
+
+
+
+
+            var circle_marker_64b58f38d26cd72aa8fe9507f338eef9 = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_f1a826a802ea18f6c4adba08b4e82377 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_21787cb48149bef03640b7dcabae90d4 = $(`<div id="html_21787cb48149bef03640b7dcabae90d4" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> Crewe: Low Elasticity</div>`)[0];
+                popup_f1a826a802ea18f6c4adba08b4e82377.setContent(html_21787cb48149bef03640b7dcabae90d4);
+
+
+
+        circle_marker_64b58f38d26cd72aa8fe9507f338eef9.bindPopup(popup_f1a826a802ea18f6c4adba08b4e82377)
+        ;
+
+
+
+
+            var circle_marker_5b08292f4213e2bb92922b89ca6c8eb5 = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_81576caadba1b280bec07afa95e47534 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_b4e59269af6dcc3766771103211c1b88 = $(`<div id="html_b4e59269af6dcc3766771103211c1b88" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> Leeds: Medium Elasticity</div>`)[0];
+                popup_81576caadba1b280bec07afa95e47534.setContent(html_b4e59269af6dcc3766771103211c1b88);
+
+
+
+        circle_marker_5b08292f4213e2bb92922b89ca6c8eb5.bindPopup(popup_81576caadba1b280bec07afa95e47534)
+        ;
+
+
+
+
+            var circle_marker_4ac236fb4561f83048c7c3d92b3aba3c = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_547a989b90b248304f76a7f184f77d21 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_75bfbb90db9ed7d35d3230d8bc7f454e = $(`<div id="html_75bfbb90db9ed7d35d3230d8bc7f454e" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> London Euston: Medium Elasticity</div>`)[0];
+                popup_547a989b90b248304f76a7f184f77d21.setContent(html_75bfbb90db9ed7d35d3230d8bc7f454e);
+
+
+
+        circle_marker_4ac236fb4561f83048c7c3d92b3aba3c.bindPopup(popup_547a989b90b248304f76a7f184f77d21)
+        ;
+
+
+
+
+            var circle_marker_5faa5e75e623d86df4ae3fc8887f3e7c = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_0da23af0413dba543caae2510a1474b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_63072e84d9ddb0363c80c9c7ad1e0ba9 = $(`<div id="html_63072e84d9ddb0363c80c9c7ad1e0ba9" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> London St Pancras: Low Elasticity</div>`)[0];
+                popup_0da23af0413dba543caae2510a1474b7.setContent(html_63072e84d9ddb0363c80c9c7ad1e0ba9);
+
+
+
+        circle_marker_5faa5e75e623d86df4ae3fc8887f3e7c.bindPopup(popup_0da23af0413dba543caae2510a1474b7)
+        ;
+
+
+
+
+            var circle_marker_2574a49c3d7bac08e946d31180d5a59a = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_834a4a7775c037eb69ddd7e54a10fe98 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_234572966b8ec64d4dd32704f060583f = $(`<div id="html_234572966b8ec64d4dd32704f060583f" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> Manchester Piccadilly: High Elasticity</div>`)[0];
+                popup_834a4a7775c037eb69ddd7e54a10fe98.setContent(html_234572966b8ec64d4dd32704f060583f);
+
+
+
+        circle_marker_2574a49c3d7bac08e946d31180d5a59a.bindPopup(popup_834a4a7775c037eb69ddd7e54a10fe98)
+        ;
+
+
+
+
+            var circle_marker_f4846deed09cfa04ae6b548ba4057b94 = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_79cf89aa73fced201c4bae063cd07936 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_93dedf33154790219ef8d6eac4990864 = $(`<div id="html_93dedf33154790219ef8d6eac4990864" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street -> Sheffield: Low Elasticity</div>`)[0];
+                popup_79cf89aa73fced201c4bae063cd07936.setContent(html_93dedf33154790219ef8d6eac4990864);
+
+
+
+        circle_marker_f4846deed09cfa04ae6b548ba4057b94.bindPopup(popup_79cf89aa73fced201c4bae063cd07936)
+        ;
+
+
+
+
+            var circle_marker_c8d6eb8a81d7e804542eee5311bef16f = L.circleMarker(
+                [51.528313, -0.134545],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_689870772f1f71445be0eedf8ee5abf2 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_a585552afac9d5755925211c9cca20af = $(`<div id="html_a585552afac9d5755925211c9cca20af" style="width: 100.0%; height: 100.0%;">London Euston -> Birmingham New Street: High Elasticity</div>`)[0];
+                popup_689870772f1f71445be0eedf8ee5abf2.setContent(html_a585552afac9d5755925211c9cca20af);
+
+
+
+        circle_marker_c8d6eb8a81d7e804542eee5311bef16f.bindPopup(popup_689870772f1f71445be0eedf8ee5abf2)
+        ;
+
+
+
+
+            var circle_marker_79eb9fc94fe783ebec4606d9f8df612d = L.circleMarker(
+                [51.528313, -0.134545],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_cda277b793dabd977b706db9d9dfefa7 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_268db03acedb7dc9afb33189917ac976 = $(`<div id="html_268db03acedb7dc9afb33189917ac976" style="width: 100.0%; height: 100.0%;">London Euston -> Manchester Piccadilly: Medium Elasticity</div>`)[0];
+                popup_cda277b793dabd977b706db9d9dfefa7.setContent(html_268db03acedb7dc9afb33189917ac976);
+
+
+
+        circle_marker_79eb9fc94fe783ebec4606d9f8df612d.bindPopup(popup_cda277b793dabd977b706db9d9dfefa7)
+        ;
+
+
+
+
+            var circle_marker_1b860fed0e9300e79f22bfc55b8ef60a = L.circleMarker(
+                [51.530827, -0.122907],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_4614e938bc9519f96eded86dc5c36bf6 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_d73ce09d88a16514aeaec99cbfa47852 = $(`<div id="html_d73ce09d88a16514aeaec99cbfa47852" style="width: 100.0%; height: 100.0%;">London Kings Cross -> Edinburgh Waverley: Medium Elasticity</div>`)[0];
+                popup_4614e938bc9519f96eded86dc5c36bf6.setContent(html_d73ce09d88a16514aeaec99cbfa47852);
+
+
+
+        circle_marker_1b860fed0e9300e79f22bfc55b8ef60a.bindPopup(popup_4614e938bc9519f96eded86dc5c36bf6)
+        ;
+
+
+
+
+            var circle_marker_d1d4b39ed14795a1f88a791cce23fd55 = L.circleMarker(
+                [51.530827, -0.122907],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_d9014a7b4f2b2b08dfcc4156ae45649a = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_b6842cef918b388da17e6b6bff9c637c = $(`<div id="html_b6842cef918b388da17e6b6bff9c637c" style="width: 100.0%; height: 100.0%;">London Kings Cross -> Liverpool Lime Street: Medium Elasticity</div>`)[0];
+                popup_d9014a7b4f2b2b08dfcc4156ae45649a.setContent(html_b6842cef918b388da17e6b6bff9c637c);
+
+
+
+        circle_marker_d1d4b39ed14795a1f88a791cce23fd55.bindPopup(popup_d9014a7b4f2b2b08dfcc4156ae45649a)
+        ;
+
+
+
+
+            var circle_marker_c6caf91c0fa3a043d91c1946506a734c = L.circleMarker(
+                [51.530827, -0.122907],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_f612cf1ed38dd75f43ab424eee0daeeb = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_ae175d85b3d4b03e65e3990c7771dc19 = $(`<div id="html_ae175d85b3d4b03e65e3990c7771dc19" style="width: 100.0%; height: 100.0%;">London Kings Cross -> York: Medium Elasticity</div>`)[0];
+                popup_f612cf1ed38dd75f43ab424eee0daeeb.setContent(html_ae175d85b3d4b03e65e3990c7771dc19);
+
+
+
+        circle_marker_c6caf91c0fa3a043d91c1946506a734c.bindPopup(popup_f612cf1ed38dd75f43ab424eee0daeeb)
+        ;
+
+
+
+
+            var circle_marker_572590ea09bd10698c6dea1cfffab595 = L.circleMarker(
+                [51.516014, -0.176049],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_2136e5775f61b7d74a3ef3c9e445ff38 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_37f54276a46084b668e08fe751af26cd = $(`<div id="html_37f54276a46084b668e08fe751af26cd" style="width: 100.0%; height: 100.0%;">London Paddington -> Liverpool Lime Street: Low Elasticity</div>`)[0];
+                popup_2136e5775f61b7d74a3ef3c9e445ff38.setContent(html_37f54276a46084b668e08fe751af26cd);
+
+
+
+        circle_marker_572590ea09bd10698c6dea1cfffab595.bindPopup(popup_2136e5775f61b7d74a3ef3c9e445ff38)
+        ;
+
+
+
+
+            var circle_marker_de25b57441199222ec2eef9f60398394 = L.circleMarker(
+                [51.516014, -0.176049],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_5770c2c59c06b25c829e963931133760 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_b601b345a62345e45d26bc615de0f3de = $(`<div id="html_b601b345a62345e45d26bc615de0f3de" style="width: 100.0%; height: 100.0%;">London Paddington -> London Waterloo: Medium Elasticity</div>`)[0];
+                popup_5770c2c59c06b25c829e963931133760.setContent(html_b601b345a62345e45d26bc615de0f3de);
+
+
+
+        circle_marker_de25b57441199222ec2eef9f60398394.bindPopup(popup_5770c2c59c06b25c829e963931133760)
+        ;
+
+
+
+
+            var circle_marker_4398df109995ebdc2776f6e65aba5f4d = L.circleMarker(
+                [51.516014, -0.176049],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_40d8e7482109d77fc206de2f8334e7db = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_16a2f92763a47c098190ae21cf85c14e = $(`<div id="html_16a2f92763a47c098190ae21cf85c14e" style="width: 100.0%; height: 100.0%;">London Paddington -> Oxford: Low Elasticity</div>`)[0];
+                popup_40d8e7482109d77fc206de2f8334e7db.setContent(html_16a2f92763a47c098190ae21cf85c14e);
+
+
+
+        circle_marker_4398df109995ebdc2776f6e65aba5f4d.bindPopup(popup_40d8e7482109d77fc206de2f8334e7db)
+        ;
+
+
+
+
+            var circle_marker_0e248681157c395004c725a8c5730cd3 = L.circleMarker(
+                [51.516014, -0.176049],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_502eecaaa46c6802622756b3901f7ac3 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_d302d2f2f621ab296e98d5ea1c5536eb = $(`<div id="html_d302d2f2f621ab296e98d5ea1c5536eb" style="width: 100.0%; height: 100.0%;">London Paddington -> Reading: High Elasticity</div>`)[0];
+                popup_502eecaaa46c6802622756b3901f7ac3.setContent(html_d302d2f2f621ab296e98d5ea1c5536eb);
+
+
+
+        circle_marker_0e248681157c395004c725a8c5730cd3.bindPopup(popup_502eecaaa46c6802622756b3901f7ac3)
+        ;
+
+
+
+
+            var circle_marker_41272c0f24d9a96d72bbbc44886161f1 = L.circleMarker(
+                [51.531921, -0.126361],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_93ec5c9bafb4dcec1dc549c3898dd52b = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_5d8bd5b3d29dce46a5507baa03066660 = $(`<div id="html_5d8bd5b3d29dce46a5507baa03066660" style="width: 100.0%; height: 100.0%;">London St Pancras -> Birmingham New Street: High Elasticity</div>`)[0];
+                popup_93ec5c9bafb4dcec1dc549c3898dd52b.setContent(html_5d8bd5b3d29dce46a5507baa03066660);
+
+
+
+        circle_marker_41272c0f24d9a96d72bbbc44886161f1.bindPopup(popup_93ec5c9bafb4dcec1dc549c3898dd52b)
+        ;
+
+
+
+
+            var circle_marker_fc924bf899ef05533b2d1e071825f88f = L.circleMarker(
+                [51.531921, -0.126361],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_6ba14af32af7f0b2764200a93340d967 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_6333a172ab212a6fa57f7b42298fba5b = $(`<div id="html_6333a172ab212a6fa57f7b42298fba5b" style="width: 100.0%; height: 100.0%;">London St Pancras -> Leicester: Low Elasticity</div>`)[0];
+                popup_6ba14af32af7f0b2764200a93340d967.setContent(html_6333a172ab212a6fa57f7b42298fba5b);
+
+
+
+        circle_marker_fc924bf899ef05533b2d1e071825f88f.bindPopup(popup_6ba14af32af7f0b2764200a93340d967)
+        ;
+
+
+
+
+            var circle_marker_c484ff8d088c56217eb52a0ff1276ba6 = L.circleMarker(
+                [51.531921, -0.126361],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_6233b8b7b042f5a42d49b03f707f7071 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_354ef16ad596b4327282423ff8a0d7f0 = $(`<div id="html_354ef16ad596b4327282423ff8a0d7f0" style="width: 100.0%; height: 100.0%;">London St Pancras -> Wolverhampton: Medium Elasticity</div>`)[0];
+                popup_6233b8b7b042f5a42d49b03f707f7071.setContent(html_354ef16ad596b4327282423ff8a0d7f0);
+
+
+
+        circle_marker_c484ff8d088c56217eb52a0ff1276ba6.bindPopup(popup_6233b8b7b042f5a42d49b03f707f7071)
+        ;
+
+
+
+
+            var circle_marker_aefedabe30e989153e2000d782f9edbd = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_a54ea8e75d614ef21097b92df622c18f = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_5651d9cd9a7ba40bb5cb3e39d76fb7d9 = $(`<div id="html_5651d9cd9a7ba40bb5cb3e39d76fb7d9" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> Leeds: Medium Elasticity</div>`)[0];
+                popup_a54ea8e75d614ef21097b92df622c18f.setContent(html_5651d9cd9a7ba40bb5cb3e39d76fb7d9);
+
+
+
+        circle_marker_aefedabe30e989153e2000d782f9edbd.bindPopup(popup_a54ea8e75d614ef21097b92df622c18f)
+        ;
+
+
+
+
+            var circle_marker_aab1d84946d4309b19b919ec2c74bb8d = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_300dc2b51c11a79763e65668dd7041c4 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_643a75c348f77f9fa7cf46430e3e0866 = $(`<div id="html_643a75c348f77f9fa7cf46430e3e0866" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> Liverpool Lime Street: High Elasticity</div>`)[0];
+                popup_300dc2b51c11a79763e65668dd7041c4.setContent(html_643a75c348f77f9fa7cf46430e3e0866);
+
+
+
+        circle_marker_aab1d84946d4309b19b919ec2c74bb8d.bindPopup(popup_300dc2b51c11a79763e65668dd7041c4)
+        ;
+
+
+
+
+            var circle_marker_ebbec31136ab0fed554e918e99b48b38 = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_dbe139431bd701d68de0835d98f190bc = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_ea6ed087ca3297eaf3457e0be499d03c = $(`<div id="html_ea6ed087ca3297eaf3457e0be499d03c" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> London Euston: Medium Elasticity</div>`)[0];
+                popup_dbe139431bd701d68de0835d98f190bc.setContent(html_ea6ed087ca3297eaf3457e0be499d03c);
+
+
+
+        circle_marker_ebbec31136ab0fed554e918e99b48b38.bindPopup(popup_dbe139431bd701d68de0835d98f190bc)
+        ;
+
+
+
+
+            var circle_marker_429b569d36a83231397ba24f9a115907 = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_2ad0925b808f16e4823f13bbb7495637 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_a84b0cd5cab5fa9de1e9f015184e579f = $(`<div id="html_a84b0cd5cab5fa9de1e9f015184e579f" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> London Paddington: Low Elasticity</div>`)[0];
+                popup_2ad0925b808f16e4823f13bbb7495637.setContent(html_a84b0cd5cab5fa9de1e9f015184e579f);
+
+
+
+        circle_marker_429b569d36a83231397ba24f9a115907.bindPopup(popup_2ad0925b808f16e4823f13bbb7495637)
+        ;
+
+
+
+
+            var circle_marker_742b8112ccec9ced33ef4bafc285cd8c = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_58bd845ac9f1a13b5462daa9161a684a = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_4688678f9ced353d9efc7347af06e4b8 = $(`<div id="html_4688678f9ced353d9efc7347af06e4b8" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> Nottingham: Low Elasticity</div>`)[0];
+                popup_58bd845ac9f1a13b5462daa9161a684a.setContent(html_4688678f9ced353d9efc7347af06e4b8);
+
+
+
+        circle_marker_742b8112ccec9ced33ef4bafc285cd8c.bindPopup(popup_58bd845ac9f1a13b5462daa9161a684a)
+        ;
+
+
+
+
+            var circle_marker_2d9b664fc02b99e3029827c8c407cb29 = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_1ad11e3c5f387740ba940775caadc14c = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_05e1d746cbb5791a9dad9db3e359d4c7 = $(`<div id="html_05e1d746cbb5791a9dad9db3e359d4c7" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly -> Sheffield: Medium Elasticity</div>`)[0];
+                popup_1ad11e3c5f387740ba940775caadc14c.setContent(html_05e1d746cbb5791a9dad9db3e359d4c7);
+
+
+
+        circle_marker_2d9b664fc02b99e3029827c8c407cb29.bindPopup(popup_1ad11e3c5f387740ba940775caadc14c)
+        ;
+
+
+
+
+            var circle_marker_436af14240c9f64da9780f74f28cf749 = L.circleMarker(
+                [51.753549, -1.270037],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_da6632dceacf2fbdeff5ebdf24514735 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_008f2287a6b335a96277805b280fd9f9 = $(`<div id="html_008f2287a6b335a96277805b280fd9f9" style="width: 100.0%; height: 100.0%;">Oxford -> Bristol Temple Meads: High Elasticity</div>`)[0];
+                popup_da6632dceacf2fbdeff5ebdf24514735.setContent(html_008f2287a6b335a96277805b280fd9f9);
+
+
+
+        circle_marker_436af14240c9f64da9780f74f28cf749.bindPopup(popup_da6632dceacf2fbdeff5ebdf24514735)
+        ;
+
+
+
+
+            var circle_marker_20cdceec1559e9b654c5bf1fe3da0add = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_97054833750c98ad795cd3ba833bd40f = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_0bf0b9f32c5a289f3fa95210b3273a00 = $(`<div id="html_0bf0b9f32c5a289f3fa95210b3273a00" style="width: 100.0%; height: 100.0%;">Reading -> Birmingham New Street: Low Elasticity</div>`)[0];
+                popup_97054833750c98ad795cd3ba833bd40f.setContent(html_0bf0b9f32c5a289f3fa95210b3273a00);
+
+
+
+        circle_marker_20cdceec1559e9b654c5bf1fe3da0add.bindPopup(popup_97054833750c98ad795cd3ba833bd40f)
+        ;
+
+
+
+
+            var circle_marker_13e7c7ee0e3ee875ff3850e853f3b8a7 = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_e103c2d72bc71258db913f5a9fe53c3e = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_56a279a769cc2ef413e801665086e758 = $(`<div id="html_56a279a769cc2ef413e801665086e758" style="width: 100.0%; height: 100.0%;">Reading -> Didcot: High Elasticity</div>`)[0];
+                popup_e103c2d72bc71258db913f5a9fe53c3e.setContent(html_56a279a769cc2ef413e801665086e758);
+
+
+
+        circle_marker_13e7c7ee0e3ee875ff3850e853f3b8a7.bindPopup(popup_e103c2d72bc71258db913f5a9fe53c3e)
+        ;
+
+
+
+
+            var circle_marker_d2ba2f5f76cccc5cfa1dd209e608a370 = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_fb0db4eed00fa39e3d8ba63b4d313623 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_cae7f5cf3e561365281f33c05ae9ced8 = $(`<div id="html_cae7f5cf3e561365281f33c05ae9ced8" style="width: 100.0%; height: 100.0%;">Reading -> London Paddington: Low Elasticity</div>`)[0];
+                popup_fb0db4eed00fa39e3d8ba63b4d313623.setContent(html_cae7f5cf3e561365281f33c05ae9ced8);
+
+
+
+        circle_marker_d2ba2f5f76cccc5cfa1dd209e608a370.bindPopup(popup_fb0db4eed00fa39e3d8ba63b4d313623)
+        ;
+
+
+
+
+            var circle_marker_a060912c6157e1e359bc8b02d351890d = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_356064c58578199996efcc4a1746e143 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_265640b9d4e6adab857d616dd2872b96 = $(`<div id="html_265640b9d4e6adab857d616dd2872b96" style="width: 100.0%; height: 100.0%;">Reading -> Oxford: Low Elasticity</div>`)[0];
+                popup_356064c58578199996efcc4a1746e143.setContent(html_265640b9d4e6adab857d616dd2872b96);
+
+
+
+        circle_marker_a060912c6157e1e359bc8b02d351890d.bindPopup(popup_356064c58578199996efcc4a1746e143)
+        ;
+
+
+
+
+            var circle_marker_32de7fa23f14c1c368b3e041051184ed = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_84e9e8fb889932318ec34a9a0206389e = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_ad7fd6d0269868b661afa8ec554523f0 = $(`<div id="html_ad7fd6d0269868b661afa8ec554523f0" style="width: 100.0%; height: 100.0%;">Reading -> Swindon: High Elasticity</div>`)[0];
+                popup_84e9e8fb889932318ec34a9a0206389e.setContent(html_ad7fd6d0269868b661afa8ec554523f0);
+
+
+
+        circle_marker_32de7fa23f14c1c368b3e041051184ed.bindPopup(popup_84e9e8fb889932318ec34a9a0206389e)
+        ;
+
+
+
+
+            var circle_marker_90f401353d142dd1b86e5f75b04f8f3c = L.circleMarker(
+                [53.957966, -1.093159],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_72a4c31b32191b2b2aea4f05bfbb5a83 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_59041874a32c338dbae1fd82014c5b8e = $(`<div id="html_59041874a32c338dbae1fd82014c5b8e" style="width: 100.0%; height: 100.0%;">York -> Doncaster: High Elasticity</div>`)[0];
+                popup_72a4c31b32191b2b2aea4f05bfbb5a83.setContent(html_59041874a32c338dbae1fd82014c5b8e);
+
+
+
+        circle_marker_90f401353d142dd1b86e5f75b04f8f3c.bindPopup(popup_72a4c31b32191b2b2aea4f05bfbb5a83)
+        ;
+
+
+
+
+            var circle_marker_a5d54ebf7f14edcfaf944398c151b2ab = L.circleMarker(
+                [53.957966, -1.093159],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_3c8f9aac5dce769f30cc92b483ef945b = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_1e5aa7b3423b4b7cedc834fd62e23c4b = $(`<div id="html_1e5aa7b3423b4b7cedc834fd62e23c4b" style="width: 100.0%; height: 100.0%;">York -> Durham: Low Elasticity</div>`)[0];
+                popup_3c8f9aac5dce769f30cc92b483ef945b.setContent(html_1e5aa7b3423b4b7cedc834fd62e23c4b);
+
+
+
+        circle_marker_a5d54ebf7f14edcfaf944398c151b2ab.bindPopup(popup_3c8f9aac5dce769f30cc92b483ef945b)
+        ;
+
+
+
+
+            var circle_marker_1e4e294bf83119fe40aa84a7c5914dcf = L.circleMarker(
+                [53.957966, -1.093159],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_324338f99d20fad9691fa28d6cac1df5 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_c6cc8e3be426ad1cef41a38d443ee737 = $(`<div id="html_c6cc8e3be426ad1cef41a38d443ee737" style="width: 100.0%; height: 100.0%;">York -> Edinburgh: Low Elasticity</div>`)[0];
+                popup_324338f99d20fad9691fa28d6cac1df5.setContent(html_c6cc8e3be426ad1cef41a38d443ee737);
+
+
+
+        circle_marker_1e4e294bf83119fe40aa84a7c5914dcf.bindPopup(popup_324338f99d20fad9691fa28d6cac1df5)
+        ;
+
+
+
+
+            var circle_marker_9bb63426008979d580288f6339ba3322 = L.circleMarker(
+                [53.957966, -1.093159],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_14d9d051939a64d9446587ef6923e676);
+
+
+        var popup_6ec5d2fd35a48386697a8b3678a12807 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_9520f8cfc474794e5916859bf6f1cb4a = $(`<div id="html_9520f8cfc474794e5916859bf6f1cb4a" style="width: 100.0%; height: 100.0%;">York -> Peterborough: Medium Elasticity</div>`)[0];
+                popup_6ec5d2fd35a48386697a8b3678a12807.setContent(html_9520f8cfc474794e5916859bf6f1cb4a);
+
+
+
+        circle_marker_9bb63426008979d580288f6339ba3322.bindPopup(popup_6ec5d2fd35a48386697a8b3678a12807)
+        ;
+
+
+
+</script>
+</html>

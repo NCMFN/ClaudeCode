@@ -1,0 +1,14 @@
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.4
+matplotlib>=3.8
+seaborn>=0.13
+geopandas>=0.14
+folium>=0.15
+rapidfuzz>=3.0
+reportlab>=4.0
+nbconvert>=7.0
+jupyter>=1.0
+scipy>=1.11
+xgboost>=2.0
+haversine>=2.8

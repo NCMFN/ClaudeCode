@@ -97,3 +97,7 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+uk-rail-pricing/data/raw/
+uk-rail-pricing/data/processed/
+uk-rail-pricing/data/geospatial/
+uk-rail-pricing/outputs/models/
