@@ -42,7 +42,7 @@ def main():
 
     wrapper_path = "pipeline_runner.py"
 
-    wrapper_code = """
+    wrapper_code = r"""
 import os
 import sys
 import logging
@@ -76,7 +76,7 @@ feature_df = extract_features(dhs_geo, wealth_df, ntl_median_path, feature_matri
 
 # 4. Model Training
 print("Phase 4: Model Training...")
-model = train_and_evaluate(feature_matrix_path, "outputs/model.joblib", "outputs/figures/feature_importance.png")
+model = train_and_evaluate(feature_matrix_path, "outputs/models/model.joblib", "outputs/figures/feature_importance.png")
 
 # 5. Poverty Heatmap
 print("Phase 5: Generating Heatmap...")
@@ -100,6 +100,22 @@ manifest_df = pd.DataFrame(manifest_data)
 import os
 os.makedirs('outputs/paper_assets', exist_ok=True)
 manifest_df.to_csv('outputs/paper_assets/paper_assets_manifest.csv', index=False)
+
+# Generate boilerplate final_paper.tex
+print("Generating boilerplate final_paper.tex...")
+tex_content = r'''\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/feature_importance.png}
+\caption{Feature importance analysis.}
+\label{fig:feature_importance}
+\end{figure}
+\end{document}
+'''
+with open('outputs/final_paper.tex', 'w') as f:
+    f.write(tex_content)
 
 print("Pipeline execution completed gracefully.")
 """
