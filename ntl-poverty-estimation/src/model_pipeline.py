@@ -78,20 +78,30 @@ def train_and_evaluate(features_csv: str, output_model_path: str, output_fig_pat
         rf_pipeline.fit(X, y)
 
         # Save Model
-        os.makedirs(os.path.dirname(output_model_path), exist_ok=True)
+        os.makedirs('outputs/models', exist_ok=True)
         joblib.dump(rf_pipeline, output_model_path)
+
+        # Ensure directories exist
+        os.makedirs('outputs/figures', exist_ok=True)
+        os.makedirs('outputs/tables', exist_ok=True)
+        os.makedirs('outputs/datasets', exist_ok=True)
 
         # Feature Importance
         importances = rf_pipeline.named_steps['rf'].feature_importances_
         feat_imp = pd.Series(importances, index=FEATURES).sort_values(ascending=False)
+
+        # Table: Feature Importance
+        feat_imp_df = feat_imp.reset_index()
+        feat_imp_df.columns = ['Feature', 'Importance']
+        feat_imp_df.to_csv('outputs/tables/table_2_feature_importance.csv', index=False)
+        feat_imp_df.to_csv('outputs/datasets/feature_importance.csv', index=False)
 
         plt.figure(figsize=(8, 5))
         feat_imp.plot(kind='bar', color='steelblue')
         plt.title("Random Forest Feature Importance — NTL Poverty Estimation")
         plt.ylabel("Importance Score")
         plt.tight_layout()
-        os.makedirs(os.path.dirname(output_fig_path), exist_ok=True)
-        plt.savefig(output_fig_path, dpi=150)
+        plt.savefig('outputs/figures/feature_importance.png', dpi=300, bbox_inches="tight")
         plt.close()
 
         # Save predictions vs actuals for Phase 7
@@ -99,8 +109,9 @@ def train_and_evaluate(features_csv: str, output_model_path: str, output_fig_pat
         results_table['predicted_wealth'] = rf_pipeline.predict(X)
         results_table['residual'] = results_table['wealth_score'] - results_table['predicted_wealth']
 
-        output_results_csv = os.path.join(os.path.dirname(output_fig_path).replace('figures', ''), 'prediction_results.csv')
-        results_table.to_csv(output_results_csv, index=False)
+        # Dataset: Predictions and Residuals
+        results_table.to_csv('outputs/datasets/predictions.csv', index=False)
+        results_table[['DHSCLUST', 'residual']].to_csv('outputs/datasets/residuals.csv', index=False)
 
         fig, ax = plt.subplots(figsize=(7, 6))
         ax.scatter(results_table['wealth_score'], results_table['predicted_wealth'],
@@ -110,10 +121,25 @@ def train_and_evaluate(features_csv: str, output_model_path: str, output_fig_pat
                 sorted(m * results_table['wealth_score'] + b), 'r--')
         ax.set_xlabel("Observed Wealth Index")
         ax.set_ylabel("Predicted Wealth Index")
-        ax.set_title(f"Predicted vs Actual — R² = {r2_score(results_table['wealth_score'], results_table['predicted_wealth']):.3f}")
+        r2_val = r2_score(results_table['wealth_score'], results_table['predicted_wealth'])
+        ax.set_title(f"Predicted vs Actual — R² = {r2_val:.3f}")
         plt.tight_layout()
-        plt.savefig(os.path.join(os.path.dirname(output_fig_path), 'predicted_vs_actual.png'), dpi=150)
+        plt.savefig('outputs/figures/predicted_vs_actual.png', dpi=300, bbox_inches="tight")
         plt.close()
+
+        # Table: Model Performance
+        rmse_val = np.sqrt(mean_squared_error(results_table['wealth_score'], results_table['predicted_wealth']))
+        perf_df = pd.DataFrame({'Metric': ['R-Squared', 'RMSE'], 'Value': [r2_val, rmse_val]})
+        perf_df.to_csv('outputs/tables/table_1_model_performance.csv', index=False)
+
+        if n_splits > 1:
+            fold_results_df = pd.DataFrame({
+                'Fold': range(1, len(r2_scores) + 1),
+                'R2_Score': r2_scores,
+                'RMSE': rmse_scores
+            })
+            fold_results_df.to_csv('outputs/datasets/fold_results.csv', index=False)
+            fold_results_df.to_csv('outputs/tables/table_3_cross_validation_results.csv', index=False)
 
         return rf_pipeline
 

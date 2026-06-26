@@ -69,10 +69,10 @@ def generate_poverty_heatmap(model: Pipeline, raster_path: str, output_tif: str,
         ax.set_title("Regional Poverty Heatmap — NTL-Derived Wealth Estimation", fontsize=14)
         ax.axis('off')
         plt.tight_layout()
-        os.makedirs(os.path.dirname(output_fig), exist_ok=True)
-        plt.savefig(output_fig, dpi=200)
+        os.makedirs('outputs/figures', exist_ok=True)
+        plt.savefig('outputs/figures/poverty_heatmap.png', dpi=300, bbox_inches="tight")
         plt.close()
-        print(f"Poverty heatmap visualization saved to {output_fig}")
+        print(f"Poverty heatmap visualization saved to outputs/figures/poverty_heatmap.png")
 
     except Exception as e:
         print(f"Error generating poverty heatmap: {e}")

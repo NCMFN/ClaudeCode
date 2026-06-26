@@ -86,6 +86,21 @@ generate_poverty_heatmap(model, ntl_median_path, "outputs/poverty_heatmap.tif", 
 print("Phase 6: Multimodal Fusion...")
 fetch_ndvi_data(study_region=None, output_prefix="demo")
 
+# Generate Paper Assets Manifest
+print("Generating Paper Assets Manifest...")
+import pandas as pd
+manifest_data = {
+    'Asset Type': ['Figure', 'Figure', 'Figure', 'Table', 'Table', 'Table'],
+    'Filename': ['feature_importance.png', 'predicted_vs_actual.png', 'poverty_heatmap.png',
+                 'table_1_model_performance.csv', 'table_2_feature_importance.csv', 'table_3_cross_validation_results.csv'],
+    'Description': ['Feature Importance Plot', 'Predicted vs Actual Plot', 'Spatial Heatmap',
+                    'Model Performance Table', 'Feature Importance Table', 'Cross Validation Results Table']
+}
+manifest_df = pd.DataFrame(manifest_data)
+import os
+os.makedirs('outputs/paper_assets', exist_ok=True)
+manifest_df.to_csv('outputs/paper_assets/paper_assets_manifest.csv', index=False)
+
 print("Pipeline execution completed gracefully.")
 """
 
