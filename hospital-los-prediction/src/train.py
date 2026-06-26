@@ -97,7 +97,7 @@ def evaluate_model(y_true, y_pred, model_name="Model"):
         'MAPE': round(mape, 4)
     }
 
-def plot_actual_vs_predicted(y_true, y_pred, output_path="outputs/actual_vs_predicted.png"):
+def plot_actual_vs_predicted(y_true, y_pred, output_path="outputs/figures/actual_vs_predicted.png"):
     """
     Generate and save a scatter plot of Actual vs Predicted LOS values.
     """
@@ -111,7 +111,7 @@ def plot_actual_vs_predicted(y_true, y_pred, output_path="outputs/actual_vs_pred
     plt.savefig(output_path)
     plt.close()
 
-def plot_residuals(y_true, y_pred, output_path="outputs/residuals.png"):
+def plot_residuals(y_true, y_pred, output_path="outputs/figures/residuals.png"):
     """
     Generate and save a histogram of regression residuals.
     """
@@ -124,7 +124,7 @@ def plot_residuals(y_true, y_pred, output_path="outputs/residuals.png"):
     plt.savefig(output_path)
     plt.close()
 
-def plot_feature_importance(model, feature_names, output_path="outputs/feature_importance.png"):
+def plot_feature_importance(model, feature_names, output_path="outputs/figures/feature_importance.png"):
     """
     Generate and save a bar chart of native XGBoost feature importances.
     """
@@ -139,7 +139,7 @@ def plot_feature_importance(model, feature_names, output_path="outputs/feature_i
     plt.savefig(output_path)
     plt.close()
 
-def generate_shap_plot(model, X_transformed, feature_names, output_path="outputs/shap_summary.png"):
+def generate_shap_plot(model, X_transformed, feature_names, output_path="outputs/figures/shap_summary.png"):
     """
     Generate and save a SHAP summary plot for interpretability.
     """
@@ -159,7 +159,8 @@ def proper_training_flow():
     """
     Execute full training lifecycle, including CV tuning, evaluation, and artifact generation.
     """
-    os.makedirs("outputs", exist_ok=True)
+    os.makedirs("outputs/figures", exist_ok=True)
+    os.makedirs("outputs/tables", exist_ok=True)
     X, y = load_data("data/processed_data.csv")
 
     # Store metrics for table export
@@ -266,8 +267,8 @@ def proper_training_flow():
 
     # Export the table as requested
     metrics_df = pd.DataFrame(metrics_log)
-    metrics_df.to_csv("outputs/metrics_summary.csv", index=False)
-    print("Metrics summary table saved to outputs/metrics_summary.csv")
+    metrics_df.to_csv("outputs/tables/metrics_summary.csv", index=False)
+    print("Metrics summary table saved to outputs/tables/metrics_summary.csv")
 
     # 4. Final Model Training & Export
     print("\nTraining Final XGBoost Model on Full Data...")
@@ -286,8 +287,8 @@ def proper_training_flow():
     final_pipeline.fit(X, y)
 
     # Visualizations
-    plot_actual_vs_predicted(y, xgb_preds, "outputs/actual_vs_predicted.png")
-    plot_residuals(y, xgb_preds, "outputs/residuals.png")
+    plot_actual_vs_predicted(y, xgb_preds, "outputs/figures/actual_vs_predicted.png")
+    plot_residuals(y, xgb_preds, "outputs/figures/residuals.png")
 
     # Extract feature names
     dummy_pipeline = Pipeline([('preprocessor', build_preprocessor())])
@@ -295,14 +296,14 @@ def proper_training_flow():
     feature_names = get_feature_names(dummy_pipeline)
 
     final_model = final_pipeline.named_steps['model']
-    plot_feature_importance(final_model, feature_names, "outputs/feature_importance.png")
+    plot_feature_importance(final_model, feature_names, "outputs/figures/feature_importance.png")
 
     X_trans_full = dummy_pipeline.transform(X)
-    generate_shap_plot(final_model, X_trans_full, feature_names, "outputs/shap_summary.png")
+    generate_shap_plot(final_model, X_trans_full, feature_names, "outputs/figures/shap_summary.png")
 
     joblib.dump(final_pipeline, "outputs/xgb_los_model.pkl")
     print("Model saved to outputs/xgb_los_model.pkl")
-    print("All plots saved to outputs/")
+    print("All plots saved to outputs/figures/")
 
 if __name__ == "__main__":
     proper_training_flow()

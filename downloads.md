@@ -36,9 +36,9 @@ This file serves as a template for managing downloads for various tasks and proj
 
 *Customize the sections above by filling in the details relevant to your project.*
 ## Hospital LOS Prediction
-- [Actual vs Predicted LOS](hospital-los-prediction/outputs/actual_vs_predicted.png)
-- [Residuals Distribution](hospital-los-prediction/outputs/residuals.png)
-- [Feature Importance](hospital-los-prediction/outputs/feature_importance.png)
-- [SHAP Summary](hospital-los-prediction/outputs/shap_summary.png)
+- [Actual vs Predicted LOS](hospital-los-prediction/outputs/figures/actual_vs_predicted.png)
+- [Residuals Distribution](hospital-los-prediction/outputs/figures/residuals.png)
+- [Feature Importance](hospital-los-prediction/outputs/figures/feature_importance.png)
+- [SHAP Summary](hospital-los-prediction/outputs/figures/shap_summary.png)
 - [Trained XGBoost Pipeline](hospital-los-prediction/outputs/xgb_los_model.pkl)
-- [Evaluation Metrics Summary Table](hospital-los-prediction/outputs/metrics_summary.csv)
+- [Evaluation Metrics Summary Table](hospital-los-prediction/outputs/tables/metrics_summary.csv)
