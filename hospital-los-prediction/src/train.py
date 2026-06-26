@@ -10,6 +10,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, m
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, RegressorMixin
 from xgboost import XGBRegressor
+import os
 
 from features import build_preprocessor, get_feature_names
 
@@ -88,7 +89,13 @@ def evaluate_model(y_true, y_pred, model_name="Model"):
     print(f"R2:   {r2:.4f}")
     print(f"MAPE: {mape:.4f}")
 
-    return {'mae': mae, 'rmse': rmse, 'r2': r2, 'mape': mape}
+    return {
+        'Model': model_name,
+        'MAE': round(mae, 4),
+        'RMSE': round(rmse, 4),
+        'R2_Score': round(r2, 4),
+        'MAPE': round(mape, 4)
+    }
 
 def plot_actual_vs_predicted(y_true, y_pred, output_path="outputs/actual_vs_predicted.png"):
     """
@@ -152,7 +159,11 @@ def proper_training_flow():
     """
     Execute full training lifecycle, including CV tuning, evaluation, and artifact generation.
     """
+    os.makedirs("outputs", exist_ok=True)
     X, y = load_data("data/processed_data.csv")
+
+    # Store metrics for table export
+    metrics_log = []
 
     # Stratification bins for CV splits
     y_bins = pd.qcut(y, q=4, labels=False, duplicates='drop')
@@ -171,7 +182,9 @@ def proper_training_flow():
         preds = lr_pipeline.predict(X.iloc[val_idx])
         lr_preds[val_idx] = preds
         print(f"LR Fold {fold+1} MAE: {mean_absolute_error(y.iloc[val_idx], preds):.4f}")
-    evaluate_model(y, lr_preds, "Baseline Linear Regression")
+
+    lr_metrics = evaluate_model(y, lr_preds, "Baseline Linear Regression")
+    metrics_log.append(lr_metrics)
 
     # 2. XGBoost Setup and Hyperparameter Tuning
     print("\nPreparing for XGBoost Hyperparameter Tuning...")
@@ -248,7 +261,13 @@ def proper_training_flow():
         fold_mae = mean_absolute_error(y_val, preds)
         print(f"XGB Fold {fold+1} MAE: {fold_mae:.4f}")
 
-    evaluate_model(y, xgb_preds, "Tuned XGBoost Regressor (CV)")
+    xgb_metrics = evaluate_model(y, xgb_preds, "Tuned XGBoost Regressor (CV)")
+    metrics_log.append(xgb_metrics)
+
+    # Export the table as requested
+    metrics_df = pd.DataFrame(metrics_log)
+    metrics_df.to_csv("outputs/metrics_summary.csv", index=False)
+    print("Metrics summary table saved to outputs/metrics_summary.csv")
 
     # 4. Final Model Training & Export
     print("\nTraining Final XGBoost Model on Full Data...")
