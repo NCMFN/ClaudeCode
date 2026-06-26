@@ -1,0 +1,18 @@
+AUC-ROC Score: 0.7459
+Average Precision Score: 0.3042
+F1-Score (Macro): 0.5614
+F1-Score (Default Class): 0.3332
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Safe       0.94      0.68      0.79     45139
+     Default       0.22      0.69      0.33      5931
+
+    accuracy                           0.68     51070
+   macro avg       0.58      0.68      0.56     51070
+weighted avg       0.86      0.68      0.74     51070
+
+
+Business Impact:
+Missed defaults (FN): 1850 — representing $236,020,901.20 in potential principal at risk
