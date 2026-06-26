@@ -15,10 +15,18 @@ This file serves as a template for managing downloads for various tasks and proj
   - Download Link:
 
 ## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
+- **Random Forest Feature Importance**
+  - Description: Feature importance bar chart from the RF model.
+  - Source/Attribution: NTL Poverty Estimation Pipeline
+  - Download Link: [feature_importance.png](ntl-poverty-estimation/outputs/figures/feature_importance.png)
+- **Predicted vs Actual Scatter Plot**
+  - Description: Scatter plot showing predicted vs observed wealth index scores.
+  - Source/Attribution: NTL Poverty Estimation Pipeline
+  - Download Link: [predicted_vs_actual.png](ntl-poverty-estimation/outputs/figures/predicted_vs_actual.png)
+- **Poverty Heatmap Visualization**
+  - Description: Visual heatmap of the predicted poverty levels over the NTL grid.
+  - Source/Attribution: NTL Poverty Estimation Pipeline
+  - Download Link: [poverty_heatmap.png](ntl-poverty-estimation/outputs/figures/poverty_heatmap.png)
 
 ## Notebooks
 - **Notebook Title**
@@ -27,11 +35,11 @@ This file serves as a template for managing downloads for various tasks and proj
   - Download Link:
 
 ## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- **NTL Feature Matrix**
+  - Description: Tabular NTL feature set per DHS cluster.
+  - Source: NTL Poverty Estimation Pipeline
+  - Download Link: [feature_matrix.csv](ntl-poverty-estimation/data/processed/feature_matrix.csv)
+- **Prediction Results**
+  - Description: Per-cluster predictions vs DHS wealth scores.
+  - Source: NTL Poverty Estimation Pipeline
+  - Download Link: [prediction_results.csv](ntl-poverty-estimation/outputs/prediction_results.csv)
