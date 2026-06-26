@@ -1,0 +1,23 @@
+Asset Type,Filename,Description
+Figure,feature_importance.png,Feature Importance
+Figure,predicted_vs_actual.png,Predicted Vs Actual
+Figure,poverty_heatmap.png,Poverty Heatmap
+Figure,model_comparison.png,Model Comparison
+Figure,confusion_matrix.png,Confusion Matrix
+Figure,correlation_heatmap.png,Correlation Heatmap
+Figure,residual_analysis.png,Residual Analysis
+Figure,roc_curve.png,Roc Curve
+Figure,precision_recall_curve.png,Precision Recall Curve
+Figure,shap_summary.png,Shap Summary
+Figure,partial_dependence.png,Partial Dependence
+Figure,geospatial_map.png,Geospatial Map
+Figure,clustering_visualization.png,Clustering Visualization
+Figure,time_series_forecast.png,Time Series Forecast
+Figure,cross_validation_results.png,Cross Validation Results
+Figure,hyperparameter_tuning.png,Hyperparameter Tuning
+Figure,heatmap.png,Heatmap
+Table,table_1_model_performance.csv,Table 1 Model Performance
+Table,table_2_feature_importance.csv,Table 2 Feature Importance
+Table,table_3_cross_validation_results.csv,Table 3 Cross Validation Results
+Table,table_4_error_analysis.csv,Table 4 Error Analysis
+Table,table_5_fairness_assessment.csv,Table 5 Fairness Assessment

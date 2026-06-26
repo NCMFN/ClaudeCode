@@ -1,8 +1,10 @@
-# Downloads
+import re
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+with open('/app/downloads.md', 'r') as f:
+    content = f.read()
 
-## Datasets
+# We need to add all these files to the right sections.
+new_datasets = """
 - **Predictions**
   - Description: Predictions
   - Source: Generated
@@ -59,19 +61,9 @@ This file serves as a template for managing downloads for various tasks and proj
   - Description: Paper Assets Manifest
   - Source: Generated
   - Download Link: [paper_assets_manifest.csv](ntl-poverty-estimation/outputs/paper_assets/paper_assets_manifest.csv)
+"""
 
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
+new_images = """
 - **Feature Importance Plot**
   - Description: Feature Importance Plot
   - Source/Attribution: Generated
@@ -140,19 +132,9 @@ This file serves as a template for managing downloads for various tasks and proj
   - Description: Heatmap Plot
   - Source/Attribution: Generated
   - Download Link: [heatmap.png](ntl-poverty-estimation/outputs/figures/heatmap.png)
+"""
 
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
+new_research_files = """
 - **Poverty Heatmap TIF**
   - Description: Poverty Heatmap GeoTIFF
   - Source: Generated
@@ -165,12 +147,11 @@ This file serves as a template for managing downloads for various tasks and proj
   - Description: Final Paper LaTeX File
   - Source: Generated
   - Download Link: [final_paper.tex](ntl-poverty-estimation/outputs/final_paper.tex)
+"""
 
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
+content = content.replace('## Datasets', '## Datasets' + new_datasets)
+content = content.replace('## Images', '## Images' + new_images)
+content = content.replace('## Research Files', '## Research Files' + new_research_files)
 
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+with open('/app/downloads.md', 'w') as f:
+    f.write(content)
