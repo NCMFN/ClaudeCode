@@ -1,0 +1,1001 @@
+wall_type,roof_type,bed_net_available,bed_net_used_last_night,proximity_water_body_m,household_size,education_head,income_level,eave_open,floor_type,num_windows_screened,target
+Concrete,Iron Sheet,0,1,523.4113674718119,3,Tertiary,High,0,Tile,6,0
+Wood,Tile,1,1,493.95759814399963,9,None,High,1,Cement,2,0
+Mud,Thatch,1,1,1812.5091610420734,5,None,Low,0,Earth,6,0
+Concrete,Thatch,1,1,499.0923996990122,8,Tertiary,Low,1,Tile,2,0
+Concrete,Thatch,1,0,543.8994522572619,7,Tertiary,Low,1,Cement,1,1
+Wood,Thatch,0,0,1518.7965248359274,14,None,High,0,Earth,2,1
+Mud,Concrete,1,1,899.47968490108,8,Primary,High,1,Tile,5,0
+Mud,Thatch,0,0,1553.4211139103625,7,Primary,High,0,Earth,2,1
+Concrete,Concrete,0,1,130.7323151287705,3,Tertiary,Low,0,Earth,1,0
+Brick,Concrete,0,0,975.1423873467686,2,Secondary,Middle,0,Earth,1,1
+Concrete,Thatch,0,1,67.22720036656527,7,Primary,High,1,Cement,4,0
+Concrete,Thatch,0,1,125.30640691070904,3,Tertiary,Middle,0,Tile,6,0
+Concrete,Iron Sheet,1,0,1812.874906688822,3,Primary,Middle,0,Tile,3,0
+Concrete,Tile,1,0,278.49074223519034,2,Secondary,Middle,1,Cement,0,1
+Wood,Thatch,1,1,1064.8413645504343,4,Tertiary,Low,1,Tile,0,0
+Mud,Iron Sheet,1,1,822.1912052014131,8,Secondary,Middle,1,Earth,2,1
+Wood,Iron Sheet,0,0,694.6866525176854,12,Tertiary,High,1,Tile,4,1
+Wood,Tile,1,0,1799.6666913745448,1,Secondary,Low,0,Cement,2,1
+Wood,Concrete,0,1,43.646793550979,1,Primary,High,0,Earth,0,0
+Concrete,Thatch,1,0,1327.579372351178,12,Primary,High,0,Cement,6,0
+Brick,Tile,0,1,1926.7888684271009,14,Secondary,Low,1,Earth,6,1
+Mud,Thatch,0,1,1120.336366923684,5,Secondary,High,1,Earth,6,0
+Brick,Iron Sheet,1,1,1873.6449240661836,11,Secondary,High,0,Tile,1,0
+Wood,Iron Sheet,0,1,104.51575857204753,5,Tertiary,Low,1,Earth,3,1
+Wood,Concrete,0,0,837.5866381483228,11,Primary,High,1,Cement,4,0
+Brick,Iron Sheet,1,0,520.3155819241023,12,Tertiary,Middle,0,Tile,1,0
+Brick,Iron Sheet,0,0,1461.6419299614595,1,Primary,High,0,Cement,3,0
+Brick,Tile,1,0,1962.5941809944934,6,None,Middle,1,Earth,4,1
+Wood,Thatch,1,0,513.0601248884956,1,Tertiary,High,1,Cement,4,1
+Wood,Thatch,1,0,1308.349202948149,5,Primary,Low,1,Cement,0,1
+Mud,Tile,0,0,396.19526551948024,9,Primary,Low,0,Earth,1,1
+Mud,Concrete,0,1,1130.6605091432198,12,Tertiary,High,0,Tile,4,0
+Wood,Thatch,0,0,927.8649733766724,14,Tertiary,Low,0,Cement,5,1
+Brick,Iron Sheet,1,0,1944.010659263074,5,Primary,High,0,Earth,6,0
+Brick,Thatch,0,1,1217.054545392933,6,Tertiary,Low,0,Tile,4,1
+Mud,Iron Sheet,1,0,699.0127441736375,8,Secondary,Middle,1,Tile,3,1
+Wood,Concrete,1,0,228.19156977586675,11,Tertiary,High,1,Tile,0,0
+Mud,Tile,0,1,302.4936574698691,1,Tertiary,Middle,1,Cement,2,1
+Mud,Thatch,1,0,450.6338599024702,14,Tertiary,Middle,0,Cement,6,1
+Concrete,Tile,0,0,501.933322680596,2,Primary,High,0,Cement,0,1
+Concrete,Thatch,0,0,1701.2321156822757,9,Secondary,Middle,0,Tile,2,0
+Concrete,Iron Sheet,0,1,1122.4455765650498,3,None,High,1,Cement,1,0
+Brick,Tile,0,0,1046.7818227487328,6,None,Middle,0,Earth,1,1
+Wood,Thatch,0,0,229.53774373843493,5,Secondary,High,0,Cement,4,0
+Wood,Iron Sheet,1,1,1720.27938669887,11,Secondary,High,1,Cement,5,0
+Wood,Tile,1,0,1445.6286064169674,2,Secondary,Low,0,Tile,1,0
+Wood,Tile,1,1,135.33672380000317,14,Primary,High,1,Cement,4,0
+Concrete,Thatch,0,1,1415.6701944595372,15,None,High,0,Earth,6,0
+Brick,Thatch,0,0,1087.076434685292,7,Secondary,Middle,0,Tile,0,1
+Brick,Thatch,0,1,163.45069149355652,4,Primary,High,1,Earth,1,1
+Concrete,Iron Sheet,1,1,916.6012830573129,1,None,Low,1,Tile,0,0
+Brick,Thatch,0,0,969.392574260094,13,Tertiary,Middle,1,Tile,0,1
+Concrete,Tile,1,1,331.5490803265515,4,Primary,Middle,1,Cement,5,0
+Wood,Tile,1,1,1891.3962940005647,6,None,Low,1,Earth,1,0
+Concrete,Thatch,0,0,1699.9507429613238,7,Primary,Middle,1,Tile,0,1
+Wood,Thatch,0,0,1338.0446746582165,15,None,Middle,0,Cement,5,0
+Wood,Concrete,1,0,924.5911220012144,7,None,Middle,0,Tile,5,0
+Mud,Tile,0,1,823.531083169017,14,Tertiary,Middle,1,Tile,1,1
+Concrete,Iron Sheet,1,0,1301.9469343019084,7,Primary,Low,0,Tile,5,0
+Mud,Concrete,0,1,1090.8637388138109,3,Secondary,Low,1,Tile,1,1
+Concrete,Thatch,0,1,124.54621176377123,6,Tertiary,Middle,0,Tile,1,1
+Concrete,Thatch,1,1,1025.0052975406634,13,Tertiary,Middle,1,Tile,2,0
+Mud,Tile,0,1,1612.807234465679,8,None,Low,0,Cement,0,1
+Mud,Thatch,1,1,918.4797551939162,4,Secondary,Low,0,Tile,3,1
+Concrete,Iron Sheet,0,1,103.91315510853683,13,Primary,Low,0,Earth,1,1
+Brick,Tile,1,1,1572.5563987680662,8,Secondary,Middle,0,Cement,0,0
+Wood,Thatch,1,0,402.7275642719488,2,Secondary,Middle,0,Earth,6,1
+Mud,Tile,0,0,517.2416697760775,15,Secondary,High,1,Tile,5,1
+Wood,Thatch,1,1,329.41270686459177,10,Secondary,Low,1,Earth,4,1
+Brick,Thatch,0,1,660.4301297429951,9,Secondary,Middle,1,Tile,1,1
+Brick,Thatch,0,0,1513.50301137727,9,None,Low,0,Tile,5,1
+Brick,Iron Sheet,0,1,1038.7717190078747,8,None,Middle,1,Cement,5,0
+Mud,Iron Sheet,1,0,409.7625483014251,10,Tertiary,Low,0,Cement,5,0
+Brick,Tile,1,0,1755.6601563040817,14,None,Middle,0,Tile,5,1
+Mud,Thatch,0,0,1759.1637099030584,13,Tertiary,High,0,Cement,5,1
+Brick,Thatch,0,1,1741.1568500920139,10,Tertiary,High,1,Earth,1,0
+Wood,Iron Sheet,1,1,477.59242276307856,1,Primary,Low,0,Cement,6,0
+Wood,Thatch,0,0,902.4786883619762,2,Secondary,Middle,1,Cement,3,0
+Concrete,Iron Sheet,0,0,1969.9793122817503,6,None,Middle,1,Earth,2,1
+Wood,Thatch,1,0,1544.0249526199807,10,Primary,Low,0,Cement,5,1
+Concrete,Tile,0,0,54.334842451119634,5,None,Middle,0,Tile,5,0
+Wood,Thatch,1,0,130.4091825209841,12,Tertiary,Low,1,Earth,2,1
+Mud,Thatch,0,1,927.8627536246655,14,None,Middle,1,Tile,6,0
+Wood,Concrete,1,0,1818.4404117231204,9,Secondary,Low,1,Earth,6,1
+Concrete,Iron Sheet,0,1,1077.4035959054283,5,Tertiary,Middle,1,Tile,1,1
+Concrete,Thatch,0,0,995.6250160685804,2,Tertiary,Low,1,Tile,0,1
+Brick,Thatch,1,1,210.94739991326117,10,Primary,Middle,1,Cement,4,1
+Mud,Concrete,0,1,1313.560209448588,4,Secondary,High,0,Tile,4,0
+Wood,Concrete,1,1,1644.206321200451,9,Tertiary,Middle,1,Cement,0,0
+Brick,Iron Sheet,0,1,760.8400150151247,1,Secondary,Low,1,Earth,1,1
+Wood,Concrete,1,1,1551.2237018506548,11,None,High,1,Tile,4,0
+Wood,Tile,1,1,1928.9533078016232,1,Secondary,Middle,1,Tile,6,1
+Brick,Concrete,1,0,407.5329182553782,12,Tertiary,High,0,Earth,2,0
+Brick,Tile,1,1,1046.6592623894826,7,Primary,Middle,0,Earth,0,1
+Brick,Iron Sheet,0,0,574.2759161691511,11,Tertiary,High,1,Tile,6,0
+Brick,Iron Sheet,0,1,1585.7088380676787,3,Secondary,Low,1,Earth,3,1
+Brick,Iron Sheet,1,1,1155.186731762315,10,Secondary,Middle,1,Cement,1,0
+Wood,Iron Sheet,1,0,1269.1648351006074,2,Tertiary,Middle,0,Earth,0,1
+Brick,Iron Sheet,1,1,1595.828319231788,9,Secondary,Low,0,Earth,4,1
+Mud,Tile,0,0,791.9409453249098,3,None,High,0,Tile,1,1
+Concrete,Tile,0,0,1830.1801368140864,2,Tertiary,Low,0,Cement,2,0
+Brick,Iron Sheet,0,0,1066.05773449228,12,Primary,Low,0,Earth,1,1
+Brick,Concrete,0,0,315.909645670696,8,Tertiary,High,0,Cement,1,0
+Wood,Thatch,1,1,1391.798236337605,10,None,Low,1,Cement,2,0
+Brick,Iron Sheet,1,1,1586.522700876509,6,None,Middle,0,Cement,5,0
+Brick,Concrete,1,0,633.5233541350533,6,None,Middle,0,Tile,2,0
+Brick,Thatch,0,1,1714.358513997506,10,None,Middle,1,Earth,6,0
+Wood,Iron Sheet,0,1,1812.2865095315328,11,None,Low,0,Tile,1,0
+Brick,Iron Sheet,0,0,553.8089747556179,7,Primary,Middle,1,Earth,2,0
+Concrete,Tile,1,1,1967.0429454304442,7,Secondary,Middle,0,Earth,5,0
+Wood,Thatch,1,0,281.42305609751685,11,None,Middle,1,Tile,6,1
+Concrete,Thatch,0,0,404.03133680497996,13,None,Middle,1,Cement,0,1
+Wood,Concrete,1,1,368.44967847605227,15,Tertiary,Middle,1,Cement,2,0
+Brick,Tile,0,1,1787.9794200157407,6,Primary,Middle,1,Earth,2,0
+Concrete,Tile,0,1,1308.5851046499238,4,Primary,Low,1,Tile,1,0
+Wood,Tile,1,0,304.20856644454574,11,Secondary,Middle,0,Cement,6,0
+Mud,Tile,0,0,880.646836736698,9,Primary,Middle,0,Cement,0,1
+Brick,Thatch,1,1,1230.5960501396041,6,Tertiary,High,1,Earth,3,0
+Wood,Thatch,0,1,166.9281699787666,4,Tertiary,Low,1,Earth,3,1
+Mud,Iron Sheet,1,1,1764.8327368146774,12,Secondary,Low,1,Tile,4,0
+Wood,Iron Sheet,1,1,1607.2070708830704,3,Tertiary,Low,0,Earth,2,0
+Mud,Tile,1,0,1010.4135471532765,4,None,Low,1,Cement,2,1
+Brick,Tile,0,1,1934.2532305183408,3,None,Middle,1,Cement,0,0
+Concrete,Tile,0,0,835.5219585501994,15,Tertiary,Middle,1,Cement,5,0
+Mud,Iron Sheet,1,0,1968.2206380729956,2,Secondary,High,1,Cement,3,0
+Wood,Concrete,1,1,1335.8399976072542,14,Primary,High,0,Tile,4,0
+Brick,Concrete,0,1,1269.3425465078828,5,Secondary,Low,1,Tile,0,0
+Mud,Iron Sheet,0,1,331.90979059157,2,Primary,High,1,Earth,2,1
+Wood,Iron Sheet,0,0,1763.8555166092879,6,Tertiary,High,0,Earth,3,0
+Wood,Iron Sheet,1,1,854.9793758412303,3,Tertiary,Low,1,Earth,6,0
+Wood,Iron Sheet,0,1,324.46681156495873,6,None,Low,1,Tile,4,1
+Mud,Iron Sheet,0,0,25.21503995151808,15,Primary,High,0,Cement,1,1
+Mud,Iron Sheet,1,1,1119.5113672767652,11,Secondary,Middle,0,Earth,3,1
+Mud,Tile,0,0,1054.7992442453526,10,Tertiary,High,0,Cement,4,0
+Concrete,Tile,0,1,1438.707244738317,9,Secondary,High,1,Earth,0,0
+Mud,Tile,0,0,1780.5161060356043,1,None,Middle,1,Earth,1,1
+Mud,Tile,1,1,158.81316928605904,6,Primary,Middle,0,Earth,4,1
+Mud,Iron Sheet,1,1,1462.9929806807247,9,Primary,Low,0,Earth,4,0
+Concrete,Concrete,1,0,374.82388819516444,11,Tertiary,Low,0,Earth,2,1
+Mud,Thatch,1,0,1716.354106314328,4,Primary,High,1,Cement,5,1
+Wood,Iron Sheet,1,1,1638.1270277233123,11,Tertiary,Middle,1,Earth,3,0
+Mud,Thatch,1,0,1081.5875099710888,12,None,Low,0,Cement,2,1
+Wood,Concrete,1,0,1420.485597246623,2,Primary,High,1,Tile,6,0
+Wood,Tile,0,0,628.7002263674968,13,Tertiary,Middle,0,Earth,1,1
+Wood,Concrete,0,0,942.3357978656293,4,Secondary,High,1,Cement,5,0
+Concrete,Iron Sheet,1,1,1643.2737954209433,1,Tertiary,Low,1,Tile,4,0
+Concrete,Tile,0,1,918.5303943464278,3,Primary,Low,1,Tile,2,1
+Concrete,Iron Sheet,0,0,715.5965306508836,10,None,Middle,1,Tile,5,1
+Mud,Tile,1,0,988.4248945005997,9,Primary,High,0,Cement,6,0
+Wood,Thatch,0,0,1656.4985048744368,10,Primary,Middle,1,Earth,3,1
+Concrete,Thatch,0,0,670.4160947417455,5,Tertiary,Low,1,Earth,6,1
+Concrete,Thatch,0,1,347.5231862714876,15,Secondary,Low,0,Cement,1,1
+Mud,Concrete,0,1,1424.0280406615616,11,Primary,High,1,Earth,0,1
+Concrete,Iron Sheet,0,0,1651.9564254161637,6,Secondary,High,0,Cement,2,0
+Mud,Concrete,1,0,201.27495704706666,3,Tertiary,High,0,Earth,1,1
+Brick,Thatch,1,0,479.7482255118895,5,Secondary,Middle,1,Tile,0,1
+Concrete,Iron Sheet,1,1,283.9439795219878,11,Tertiary,High,1,Earth,2,0
+Brick,Thatch,0,0,695.8828231643332,8,None,High,0,Cement,1,1
+Mud,Concrete,1,1,900.7019578108253,6,Secondary,Low,0,Cement,6,0
+Wood,Concrete,0,0,1497.652673926613,4,Secondary,Low,0,Tile,1,1
+Concrete,Concrete,0,1,1302.2951697633482,2,None,High,1,Cement,5,0
+Mud,Thatch,0,0,1241.8571349568624,14,Secondary,High,0,Earth,6,1
+Wood,Iron Sheet,0,1,704.7498932193088,9,None,Low,0,Earth,2,1
+Wood,Iron Sheet,1,0,1682.89510616952,13,Primary,High,0,Tile,1,0
+Brick,Thatch,1,0,942.5743347963291,12,Tertiary,Middle,1,Cement,4,0
+Mud,Iron Sheet,0,0,1958.209876030309,1,None,Middle,0,Tile,2,0
+Wood,Thatch,1,1,1268.2842765914736,1,Secondary,Middle,1,Earth,1,0
+Concrete,Iron Sheet,0,0,252.52948312900548,13,None,High,1,Tile,5,1
+Concrete,Tile,1,1,1352.355124150868,4,Secondary,Low,0,Cement,0,0
+Brick,Tile,1,1,650.208030863398,7,Primary,High,1,Tile,0,0
+Wood,Concrete,0,0,1372.6543933721948,1,None,High,0,Cement,4,0
+Mud,Tile,1,0,139.28229632481148,9,Primary,Low,1,Cement,2,1
+Concrete,Tile,0,0,349.76287435191875,4,Tertiary,Low,1,Earth,5,1
+Wood,Tile,1,1,1711.4745178115727,3,Secondary,Low,0,Earth,1,0
+Wood,Thatch,0,0,454.3591140470298,1,Secondary,Middle,0,Earth,1,0
+Brick,Tile,0,1,1674.0822504858802,10,Primary,High,0,Cement,0,0
+Concrete,Tile,1,1,558.5521769088209,4,Tertiary,Low,1,Tile,5,0
+Concrete,Concrete,1,0,1285.7638201174152,9,None,High,1,Cement,6,0
+Mud,Tile,0,0,1388.301147019662,13,None,Middle,0,Earth,4,1
+Concrete,Tile,1,0,1025.309506290106,14,Secondary,Middle,0,Earth,0,1
+Mud,Iron Sheet,1,0,610.6213533934625,10,Primary,Low,1,Tile,0,1
+Concrete,Concrete,0,0,425.28875274219223,6,Primary,Low,1,Earth,4,1
+Brick,Concrete,0,0,66.37870912485243,6,None,High,1,Earth,2,1
+Concrete,Concrete,1,1,607.8928024814476,1,Tertiary,Low,0,Earth,1,0
+Mud,Concrete,0,1,1306.325581062566,10,Tertiary,High,1,Tile,2,0
+Mud,Concrete,0,1,1876.6096368969654,2,None,Low,0,Cement,5,0
+Brick,Concrete,0,0,1742.408964526104,11,None,High,1,Earth,6,0
+Concrete,Thatch,1,1,1532.1295530706052,6,Primary,High,1,Tile,3,0
+Concrete,Tile,1,1,1576.8946865065973,2,Tertiary,High,0,Earth,3,0
+Brick,Concrete,0,1,1329.9698069519904,3,None,High,0,Tile,3,0
+Concrete,Tile,1,1,520.573715132006,4,None,Middle,0,Earth,4,0
+Concrete,Tile,0,1,1814.3900614116596,11,Secondary,High,1,Tile,0,0
+Mud,Thatch,1,0,1341.4646238116682,5,None,Low,1,Earth,6,1
+Concrete,Concrete,0,0,1120.8812619608798,15,None,Middle,1,Cement,2,0
+Concrete,Iron Sheet,0,1,221.97893842696215,9,Tertiary,Middle,0,Earth,1,0
+Brick,Thatch,1,1,894.1110876128508,12,Primary,High,1,Tile,3,0
+Brick,Iron Sheet,0,1,920.7165424038526,15,Tertiary,Middle,0,Earth,2,0
+Wood,Tile,1,0,1729.1272190453399,15,Primary,High,0,Cement,3,0
+Mud,Tile,1,0,1093.296440375577,4,Secondary,Low,0,Earth,6,1
+Concrete,Thatch,0,1,760.8010979408193,13,None,High,1,Tile,3,0
+Concrete,Thatch,0,0,1953.6006570213187,11,Secondary,Middle,1,Tile,1,0
+Wood,Iron Sheet,1,0,221.44118665263136,9,Primary,Low,0,Cement,5,1
+Concrete,Concrete,0,1,845.0968566238893,11,Tertiary,High,1,Tile,5,0
+Mud,Iron Sheet,0,0,84.04935034281058,10,Tertiary,Low,0,Earth,6,1
+Wood,Thatch,0,0,1479.8082415338606,3,Secondary,Low,0,Earth,5,1
+Mud,Iron Sheet,0,1,1836.1531043983014,8,Primary,Middle,1,Earth,4,0
+Wood,Thatch,0,0,560.0746591009789,12,Secondary,Low,0,Tile,0,1
+Wood,Iron Sheet,1,0,1716.6833535982419,1,Secondary,Middle,0,Earth,4,0
+Brick,Thatch,1,1,584.4364609237955,11,None,Low,1,Earth,2,1
+Mud,Thatch,0,0,1821.5403232878305,9,Secondary,High,0,Earth,4,0
+Concrete,Thatch,0,0,1507.9238071935679,9,None,Low,0,Cement,2,1
+Concrete,Concrete,0,1,1609.8135536828772,10,None,High,0,Tile,2,0
+Mud,Iron Sheet,1,1,36.013111200908995,2,Tertiary,High,0,Tile,0,1
+Concrete,Iron Sheet,0,1,1925.620714148052,4,None,Low,0,Tile,1,0
+Concrete,Iron Sheet,1,0,1453.3419841406464,13,None,High,0,Cement,6,0
+Mud,Thatch,1,1,609.5021907722667,8,Tertiary,Low,0,Tile,0,0
+Wood,Iron Sheet,1,0,1658.7893297176938,7,Secondary,Low,1,Cement,6,0
+Mud,Iron Sheet,0,1,563.0423968298599,1,Primary,High,1,Cement,5,0
+Wood,Thatch,1,0,1745.5076791322558,5,Primary,High,0,Tile,5,0
+Concrete,Tile,0,1,225.16078082387403,7,Primary,Middle,0,Earth,4,0
+Concrete,Thatch,1,1,1407.3719549215914,15,Secondary,High,1,Earth,2,0
+Concrete,Iron Sheet,0,1,1081.3969532898207,4,None,Middle,1,Tile,3,0
+Brick,Thatch,1,1,193.06894039088164,15,Primary,High,1,Tile,3,0
+Wood,Tile,0,0,483.787656517678,15,Secondary,Low,1,Cement,6,1
+Brick,Thatch,1,1,24.80807255462958,1,None,High,1,Tile,2,0
+Brick,Iron Sheet,0,1,937.5359309290117,9,Tertiary,Low,0,Cement,6,0
+Mud,Tile,0,0,602.5305215200008,14,Primary,Low,1,Tile,0,1
+Brick,Concrete,0,1,1196.7149685955176,5,None,Low,1,Earth,1,1
+Mud,Iron Sheet,0,0,594.4756154172344,11,Primary,Middle,1,Earth,0,1
+Mud,Tile,1,1,599.8382230139694,2,Primary,High,0,Tile,2,0
+Brick,Tile,1,1,1486.3863974632068,8,Primary,Low,0,Cement,2,0
+Wood,Concrete,0,1,96.28567195670689,11,None,Low,0,Earth,1,1
+Wood,Thatch,1,0,1805.7899903839746,13,Secondary,Middle,0,Cement,6,0
+Wood,Thatch,0,1,1704.527748782363,2,None,High,0,Tile,4,0
+Wood,Iron Sheet,0,1,1335.609366452813,3,Primary,High,0,Tile,4,0
+Wood,Concrete,1,1,1186.4431402147686,14,None,Middle,1,Earth,1,1
+Brick,Thatch,0,0,1784.6049962793045,10,Tertiary,Middle,0,Tile,4,0
+Brick,Concrete,0,0,370.6603590574289,1,Secondary,High,0,Earth,3,1
+Concrete,Thatch,1,1,157.93832438165722,11,None,Middle,1,Cement,4,0
+Wood,Tile,0,0,479.0203398190762,2,Tertiary,High,0,Earth,4,0
+Brick,Thatch,0,1,1589.1565574003805,14,Secondary,High,1,Earth,4,0
+Concrete,Concrete,0,1,69.34053345296664,7,Tertiary,Low,1,Cement,3,1
+Wood,Tile,0,1,1165.6136701669793,10,Secondary,Low,0,Earth,6,0
+Mud,Tile,1,1,1990.8750323826198,2,None,High,1,Earth,4,0
+Concrete,Tile,1,1,1711.3921876750787,6,Tertiary,High,1,Tile,5,0
+Brick,Concrete,1,1,1042.891378087179,15,Primary,High,1,Cement,3,0
+Mud,Iron Sheet,0,1,127.28181857328468,3,Tertiary,High,1,Earth,1,0
+Mud,Iron Sheet,0,0,1662.7470287714198,4,Secondary,High,0,Cement,0,0
+Mud,Iron Sheet,1,0,1197.957016354421,11,None,High,1,Cement,1,0
+Concrete,Concrete,0,0,229.86599411913366,15,Secondary,Middle,0,Earth,0,1
+Brick,Tile,0,0,187.7145696467124,13,Tertiary,High,1,Tile,1,0
+Mud,Iron Sheet,0,0,1819.2536388731849,8,Tertiary,Middle,1,Cement,5,0
+Wood,Concrete,0,0,1338.400525876157,14,Primary,Middle,1,Earth,0,1
+Mud,Iron Sheet,1,0,1658.573598633511,3,None,High,0,Cement,0,0
+Mud,Thatch,1,1,1757.9578005645346,10,None,High,0,Tile,2,0
+Concrete,Iron Sheet,1,1,1143.5447040966444,6,Tertiary,Middle,0,Tile,0,0
+Concrete,Iron Sheet,0,1,1034.8927035100826,1,None,Middle,1,Tile,0,0
+Brick,Tile,1,1,860.8548206419804,7,Primary,High,1,Earth,2,0
+Wood,Concrete,1,0,633.8931755822385,8,Secondary,High,1,Earth,4,0
+Concrete,Tile,0,0,869.1919217174235,11,None,Middle,1,Tile,4,0
+Mud,Tile,0,1,1547.7593114603128,14,Tertiary,Middle,0,Earth,2,0
+Brick,Tile,1,1,1203.846862030263,8,Secondary,Middle,1,Tile,3,0
+Mud,Tile,1,0,1785.0465799096921,3,Secondary,Low,0,Earth,0,1
+Mud,Tile,1,1,886.7600287583755,14,Primary,Middle,1,Tile,0,1
+Concrete,Iron Sheet,1,1,1214.1791574375081,10,Tertiary,Low,0,Cement,2,0
+Brick,Tile,0,1,1262.6151061839773,1,None,High,0,Tile,2,0
+Wood,Tile,1,1,1183.394324612651,9,Tertiary,High,1,Tile,3,0
+Wood,Concrete,1,0,1405.2675461710326,13,Secondary,Middle,1,Earth,5,0
+Concrete,Thatch,0,1,474.86693674961253,6,Tertiary,High,0,Earth,4,0
+Concrete,Iron Sheet,1,1,1024.7275550915813,11,None,High,1,Earth,1,0
+Brick,Iron Sheet,0,0,208.44960561669535,9,None,High,1,Earth,5,1
+Wood,Iron Sheet,0,0,769.022655289625,7,Primary,High,0,Earth,6,1
+Wood,Tile,0,1,975.3341372425289,1,None,Low,0,Earth,4,1
+Wood,Tile,1,0,1304.448519090945,12,None,Low,0,Cement,0,1
+Mud,Tile,1,1,1901.062105172407,12,Tertiary,Middle,0,Tile,6,0
+Wood,Concrete,0,1,1201.3021330967117,1,Tertiary,Middle,1,Tile,5,0
+Mud,Thatch,1,0,1487.1878323531196,6,Secondary,Middle,0,Tile,2,1
+Brick,Tile,1,1,1012.5321189904055,5,Primary,High,0,Cement,3,0
+Mud,Thatch,0,1,1268.2080627526627,9,Tertiary,High,0,Tile,4,0
+Brick,Concrete,0,1,141.86443226754685,2,None,Low,1,Cement,3,0
+Wood,Iron Sheet,1,1,508.78316168369395,8,Secondary,Low,0,Cement,6,0
+Wood,Tile,0,0,723.7061864102774,11,Tertiary,Middle,1,Cement,4,0
+Brick,Thatch,1,0,944.9867100130272,5,Primary,Low,0,Tile,5,1
+Concrete,Thatch,1,1,91.29749100476747,2,Primary,Low,0,Cement,0,0
+Brick,Tile,1,0,280.0481951066354,13,Secondary,Low,1,Tile,1,1
+Concrete,Iron Sheet,1,1,553.6286155826116,10,Secondary,Low,0,Tile,3,0
+Mud,Iron Sheet,0,1,1943.0653818021012,11,Secondary,Low,0,Earth,3,1
+Mud,Iron Sheet,0,1,662.6940142061015,11,Secondary,Middle,1,Earth,1,1
+Mud,Concrete,0,1,964.082116224165,12,Secondary,Middle,0,Cement,3,1
+Wood,Thatch,0,1,392.1954254767859,6,None,Low,0,Cement,3,1
+Mud,Thatch,1,0,1221.5601421515364,10,None,Middle,0,Tile,4,1
+Concrete,Thatch,1,1,561.3664310319487,8,Tertiary,High,0,Cement,4,0
+Mud,Concrete,0,0,413.9851568768536,4,Primary,Low,1,Cement,1,1
+Brick,Thatch,1,0,1033.145256891958,2,None,High,0,Tile,6,0
+Brick,Concrete,1,1,11.011598320841642,12,None,Middle,1,Cement,0,0
+Wood,Iron Sheet,1,1,15.328065298450655,11,None,Middle,0,Cement,5,1
+Brick,Tile,0,1,438.13761820371553,5,Tertiary,High,1,Tile,5,0
+Concrete,Thatch,0,1,73.44272500164229,15,Secondary,Middle,0,Tile,6,0
+Mud,Thatch,0,1,216.05150826138276,12,Tertiary,Low,1,Earth,3,1
+Wood,Iron Sheet,1,0,677.7212986775032,2,Primary,High,0,Tile,0,0
+Mud,Tile,0,1,1605.1713591596258,2,Primary,Low,1,Earth,1,1
+Mud,Concrete,0,1,1144.0972867386017,15,Primary,High,1,Cement,6,0
+Concrete,Tile,0,0,1025.335451912833,6,Primary,Middle,0,Tile,1,1
+Brick,Iron Sheet,0,0,586.9776464162433,11,None,High,1,Tile,4,1
+Brick,Iron Sheet,0,1,1863.5074388656328,10,None,High,0,Tile,3,0
+Mud,Tile,0,0,794.0300824743833,9,Tertiary,Low,0,Cement,2,0
+Wood,Concrete,1,1,174.185533591543,13,Secondary,Middle,0,Earth,1,1
+Brick,Concrete,1,0,1234.1330322356025,4,Primary,Low,0,Cement,6,0
+Wood,Thatch,0,0,227.67678695320282,6,Tertiary,Middle,0,Cement,3,1
+Brick,Concrete,0,1,690.4462856033841,7,None,Low,1,Tile,0,0
+Wood,Tile,1,0,1014.8238774356178,13,None,High,0,Earth,6,0
+Concrete,Iron Sheet,1,0,1748.4450493703516,11,Secondary,Low,0,Cement,4,1
+Wood,Thatch,0,0,987.0931606802374,6,Secondary,Middle,0,Tile,5,1
+Concrete,Thatch,0,0,1404.5175320633284,8,Secondary,Middle,0,Cement,0,0
+Concrete,Iron Sheet,0,0,1985.6336779981407,4,Tertiary,High,0,Cement,1,0
+Wood,Concrete,0,0,262.97823979596325,12,None,Middle,0,Tile,1,1
+Concrete,Iron Sheet,1,1,549.463051039039,15,None,Low,1,Tile,0,1
+Mud,Concrete,0,1,789.1521511952928,1,Secondary,High,1,Earth,1,0
+Concrete,Iron Sheet,0,0,843.6563570776627,7,Primary,Middle,0,Cement,6,0
+Brick,Tile,0,1,822.0421505310916,3,Secondary,Middle,1,Tile,3,0
+Wood,Concrete,0,1,1815.2220051131098,14,Tertiary,Low,0,Tile,1,0
+Mud,Tile,1,1,1428.065288933713,6,Secondary,Low,0,Earth,4,0
+Wood,Thatch,1,0,1215.8104281814076,2,Secondary,High,0,Earth,3,1
+Brick,Iron Sheet,1,1,618.7454357255642,9,Tertiary,Middle,0,Tile,6,0
+Brick,Thatch,0,0,1647.5807684425895,1,Secondary,Low,0,Earth,2,0
+Brick,Thatch,0,1,1910.121022969978,6,None,High,1,Tile,1,0
+Concrete,Thatch,1,0,1642.396565100453,6,Primary,Middle,1,Cement,1,0
+Concrete,Thatch,0,0,3.1302103829458083,5,Secondary,Middle,1,Earth,4,1
+Wood,Iron Sheet,0,1,1272.802740366814,13,Tertiary,High,1,Cement,6,0
+Wood,Thatch,1,1,102.27076288420145,5,Primary,High,0,Cement,4,0
+Mud,Iron Sheet,1,0,515.2144406674437,1,Tertiary,Low,1,Cement,5,0
+Mud,Iron Sheet,1,1,119.04940069554337,10,Primary,Middle,0,Tile,6,1
+Wood,Tile,1,1,1207.5909058987754,12,Primary,Middle,1,Cement,0,1
+Concrete,Concrete,0,1,1373.1798269852136,5,Secondary,Middle,1,Cement,0,0
+Brick,Concrete,0,0,228.97527613181023,2,None,High,1,Cement,0,0
+Wood,Iron Sheet,1,0,767.6777660899589,7,Secondary,Low,1,Tile,4,1
+Mud,Tile,0,1,912.4730179110841,3,Tertiary,Middle,0,Cement,0,0
+Concrete,Iron Sheet,1,1,738.1060435218332,13,Tertiary,High,1,Cement,6,0
+Wood,Iron Sheet,1,1,242.0500009703861,15,Primary,Middle,1,Earth,0,1
+Wood,Iron Sheet,0,0,837.8955803749508,4,Primary,Low,0,Tile,2,1
+Concrete,Tile,1,0,1502.3560956168362,3,None,Middle,0,Cement,0,0
+Wood,Concrete,0,1,142.01532906651093,3,Secondary,Low,1,Earth,1,1
+Concrete,Tile,0,1,160.3600281638069,4,Tertiary,Low,0,Tile,5,0
+Brick,Thatch,0,1,709.5425836719685,5,Primary,Middle,0,Tile,4,0
+Concrete,Tile,0,1,1883.4514232378501,1,None,Middle,0,Tile,3,0
+Concrete,Tile,1,1,1337.1452934458282,4,Tertiary,Low,1,Tile,5,0
+Concrete,Tile,0,1,1357.3399133451296,12,Primary,High,0,Tile,2,0
+Wood,Tile,1,0,723.83998167573,12,Tertiary,Low,1,Tile,4,1
+Wood,Concrete,1,1,1187.3215824170768,11,None,Middle,1,Cement,6,0
+Concrete,Thatch,1,0,20.262368055486757,8,None,Middle,1,Cement,4,1
+Wood,Concrete,1,1,1272.1920928190843,10,Tertiary,High,1,Cement,1,0
+Mud,Concrete,0,1,1826.5738951524734,7,Secondary,Low,0,Cement,6,0
+Mud,Tile,0,0,1225.1469366896383,9,Tertiary,Low,1,Earth,5,0
+Wood,Iron Sheet,1,0,1747.3971869326901,5,Primary,Low,0,Cement,5,0
+Wood,Iron Sheet,1,0,1447.9461109321876,13,Secondary,Middle,1,Tile,0,0
+Concrete,Concrete,0,0,241.1168328073805,15,Primary,Low,0,Cement,6,0
+Brick,Concrete,1,1,1804.9066145716833,10,Tertiary,High,1,Cement,1,0
+Wood,Tile,0,0,132.88768871154977,4,Secondary,Middle,0,Tile,0,1
+Mud,Concrete,1,1,1067.9349450955276,8,Primary,Middle,1,Cement,0,1
+Concrete,Tile,0,0,284.27424758691535,9,Tertiary,Low,1,Cement,4,1
+Wood,Iron Sheet,1,1,23.41322146180813,13,Tertiary,High,0,Cement,5,0
+Mud,Iron Sheet,1,1,844.068520255278,7,Secondary,Middle,1,Earth,0,1
+Mud,Thatch,0,1,590.0814153083124,14,Tertiary,Middle,1,Cement,2,0
+Brick,Iron Sheet,1,1,972.0009875952061,7,None,Low,1,Tile,2,0
+Concrete,Concrete,1,1,1154.3997734691015,5,Primary,Low,0,Tile,5,0
+Concrete,Iron Sheet,0,1,87.47814461789471,4,Primary,High,1,Cement,2,0
+Brick,Tile,1,0,246.00659024749126,14,Tertiary,Low,1,Cement,4,1
+Brick,Iron Sheet,0,1,1117.2847929008508,10,Tertiary,High,0,Cement,1,0
+Concrete,Thatch,0,0,686.3347063453165,1,None,Middle,0,Tile,3,0
+Concrete,Iron Sheet,1,0,1458.3469750988959,10,Secondary,High,0,Tile,0,0
+Wood,Tile,1,1,1304.5832971838793,10,Tertiary,High,0,Earth,3,0
+Wood,Tile,1,0,1691.2087259798136,7,Tertiary,High,0,Earth,1,0
+Brick,Concrete,1,1,1384.9856533384507,1,Tertiary,Middle,1,Earth,1,0
+Wood,Iron Sheet,1,0,859.8621547802962,1,Tertiary,Low,1,Tile,4,0
+Mud,Tile,1,1,1345.9332447888648,5,Primary,Middle,1,Earth,2,1
+Wood,Thatch,1,0,550.762348510837,13,Tertiary,Low,0,Cement,2,1
+Wood,Concrete,0,1,612.6269975564254,9,Primary,High,1,Cement,1,0
+Mud,Thatch,1,1,1577.9703198415866,6,Tertiary,High,0,Tile,4,0
+Brick,Iron Sheet,0,1,892.8390328031644,3,Secondary,High,0,Earth,4,0
+Mud,Iron Sheet,1,1,1596.760681036705,13,None,High,1,Cement,5,0
+Wood,Iron Sheet,1,0,1644.8447473365568,3,Secondary,High,0,Tile,6,0
+Brick,Concrete,0,1,1715.1246753225676,7,Tertiary,Low,0,Earth,0,0
+Wood,Tile,1,0,1833.2704716824146,6,Tertiary,Low,1,Cement,6,0
+Mud,Concrete,1,0,861.9704410265924,9,Tertiary,High,0,Earth,2,0
+Mud,Thatch,0,0,637.7336366422777,6,Secondary,Middle,0,Tile,1,1
+Wood,Concrete,1,1,1164.3974931882278,5,Tertiary,Middle,1,Earth,5,0
+Concrete,Thatch,1,0,742.3448468752551,10,Secondary,High,0,Tile,3,0
+Concrete,Concrete,1,0,1202.148333600466,7,Primary,Low,0,Earth,2,0
+Mud,Tile,0,0,1411.1717252876492,1,None,Middle,1,Cement,0,0
+Mud,Thatch,1,1,1376.8100369842737,12,None,Middle,1,Tile,4,0
+Concrete,Iron Sheet,1,1,749.1057740402427,7,Secondary,Middle,1,Tile,1,0
+Concrete,Iron Sheet,1,0,333.72040339750566,3,Primary,High,1,Tile,2,0
+Wood,Concrete,1,1,861.0586769244151,14,Secondary,Middle,0,Earth,3,0
+Wood,Iron Sheet,0,1,285.18828816381745,9,Primary,Middle,0,Earth,0,1
+Concrete,Thatch,0,0,1780.1940703676166,15,Tertiary,Middle,1,Cement,0,0
+Wood,Iron Sheet,1,0,691.7549214757148,6,Primary,Middle,0,Tile,5,0
+Wood,Tile,1,1,308.91949444664755,9,Primary,Low,0,Tile,2,1
+Brick,Tile,0,0,50.89551981150176,13,Primary,High,1,Earth,3,1
+Wood,Concrete,0,1,1291.6447725729686,15,None,High,1,Earth,0,1
+Mud,Thatch,1,1,1273.8046349094864,5,Primary,Low,0,Cement,1,0
+Wood,Tile,0,1,681.2083331625834,7,Tertiary,Low,1,Cement,0,1
+Wood,Tile,1,1,143.42377769530202,13,Tertiary,High,1,Earth,3,0
+Concrete,Thatch,0,1,819.257789790464,14,Tertiary,Middle,1,Tile,4,0
+Mud,Iron Sheet,0,1,622.4349901267872,4,Primary,Middle,0,Cement,4,0
+Wood,Iron Sheet,0,0,1354.2412794700188,15,Secondary,High,1,Earth,5,0
+Wood,Concrete,0,0,1211.5584989053807,7,Secondary,Middle,0,Earth,2,0
+Brick,Iron Sheet,1,1,729.18745639508,13,Tertiary,Low,0,Tile,3,0
+Wood,Thatch,0,1,435.7851085099802,1,None,Middle,0,Earth,5,0
+Wood,Tile,0,1,1976.0719323111837,7,Secondary,Middle,1,Earth,6,0
+Brick,Iron Sheet,1,0,908.0032423922297,8,Primary,Middle,1,Cement,0,1
+Concrete,Concrete,0,1,1376.5484715604741,5,Secondary,High,1,Earth,6,0
+Wood,Iron Sheet,0,0,281.10593515672156,2,Tertiary,Low,1,Earth,0,1
+Brick,Thatch,1,1,971.1793993187956,5,None,Middle,1,Cement,4,0
+Mud,Concrete,0,1,55.07343973893097,6,Secondary,High,0,Tile,5,0
+Concrete,Iron Sheet,1,0,1010.9102358208999,12,Secondary,Middle,0,Tile,4,0
+Mud,Concrete,1,0,1928.0348142354046,2,Tertiary,Low,0,Cement,1,0
+Mud,Thatch,1,1,768.4134259716004,14,None,Middle,1,Cement,6,1
+Brick,Tile,1,1,77.99202514982318,6,None,Low,0,Tile,6,1
+Wood,Thatch,0,1,61.911581838687056,6,Tertiary,Middle,0,Tile,4,1
+Brick,Thatch,1,0,775.973519893739,1,Primary,Low,1,Tile,1,1
+Brick,Thatch,0,0,320.0498729263881,14,Secondary,Middle,1,Tile,0,1
+Brick,Thatch,0,0,46.70419265637182,1,Primary,Low,0,Tile,5,1
+Brick,Tile,0,0,1512.4272279003537,14,Secondary,Middle,0,Cement,1,1
+Concrete,Tile,0,0,917.0460177637814,11,Secondary,Middle,1,Earth,5,1
+Wood,Concrete,0,0,578.489543945309,10,Primary,High,1,Tile,6,1
+Mud,Iron Sheet,0,1,1800.1663660329614,3,Tertiary,High,1,Tile,5,0
+Mud,Tile,0,1,232.27792040105123,14,Tertiary,Low,1,Earth,6,1
+Wood,Tile,0,0,1911.8376579106384,10,Secondary,Middle,0,Earth,1,0
+Mud,Iron Sheet,0,1,627.9334347547057,10,Tertiary,Low,0,Earth,6,1
+Wood,Tile,0,1,1776.8073446173626,15,Secondary,High,1,Earth,2,0
+Mud,Thatch,1,0,1205.8857529589231,12,Tertiary,Low,0,Earth,6,1
+Brick,Thatch,1,1,1653.414719482975,3,Secondary,Low,0,Earth,4,0
+Mud,Iron Sheet,1,0,1968.0263264209286,4,Tertiary,High,1,Cement,1,0
+Wood,Concrete,0,0,576.8108756374914,2,None,Middle,0,Earth,0,1
+Wood,Concrete,1,1,1922.270970815186,9,Primary,Low,0,Earth,5,0
+Wood,Iron Sheet,1,0,778.9637898048408,10,None,High,0,Cement,3,1
+Wood,Iron Sheet,1,0,771.0238094738446,12,Primary,Middle,1,Earth,1,1
+Wood,Thatch,0,0,680.7742085090114,11,Primary,High,1,Tile,4,1
+Concrete,Concrete,0,0,1082.8152146951704,14,Secondary,Low,0,Tile,6,0
+Concrete,Tile,0,0,308.2900863569742,7,Primary,Middle,1,Earth,5,1
+Mud,Thatch,0,0,1107.4229707160223,7,None,Middle,1,Cement,2,1
+Wood,Iron Sheet,1,0,1083.409624820008,15,None,High,1,Tile,0,1
+Mud,Concrete,1,0,1523.80362520974,6,Tertiary,High,0,Cement,2,0
+Wood,Tile,1,1,1667.299923875171,15,None,High,0,Tile,3,0
+Wood,Tile,1,1,880.8827006248481,3,Tertiary,Middle,1,Earth,1,0
+Concrete,Thatch,0,1,604.6664987029875,6,Primary,Middle,0,Cement,5,0
+Concrete,Concrete,0,0,518.669794634189,15,None,Low,0,Cement,1,1
+Brick,Concrete,0,0,389.24767340974387,14,Primary,Middle,0,Cement,4,1
+Concrete,Iron Sheet,1,1,115.29516439804976,12,None,Low,0,Tile,1,0
+Brick,Concrete,0,1,684.8959576694267,8,None,High,0,Tile,0,0
+Brick,Concrete,0,1,540.4953842615665,8,Tertiary,High,1,Tile,3,0
+Brick,Thatch,1,0,1932.8347717328147,11,Primary,Middle,0,Earth,2,0
+Brick,Concrete,1,1,1115.4176525000878,13,None,High,0,Tile,3,0
+Brick,Tile,0,1,694.554078061015,9,Secondary,High,0,Earth,5,0
+Mud,Thatch,0,0,1160.935201987392,15,Primary,Middle,1,Cement,1,1
+Concrete,Thatch,0,1,278.39340269139103,1,Primary,Low,1,Cement,5,0
+Brick,Iron Sheet,0,0,888.0874984044058,14,Primary,Middle,1,Earth,2,1
+Wood,Concrete,0,0,1252.4686428421276,1,Tertiary,Low,0,Tile,5,0
+Concrete,Iron Sheet,0,0,977.7956635849027,3,Secondary,Middle,1,Earth,4,1
+Concrete,Tile,1,1,803.5576013086485,3,Primary,Middle,1,Cement,3,0
+Brick,Thatch,1,1,1987.6967777993964,10,None,High,1,Cement,2,0
+Mud,Thatch,1,0,1760.629524297854,8,None,Middle,1,Earth,2,1
+Brick,Thatch,0,1,1246.8119163188803,15,Tertiary,Middle,0,Tile,6,0
+Mud,Tile,1,1,1138.7547223645656,10,None,Low,1,Tile,2,1
+Wood,Tile,0,1,1241.3209596491681,1,Primary,High,1,Earth,6,0
+Concrete,Iron Sheet,0,1,402.6242156448665,13,None,Low,0,Earth,0,1
+Wood,Iron Sheet,1,0,790.2754865286372,2,Primary,Low,0,Tile,6,0
+Mud,Iron Sheet,0,1,78.91906578179864,2,None,High,1,Cement,3,0
+Mud,Concrete,0,0,951.0920749736533,3,Secondary,High,0,Earth,5,0
+Wood,Thatch,1,0,1086.0491679153263,13,Tertiary,High,1,Tile,6,0
+Mud,Thatch,1,1,455.49947220641917,6,Tertiary,Middle,0,Tile,2,0
+Wood,Iron Sheet,1,0,1928.0576943310275,1,Secondary,High,0,Cement,3,0
+Concrete,Thatch,0,1,1818.909221874484,2,Secondary,High,1,Cement,6,0
+Wood,Iron Sheet,1,1,1444.2864709118116,13,Tertiary,High,0,Cement,6,0
+Concrete,Concrete,1,0,1066.7732575307252,15,Secondary,Low,1,Cement,2,0
+Wood,Concrete,0,0,1739.9383192953699,13,Primary,Low,0,Cement,4,0
+Mud,Tile,1,0,261.3046876469258,1,None,Middle,1,Earth,4,1
+Wood,Concrete,1,0,1581.0195885497699,5,Tertiary,Low,0,Tile,6,1
+Mud,Iron Sheet,1,1,249.6416279336966,13,Secondary,Middle,0,Earth,4,1
+Wood,Concrete,0,1,1588.421325098811,13,Primary,Low,0,Earth,1,0
+Wood,Tile,0,1,551.535136502714,7,Tertiary,High,0,Earth,2,0
+Brick,Thatch,0,0,1754.1811620363778,8,Secondary,Low,0,Earth,1,1
+Mud,Iron Sheet,0,0,1888.0841876507957,10,Tertiary,Middle,1,Earth,3,1
+Brick,Thatch,1,0,297.5919388102313,1,Secondary,Low,0,Cement,1,0
+Mud,Tile,0,1,925.3512101307871,7,Tertiary,High,1,Cement,3,0
+Brick,Tile,0,0,1961.9747563253702,13,Primary,Middle,1,Tile,6,0
+Concrete,Tile,1,1,966.8148719462932,5,Primary,High,1,Earth,3,0
+Wood,Thatch,1,0,1727.0950450290902,10,None,High,0,Tile,3,0
+Mud,Thatch,1,1,1177.4630442626396,1,Tertiary,Middle,1,Cement,5,0
+Mud,Thatch,0,1,750.6598158392037,3,None,High,0,Cement,1,1
+Wood,Thatch,0,0,571.5671110517404,7,Tertiary,High,1,Cement,5,0
+Mud,Tile,0,0,406.44618217217453,10,Secondary,Low,1,Earth,6,1
+Mud,Tile,1,1,1523.5963827553944,1,Secondary,High,1,Earth,2,0
+Brick,Iron Sheet,1,1,773.0810136460558,7,None,High,1,Cement,1,0
+Mud,Iron Sheet,0,0,1022.5509244015024,5,Tertiary,High,1,Tile,2,1
+Concrete,Thatch,1,0,984.6509600023638,1,None,High,0,Tile,2,0
+Concrete,Concrete,1,1,1154.5580584662625,1,Primary,Middle,1,Cement,3,0
+Wood,Concrete,1,0,1731.1542912491045,14,None,Low,1,Tile,1,1
+Mud,Tile,0,1,1961.478687166859,1,None,High,0,Cement,2,0
+Wood,Tile,1,1,815.1684171476339,11,Secondary,High,0,Tile,4,0
+Concrete,Tile,1,0,1655.0378442126062,9,None,Middle,0,Cement,2,1
+Mud,Iron Sheet,0,0,1529.0555893094354,11,Tertiary,High,1,Tile,4,0
+Mud,Iron Sheet,0,0,1147.0579029111466,13,Secondary,Middle,1,Earth,1,1
+Wood,Tile,1,0,1912.094287223866,3,None,Low,1,Cement,6,0
+Concrete,Tile,1,0,400.94903105680555,15,Primary,Low,1,Cement,5,1
+Mud,Tile,0,1,218.52842061924284,13,None,High,1,Tile,1,1
+Wood,Concrete,0,1,1707.9239339108442,5,None,High,1,Cement,5,0
+Concrete,Iron Sheet,1,0,878.2996332674966,11,None,High,0,Cement,5,0
+Wood,Concrete,1,0,1693.9377084141208,10,Secondary,Middle,0,Cement,1,0
+Brick,Concrete,1,0,1786.1804103908298,12,Tertiary,High,1,Earth,2,0
+Mud,Tile,1,1,124.91518723814288,9,Primary,High,1,Earth,0,1
+Brick,Tile,0,0,1766.9295259721214,6,None,Low,1,Tile,2,0
+Concrete,Thatch,1,0,896.6381107388444,12,Tertiary,High,1,Earth,2,0
+Brick,Thatch,1,1,1020.8649780084644,9,Tertiary,Low,1,Tile,6,0
+Brick,Concrete,0,1,1253.1850221864204,8,Secondary,High,0,Earth,3,0
+Concrete,Iron Sheet,1,0,1852.7652134601735,8,Primary,Low,0,Tile,3,0
+Wood,Tile,0,0,38.23218885952806,1,Secondary,High,1,Earth,2,1
+Brick,Tile,1,0,953.6869366356342,13,Tertiary,Low,0,Earth,4,1
+Wood,Concrete,1,1,1375.4440848611214,9,Tertiary,Middle,1,Tile,6,0
+Brick,Thatch,0,0,1445.413915396457,6,Tertiary,Low,1,Cement,5,0
+Wood,Iron Sheet,0,0,1385.064863074216,9,Secondary,Low,1,Cement,3,0
+Concrete,Thatch,1,0,268.87025881624373,3,Primary,Low,0,Earth,2,1
+Brick,Thatch,1,1,598.7911767433625,12,None,High,0,Tile,6,0
+Concrete,Thatch,1,1,717.4310508340269,3,Secondary,High,1,Cement,0,0
+Brick,Thatch,0,0,1608.87441535901,6,Tertiary,High,0,Tile,4,0
+Concrete,Tile,1,0,557.519744829106,9,Secondary,Middle,0,Cement,1,1
+Concrete,Tile,0,1,421.4099277344063,7,Tertiary,Middle,1,Tile,2,0
+Brick,Thatch,0,1,1914.8960380761923,14,None,Low,0,Earth,6,0
+Brick,Iron Sheet,1,1,17.7265702269378,13,None,Middle,0,Tile,2,1
+Brick,Concrete,0,1,1995.6417113639563,3,Primary,Low,1,Cement,5,0
+Mud,Iron Sheet,1,1,1353.6425977147912,3,Tertiary,Low,1,Earth,4,0
+Wood,Iron Sheet,1,1,1656.9385988982342,2,Primary,Low,0,Tile,3,0
+Mud,Iron Sheet,1,1,589.2387926923864,9,Primary,Middle,1,Cement,3,0
+Mud,Thatch,1,1,28.630555334119954,13,None,High,0,Earth,3,1
+Concrete,Tile,1,1,1475.7390371230601,15,Secondary,Middle,1,Tile,1,0
+Brick,Iron Sheet,0,0,1668.2891940013515,3,Secondary,Low,1,Cement,6,0
+Wood,Thatch,0,0,1480.9522639070383,11,Primary,Low,1,Tile,4,1
+Concrete,Iron Sheet,1,0,285.7005746016772,5,None,Middle,1,Tile,4,1
+Mud,Iron Sheet,1,1,1506.855844513938,14,Tertiary,Low,0,Earth,3,0
+Brick,Thatch,0,0,1537.845564215282,14,Secondary,Low,1,Earth,3,1
+Concrete,Tile,0,1,1317.0810313401098,9,Primary,Middle,1,Cement,5,0
+Brick,Tile,0,1,1532.2318655911724,8,Secondary,Middle,1,Earth,0,0
+Concrete,Concrete,0,0,1691.8428793554642,2,Secondary,Middle,0,Cement,0,0
+Brick,Thatch,1,1,1227.208228474917,3,Tertiary,Low,0,Tile,2,0
+Mud,Concrete,1,0,177.20942793935814,2,None,Low,1,Tile,2,1
+Wood,Concrete,0,0,975.2556193344217,8,Tertiary,High,1,Cement,4,0
+Mud,Concrete,1,0,155.29866934321012,6,None,High,1,Tile,4,1
+Wood,Tile,0,1,815.0860620648617,6,Secondary,Middle,1,Earth,1,1
+Brick,Thatch,1,0,814.2129782512553,12,Primary,High,1,Tile,1,0
+Concrete,Concrete,0,1,132.01968828048317,15,Tertiary,Low,1,Earth,0,0
+Mud,Thatch,1,0,697.6410679389586,9,None,High,0,Cement,2,1
+Wood,Thatch,0,0,221.99619758262966,8,Secondary,Low,1,Cement,0,1
+Mud,Tile,0,0,1616.4704200184444,4,None,Middle,1,Tile,0,1
+Wood,Concrete,1,1,1895.3760519289415,15,None,Middle,1,Tile,2,0
+Mud,Concrete,0,1,144.6329505158772,12,None,Low,1,Earth,6,1
+Wood,Thatch,1,1,1910.2304145834028,4,Secondary,High,1,Earth,1,0
+Wood,Iron Sheet,1,0,1045.1531986734904,9,Primary,Middle,1,Tile,5,1
+Brick,Tile,0,0,599.1313559077478,1,Primary,Middle,0,Tile,5,0
+Wood,Tile,1,1,153.72415055232702,13,Primary,High,0,Cement,5,0
+Brick,Tile,1,1,1001.2485361408357,2,None,High,0,Cement,2,0
+Wood,Tile,1,1,1589.0310889814973,2,Secondary,Low,0,Cement,3,0
+Concrete,Concrete,1,1,1414.1729545333963,13,None,High,0,Tile,3,0
+Concrete,Concrete,1,1,100.45202292794752,13,Primary,High,0,Tile,3,0
+Concrete,Iron Sheet,0,1,145.80367073580703,6,Primary,High,1,Tile,4,0
+Wood,Tile,1,0,805.7465652652742,15,Secondary,Low,1,Cement,1,1
+Brick,Tile,1,1,590.5809880958866,4,None,Low,1,Tile,1,0
+Brick,Thatch,1,0,464.76864611209567,13,Tertiary,Middle,1,Earth,6,1
+Wood,Concrete,1,0,562.0089978174271,11,Tertiary,Low,1,Tile,6,0
+Concrete,Tile,1,1,1606.9654865937694,10,Primary,Middle,1,Tile,4,0
+Concrete,Iron Sheet,0,1,1858.4561072637077,13,Secondary,High,0,Tile,0,0
+Brick,Iron Sheet,1,0,810.2053890551329,3,None,Middle,1,Tile,6,0
+Concrete,Concrete,0,1,1812.2220042649942,3,None,Middle,0,Tile,5,0
+Mud,Iron Sheet,0,1,642.991402495764,3,Primary,High,0,Earth,3,0
+Brick,Iron Sheet,0,0,952.8739726875832,6,Primary,Middle,1,Earth,5,1
+Concrete,Concrete,0,0,452.05799563199946,14,None,Low,1,Tile,3,1
+Brick,Tile,1,0,1280.952084351688,8,None,Low,1,Cement,5,1
+Mud,Tile,0,1,1957.9622303496178,11,Primary,Low,1,Tile,0,1
+Brick,Iron Sheet,0,0,1206.9861920867572,7,None,Low,1,Tile,5,0
+Brick,Iron Sheet,1,1,715.6281682270977,14,Tertiary,Middle,1,Tile,5,0
+Brick,Tile,1,0,1295.6348919810569,4,Primary,Middle,1,Cement,2,0
+Brick,Concrete,1,0,245.84135693077513,11,None,High,0,Cement,5,0
+Mud,Iron Sheet,0,0,1777.3181605307973,12,Primary,Middle,1,Cement,2,0
+Wood,Thatch,1,1,1006.1679015596727,4,Secondary,Middle,1,Earth,1,1
+Brick,Concrete,1,1,898.6994840792842,11,Primary,Middle,0,Cement,4,0
+Brick,Iron Sheet,0,0,1171.7295769070383,10,Primary,High,1,Earth,5,0
+Concrete,Iron Sheet,1,0,1249.5677255788048,15,Secondary,Low,1,Earth,1,1
+Brick,Thatch,1,0,143.55161245302605,11,Tertiary,Middle,0,Cement,6,0
+Concrete,Thatch,1,1,1365.234442446805,11,None,High,1,Cement,6,0
+Wood,Tile,1,0,483.86336063105915,14,Secondary,High,1,Cement,2,0
+Mud,Concrete,0,1,1427.9052650131796,11,Primary,High,1,Earth,5,1
+Mud,Concrete,1,0,1645.0695887683935,2,None,Low,1,Tile,5,1
+Wood,Tile,1,0,1607.9170151050405,14,Secondary,Middle,1,Cement,0,1
+Mud,Concrete,0,0,1105.0019348157782,1,None,High,1,Cement,1,1
+Wood,Concrete,1,0,1040.3397846215023,9,None,Low,0,Cement,3,0
+Wood,Concrete,0,0,285.75192267882346,12,Secondary,High,1,Earth,3,1
+Wood,Concrete,1,0,1550.692300806271,15,None,High,1,Earth,0,1
+Mud,Concrete,0,1,542.8187608934287,12,Tertiary,High,0,Tile,2,0
+Concrete,Thatch,0,0,993.3908456358931,2,Secondary,High,0,Cement,3,0
+Wood,Concrete,0,1,568.5481858550335,13,Tertiary,High,1,Earth,3,0
+Brick,Thatch,0,0,267.65672599938625,8,Primary,Low,0,Tile,6,1
+Mud,Concrete,1,0,1259.115393783473,15,None,Middle,1,Cement,6,1
+Wood,Tile,0,1,108.66406964580766,9,Primary,Middle,1,Earth,4,0
+Wood,Iron Sheet,1,0,1497.2904682524,4,Primary,Middle,0,Cement,1,0
+Brick,Thatch,0,1,635.1735905222333,8,None,Middle,1,Cement,2,1
+Concrete,Concrete,0,1,0.26938600897064013,9,Secondary,Low,1,Earth,5,1
+Concrete,Tile,0,0,1022.2582784744596,10,None,Low,0,Earth,1,1
+Concrete,Iron Sheet,1,1,93.70381705520626,10,Primary,Low,0,Earth,2,1
+Wood,Thatch,0,1,552.3391156417989,5,Primary,High,0,Cement,3,0
+Wood,Iron Sheet,1,0,1413.9529749114324,13,Secondary,High,0,Cement,4,0
+Wood,Tile,1,1,125.37924324373174,14,None,High,1,Tile,1,0
+Mud,Thatch,1,0,1678.6769847120047,7,Primary,Middle,0,Cement,3,0
+Brick,Iron Sheet,1,0,7.639845317166216,10,Tertiary,High,0,Earth,2,0
+Wood,Concrete,1,0,493.6477384038045,4,Primary,Middle,0,Cement,1,1
+Brick,Thatch,1,0,1481.808112304143,1,Primary,High,0,Tile,5,0
+Brick,Iron Sheet,1,1,632.5402994586136,3,Secondary,Middle,0,Tile,1,0
+Concrete,Tile,1,0,203.78477613202705,5,Tertiary,High,1,Earth,3,0
+Mud,Tile,1,0,720.4678376008558,3,Primary,High,0,Earth,1,0
+Wood,Thatch,0,1,540.7865727690511,12,Primary,Low,1,Tile,5,1
+Concrete,Iron Sheet,0,0,1685.4238043211099,13,Tertiary,High,0,Tile,4,0
+Concrete,Thatch,0,0,626.6958351702863,11,None,High,0,Tile,4,0
+Wood,Thatch,0,1,1577.8649435520144,7,None,Low,0,Earth,3,1
+Brick,Iron Sheet,0,1,1783.7442896214695,12,Primary,Middle,0,Tile,2,0
+Concrete,Iron Sheet,1,1,867.634839153059,9,Primary,Low,0,Tile,3,0
+Brick,Concrete,1,1,1819.886287708784,15,None,Low,0,Earth,4,0
+Mud,Iron Sheet,1,1,754.6361079263856,12,Secondary,Middle,0,Cement,0,0
+Brick,Tile,1,1,1928.1568329802164,6,Tertiary,High,0,Cement,0,0
+Mud,Thatch,1,1,178.57904905114586,13,Tertiary,Middle,1,Tile,1,0
+Brick,Thatch,1,0,1374.0385330064855,10,Secondary,High,0,Cement,5,0
+Concrete,Tile,1,1,987.6280809138574,1,Secondary,High,1,Cement,6,0
+Concrete,Iron Sheet,0,1,775.2976109112941,7,Secondary,Middle,0,Cement,6,0
+Mud,Tile,0,1,1265.423757497202,15,Secondary,Low,1,Cement,6,1
+Wood,Tile,0,0,1407.7141832686623,3,Secondary,Middle,0,Tile,1,0
+Mud,Concrete,0,0,8.726539300618175,5,Secondary,High,0,Cement,0,1
+Mud,Tile,1,1,333.9061774943974,10,Tertiary,Middle,0,Cement,4,0
+Brick,Thatch,1,1,1426.0921012686374,4,Secondary,Middle,1,Earth,1,0
+Brick,Tile,1,1,1332.770827156413,10,None,High,1,Tile,6,0
+Mud,Thatch,0,0,1932.0950102573545,5,Secondary,Low,1,Earth,6,1
+Concrete,Thatch,1,0,1522.075580501566,5,Secondary,Middle,1,Earth,3,1
+Brick,Thatch,1,1,1901.5454154626761,6,Tertiary,High,0,Tile,6,0
+Wood,Iron Sheet,1,0,1405.0810030696139,14,Tertiary,High,0,Cement,5,0
+Brick,Concrete,0,1,596.1044172788863,10,Secondary,Middle,0,Earth,6,0
+Brick,Thatch,1,0,210.72984450171296,12,Tertiary,Low,1,Tile,3,1
+Wood,Thatch,0,0,1563.6477266898712,10,Primary,Middle,0,Cement,6,0
+Mud,Iron Sheet,0,1,1288.298442951832,13,Tertiary,Low,1,Tile,5,0
+Wood,Thatch,0,1,96.37202478659246,13,Tertiary,Low,1,Earth,4,1
+Mud,Tile,0,1,720.1009318019567,11,Tertiary,Low,1,Cement,1,0
+Mud,Tile,1,1,1913.5996309685722,6,Tertiary,Low,1,Cement,5,0
+Mud,Concrete,0,0,1000.8022914204024,8,None,Middle,1,Tile,3,1
+Wood,Thatch,0,0,865.4582720394093,8,None,High,0,Cement,1,1
+Mud,Iron Sheet,1,0,915.399210318588,11,None,High,1,Earth,1,1
+Concrete,Tile,1,1,417.7654480103274,9,Secondary,High,1,Earth,3,0
+Wood,Iron Sheet,0,0,737.4143417295904,8,Secondary,High,0,Earth,0,1
+Concrete,Iron Sheet,1,1,739.6265119743532,13,Primary,High,1,Tile,6,0
+Mud,Tile,0,0,104.7100403749448,11,None,High,1,Cement,5,1
+Brick,Iron Sheet,0,1,1535.1352570358365,2,Secondary,Middle,0,Cement,3,0
+Mud,Tile,0,1,833.008863807758,14,Tertiary,Low,0,Cement,4,0
+Concrete,Iron Sheet,0,0,1644.3597736328466,14,Tertiary,High,0,Earth,2,0
+Concrete,Tile,1,1,1700.6960022397907,12,None,Middle,1,Cement,3,0
+Wood,Thatch,0,1,423.9881093973161,10,Primary,High,0,Earth,6,0
+Brick,Concrete,1,0,1314.7069643402572,12,Primary,High,0,Cement,6,0
+Wood,Tile,1,1,944.5636083259634,11,Tertiary,Low,0,Earth,1,0
+Concrete,Tile,1,1,1760.31347584297,15,Primary,Low,1,Cement,1,0
+Mud,Concrete,1,1,431.4813583529082,1,None,Low,0,Tile,3,1
+Brick,Tile,0,0,1355.6264006200884,10,Tertiary,High,1,Tile,2,0
+Mud,Tile,1,0,1215.504244505445,2,Secondary,High,1,Earth,3,1
+Mud,Iron Sheet,0,1,590.6029551436656,2,Secondary,High,0,Earth,2,1
+Brick,Concrete,1,0,273.20180730234523,12,Primary,Low,1,Cement,2,1
+Wood,Thatch,1,1,1303.2795209545532,3,Tertiary,Middle,1,Cement,6,0
+Mud,Tile,0,1,1477.1949162646613,10,Tertiary,High,0,Tile,6,0
+Concrete,Concrete,0,1,631.2546875267,7,Secondary,High,1,Cement,6,0
+Mud,Iron Sheet,0,1,1289.6652080446277,2,Tertiary,High,0,Earth,4,0
+Brick,Thatch,1,1,790.2618152230066,14,Tertiary,Middle,1,Earth,6,0
+Brick,Concrete,1,0,1426.4137665652354,1,Tertiary,High,1,Earth,5,0
+Brick,Thatch,0,1,398.4305497881062,14,Primary,Middle,0,Earth,1,1
+Wood,Thatch,0,0,1780.4300052723488,6,Tertiary,High,0,Earth,1,1
+Mud,Thatch,0,0,574.8191929311595,9,None,Middle,1,Tile,2,1
+Wood,Tile,0,1,735.5719755123058,15,Primary,High,1,Tile,1,0
+Wood,Tile,1,1,116.18390416069957,3,Tertiary,Low,0,Earth,0,1
+Brick,Iron Sheet,0,0,223.0244246425528,6,Tertiary,Low,1,Cement,2,1
+Brick,Iron Sheet,0,0,1031.7238054246563,3,None,Low,1,Earth,1,1
+Wood,Concrete,0,0,535.185353455943,14,Primary,Low,1,Tile,0,1
+Mud,Iron Sheet,0,1,1670.9604514843888,13,Secondary,High,1,Earth,4,1
+Concrete,Thatch,1,0,29.386777309907686,1,Secondary,Low,0,Tile,1,0
+Wood,Thatch,0,1,758.1880973438724,14,Primary,Middle,0,Tile,0,1
+Mud,Tile,1,1,674.6910935381853,13,Tertiary,Low,0,Earth,3,0
+Brick,Thatch,0,1,38.65526183520207,12,Tertiary,Low,0,Earth,5,1
+Brick,Concrete,0,0,248.73679800102045,5,Secondary,Low,0,Cement,3,0
+Mud,Thatch,1,1,827.2853498372706,10,Secondary,High,0,Tile,0,0
+Concrete,Thatch,0,1,985.7291688948933,14,Secondary,Low,1,Cement,2,1
+Brick,Concrete,1,1,808.5794945097382,13,None,Middle,0,Earth,6,1
+Brick,Iron Sheet,1,1,1061.8753568241877,11,Secondary,Low,1,Tile,6,0
+Brick,Iron Sheet,0,1,1190.263349811363,4,None,Low,1,Cement,6,0
+Mud,Concrete,1,0,19.84764225567126,7,Primary,Low,1,Cement,2,1
+Wood,Tile,1,1,928.1903189070077,6,Tertiary,Middle,0,Cement,1,0
+Brick,Thatch,1,1,1926.9984817751767,10,Secondary,Low,1,Earth,6,0
+Wood,Concrete,1,0,1038.0645602590973,7,Tertiary,Middle,0,Earth,3,1
+Concrete,Thatch,1,1,1355.0845349179065,5,Tertiary,Middle,1,Earth,2,0
+Brick,Tile,1,0,623.7277158337664,15,Secondary,Low,1,Tile,2,1
+Brick,Thatch,1,1,1547.982756305525,15,Secondary,Middle,0,Earth,6,0
+Concrete,Concrete,1,0,1545.8429637522302,4,Primary,High,1,Tile,3,0
+Brick,Thatch,0,0,1042.592095308278,7,None,Low,1,Cement,4,1
+Wood,Iron Sheet,0,1,1952.0276465584273,7,None,Low,1,Cement,2,0
+Mud,Tile,1,1,251.10042952530677,6,Tertiary,Middle,1,Earth,6,1
+Wood,Tile,0,1,33.89532977916198,8,Secondary,Middle,0,Cement,5,0
+Mud,Tile,1,0,1540.316423514192,4,Primary,Low,1,Earth,0,1
+Mud,Concrete,1,0,1614.311074729765,10,Primary,High,1,Tile,1,1
+Wood,Tile,0,0,240.4144582411525,5,Primary,Middle,0,Cement,2,0
+Wood,Iron Sheet,1,1,531.1656659172121,4,Primary,Middle,1,Earth,5,0
+Wood,Concrete,1,0,35.10472673325782,12,Primary,High,1,Cement,5,1
+Wood,Iron Sheet,1,0,586.6172215611294,1,None,High,1,Cement,2,0
+Concrete,Thatch,1,1,1546.283747837343,12,None,Low,1,Earth,4,1
+Brick,Thatch,0,0,1035.9210554251579,8,None,High,0,Cement,0,0
+Mud,Thatch,1,0,696.1911863365762,1,Secondary,Low,1,Cement,1,1
+Wood,Thatch,1,1,743.4785898126606,5,Tertiary,High,0,Cement,2,0
+Wood,Iron Sheet,1,0,2.7072514309363083,15,Primary,Middle,1,Cement,1,1
+Wood,Concrete,0,1,599.6010551304718,6,Secondary,Low,1,Tile,3,1
+Concrete,Concrete,1,1,1292.917483275861,6,Primary,Low,1,Cement,5,0
+Wood,Tile,0,1,1948.3888876327142,13,None,Low,0,Cement,5,0
+Wood,Iron Sheet,0,1,1694.121653967799,5,Secondary,High,1,Earth,2,1
+Wood,Thatch,1,1,47.18992929105825,3,None,Middle,1,Tile,2,0
+Brick,Iron Sheet,1,0,1797.1212093496786,15,Primary,Low,0,Earth,3,1
+Concrete,Tile,0,0,1566.396826597252,5,Primary,Low,0,Earth,4,1
+Wood,Tile,1,1,1560.7522471419609,12,Tertiary,Low,0,Earth,2,0
+Mud,Iron Sheet,0,1,915.991518007143,8,Primary,Low,0,Tile,5,0
+Mud,Iron Sheet,0,0,796.0105859090056,14,None,Middle,1,Earth,1,1
+Mud,Iron Sheet,1,1,605.8314576663853,2,Primary,High,1,Earth,0,0
+Concrete,Concrete,1,1,131.38971790873154,6,Tertiary,Middle,1,Earth,6,0
+Concrete,Thatch,0,1,456.4707269873982,9,Tertiary,Low,1,Cement,1,0
+Mud,Iron Sheet,0,0,493.20726995604923,8,None,Middle,0,Earth,4,1
+Wood,Iron Sheet,0,0,968.1541394204032,14,Secondary,Low,1,Tile,0,1
+Concrete,Iron Sheet,0,1,1494.888813193388,11,Primary,High,1,Tile,1,0
+Mud,Tile,1,1,947.6196567958932,8,Tertiary,High,1,Cement,1,0
+Mud,Tile,1,0,115.68889889432121,8,Primary,High,1,Tile,3,0
+Wood,Concrete,1,0,1915.5796019764077,15,Primary,Low,0,Tile,6,0
+Brick,Thatch,1,1,1885.4486381882245,13,Secondary,Middle,1,Cement,4,0
+Concrete,Concrete,1,1,1570.3790862968167,7,Tertiary,High,1,Earth,5,0
+Wood,Thatch,0,0,1982.6558031284412,8,Primary,Low,1,Cement,3,1
+Mud,Tile,1,0,1088.964665600526,13,Tertiary,Low,0,Earth,0,1
+Mud,Tile,1,0,1925.5367005064122,6,None,Middle,0,Earth,6,0
+Wood,Tile,1,1,151.21008123350154,2,None,High,1,Tile,5,0
+Concrete,Concrete,1,0,731.3614965227426,2,Primary,Low,1,Cement,3,0
+Brick,Iron Sheet,1,1,450.76253601353164,8,Tertiary,Middle,1,Tile,6,0
+Brick,Iron Sheet,0,0,391.66616826854005,11,Primary,High,0,Tile,4,1
+Mud,Tile,0,0,281.60589778535217,1,Tertiary,Middle,1,Earth,2,1
+Concrete,Iron Sheet,0,0,1244.8272831319932,6,Tertiary,Middle,1,Tile,2,0
+Brick,Iron Sheet,1,0,1562.6437114946102,13,Secondary,Low,1,Cement,0,1
+Concrete,Concrete,0,1,1156.5967988407212,6,Secondary,Low,0,Tile,2,0
+Concrete,Thatch,0,1,293.9254191764193,11,Secondary,Low,1,Tile,3,1
+Mud,Tile,1,0,1622.247539866942,4,Primary,Middle,1,Earth,0,1
+Brick,Tile,1,1,1271.909414327457,12,Secondary,Low,0,Cement,5,0
+Wood,Concrete,1,0,776.3314122539911,11,Secondary,Middle,0,Tile,4,0
+Mud,Concrete,0,0,1348.2605910721259,13,None,Middle,1,Earth,0,1
+Brick,Iron Sheet,0,0,519.8099584856657,15,Tertiary,Low,0,Tile,5,0
+Brick,Tile,1,0,690.384416988421,11,Tertiary,High,1,Cement,0,0
+Brick,Thatch,1,1,1834.9716862639805,13,Secondary,High,0,Tile,1,0
+Brick,Concrete,0,0,581.0090113428407,10,Tertiary,High,0,Tile,1,0
+Brick,Thatch,0,0,939.9765363158732,3,None,Middle,1,Earth,0,1
+Concrete,Thatch,1,1,1780.2822747920293,13,None,Middle,1,Tile,6,0
+Mud,Tile,1,0,1415.4427005350549,11,Secondary,Middle,1,Earth,2,1
+Concrete,Tile,0,0,124.40645232940551,3,None,Low,0,Cement,1,1
+Wood,Concrete,1,0,294.60608855794067,15,Tertiary,Middle,1,Tile,6,1
+Brick,Tile,0,1,15.683181543833635,15,Primary,Low,1,Cement,6,1
+Mud,Tile,0,0,1261.8435804583269,13,Tertiary,Low,1,Cement,4,1
+Brick,Tile,0,1,895.3468508208366,13,Primary,High,1,Tile,5,0
+Mud,Thatch,0,0,268.5497018045511,1,Secondary,High,1,Earth,3,1
+Concrete,Concrete,1,0,1915.8682421135409,3,Primary,High,0,Cement,1,0
+Mud,Iron Sheet,1,1,1059.3194478912399,4,None,Low,1,Cement,0,1
+Wood,Thatch,0,0,483.78658822577836,11,Tertiary,Low,1,Tile,2,1
+Wood,Tile,0,0,1001.2071423094151,11,Primary,Low,0,Tile,3,1
+Mud,Thatch,0,1,1359.2406654702156,5,Tertiary,Middle,1,Tile,5,0
+Mud,Tile,0,1,152.47843594712896,3,Secondary,Low,1,Tile,6,0
+Mud,Tile,0,1,549.4076300957839,6,Secondary,High,1,Tile,5,0
+Mud,Thatch,1,1,1613.9309817679873,11,None,High,1,Tile,1,0
+Wood,Concrete,1,1,919.3297408053224,14,Secondary,Low,1,Earth,5,1
+Brick,Tile,1,0,1093.1542840645898,15,Primary,Low,0,Cement,5,0
+Mud,Concrete,1,1,865.6320044189385,12,Secondary,High,0,Earth,2,1
+Mud,Iron Sheet,0,0,87.79988528601024,5,None,Low,0,Earth,6,1
+Wood,Tile,0,0,331.4995596403119,3,Tertiary,High,1,Tile,2,0
+Wood,Concrete,0,0,891.0832774837818,6,Tertiary,Middle,0,Cement,2,0
+Concrete,Concrete,0,1,418.3709308158556,6,Secondary,High,1,Earth,0,0
+Mud,Iron Sheet,0,1,99.95805731935748,15,Primary,Middle,1,Tile,5,1
+Concrete,Concrete,1,0,1687.2993281036474,14,None,Low,1,Tile,5,0
+Wood,Concrete,0,1,1962.3850583282317,8,Primary,Low,0,Cement,5,0
+Wood,Iron Sheet,1,1,1586.285747993479,2,None,Middle,0,Earth,4,0
+Brick,Tile,1,1,1707.569843409334,1,Secondary,Low,0,Earth,2,1
+Mud,Concrete,1,1,483.95426063409076,4,None,Middle,1,Earth,3,0
+Concrete,Concrete,1,0,1921.2539510263996,7,None,Low,0,Tile,1,1
+Wood,Concrete,0,0,393.85140890685676,15,Secondary,High,1,Cement,6,0
+Wood,Thatch,1,1,1902.8596207236646,11,Primary,Low,0,Cement,3,0
+Concrete,Iron Sheet,1,0,1989.638587931902,10,Secondary,High,0,Earth,6,0
+Brick,Thatch,1,1,1423.4456114920974,3,None,High,1,Tile,0,1
+Wood,Iron Sheet,0,1,1962.2874635836438,3,Secondary,Middle,1,Earth,0,1
+Mud,Tile,0,0,1139.0795591342073,5,None,Low,0,Cement,6,0
+Wood,Tile,0,0,519.0835663521807,5,Secondary,Middle,0,Tile,5,0
+Mud,Concrete,1,0,873.9917713312417,13,Tertiary,Low,0,Earth,3,0
+Concrete,Iron Sheet,1,1,1187.121870757572,10,Tertiary,High,1,Earth,5,0
+Mud,Tile,0,0,146.16312405403,3,Secondary,High,1,Tile,4,1
+Concrete,Iron Sheet,1,1,1244.6865292344921,9,Primary,Low,0,Cement,0,0
+Mud,Tile,0,0,1962.355673524589,4,None,Low,0,Tile,0,1
+Concrete,Thatch,0,0,380.21529956745525,13,Tertiary,Middle,1,Earth,3,1
+Mud,Tile,1,1,1585.1902325767667,13,Primary,Low,0,Earth,0,1
+Brick,Thatch,1,1,1815.7975875592388,15,None,Low,1,Earth,4,1
+Mud,Tile,1,1,1887.4031856404417,3,Tertiary,Low,1,Earth,4,0
+Mud,Concrete,1,1,1920.2712088108944,11,Tertiary,Middle,1,Cement,4,0
+Brick,Thatch,0,1,1042.919277442944,2,Secondary,Low,1,Cement,1,0
+Wood,Tile,0,1,1954.6158159830075,10,None,High,1,Earth,4,0
+Wood,Concrete,0,1,1514.6204142688778,13,Primary,Middle,1,Cement,4,0
+Mud,Thatch,0,1,323.3428724739238,11,Primary,Middle,0,Cement,1,0
+Brick,Concrete,0,0,953.80021293594,9,Primary,High,1,Cement,5,0
+Mud,Iron Sheet,1,1,1436.6623507440079,4,None,High,1,Earth,2,0
+Concrete,Iron Sheet,0,1,494.6806316381667,3,Primary,High,0,Tile,0,0
+Concrete,Thatch,0,0,1281.2303670977747,7,Primary,Low,1,Tile,4,1
+Mud,Tile,0,1,1333.2009580932386,8,Primary,High,0,Tile,0,0
+Wood,Thatch,1,0,325.3994876171318,11,Secondary,Low,1,Earth,3,1
+Wood,Concrete,1,0,1130.1706249055126,14,Secondary,Middle,0,Cement,0,1
+Mud,Tile,1,1,1543.2538219572155,2,None,Middle,0,Cement,6,0
+Mud,Iron Sheet,1,0,997.7913290718839,7,None,High,1,Earth,5,0
+Concrete,Tile,0,1,24.20623355221485,12,Primary,Low,1,Earth,1,0
+Wood,Iron Sheet,0,0,18.076938158584355,5,Secondary,High,1,Tile,0,1
+Mud,Tile,1,0,714.0586879400244,15,Tertiary,High,1,Tile,0,0
+Concrete,Tile,1,0,1852.388136863564,11,Tertiary,Low,0,Earth,0,0
+Wood,Tile,0,1,457.35355920721753,5,Primary,High,0,Tile,2,0
+Brick,Concrete,0,1,1268.7273777433743,3,Primary,Middle,0,Cement,2,0
+Concrete,Concrete,1,0,444.15174138664116,5,Secondary,High,1,Earth,3,0
+Wood,Thatch,1,0,643.3399793190972,12,Secondary,Low,0,Earth,1,1
+Wood,Thatch,1,1,1696.084179202968,2,Secondary,Low,1,Cement,0,0
+Concrete,Iron Sheet,1,1,1457.7228845398938,4,None,Middle,1,Cement,0,0
+Brick,Concrete,0,0,190.79855462642126,6,None,Low,0,Cement,0,1
+Concrete,Iron Sheet,0,0,857.4040419728673,1,Primary,Low,1,Tile,0,0
+Wood,Thatch,0,1,58.339527290528935,10,None,Middle,0,Earth,2,1
+Mud,Iron Sheet,1,1,961.780293206018,4,Secondary,High,1,Tile,5,0
+Mud,Thatch,1,1,1324.8680234021363,6,Secondary,Middle,0,Cement,5,0
+Concrete,Concrete,0,1,237.00524719630312,9,None,High,1,Tile,3,0
+Wood,Tile,0,1,577.7698778183313,14,Tertiary,Middle,0,Cement,6,0
+Mud,Concrete,0,0,795.6732510043139,11,Primary,High,0,Tile,4,1
+Wood,Iron Sheet,0,1,1839.0620493120996,11,Tertiary,Middle,1,Tile,1,0
+Concrete,Iron Sheet,1,0,1986.510030845928,13,Primary,High,1,Cement,5,0
+Mud,Concrete,0,1,89.82259799123172,2,Tertiary,Middle,0,Tile,6,1
+Wood,Concrete,0,0,1522.015846990784,11,None,High,1,Earth,0,1
+Mud,Thatch,0,1,743.4481328046865,7,Primary,Middle,1,Tile,5,1
+Concrete,Iron Sheet,0,1,784.91637245896,6,Primary,Low,1,Tile,3,0
+Wood,Iron Sheet,0,0,1508.5299466940453,2,Primary,High,0,Earth,4,0
+Mud,Concrete,0,0,1836.8528642908173,8,Secondary,Middle,0,Cement,5,0
+Concrete,Tile,0,1,1901.8571890050969,7,Secondary,High,1,Earth,3,0
+Mud,Iron Sheet,1,1,1154.2451720766417,11,Tertiary,High,1,Tile,2,0
+Mud,Tile,1,1,714.2423186010056,5,None,Middle,0,Cement,4,0
+Brick,Concrete,1,1,1575.0981717175584,12,Secondary,High,1,Tile,3,0
+Brick,Concrete,1,1,502.00276652460053,5,Primary,Middle,0,Tile,6,0
+Concrete,Thatch,0,0,1128.1480576670356,7,Secondary,Low,1,Earth,5,1
+Brick,Iron Sheet,1,0,717.1569230497463,9,None,High,1,Earth,2,1
+Concrete,Tile,1,1,1313.2621474157522,11,Secondary,Low,1,Cement,6,0
+Brick,Thatch,0,0,480.7978257870138,15,Primary,High,0,Cement,3,1
+Mud,Iron Sheet,0,0,383.18589146965155,9,Tertiary,High,0,Cement,3,0
+Concrete,Thatch,1,0,1836.4781733508742,9,Primary,High,0,Tile,6,0
+Concrete,Concrete,1,1,203.6073658990738,6,None,Middle,0,Earth,5,1
+Mud,Iron Sheet,0,0,1011.9158154698633,10,Tertiary,Low,1,Earth,4,1
+Concrete,Thatch,1,1,441.7055659260178,6,Secondary,High,1,Earth,2,0
+Concrete,Thatch,0,0,77.8599266513349,3,Secondary,Middle,0,Cement,0,1
+Brick,Tile,0,1,72.03763658285278,1,Secondary,High,1,Earth,1,0
+Concrete,Thatch,0,0,350.4435442116547,7,Tertiary,Middle,1,Earth,4,1
+Wood,Iron Sheet,0,1,1733.5407090120004,4,Primary,High,0,Earth,2,0
+Mud,Iron Sheet,1,1,564.9574879540534,1,Tertiary,Low,1,Cement,6,1
+Brick,Tile,0,0,1900.9183411505915,15,Tertiary,Low,1,Earth,3,1
+Brick,Iron Sheet,0,1,1163.244585978387,8,None,High,0,Cement,6,0
+Wood,Concrete,1,1,873.2283795375322,12,Tertiary,Middle,1,Earth,2,0
+Mud,Iron Sheet,0,1,1160.1776693389093,6,Secondary,High,1,Earth,6,0
+Mud,Iron Sheet,1,1,1033.3967704525355,6,Primary,Middle,1,Earth,6,0
+Brick,Thatch,1,1,1517.5525075146504,2,Primary,High,0,Cement,1,0
+Concrete,Thatch,1,1,564.9921319457045,15,Primary,Middle,0,Cement,5,0
+Brick,Iron Sheet,0,1,706.1007832006047,1,Secondary,Low,1,Earth,1,0
+Mud,Tile,1,1,1788.1886050665014,13,Secondary,High,1,Tile,0,0
+Wood,Thatch,1,0,1892.913026300811,14,Secondary,Low,1,Cement,0,0
+Brick,Tile,0,0,1785.116454972949,14,Secondary,Low,0,Cement,1,0
+Mud,Iron Sheet,1,1,838.8959879146272,2,Secondary,High,0,Earth,4,0
+Brick,Iron Sheet,1,1,1560.7310060137634,4,Tertiary,High,0,Tile,4,0
+Concrete,Concrete,1,0,952.6714666021976,2,Secondary,Middle,1,Earth,6,0
+Brick,Thatch,1,0,995.0797042922044,1,Secondary,Middle,1,Cement,6,1
+Brick,Iron Sheet,1,0,409.3602181145679,7,Secondary,Low,1,Cement,3,1
+Mud,Concrete,0,1,1182.260606517033,11,Secondary,Middle,1,Earth,0,1
+Mud,Thatch,1,0,372.27179550669587,11,Primary,Middle,1,Earth,3,1
+Mud,Iron Sheet,1,1,663.1293981343875,15,Secondary,High,0,Tile,0,0
+Brick,Iron Sheet,0,1,1710.0604032398703,12,Tertiary,Middle,1,Tile,1,1
+Concrete,Thatch,0,0,414.15161842171045,8,Tertiary,Low,1,Cement,4,1
+Wood,Thatch,0,1,142.31657034686563,6,Tertiary,Middle,1,Tile,6,0
+Wood,Thatch,1,1,138.01518522563262,4,None,Low,0,Tile,4,0
+Mud,Iron Sheet,0,1,1881.569041006216,14,Primary,High,1,Cement,1,1
+Mud,Iron Sheet,1,1,1013.8408759236693,6,Secondary,Low,0,Cement,3,0
+Brick,Concrete,1,0,818.8241436340367,3,None,Middle,0,Cement,3,0
+Wood,Tile,0,0,1621.757162015837,12,Secondary,High,0,Cement,2,0
+Mud,Thatch,0,1,1671.651855821032,8,None,Middle,0,Earth,6,1
+Concrete,Iron Sheet,1,1,664.3820662312093,10,None,High,0,Cement,6,0
+Concrete,Iron Sheet,0,0,1387.2361149475905,14,Tertiary,High,1,Cement,6,0
+Mud,Thatch,1,1,1542.2456317037731,13,Tertiary,Middle,1,Cement,0,1
+Mud,Tile,0,0,1309.301373731909,13,None,Middle,0,Tile,3,1
+Wood,Thatch,0,1,303.19014960019877,2,Tertiary,High,0,Cement,1,0
+Wood,Tile,0,1,1751.766167034114,5,None,High,0,Earth,3,0
+Brick,Iron Sheet,1,0,1078.1891054720174,1,Primary,Middle,1,Earth,4,0
+Wood,Tile,0,0,564.9448527400074,6,Tertiary,Low,1,Cement,0,0
+Concrete,Concrete,1,0,850.4563708753878,2,Tertiary,Middle,0,Earth,6,0
+Concrete,Iron Sheet,1,0,75.14218079781476,4,Tertiary,High,1,Tile,5,0
+Mud,Concrete,1,1,255.73360244483513,6,Primary,Middle,1,Cement,2,1
+Wood,Thatch,1,0,1531.0935010317216,10,None,Low,0,Earth,0,1
+Brick,Thatch,0,1,0.023269510732282228,11,Secondary,Middle,0,Earth,4,1
+Concrete,Thatch,1,0,833.1316569645844,8,Tertiary,High,1,Cement,6,0
+Concrete,Tile,1,0,1045.0203621711769,12,None,Middle,1,Earth,4,0
+Brick,Iron Sheet,0,1,109.2688400019446,8,Primary,High,1,Cement,4,0
+Brick,Thatch,1,0,1946.1563259446657,11,Secondary,High,0,Earth,6,1
+Concrete,Thatch,0,0,452.2506624993439,6,Tertiary,Middle,0,Tile,4,0
+Concrete,Iron Sheet,1,0,608.3974392725618,4,Primary,High,0,Earth,1,0
+Brick,Thatch,0,0,607.8850245100547,8,Primary,High,1,Earth,2,1
+Concrete,Concrete,1,1,460.83332423469983,13,Secondary,Low,1,Cement,5,0
+Mud,Iron Sheet,0,1,2.947644172622832,8,None,Low,0,Earth,4,1
+Mud,Iron Sheet,1,0,1458.6895881759926,10,Tertiary,Low,1,Cement,4,1
+Brick,Iron Sheet,1,0,1933.6909995985707,14,Tertiary,Low,0,Tile,3,0
+Wood,Concrete,0,0,448.5869665700901,1,None,High,1,Cement,2,0
+Brick,Iron Sheet,0,1,1326.0943836068448,4,None,Middle,0,Cement,0,1
+Brick,Concrete,0,1,1483.7926539174302,4,None,High,1,Earth,2,0
+Wood,Iron Sheet,0,1,1696.8507581810495,7,Secondary,High,1,Tile,2,0
+Wood,Tile,1,1,845.2583940272183,14,Secondary,High,0,Cement,6,0
+Wood,Thatch,1,0,605.8618112808584,14,Tertiary,Middle,0,Earth,6,1
+Mud,Tile,0,0,650.5902680460622,11,Secondary,Low,0,Earth,6,1
+Concrete,Thatch,1,0,1425.2426661970258,7,Primary,High,0,Cement,5,0
+Mud,Concrete,0,1,1633.558933011272,13,Tertiary,High,0,Earth,2,1
+Concrete,Tile,0,0,363.2279355132053,11,Secondary,Low,1,Cement,5,0
+Mud,Iron Sheet,1,1,741.8820163155304,15,None,High,0,Cement,4,0
+Concrete,Thatch,1,1,1803.8803934983,8,Primary,Middle,0,Cement,6,0
+Mud,Thatch,1,0,1613.3870393894786,11,None,High,0,Tile,4,1
+Wood,Tile,1,0,1969.7168055249517,5,Tertiary,High,0,Cement,6,0
+Brick,Concrete,1,0,1508.4965193641615,7,None,Low,0,Earth,1,1
+Mud,Tile,1,1,786.3904020558446,8,Secondary,High,1,Tile,5,0
+Concrete,Concrete,1,1,1181.2756679892755,15,Secondary,High,0,Earth,5,0
+Wood,Concrete,0,0,1322.0285084946406,9,Tertiary,Middle,0,Tile,0,0
+Mud,Thatch,0,0,156.9116326342479,3,None,Low,0,Tile,3,1
+Mud,Tile,0,1,1088.99391820773,3,Tertiary,Low,1,Tile,2,0
+Wood,Tile,0,0,1418.6416569452192,4,None,Middle,1,Tile,0,1
+Mud,Concrete,0,1,334.64260800212077,5,Primary,High,0,Earth,5,1
+Brick,Tile,1,1,1561.2634348511142,10,Secondary,Low,0,Cement,0,0
+Mud,Iron Sheet,0,0,1167.5455610282233,1,Tertiary,Low,1,Earth,1,1
+Brick,Iron Sheet,0,0,1904.4435713951893,15,Primary,High,1,Cement,3,0
+Brick,Tile,0,0,84.84459641378339,15,Primary,High,1,Earth,5,1
+Wood,Tile,0,0,530.6522751109339,7,Tertiary,Low,0,Tile,5,0
+Mud,Concrete,0,1,1203.1077585996482,9,Tertiary,High,0,Tile,2,0
+Wood,Iron Sheet,0,1,593.1198244118614,8,Primary,Low,1,Cement,6,0
+Mud,Iron Sheet,0,1,1428.8483281424844,15,None,High,0,Cement,3,0
+Mud,Thatch,1,0,1518.010565043862,15,Primary,High,1,Earth,1,1
+Concrete,Concrete,1,1,205.0319281329489,5,Tertiary,Middle,1,Cement,4,0
+Mud,Thatch,0,0,1027.7089284135354,14,Primary,High,1,Earth,0,1
+Wood,Iron Sheet,1,0,1017.7811111821118,14,None,Middle,0,Cement,2,1
+Brick,Concrete,1,0,738.5615404310821,4,Secondary,High,1,Cement,5,1
+Mud,Tile,1,0,1865.8497251393442,12,Secondary,Low,1,Cement,4,1
+Concrete,Concrete,1,0,1655.0126397464423,7,Primary,Low,0,Tile,1,0
+Wood,Tile,0,0,1394.4187638192736,5,None,High,1,Tile,3,0
+Mud,Tile,1,1,1428.6532714699952,7,Secondary,High,0,Earth,0,0
+Wood,Concrete,1,0,923.4322876262382,12,Primary,Low,1,Cement,2,0
+Concrete,Tile,1,1,1841.9890421931518,1,Primary,High,0,Earth,5,0
+Concrete,Thatch,0,1,1389.1908545065708,1,None,Middle,1,Cement,5,0
+Wood,Iron Sheet,0,0,1457.962123311633,10,Tertiary,Middle,1,Tile,4,0
+Mud,Tile,0,0,1723.3818075746906,14,Primary,Middle,1,Tile,4,1
+Brick,Thatch,0,0,548.143178684382,13,Tertiary,Middle,1,Cement,0,1
+Concrete,Tile,0,1,1614.141807733406,3,Tertiary,Middle,1,Cement,3,0
+Mud,Iron Sheet,0,0,390.4812059129841,14,Secondary,High,0,Tile,1,1
+Mud,Thatch,0,1,690.6839044897757,11,Tertiary,High,0,Tile,6,0
+Brick,Iron Sheet,1,0,671.2209085396854,2,None,Middle,1,Earth,3,1
+Concrete,Iron Sheet,1,0,1957.050936778281,2,Secondary,High,1,Tile,3,0
+Concrete,Thatch,1,1,1713.0744474958537,7,Secondary,High,1,Cement,3,0
+Mud,Thatch,0,1,1402.3397231805195,12,Secondary,Middle,0,Earth,6,1
+Mud,Thatch,0,0,1454.1135232307802,10,Primary,High,0,Cement,0,1
+Brick,Concrete,0,1,1124.145588805142,2,Primary,High,1,Earth,6,0
+Brick,Thatch,0,1,1894.181334217038,11,Tertiary,High,0,Cement,0,0
+Concrete,Thatch,0,1,992.5175057647231,4,Secondary,Middle,1,Tile,6,0
+Wood,Thatch,1,1,761.0354197397891,2,Secondary,High,1,Cement,1,0
+Concrete,Thatch,1,1,326.070673863182,6,None,Low,1,Earth,3,1
+Mud,Tile,0,0,1572.4113045221159,8,Tertiary,Low,0,Cement,0,1
+Concrete,Concrete,0,0,1468.8878641511828,10,None,Middle,1,Earth,6,1
+Wood,Iron Sheet,0,1,768.7100770482698,4,Tertiary,Low,1,Cement,1,0
+Brick,Thatch,0,0,50.38682791845872,15,Tertiary,Middle,1,Tile,6,1
+Wood,Tile,1,0,1677.9946554360215,5,Primary,Low,0,Tile,5,0
+Wood,Tile,0,1,22.835966908147263,4,Primary,Low,0,Cement,1,0
+Wood,Tile,0,0,1407.3995592581018,3,None,Low,0,Cement,3,0
+Brick,Iron Sheet,0,1,1940.514219452114,5,Tertiary,Middle,1,Cement,2,0
+Wood,Thatch,0,1,875.3226562964069,14,Secondary,Middle,0,Earth,3,1
+Wood,Concrete,1,0,469.9468099919055,9,Primary,High,1,Cement,2,1
+Wood,Concrete,0,1,1409.7420200867634,8,Secondary,Middle,0,Cement,1,0
+Mud,Tile,0,1,1634.2562840311703,8,None,Low,1,Earth,5,1
+Wood,Iron Sheet,1,1,1092.8606321556947,8,Primary,Low,0,Tile,5,0
+Brick,Iron Sheet,1,1,1934.0705505122924,12,Primary,Middle,1,Cement,0,0
+Wood,Iron Sheet,1,1,103.3374433159222,8,Tertiary,Middle,0,Cement,5,0
+Wood,Concrete,0,0,1009.5911966090563,7,None,Middle,0,Tile,4,1
+Brick,Tile,0,0,1436.9078946451002,8,Tertiary,High,0,Tile,1,0
+Wood,Thatch,1,1,1725.280942298358,11,Primary,Low,1,Earth,0,1
+Brick,Concrete,1,1,358.5112238155801,14,None,High,0,Cement,5,0
+Wood,Tile,1,0,1600.0069635273628,8,Primary,High,0,Cement,1,0
+Brick,Tile,1,1,1105.4141514370906,13,None,Low,0,Earth,3,0
+Wood,Thatch,1,0,793.1073639799264,14,Primary,Low,0,Tile,5,1
+Wood,Thatch,1,1,263.43005715818714,8,Secondary,Middle,1,Earth,6,0
+Mud,Thatch,0,1,1730.5915178178248,12,Secondary,Middle,0,Tile,2,1
+Mud,Iron Sheet,0,1,314.5464163594307,10,Tertiary,High,1,Earth,1,1
+Wood,Thatch,0,1,619.5757184181984,7,Secondary,Middle,1,Tile,0,1
+Wood,Tile,1,1,580.0910639248738,12,Primary,Middle,1,Earth,3,1
+Concrete,Thatch,1,1,1742.8280683817086,1,Primary,Low,1,Tile,4,0
