@@ -1,0 +1,21 @@
+			Smartphone Sensor Dataset
+
+Data Set Information:
+The experiments have been carried out with a group of 5 volunteers within an age bracket of 19-28 years.
+Each person performed 11 activities ( Walking on stairs, Walking in corridor, Walking nearby road,
+Walking in playground, Sitting in classroom/room, Sitting in car, Sitting in auto-rickshaw, Sitting
+in bus, Standing in classroom, Standing in bus, Standing nearby road, Sleeping on bed and Running)
+having a smartphone(Realme 3i) in their pant's front right/left(randomly) pocket. Using it's embedded
+accelerometer, gyroscope etc, we captured 3-axial acceleration, 3-axial linear acceleration etc sensor
+signals at a constant rate of 25Hz. The experimentts were collected and labelled by an android app named AndoSensor( available on
+Play Store as well). The obtained data files were saved as different csv files.
+
+For each record in the dataset, it is provided:
+1. Triaxial acceleration(total)
+2. Triaxial gravitational acceleration
+3. Triaxial linear acceleration
+4. Triaxial angular velocity
+5. Triaxial Magnetic field intensity
+6. Triaxial orientation
+7. Sound intensity
+8. Longitude, Latitude and Altitude

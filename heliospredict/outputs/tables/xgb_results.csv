@@ -1,0 +1,3 @@
+Model,Accuracy,F1,RMSE
+XGBoost Classification,1.0,1.0,
+XGBoost Regression,,,0.12406721108567215
