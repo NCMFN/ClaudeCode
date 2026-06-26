@@ -35,3 +35,11 @@ This file serves as a template for managing downloads for various tasks and proj
 ---
 
 *Customize the sections above by filling in the details relevant to your project.*
+## NTL Poverty Estimation Pipeline Outputs
+
+- [Poverty Heatmap GeoTIFF](ntl-poverty-estimation/outputs/poverty_heatmap.tif)
+- [Poverty Heatmap PNG](ntl-poverty-estimation/outputs/figures/poverty_heatmap.png)
+- [Feature Importance](ntl-poverty-estimation/outputs/figures/feature_importance.png)
+- [Predicted vs Actual](ntl-poverty-estimation/outputs/figures/predicted_vs_actual.png)
+- [Prediction Results](ntl-poverty-estimation/outputs/tables/prediction_results.csv)
+- [Paper Assets Manifest](ntl-poverty-estimation/outputs/paper_assets/paper_assets_manifest.csv)

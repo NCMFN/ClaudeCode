@@ -1,0 +1,6 @@
+file,type
+outputs/poverty_heatmap.tif,dataset
+outputs/tables/prediction_results.csv,table
+outputs/figures/feature_importance.png,figure
+outputs/figures/predicted_vs_actual.png,figure
+outputs/figures/poverty_heatmap.png,figure
