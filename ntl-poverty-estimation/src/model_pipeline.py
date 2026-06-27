@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GroupKFold
 from sklearn.preprocessing import StandardScaler
@@ -36,9 +37,27 @@ def train_and_evaluate():
         plt.figure()
         plt.title("Mock Feature Importance")
         plt.savefig("outputs/figures/feature_importance.png")
+
         plt.figure()
         plt.title("Mock Predicted vs Actual")
         plt.savefig("outputs/figures/predicted_vs_actual.png")
+
+        plt.figure()
+        plt.title("Mock Spatial CV Scores")
+        plt.savefig("outputs/figures/spatial_cv_scores.png")
+
+        plt.figure()
+        plt.title("Mock Residuals Distribution")
+        plt.savefig("outputs/figures/residuals_distribution.png")
+
+        plt.figure()
+        plt.title("Mock Residuals vs Predicted")
+        plt.savefig("outputs/figures/residuals_vs_predicted.png")
+
+        plt.figure()
+        plt.title("Mock Correlation Heatmap")
+        plt.savefig("outputs/figures/correlation_heatmap.png")
+
         pd.DataFrame(columns=['DHSCLUST', 'LATNUM', 'LONGNUM', 'URBAN_RURA', 'wealth_score', 'predicted_wealth', 'residual']).to_csv("outputs/tables/prediction_results.csv", index=False)
         # Save a mock model
         rf_pipeline = Pipeline([
@@ -71,8 +90,20 @@ def train_and_evaluate():
             rmse_scores.append(np.sqrt(mean_squared_error(y.iloc[test_idx], preds)))
         print(f"Spatial CV R²: {np.mean(r2_scores):.4f} ± {np.std(r2_scores):.4f}")
         print(f"Spatial CV RMSE: {np.mean(rmse_scores):.4f} ± {np.std(rmse_scores):.4f}")
+
+        # Plot Spatial CV Scores
+        plt.figure(figsize=(8, 5))
+        plt.boxplot([r2_scores, rmse_scores], tick_labels=['R²', 'RMSE'])
+        plt.title("Spatial CV Scores (GroupKFold)")
+        plt.ylabel("Score")
+        plt.tight_layout()
+        plt.savefig("outputs/figures/spatial_cv_scores.png", dpi=150)
+
     except Exception as e:
         print(f"CV failed (likely not enough data): {e}")
+        plt.figure()
+        plt.title("Mock Spatial CV Scores (Failed)")
+        plt.savefig("outputs/figures/spatial_cv_scores.png")
 
     # Final model on full dataset
     rf_pipeline.fit(X, y)
@@ -111,6 +142,33 @@ def train_and_evaluate():
     ax.set_title(f"Predicted vs Actual")
     plt.tight_layout()
     plt.savefig("outputs/figures/predicted_vs_actual.png", dpi=150)
+
+    # Residuals Distribution
+    plt.figure(figsize=(8, 5))
+    sns.histplot(results_table['residual'].dropna(), kde=True, color='purple', bins=30)
+    plt.title("Distribution of Prediction Residuals")
+    plt.xlabel("Residual (Observed - Predicted)")
+    plt.ylabel("Frequency")
+    plt.tight_layout()
+    plt.savefig("outputs/figures/residuals_distribution.png", dpi=150)
+
+    # Residuals vs Predicted
+    plt.figure(figsize=(8, 5))
+    plt.scatter(results_table['predicted_wealth'], results_table['residual'], alpha=0.5, color='darkorange')
+    plt.axhline(0, color='black', linestyle='--')
+    plt.title("Residuals vs Predicted Wealth Score")
+    plt.xlabel("Predicted Wealth Index")
+    plt.ylabel("Residuals")
+    plt.tight_layout()
+    plt.savefig("outputs/figures/residuals_vs_predicted.png", dpi=150)
+
+    # Correlation Heatmap
+    plt.figure(figsize=(10, 8))
+    corr_matrix = df[FEATURES + [TARGET]].corr()
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+    plt.title("Feature and Target Correlation Heatmap")
+    plt.tight_layout()
+    plt.savefig("outputs/figures/correlation_heatmap.png", dpi=150)
 
 if __name__ == "__main__":
     train_and_evaluate()

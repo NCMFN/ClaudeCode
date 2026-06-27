@@ -3,4 +3,11 @@ outputs/poverty_heatmap.tif,dataset
 outputs/tables/prediction_results.csv,table
 outputs/figures/feature_importance.png,figure
 outputs/figures/predicted_vs_actual.png,figure
+outputs/figures/spatial_cv_scores.png,figure
+outputs/figures/residuals_distribution.png,figure
+outputs/figures/residuals_vs_predicted.png,figure
 outputs/figures/poverty_heatmap.png,figure
+outputs/figures/ntl_vs_poverty_scatter.png,figure
+outputs/figures/urban_rural_wealth_boxplot.png,figure
+outputs/figures/ntl_mean_histogram.png,figure
+outputs/figures/error_map.png,figure
