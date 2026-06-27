@@ -19,10 +19,6 @@ from features import engineer_features, get_preprocessor, save_feature_correlati
 np.random.seed(42)
 
 class XGBWrapper(BaseEstimator, RegressorMixin):
-    """
-    Custom Scikit-Learn wrapper for XGBoost to dynamically partition a validation set
-    for early_stopping_rounds without leaking data or breaking CV isolation.
-    """
     def __init__(self, n_estimators=500, learning_rate=0.05, max_depth=6,
                  subsample=0.8, colsample_bytree=0.8, reg_alpha=0.1, reg_lambda=1.0,
                  objective='reg:squarederror', early_stopping_rounds=50, random_state=42):
@@ -40,9 +36,6 @@ class XGBWrapper(BaseEstimator, RegressorMixin):
         self._is_fitted = False
 
     def fit(self, X, y):
-        """
-        Fits the XGBoost Regressor with an internal validation partition.
-        """
         X_arr = np.array(X) if isinstance(X, pd.DataFrame) else X
         y_arr = np.array(y) if isinstance(y, pd.Series) else y
 
@@ -73,21 +66,12 @@ class XGBWrapper(BaseEstimator, RegressorMixin):
         return self
 
     def predict(self, X):
-        """
-        Predicts using the fitted XGBoost Regressor.
-        """
         return self.model.predict(X)
 
     def __sklearn_is_fitted__(self):
-        """
-        Ensures compatibility with sklearn check_is_fitted.
-        """
         return self._is_fitted
 
 def evaluate_metrics(y_true, y_pred, model_name):
-    """
-    Computes regression metrics MAE, RMSE, R2, MAPE.
-    """
     mae = mean_absolute_error(y_true, y_pred)
     rmse = np.sqrt(mean_squared_error(y_true, y_pred))
     r2 = r2_score(y_true, y_pred)
@@ -102,9 +86,6 @@ def evaluate_metrics(y_true, y_pred, model_name):
     }
 
 def plot_scatter(y_true, y_pred, title, filename):
-    """
-    Plots an actual vs predicted scatter plot and saves it.
-    """
     os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
     plt.figure(figsize=(8, 6))
     plt.scatter(y_true, y_pred, alpha=0.5)
@@ -117,9 +98,6 @@ def plot_scatter(y_true, y_pred, title, filename):
     plt.close()
 
 def plot_residuals(y_true, y_pred, title, filename):
-    """
-    Plots the residual distribution and saves it.
-    """
     os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
     residuals = y_true - y_pred
     plt.figure(figsize=(8, 6))
@@ -132,12 +110,8 @@ def plot_residuals(y_true, y_pred, title, filename):
     plt.close()
 
 def plot_shap(model, X_processed, feature_names, filename):
-    """
-    Computes SHAP values and plots the summary plot for the top 15 features.
-    """
     os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
     explainer = shap.TreeExplainer(model)
-    # Using a sample to speed up SHAP
     sample_idx = np.random.choice(X_processed.shape[0], min(1000, X_processed.shape[0]), replace=False)
     shap_values = explainer.shap_values(X_processed[sample_idx])
 
@@ -149,9 +123,6 @@ def plot_shap(model, X_processed, feature_names, filename):
     plt.close()
 
 def plot_feature_importance(model, feature_names, filename):
-    """
-    Plots native XGBoost feature importances as a bar chart.
-    """
     os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
     importances = model.feature_importances_
     indices = np.argsort(importances)[::-1]
@@ -164,11 +135,39 @@ def plot_feature_importance(model, feature_names, filename):
     plt.savefig(f"outputs/figures/{filename}")
     plt.close()
 
+def plot_distribution(y, title, filename):
+    os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
+    plt.figure(figsize=(8, 6))
+    sns.histplot(y, kde=True, bins=20)
+    plt.title(title)
+    plt.xlabel("Length of Stay (days)")
+    plt.ylabel("Count")
+    plt.tight_layout()
+    plt.savefig(f"outputs/figures/{filename}")
+    plt.close()
+
+def plot_correlation_heatmap(df, filename):
+    os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
+    plt.figure(figsize=(10, 8))
+    numeric_df = df.select_dtypes(include=[np.number])
+    corr = numeric_df.corr()
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f")
+    plt.title("Feature Correlation Heatmap")
+    plt.tight_layout()
+    plt.savefig(f"outputs/figures/{filename}")
+    plt.close()
+
+def plot_boxplot(df, x_col, y_col, title, filename):
+    os.makedirs(os.path.dirname(f"outputs/figures/{filename}"), exist_ok=True)
+    plt.figure(figsize=(8, 6))
+    sns.boxplot(x=x_col, y=y_col, data=df)
+    plt.title(title)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig(f"outputs/figures/{filename}")
+    plt.close()
+
 def main():
-    """
-    Main training pipeline orchestrator.
-    """
-    # Download dataset if missing
     if not os.path.exists("data/LengthOfStay.csv"):
         print("Downloading dataset...")
         import kagglehub
@@ -179,30 +178,29 @@ def main():
             if f.endswith(".csv"):
                 shutil.copy(os.path.join(path, f), "data/")
 
-    # 1. Load Data & ETL
     print("Running ETL...")
     df = run_etl("data/LengthOfStay.csv")
 
-    # 2. Feature Engineering
     print("Engineering features...")
     df = engineer_features(df)
 
-    # Prepare X and y
+    # 5. Exploratory Data Analysis Figures
+    print("Generating EDA figures...")
+    plot_distribution(df['lengthofstay'], "Length of Stay Distribution", "los_distribution.png")
+    plot_correlation_heatmap(df, "correlation_heatmap.png")
+    plot_boxplot(df, 'treatment_type', 'lengthofstay', "LOS by Treatment Type", "los_by_treatment_type.png")
+    plot_boxplot(df, 'primary_diagnosis', 'lengthofstay', "LOS by Primary Diagnosis", "los_by_primary_diagnosis.png")
+
     X = df.drop(columns=['lengthofstay', 'Admission date'])
     y = df['lengthofstay']
 
-    # Save Feature correlations
     save_feature_correlations(X, y, "outputs/tables/feature_correlations.csv")
 
-    # Stratified split based on LOS quartiles
-    # Adding noise to avoid duplicate edges
     y_binned = pd.qcut(y + np.random.normal(0, 1e-6, size=len(y)), q=4, labels=False)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y_binned, random_state=42)
 
-    # Get preprocessor
     preprocessor = get_preprocessor()
 
-    # 3. Baseline Model (Linear Regression)
     print("Training Baseline Model...")
     baseline_pipeline = Pipeline(steps=[
         ('preprocessor', preprocessor),
@@ -212,7 +210,11 @@ def main():
     y_pred_base = baseline_pipeline.predict(X_test)
     base_metrics = evaluate_metrics(y_test, y_pred_base, 'Linear Regression Baseline')
 
-    # 4. XGBoost Model & Hyperparameter Tuning
+    # 6. Baseline Model Figures
+    print("Generating Baseline figures...")
+    plot_scatter(y_test, y_pred_base, 'Actual vs Predicted LOS (Linear Regression)', 'baseline_scatter.png')
+    plot_residuals(y_test, y_pred_base, 'Residuals Distribution (Linear Regression)', 'baseline_residuals.png')
+
     print("Tuning XGBoost Model...")
     xgb_pipeline = Pipeline(steps=[
         ('preprocessor', preprocessor),
@@ -226,14 +228,11 @@ def main():
         'model__subsample': [0.7, 0.8, 0.9]
     }
 
-    # Binning train target for StratifiedKFold
     y_train_binned = pd.qcut(y_train + np.random.normal(0, 1e-6, size=len(y_train)), q=4, labels=False)
 
-    # Convert skf split generator to a list to avoid pickling generator error!
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
     cv_splits = list(skf.split(X_train, y_train_binned))
 
-    # Run RandomizedSearchCV
     search = RandomizedSearchCV(
         xgb_pipeline, param_grid, n_iter=20,
         cv=cv_splits,
@@ -245,17 +244,14 @@ def main():
     best_pipeline = search.best_estimator_
     print(f"Best XGB Params: {search.best_params_}")
 
-    # Evaluate best model
     y_pred_xgb = best_pipeline.predict(X_test)
     xgb_metrics = evaluate_metrics(y_test, y_pred_xgb, 'XGBoost (Tuned)')
 
-    # Save Metrics
     os.makedirs('outputs/tables', exist_ok=True)
     metrics_df = pd.DataFrame([base_metrics, xgb_metrics])
     metrics_df.to_csv("outputs/tables/performance_metrics.csv", index=False)
     print(metrics_df)
 
-    # Explicit 5-fold CV evaluation for logging MAE
     print("Running explicit 5-fold CV for logging MAE...")
     cv_maes = []
     fold = 1
@@ -272,18 +268,13 @@ def main():
 
     pd.DataFrame(cv_maes).to_csv("outputs/tables/cv_fold_results.csv", index=False)
 
-    # Generate Figures
-    print("Generating figures...")
+    print("Generating XGBoost figures...")
     plot_scatter(y_test, y_pred_xgb, 'Actual vs Predicted LOS (XGBoost)', 'xgb_scatter.png')
     plot_residuals(y_test, y_pred_xgb, 'Residuals Distribution (XGBoost)', 'xgb_residuals.png')
 
-    # Retrain on full train to get SHAP and feature importances
     best_pipeline.fit(X_train, y_train)
-
-    # Get processed X for SHAP
     X_train_processed = best_pipeline.named_steps['preprocessor'].transform(X_train)
 
-    # Extract feature names
     preprocessor = best_pipeline.named_steps['preprocessor']
     woe_cols = preprocessor.transformers_[0][2]
     ohe = preprocessor.transformers_[1][1]
@@ -297,7 +288,6 @@ def main():
     plot_shap(xgb_model, X_train_processed, feature_names, 'xgb_shap_summary.png')
     plot_feature_importance(xgb_model, feature_names, 'xgb_feature_importance.png')
 
-    # Save Model and Preprocessors
     print("Saving model artifacts...")
     os.makedirs('outputs', exist_ok=True)
     joblib.dump(best_pipeline, 'outputs/xgb_los_model.pkl')
