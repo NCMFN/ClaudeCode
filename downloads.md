@@ -35,3 +35,4 @@ This file serves as a template for managing downloads for various tasks and proj
 ---
 
 *Customize the sections above by filling in the details relevant to your project.*
+- [Results Report (Markdown)](drpp-research/report/results_report.md)

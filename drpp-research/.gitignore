@@ -1,0 +1,7 @@
+target/
+data/*.csv
+figures/*.png
+tables/*.csv
+tables/*.tex
+tables/*.md
+report/results_report.md

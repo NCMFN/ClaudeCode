@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "crates/drpp_core",
+    "crates/modalities",
+    "crates/experiments"
+]
+resolver = "2"
