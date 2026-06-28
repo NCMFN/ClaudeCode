@@ -1,0 +1,5 @@
+asset_id,path,type,description
+fig_shap_bar,outputs/figures/shap_kMc_vs_kMt_bar.png,figure,SHAP comparison bar plot
+fig_mae_comp,outputs/figures/model_comparison_mae.png,figure,MAE comparison across models
+fig_eda_dist,outputs/figures/eda_feature_distributions.png,figure,EDA feature distributions
+fig_eda_hex,outputs/figures/eda_target_joint_hexbin.png,figure,EDA Target joint hexbin
