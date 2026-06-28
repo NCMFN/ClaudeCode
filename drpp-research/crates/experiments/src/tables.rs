@@ -56,7 +56,7 @@ pub fn write_all(
 
 fn write_table_formats(id: &str, name: &str, headers: &[&str], rows: &[Vec<String>]) -> Result<()> {
     // 1. CSV
-    let csv_path = format!("drpp-research/output/tables/T{}_{}.csv", id, name);
+    let csv_path = format!("output/tables/T{}_{}.csv", id, name);
     let mut wtr = Writer::from_path(&csv_path)?;
     wtr.write_record(headers)?;
     for row in rows {
@@ -65,7 +65,7 @@ fn write_table_formats(id: &str, name: &str, headers: &[&str], rows: &[Vec<Strin
     wtr.flush()?;
 
     // 2. Markdown
-    let md_path = format!("drpp-research/output/tables/T{}_{}.md", id, name);
+    let md_path = format!("output/tables/T{}_{}.md", id, name);
     let mut f_md = File::create(&md_path)?;
     writeln!(f_md, "| {} |", headers.join(" | "))?;
     let sep: Vec<_> = headers.iter().map(|_| "---").collect();
@@ -75,7 +75,7 @@ fn write_table_formats(id: &str, name: &str, headers: &[&str], rows: &[Vec<Strin
     }
 
     // 3. LaTeX
-    let tex_path = format!("drpp-research/output/tables/T{}_{}.tex", id, name);
+    let tex_path = format!("output/tables/T{}_{}.tex", id, name);
     let mut f_tex = File::create(&tex_path)?;
     let col_format = vec!["c"; headers.len()].join("|");
     writeln!(f_tex, "\\begin{{table}}[h]")?;
