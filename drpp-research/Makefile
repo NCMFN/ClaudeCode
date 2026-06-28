@@ -6,4 +6,4 @@ test:
 	cargo test --workspace
 
 clean:
-	rm -rf figures/ tables/ data/ report/results_report.md target/
+	rm -rf drpp-research/output/ target/

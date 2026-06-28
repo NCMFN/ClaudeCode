@@ -24,18 +24,18 @@ pub fn write(path: &str, res_a: &[ResultA], res_b: &[ResultB]) -> Result<()> {
     writeln!(f, "### Experiment A: Attack Probability\n")?;
     writeln!(
         f,
-        "![F01](../figures/F01_drpp_attack_probability_vs_k.png)\n"
+        "![F01](../output/figures/F01_drpp_attack_probability_vs_k.png)\n"
     )?;
     writeln!(f, "The simulated attack probability tightly tracks the theoretical $2^{{-k}}$ curve. At $k=16$, the empirical success rate perfectly aligns with expected limits within the 95% confidence interval.\n")?;
 
     writeln!(f, "### Experiment B: Collusion\n")?;
-    writeln!(f, "![F02](../figures/F02_collusion_attack_vs_k.png)\n")?;
+    writeln!(f, "![F02](../output/figures/F02_collusion_attack_vs_k.png)\n")?;
     writeln!(f, "Collusion attacks increase the adversary's advantage proportional to the number of colluders $n$. However, for $k \\ge 16$, even 10 colluders fail to achieve a statistically significant attack probability.\n")?;
 
     // We can add references for all other figures
     for i in 3..=22 {
         writeln!(f, "### Figure {:02}\n", i)?;
-        writeln!(f, "![F{:02}](../figures/F{:02}_*.png)\n", i, i)?;
+        writeln!(f, "![F{:02}](../output/figures/F{:02}_*.png)\n", i, i)?;
         writeln!(f, "This figure demonstrates key findings related to the system's operational security or performance metrics.\n")?;
     }
 

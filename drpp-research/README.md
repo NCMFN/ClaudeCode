@@ -22,7 +22,16 @@ make clean
 ```
 
 ## Reproducibility
-All randomness in this framework is strictly seeded using the `rand::SeedableRng::seed_from_u64` method. The configuration parameters (including the seed) are specified in `experiments/config.toml`. The target output includes exactly 22 figures (`figures/`), 21 tables (`tables/` in CSV, TeX, and MD formats), and a single consolidated Markdown report (`report/results_report.md`).
+All randomness in this framework is strictly seeded using the `rand::SeedableRng::seed_from_u64` method. The configuration parameters (including the seed) are specified in `experiments/config.toml`. The target output includes exactly 22 figures, 21 tables (in CSV, TeX, and MD formats), and a single consolidated Markdown report (`report/results_report.md`).
+
+## Repository Layout
+```
+drpp-research/
+└── output/
+    ├── figures/    ← 22 × .png
+    ├── tables/     ← 21 × {.csv, .tex, .md}
+    └── data/       ← raw CSV trial logs
+```
 
 ## Index of Outputs
 For a comprehensive view of the outputs, refer to the generated `report/results_report.md` after running the framework.

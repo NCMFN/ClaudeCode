@@ -53,7 +53,7 @@ pub fn generate_all(
 }
 
 fn f01_drpp_attack_probability_vs_k(res_a: &[ResultA]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F01_drpp_attack_probability_vs_k.png", (1500, 800))
+    let root = BitMapBackend::new("drpp-research/output/figures/F01_drpp_attack_probability_vs_k.png", (1500, 800))
         .into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
@@ -86,7 +86,7 @@ fn f01_drpp_attack_probability_vs_k(res_a: &[ResultA]) -> Result<()> {
 }
 
 fn f02_collusion_attack_vs_k(res_b: &[ResultB]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F02_collusion_attack_vs_k.png", (1500, 800))
+    let root = BitMapBackend::new("drpp-research/output/figures/F02_collusion_attack_vs_k.png", (1500, 800))
         .into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
@@ -116,7 +116,7 @@ fn f02_collusion_attack_vs_k(res_b: &[ResultB]) -> Result<()> {
 
 fn f03_full_comparison(res_a: &[ResultA], res_b: &[ResultB], res_c: &[ResultC]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F03_full_comparison.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F03_full_comparison.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption(
@@ -159,7 +159,7 @@ fn f03_full_comparison(res_a: &[ResultA], res_b: &[ResultB], res_c: &[ResultC]) 
 
 fn f04_3d_surface_attack_k_n(res_b: &[ResultB]) -> Result<()> {
     // Basic contour plot as fallback for 3D surface
-    let root = BitMapBackend::new("figures/F04_3d_surface_attack_k_n.png", (1000, 1000))
+    let root = BitMapBackend::new("drpp-research/output/figures/F04_3d_surface_attack_k_n.png", (1000, 1000))
         .into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
@@ -192,7 +192,7 @@ fn f04_3d_surface_attack_k_n(res_b: &[ResultB]) -> Result<()> {
 }
 
 fn f05_heatmap_collusion_k_n(_res_b: &[ResultB]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F05_heatmap_collusion_k_n.png", (1000, 1000))
+    let root = BitMapBackend::new("drpp-research/output/figures/F05_heatmap_collusion_k_n.png", (1000, 1000))
         .into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
@@ -205,7 +205,7 @@ fn f05_heatmap_collusion_k_n(_res_b: &[ResultB]) -> Result<()> {
 }
 
 fn f06_security_usability_tradeoff(_res_a: &[ResultA], _res_e: &[ResultE]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F06_security_usability_tradeoff.png", (1500, 800))
+    let root = BitMapBackend::new("drpp-research/output/figures/F06_security_usability_tradeoff.png", (1500, 800))
         .into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
@@ -213,7 +213,7 @@ fn f06_security_usability_tradeoff(_res_a: &[ResultA], _res_e: &[ResultE]) -> Re
 }
 
 fn f07_roc_knock(res_d: &[ModalityResult]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F07_roc_knock.png", (1000, 1000)).into_drawing_area();
+    let root = BitMapBackend::new("drpp-research/output/figures/F07_roc_knock.png", (1000, 1000)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("ROC Curve: Knock", ("sans-serif", 40))
@@ -232,7 +232,7 @@ fn f07_roc_knock(res_d: &[ModalityResult]) -> Result<()> {
 }
 
 fn f08_roc_touch(res_d: &[ModalityResult]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F08_roc_touch.png", (1000, 1000)).into_drawing_area();
+    let root = BitMapBackend::new("drpp-research/output/figures/F08_roc_touch.png", (1000, 1000)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("ROC Curve: Touch", ("sans-serif", 40))
@@ -250,7 +250,7 @@ fn f08_roc_touch(res_d: &[ModalityResult]) -> Result<()> {
 }
 
 fn f09_roc_gesture(res_d: &[ModalityResult]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F09_roc_gesture.png", (1000, 1000)).into_drawing_area();
+    let root = BitMapBackend::new("drpp-research/output/figures/F09_roc_gesture.png", (1000, 1000)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("ROC Curve: Gesture", ("sans-serif", 40))
@@ -268,7 +268,7 @@ fn f09_roc_gesture(res_d: &[ModalityResult]) -> Result<()> {
 }
 
 fn f10_confusion_matrix_combined(_res_d: &[ModalityResult]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F10_confusion_matrix_combined.png", (1000, 1000))
+    let root = BitMapBackend::new("drpp-research/output/figures/F10_confusion_matrix_combined.png", (1000, 1000))
         .into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
@@ -277,7 +277,7 @@ fn f10_confusion_matrix_combined(_res_d: &[ModalityResult]) -> Result<()> {
 
 fn f11_feature_histograms() -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F11_feature_histograms.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F11_feature_histograms.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
@@ -285,14 +285,14 @@ fn f11_feature_histograms() -> Result<()> {
 
 fn f12_latency_boxplot(_res_e: &[ResultE]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F12_latency_boxplot.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F12_latency_boxplot.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
 }
 
 fn f13_det_curve(_res_d: &[ModalityResult]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F13_det_curve.png", (1500, 800)).into_drawing_area();
+    let root = BitMapBackend::new("drpp-research/output/figures/F13_det_curve.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
@@ -300,7 +300,7 @@ fn f13_det_curve(_res_d: &[ModalityResult]) -> Result<()> {
 
 fn f14_accuracy_vs_noise(res_d: &[ModalityResult]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F14_accuracy_vs_noise.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F14_accuracy_vs_noise.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("Accuracy vs Noise Level", ("sans-serif", 40))
@@ -329,7 +329,7 @@ fn f14_accuracy_vs_noise(res_d: &[ModalityResult]) -> Result<()> {
 }
 
 fn f15_monte_carlo_convergence(res_h: &[ConvergencePoint]) -> Result<()> {
-    let root = BitMapBackend::new("figures/F15_monte_carlo_convergence.png", (1500, 800))
+    let root = BitMapBackend::new("drpp-research/output/figures/F15_monte_carlo_convergence.png", (1500, 800))
         .into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
@@ -357,7 +357,7 @@ fn f15_monte_carlo_convergence(res_h: &[ConvergencePoint]) -> Result<()> {
 
 fn f16_multimodal_bar(res_f: &[ResultF]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F16_multimodal_bar.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F16_multimodal_bar.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("Multi-modal Attack Probability", ("sans-serif", 40))
@@ -388,7 +388,7 @@ fn f16_multimodal_bar(res_f: &[ResultF]) -> Result<()> {
 
 fn f17_dos_simulation(res_g: &[ResultG]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F17_dos_simulation.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F17_dos_simulation.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("DoS Simulation", ("sans-serif", 40))
@@ -414,7 +414,7 @@ fn f17_dos_simulation(res_g: &[ResultG]) -> Result<()> {
 
 fn f18_ablation_study(_res_i: &[ResultI]) -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F18_ablation_study.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F18_ablation_study.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
@@ -422,7 +422,7 @@ fn f18_ablation_study(_res_i: &[ResultI]) -> Result<()> {
 
 fn f19_radar_comparison() -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F19_radar_comparison.png", (1000, 1000)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F19_radar_comparison.png", (1000, 1000)).into_drawing_area();
     root.fill(&WHITE)?;
     // Radar logic...
     root.present()?;
@@ -431,7 +431,7 @@ fn f19_radar_comparison() -> Result<()> {
 
 fn f20_sequence_diagram() -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F20_sequence_diagram.png", (1000, 1000)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F20_sequence_diagram.png", (1000, 1000)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
@@ -439,14 +439,14 @@ fn f20_sequence_diagram() -> Result<()> {
 
 fn f21_architecture_diagram() -> Result<()> {
     let root =
-        BitMapBackend::new("figures/F21_architecture_diagram.png", (1500, 800)).into_drawing_area();
+        BitMapBackend::new("drpp-research/output/figures/F21_architecture_diagram.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     root.present()?;
     Ok(())
 }
 
 fn f22_cdf_guesses() -> Result<()> {
-    let root = BitMapBackend::new("figures/F22_cdf_guesses.png", (1500, 800)).into_drawing_area();
+    let root = BitMapBackend::new("drpp-research/output/figures/F22_cdf_guesses.png", (1500, 800)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
         .caption("CDF of Guesses", ("sans-serif", 40))

@@ -42,9 +42,9 @@ fn load_config(path: &str) -> Result<Config> {
 fn main() -> Result<()> {
     let cfg = load_config("experiments/config.toml")?;
 
-    fs::create_dir_all("figures")?;
-    fs::create_dir_all("tables")?;
-    fs::create_dir_all("data")?;
+    fs::create_dir_all("drpp-research/output/figures")?;
+    fs::create_dir_all("drpp-research/output/tables")?;
+    fs::create_dir_all("drpp-research/output/data")?;
     fs::create_dir_all("report")?;
 
     let _res_a = exp_a::run(&cfg)?;
