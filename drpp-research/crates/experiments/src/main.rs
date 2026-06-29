@@ -117,7 +117,7 @@ fn write_tables_index() -> Result<()> {
 
 fn print_download_manifest() -> Result<()> {
     println!("✅ Figures written to drpp-research/output/figures/");
-    let figures_dir = Path::new("drpp-research/output/figures");
+    let figures_dir = Path::new("output/figures");
     if figures_dir.exists() {
         let mut entries: Vec<_> = fs::read_dir(figures_dir)?
             .filter_map(|e| e.ok())

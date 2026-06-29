@@ -1,6 +1,0 @@
-parameter,value
-seed,42
-n_trials,10000
-k_max_drpp,20
-k_max_coll,16
-modality_samples,2000
