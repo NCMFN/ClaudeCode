@@ -1,0 +1,6 @@
+configuration,p_attack
+Full DRPP (k=16),1.525879e-5
+No temporal variability (Replay),9.900000e-1
+No multi-modal AND (Single modality),5.000000e-2
+No physical liveness (Injection),8.500000e-1
+No cryptographic PRF (Guessing space reduced),6.250000e-2

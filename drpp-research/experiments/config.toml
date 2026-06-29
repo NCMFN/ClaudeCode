@@ -1,0 +1,14 @@
+seed       = 42
+n_trials   = 10_000
+k_max_drpp = 20
+k_max_coll = 16
+colluders  = [2, 3, 4, 5, 6, 8, 10]
+noise_levels = [0.0, 0.033, 0.067, 0.10, 0.133, 0.167, 0.20, 0.233, 0.267, 0.30]
+deception_probs = [0.10, 0.16, 0.22, 0.28, 0.34, 0.40, 0.46, 0.52, 0.58, 0.60]
+modality_samples = 2_000
+latency_samples  = 500
+convergence_k    = 4
+convergence_trials = [10, 50, 100, 500, 1_000, 5_000, 10_000, 50_000, 100_000]
+prf_secret = "drpp_phd_secret_key_2024"
+figure_width_px  = 1500
+figure_height_px = 800
