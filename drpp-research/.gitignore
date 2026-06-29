@@ -1,9 +1,1 @@
 target/
-drpp-research/output/data/*.csv
-drpp-research/output/figures/*.png
-drpp-research/output/tables/*.csv
-drpp-research/output/tables/*.tex
-drpp-research/output/tables/*.md
-report/results_report.md
-output/
-drpp-research/output/

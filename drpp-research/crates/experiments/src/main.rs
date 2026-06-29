@@ -42,7 +42,7 @@ fn load_config(path: &str) -> Result<Config> {
 }
 
 fn write_figures_index() -> Result<()> {
-    let mut file = fs::File::create("output/figures/index.md")?;
+    let mut file = fs::File::create("drpp-research/output/figures/index.md")?;
     writeln!(file, "# DRPP Figures Index\n")?;
 
     let figure_info = vec![
@@ -80,7 +80,7 @@ fn write_figures_index() -> Result<()> {
 }
 
 fn write_tables_index() -> Result<()> {
-    let mut file = fs::File::create("output/tables/index.md")?;
+    let mut file = fs::File::create("drpp-research/output/tables/index.md")?;
     writeln!(file, "# DRPP Tables Index\n")?;
 
     let table_info = vec![
@@ -117,7 +117,7 @@ fn write_tables_index() -> Result<()> {
 
 fn print_download_manifest() -> Result<()> {
     println!("✅ Figures written to drpp-research/output/figures/");
-    let figures_dir = Path::new("output/figures");
+    let figures_dir = Path::new("drpp-research/output/figures");
     if figures_dir.exists() {
         let mut entries: Vec<_> = fs::read_dir(figures_dir)?
             .filter_map(|e| e.ok())
@@ -138,10 +138,10 @@ fn print_download_manifest() -> Result<()> {
 fn main() -> Result<()> {
     let cfg = load_config("experiments/config.toml")?;
 
-    fs::create_dir_all("output/figures")?;
-    fs::create_dir_all("output/tables")?;
-    fs::create_dir_all("output/data")?;
-    fs::create_dir_all("output/report")?;
+    fs::create_dir_all("drpp-research/output/figures")?;
+    fs::create_dir_all("drpp-research/output/tables")?;
+    fs::create_dir_all("drpp-research/output/data")?;
+    fs::create_dir_all("drpp-research/output/report")?;
 
     let _res_a = exp_a::run(&cfg)?;
     let _res_b = exp_b::run(&cfg)?;
@@ -159,7 +159,7 @@ fn main() -> Result<()> {
     tables::write_all(
         &_res_a, &_res_b, &_res_c, &_res_d, &_res_e, &_res_f, &_res_g, &_res_h, &_res_i, &cfg,
     )?;
-    report::write("output/report/results_report.md", &_res_a, &_res_b)?;
+    report::write("drpp-research/output/report/results_report.md", &_res_a, &_res_b)?;
 
     write_figures_index()?;
     write_tables_index()?;
