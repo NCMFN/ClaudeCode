@@ -1,0 +1,7 @@
+modality,classifier,TN,FP,FN,TP
+knock,LR,200,100,168,132
+knock,GNB,300,0,0,300
+touch,LR,300,0,0,300
+touch,GNB,300,0,0,300
+gesture,LR,300,0,0,300
+gesture,GNB,300,0,0,300
