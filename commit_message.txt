@@ -1,0 +1,10 @@
+feat(ml): implement enterprise digital sanitization detection pipeline
+
+This commit builds an end-to-end, multi-phase machine learning pipeline for behavioral forensics utilizing CERT and LANL datasets. Key features include:
+
+- **Phase 1 (Ingestion):** Implements chunked/streaming loaders for LANL (stratified) and CERT.
+- **Phase 2 (Features):** Implements robust temporal cyclical encoding, graph centrality, and padded event sequences.
+- **Phase 3 (Modeling):** Builds a hybrid ensemble (XGBoost, SVM, LSTM) cascaded into an XGBoost meta-classifier.
+- **Phase 4 (Adversarial):** Synthesizes 'low-and-slow' simulated malicious behavior by injecting patterns over the timeline.
+- **Phase 5 (Evaluation):** Outputs threshold-specific metrics, computes SHAP values globally, and computes LIME Explainer stability.
+- **Phase 6 (Artifacts):** Outputs strictly 20 tables and 20 figures corresponding to all prior pipelines.
