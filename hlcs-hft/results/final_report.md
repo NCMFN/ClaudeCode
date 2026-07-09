@@ -14,6 +14,8 @@ The goal was to reduce hybrid commitment overhead toward <=0.1 ms via hardware-a
 
 The hybrid commitment latency in the software proxy is approximately 7.5ms. This represents the software baseline and emphasizes the need for true FPGA/ASIC acceleration to reach the <=0.1ms target.
 
+![Commitment Latency](figures/obj1_latency.png)
+
 ## Q2: Scaling Phase (OBJ2 - Scaling & Batching)
 We aggregated order commitments using a Merkle-Lattice tree and evaluated SIS-based multi-message opening proofs.
 
@@ -27,6 +29,8 @@ We aggregated order commitments using a Merkle-Lattice tree and evaluated SIS-ba
 
 The proof size remains constant while verification time scales logarithmically with batch size.
 
+![Verification Time Scaling](figures/obj2_scaling.png)
+
 ## Q3: Test Phase (OBJ3 - Cryptographic Hardening)
 We migrated proof generation from Fiat-Shamir to zk-STARK and added zero-knowledge selective disclosure under malicious-security assumptions.
 
@@ -37,6 +41,8 @@ We migrated proof generation from Fiat-Shamir to zk-STARK and added zero-knowled
 | zk-STARK | 0.3293 | 100 | 0.0010 |
 
 The zk-STARK proof generation shows statistically significant latency improvements over the sequential Fiat-Shamir baseline, due to its parallelizable trace generation.
+
+![Proof Generation Latency](figures/obj3_proofsys.png)
 
 ## Q4: Output Phase (Real-World Validation)
 We simulated the end-to-end latency impact on EUR/USD order execution slippage.
@@ -52,6 +58,8 @@ We simulated the end-to-end latency impact on EUR/USD order execution slippage.
 | 1.00 | 0.5000 | 2.0000 |
 | 5.00 | 1.1180 | 4.4721 |
 | 10.00 | 1.5811 | 6.3246 |
+
+![Latency vs Slippage](figures/obj4_slippage.png)
 
 
 ## Conclusion and Objectives Mapping
