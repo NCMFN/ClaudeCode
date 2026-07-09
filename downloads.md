@@ -44,3 +44,4 @@ This file serves as a template for managing downloads for various tasks and proj
 - [OBJ2 Scaling Figure](hlcs-hft/results/figures/obj2_scaling.png)
 - [OBJ3 Proofsys Figure](hlcs-hft/results/figures/obj3_proofsys.png)
 - [OBJ4 Slippage Figure](hlcs-hft/results/figures/obj4_slippage.png)
+- [System Architecture Figure](hlcs-hft/results/figures/system_architecture.png)
