@@ -1,0 +1,36 @@
+[reproducibility]
+global_seed = 20260709
+bootstrap_resamples = 10000
+significance_alpha = 0.05
+
+[lattice]
+security_category = 3          # NIST category (1, 3, or 5)
+lwe_dimension = 768             # matches ML-KEM-768 by default
+module_rank = 3
+
+[hash]
+algorithm = "sha3-256"
+keccak_rounds = 24
+
+[batching]
+max_order_batch_sizes = [500, 10000, 100000, 1000000]
+tree_arity = 2
+
+[stark]
+target_security_bits = 96
+fri_blowup_factor = 8
+fri_folding_factor = 8
+
+[market_data]
+instrument = "EURUSD"
+tick_source = "dukascopy"
+date_range_start = "2024-01-01"
+date_range_end = "2024-12-31"
+lobster_ticker = "sample"      # free LOBSTER sample tier
+
+[latency_targets_ms]
+baseline_hash_only = 0.01
+baseline_lattice_only = 7.5    # midpoint of quoted 5-15ms range, cite source
+hybrid_v1_low = 0.05
+hybrid_v1_high = 0.20
+proposed_target = 0.02

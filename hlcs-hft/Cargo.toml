@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "crates/hlcs-core",
+    "crates/hlcs-batch",
+    "crates/hlcs-stark",
+    "crates/hlcs-market-sim",
+    "crates/hlcs-bench-harness"
+]
+resolver = "2"

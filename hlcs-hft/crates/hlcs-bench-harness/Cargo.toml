@@ -1,0 +1,10 @@
+[package]
+name = "hlcs-bench-harness"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hlcs-core = { path = "../hlcs-core" }
+hlcs-batch = { path = "../hlcs-batch" }
+hlcs-stark = { path = "../hlcs-stark" }
+hlcs-market-sim = { path = "../hlcs-market-sim" }

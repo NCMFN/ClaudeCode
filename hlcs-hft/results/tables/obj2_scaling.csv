@@ -1,0 +1,5 @@
+batch_size,proof_size_bytes,verification_time_ms
+500,1120,0.0000
+10000,1120,0.0000
+100000,1120,0.0000
+1000000,1120,0.0000

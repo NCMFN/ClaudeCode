@@ -35,3 +35,8 @@ This file serves as a template for managing downloads for various tasks and proj
 ---
 
 *Customize the sections above by filling in the details relevant to your project.*
+- [Final Report](hlcs-hft/results/final_report.md)
+- [Objective 1 Benchmarks (Latency)](hlcs-hft/results/tables/obj1_latency.csv)
+- [Objective 2 Benchmarks (Scaling)](hlcs-hft/results/tables/obj2_scaling.csv)
+- [Objective 3 Benchmarks (STARK vs FS)](hlcs-hft/results/tables/obj3_proofsys.csv)
+- [Objective 4 Benchmarks (Slippage)](hlcs-hft/results/tables/obj4_slippage.csv)
