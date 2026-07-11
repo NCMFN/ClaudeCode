@@ -1,0 +1,6 @@
+n,throughput,commit_size_b,bandwidth_kb_per_1k,meets_hft
+128,9200,288,281,true
+256,4100,544,531,true
+512,1850,1056,1031,true
+768,1180,1568,1531,true
+1024,890,2080,2031,true

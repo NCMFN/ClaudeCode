@@ -1,0 +1,8 @@
+filepath,type,description
+outputs/figures/latency_vs_dim.png,Figure,Commit+Verify Latency vs Dimension
+outputs/figures/latency_trace.png,Figure,Hybrid Latency Trace
+outputs/figures/throughput_n512.png,Figure,Throughput orders per sec at n=512
+outputs/figures/bandwidth_throughput.png,Figure,Throughput and Bandwidth vs n
+outputs/tables/latency_vs_dim.csv,Table,Latency vs Dimension Data
+outputs/tables/bandwidth.csv,Table,Bandwidth and Throughput Data
+outputs/tables/overload.csv,Table,Overload and SLA Breach Data

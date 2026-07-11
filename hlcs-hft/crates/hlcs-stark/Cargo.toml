@@ -1,0 +1,19 @@
+[package]
+name = "hlcs-stark"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hlcs-core = { path = "../hlcs-core" }
+hlcs-batch = { path = "../hlcs-batch" }
+rand = "0.8.5"
+sha3 = "0.10.8"
+
+[dev-dependencies]
+criterion = "0.5.1"
+rand_chacha = "0.3.1"
+statrs = "0.17.1"
+
+[[bench]]
+name = "proof_generation"
+harness = false
