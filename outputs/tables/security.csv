@@ -1,0 +1,16 @@
+n,scheme,pq_bits,assumption
+128,hash_only,128,SHA3-256 Grover
+128,hybrid,128,LWE+SHA3
+128,lattice_only,96,LWE
+256,hash_only,128,SHA3-256 Grover
+256,hybrid,128,LWE+SHA3
+256,lattice_only,112,LWE
+512,hash_only,128,SHA3-256 Grover
+512,hybrid,128,LWE+SHA3
+512,lattice_only,128,LWE
+768,hash_only,128,SHA3-256 Grover
+768,hybrid,128,LWE+SHA3
+768,lattice_only,128,LWE
+1024,hash_only,128,SHA3-256 Grover
+1024,hybrid,128,LWE+SHA3
+1024,lattice_only,128,LWE

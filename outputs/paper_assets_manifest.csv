@@ -1,0 +1,14 @@
+file_path,description,asset_type
+/app/outputs/tables/latency_vs_dim.csv,Latency vs Dimension,table
+/app/outputs/tables/throughput.csv,Throughput Ops/sec,table
+/app/outputs/tables/bandwidth.csv,Bandwidth usage per 1k,table
+/app/outputs/tables/p99_jitter.csv,P99 Jitter Latency,table
+/app/outputs/tables/overload.csv,Overload SLA breach,table
+/app/outputs/tables/security.csv,Security PQ Bits,table
+/app/outputs/tables/zk_proof.csv,ZK Proof Benchmark,table
+/app/outputs/figures/latency_vs_dim.png,Latency Plot,figure
+/app/outputs/figures/throughput.png,Throughput Plot,figure
+/app/outputs/figures/bandwidth.png,Bandwidth Plot,figure
+/app/outputs/figures/p99.png,P99 Jitter Plot,figure
+/app/outputs/figures/overload_heatmap.png,Overload Heatmap Plot,figure
+/app/outputs/figures/7metric_radar.png,7 Metric Radar Plot,figure

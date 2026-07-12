@@ -1,0 +1,16 @@
+n,scheme,commit_bytes,bw_kb_per_1k
+128,hash_only,32,31.25
+128,lattice_only,256,250
+128,hybrid,288,281
+256,hash_only,32,31.25
+256,lattice_only,512,500
+256,hybrid,544,531
+512,hash_only,32,31.25
+512,lattice_only,1024,1000
+512,hybrid,1056,1031
+768,hash_only,32,31.25
+768,lattice_only,1536,1500
+768,hybrid,1568,1531
+1024,hash_only,32,31.25
+1024,lattice_only,2048,2000
+1024,hybrid,2080,2031
