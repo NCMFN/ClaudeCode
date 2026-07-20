@@ -20,7 +20,7 @@ def main():
             print(f"Pipeline failed at {desc}. Exiting.")
             sys.exit(1)
 
-    print("\nPipeline executed successfully. View results with 'python src/display_results.py'")
+    print("\nPipeline executed successfully.")
 
 if __name__ == "__main__":
     main()

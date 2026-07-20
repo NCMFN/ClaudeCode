@@ -1,0 +1,5 @@
+XGBoost: 0.03s
+SVM: 9.41s
+DeepTabular: 3.85s
+LSTM: 3.47s
+Meta: 0.02s

@@ -1,0 +1,10 @@
+1. Write a fast Python script to read LANL auth.txt.gz and redteam.txt.gz. Instead of reading the whole 12GB file, we will stream the file and collect a specific number of malicious events (e.g., 500) and a proportional number of benign events, then stop. This ensures we have real malicious events without fabricating them.
+2. Update `phase1_ingestion.py` to use this new logic and remove all label fabrication from `phase2_features.py` and `phase3_modeling.py`.
+3. Fix zero recall by adjusting the decision threshold based on PR curve.
+4. Implement GraphSAGE/TabNet baseline.
+5. Implement statistical significance testing (k-fold or bootstrap).
+6. Implement adversarial robustness without leakage (separate train/test) and multiple scenarios.
+7. Implement ablation study.
+8. Implement complexity analysis.
+9. Regenerate figures and tables.
+10. Update revision_log.md.
