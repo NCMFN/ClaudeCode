@@ -1,37 +1,21 @@
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
 ## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
 
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
+## Tables
+- **adversarial_robustness.csv**
+  - Download Link: [Download adversarial_robustness.csv](outputs/tables/adversarial_robustness.csv)
+- **methodology_comparison.csv**
+  - Download Link: [Download methodology_comparison.csv](outputs/tables/methodology_comparison.csv)
+- **evaluation_metrics.csv**
+  - Download Link: [Download evaluation_metrics.csv](outputs/tables/evaluation_metrics.csv)
 
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
+## Figures
+- **pr_curve.png**
+  - Download Link: [Download pr_curve.png](outputs/figures/pr_curve.png)
+- **shap_summary.png**
+  - Download Link: [Download shap_summary.png](outputs/figures/shap_summary.png)
 
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+## Paper Assets
+- **paper_assets_manifest.csv**
+  - Download Link: [Download paper_assets_manifest.csv](outputs/paper_assets/paper_assets_manifest.csv)
