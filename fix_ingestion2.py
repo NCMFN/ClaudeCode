@@ -1,4 +1,5 @@
-import pandas as pd
+with open("src/phase1_ingestion.py", "w") as f:
+    f.write("""import pandas as pd
 import requests
 import gzip
 import urllib3
@@ -117,3 +118,4 @@ def run_ingestion():
 
 if __name__ == "__main__":
     run_ingestion()
+""")

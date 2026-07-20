@@ -1,4 +1,5 @@
-import numpy as np
+with open("src/phase5_evaluation.py", "w") as f:
+    f.write("""import numpy as np
 import pandas as pd
 import joblib
 import os
@@ -138,7 +139,7 @@ def run_evaluation():
 
     complexity = pd.DataFrame({
         "Metric": ["Training Times", "Inference Latency XGBoost (mean)"],
-        "Value": [times.replace('\n', ' | '), f"{mean_lat:.2f} ms per event"]
+        "Value": [times.replace('\\n', ' | '), f"{mean_lat:.2f} ms per event"]
     })
     complexity.to_csv(f"{table_dir}/complexity_analysis.csv", index=False)
 
@@ -146,3 +147,4 @@ def run_evaluation():
 
 if __name__ == "__main__":
     run_evaluation()
+""")

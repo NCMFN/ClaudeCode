@@ -1,4 +1,5 @@
-import numpy as np
+with open("src/phase4_adversarial.py", "w") as f:
+    f.write("""import numpy as np
 import pandas as pd
 import joblib
 import os
@@ -93,3 +94,4 @@ def run_adversarial_testing():
 
 if __name__ == "__main__":
     run_adversarial_testing()
+""")

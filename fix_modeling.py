@@ -1,4 +1,5 @@
-import pandas as pd
+with open("src/phase3_modeling.py", "w") as f:
+    f.write("""import pandas as pd
 import numpy as np
 import os
 import time
@@ -234,9 +235,10 @@ def run_modeling():
 
     with open(f"{out_dir}/train_times.txt", "w") as f:
         for k, v in train_times.items():
-            f.write(f"{k}: {v:.2f}s\n")
+            f.write(f"{k}: {v:.2f}s\\n")
 
     print("Modeling complete and models saved.")
 
 if __name__ == "__main__":
     run_modeling()
+""")

@@ -1,6 +1,7 @@
-Removed Feature Set,PR-AUC
+Removed Feature Set,PR-AUC (XGBoost)
+Temporal,0.326958638123945
+Path Entropy,1.0
+Peer Z-Score,1.0
+USB Delta,1.0
+Graph Centrality,1.0
 None (Full Model),1.0
-Temporal,0.95
-Path Entropy,0.98
-Graph Centrality,0.88
-Peer Z-Score,0.92
