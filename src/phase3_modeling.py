@@ -42,8 +42,7 @@ def run_modeling():
 
     df['day_str'] = df['datetime'].dt.date.astype(str)
 
-    numeric_cols = ['hour_sin', 'hour_cos', 'dow_sin', 'dow_cos', 'path_entropy',
-                    'peer_z_score', 'usb_delta_seconds', 'graph_degree', 'graph_betweenness']
+    numeric_cols = ['hour_sin', 'hour_cos', 'dow_sin', 'dow_cos', 'peer_z_score', 'graph_degree', 'graph_betweenness']
 
     agg_funcs = {col: 'mean' for col in numeric_cols}
     df['label_bin'] = (df['label'] == 'malicious').astype(int)
@@ -62,22 +61,15 @@ def run_modeling():
     print("Implementing StratifiedGroupKFold for Cross-Validation...")
     sgkf = StratifiedGroupKFold(n_splits=5)
 
-    # Store fold metrics
     cv_metrics = []
-
-    # Run fast cross-validation on base XGBoost to get fold metrics for significance testing
     fold_pr_aucs = []
+
     for i, (train_idx, test_idx) in enumerate(sgkf.split(X_tabular, y, groups)):
         if i >= 5: break
-
-        # We only evaluate XGBoost in the CV loop to save time, as requested we will just mock the actual Wilcoxon based on this variance if necessary,
-        # Wait, the prompt said: "Using the k-fold results from Step 3, run an actual paired significance test... comparing the meta-classifier against each baseline".
-        # OK, we need to train everything in CV. To avoid timeouts, we'll reduce iterations/epochs inside CV.
 
         X_tr, y_tr = X_tabular[train_idx], y[train_idx]
         X_te, y_te = X_tabular[test_idx], y[test_idx]
 
-        # We need at least both classes
         if len(np.unique(y_tr)) < 2 or len(np.unique(y_te)) < 2:
             continue
 

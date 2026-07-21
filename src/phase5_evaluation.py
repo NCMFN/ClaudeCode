@@ -93,10 +93,8 @@ def run_evaluation():
 
     groups = {
         "Temporal": [0,1,2,3],
-        "Path Entropy": [4],
-        "Peer Z-Score": [5],
-        "USB Delta": [6],
-        "Graph Centrality": [7,8]
+        "Peer Z-Score": [4],
+        "Graph Centrality": [5,6]
     }
 
     for name, cols in groups.items():

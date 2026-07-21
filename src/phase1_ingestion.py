@@ -4,10 +4,11 @@ import gzip
 import urllib3
 import os
 import random
+import time
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def load_lanl_data(max_benign=150000):
+def load_lanl_data(max_benign=50000):
     print("Streaming LANL redteam data...")
     redteam_url = "https://lanl.ma.ic.ac.uk/data/cyber1/redteam.txt.gz"
 
@@ -20,10 +21,10 @@ def load_lanl_data(max_benign=150000):
             for line in f:
                 parts = line.strip().split(',')
                 if len(parts) >= 3:
-                    time = parts[0]
+                    ts = parts[0]
                     user = parts[1]
                     comp1 = parts[2]
-                    malicious_events.add(f"{time}_{user}")
+                    malicious_events.add(f"{ts}_{user}")
                     malicious_lines.append(parts)
     except Exception as e:
         print(f"Error fetching LANL redteam data: {e}")
@@ -32,16 +33,22 @@ def load_lanl_data(max_benign=150000):
     print(f"Loaded {len(malicious_events)} malicious event signatures.")
 
     records = []
-    print(f"Injecting {len(malicious_lines)} true malicious events from redteam dataset...")
+
+    # Randomly assign true LANL schema events to malicious records to avoid the LogOn string artifact
+    # auth_type is usually ?, Negotiate, NTLM, Kerberos, MicroSoft_Authentication_Package_v1_0
+    # logon_type is usually ?, Network, Interactive, NetworkCleartext, Unlock, Batch
+    valid_event_types = ["Network", "Interactive", "Batch", "Unlock", "NetworkCleartext", "?"]
+
+    print(f"Injecting {len(malicious_lines)} true malicious events from redteam dataset (with randomized true LANL schema events)...")
     for parts in malicious_lines:
-        time = parts[0]
+        ts = parts[0]
         user = parts[1]
         comp1 = parts[2]
         records.append({
-            "timestamp": int(time),
+            "timestamp": int(ts),
             "user_id": user,
             "host_id": comp1,
-            "event_type": "LogOn",
+            "event_type": random.choice(valid_event_types),
             "modality": "auth",
             "label": "malicious"
         })
@@ -50,19 +57,18 @@ def load_lanl_data(max_benign=150000):
         auth_url = "https://lanl.ma.ic.ac.uk/data/cyber1/auth.txt.gz"
         response = requests.get(auth_url, stream=True, verify=False)
 
-        # Reservoir sampling for benign events over 1M lines to increase time coverage
-        # without exceeding memory/time limits in the sandbox.
         benign_reservoir = []
 
         with gzip.open(response.raw, 'rt') as f:
             for i, line in enumerate(f):
                 parts = line.strip().split(',')
                 if len(parts) == 9:
-                    time, src_user, dst_user, src_comp, dst_comp, auth_type, logon_type, auth_orient, success = parts
-                    event_id = f"{time}_{src_user}"
+                    ts, src_user, dst_user, src_comp, dst_comp, auth_type, logon_type, auth_orient, success = parts
+                    event_id = f"{ts}_{src_user}"
+
                     if event_id not in malicious_events:
                         row = {
-                            "timestamp": int(time),
+                            "timestamp": int(ts),
                             "user_id": src_user,
                             "host_id": src_comp,
                             "event_type": logon_type,
@@ -76,8 +82,8 @@ def load_lanl_data(max_benign=150000):
                             if j < max_benign:
                                 benign_reservoir[j] = row
 
-                # Limit to 1M lines to simulate time coverage while remaining feasible
-                if i >= 1000000:
+                # Check 500k lines to ensure reasonable runtime in sandbox
+                if i >= 500000:
                     break
 
         records.extend(benign_reservoir)

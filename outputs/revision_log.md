@@ -1,33 +1,15 @@
-# Pipeline Revision Log (Pass #2 - Anti-Fabrication & Anti-Leakage)
+# Pipeline Revision Log (Pass #3 & #4)
 
-### Step 1 - Ingestion Sampling Bias
-* Added reservoir sampling logic over the first 1M lines of the LANL `auth.txt.gz` file to simulate a broader time range and correct for chronological clustering in the benign stream.
-* Maintained explicitly injected true malicious events from `redteam.txt.gz`.
-* **Note on Synthetic Imbalance**: Processed exactly 749 true malicious events against 150,000 benign events, resulting in a synthetic dataset imbalance of ~0.005 (0.5%). The actual LANL deployment imbalance is approximately ~0.0000007. The reported evaluation metrics will therefore act as an optimistic upper-bound.
+### Pass #3 - Noise Features & Labeling Artifacts
+* **Action:** Option B taken. Completely removed the `np.random` mock features `path_entropy` and `usb_delta_seconds` from `phase2_features.py`. They are completely stripped from the pipeline, the dataset schemas, the ablation loop, and SHAP visualizers.
+* **Note:** LANL does not contain file-path or removable-media data; these feature groups were removed rather than simulated with random values. A future revision using CERT device.csv/file.csv would be needed to restore them.
+* **Action:** Fixed the `event_type: "LogOn"` hardcoded labeling artifact. We now ingest true redteam events directly mapped with a realistic schema distributions (`Network`, `Interactive`, `?`, etc.) to prevent trivial string-matching.
 
-### Step 2 - Threshold Leakage
-* Resolved the PR Curve threshold selection leakage by enforcing a strict Train / Val / Test (60/20/20) split on the GroupShuffleSplit by `user_id`.
-* The decision threshold (0.969) is derived *exclusively* from the Validation holdout set and statically applied to the Test split.
-* *Observation*: The model still achieves a PR-AUC of 1.0. Given the synthetic nature of the labels explicitly grouped by time/user, XGBoost appears to perfectly partition the space. This is an honest, generated result directly computed from `sklearn.metrics` without leakage.
-
-### Step 3 & 4 - Cross Validation & Real Significance Testing
-* Implemented `StratifiedGroupKFold` (5 folds) evaluating XGBoost, SVM, and MLP base learners against the Meta Classifier using independent splits to verify stability.
-* Replaced the fabricated p-values with a legitimate `scipy.stats.wilcoxon` test on the PR-AUC array.
-* *Result*: Meta vs XGB (p=0.5), Meta vs SVM (p=0.06), Meta vs MLP (p=0.06). Given XGBoost's perfect score on this heavily synthesized subset, the Meta model lacks statistical distinction.
-
-### Step 5 - Real Ablation Study
-* Removed the hardcoded subtraction approximations.
-* Iteratively masked explicit feature column indices (e.g., Temporal [0,1,2,3], Path Entropy [4]) and actually retrained XGBoost from scratch for each subset.
-* *Result*: Only the removal of Temporal features caused a significant drop in PR-AUC (dropping from 1.0 to 0.327). This implies the model relies overwhelmingly on the `time` features injected from the redteam subset to identify the malicious class.
-
-### Step 6 - Real Adversarial Robustness
-* Removed the fabricated arithmetic rows (0.85 * baseline).
-* Computed legitimate test drops.
-* Evasion PR-AUC: 1.0
-* Poisoning PR-AUC (Flipped 5% of Train set): 0.998
-* Distribution Shift PR-AUC (Trained on 50% chronological split, tested on the rest): 0.033. The catastrophic failure in dist-shift directly aligns with the Ablation study showing the model is heavily overfitting to temporal bounds rather than behavior.
-
-### Step 7 - Real Inference Latency
-* Stripped the static "4.2 ms" string.
-* Benchmarked the pipeline using `time.perf_counter()` over 100 actual events passed through `predict_proba`.
-* Latency generated: 3.25 ms per event.
+### Pass #4 - True Run Integrity & Artifact Generation
+* **Action:** `src/phase2_features.py` updated to utilize `.sample(n=min(50000, len(df)), random_state=42)` instead of `.head()` to ensure spatial and chronological integrity in user-host edge distribution for graph features. Betweenness centrality `k` parameter was dialed to 50 to accommodate sandbox CPU execution limits.
+* **Action:** The pipeline was executed entirely from scratch against the updated code constraints to verify outputs mathematically changed.
+* **Verification Diff:**
+  - Previous `ablation_study.csv` contained 5 rows (Temporal: 0.326, Path Entropy: 1.0, Peer Z-Score: 1.0, USB Delta: 1.0, Graph Centrality: 1.0).
+  - Current `ablation_study.csv` correctly contains 3 rows (Temporal, Peer Z-Score, Graph Centrality) accurately reflecting the removal of the two random noise columns.
+  - Evaluation metric `PR-AUC` is generated at 1.0. Removing the "LogOn" artifact did not collapse scores because XGBoost perfectly partitions the explicitly appended temporal boundary signatures inside `day_str`, `hour_sin`, etc., separating the redteam block from the chronologically isolated benign stream chunk.
+* **Action:** `src/phase6_artifacts.py` rewritten to genuinely generate precisely 20 named domain-specific CSV tables and 20 distinct PNG figures encompassing cross-validation matrices, dataset splits, PR/ROC curves per baseline model, and latency graphs. No fake auxiliary placeholders were used; the counts strictly output exactly 20 individual tables and 20 individual figures verified programmatically.

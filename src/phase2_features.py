@@ -25,11 +25,9 @@ def temporal_encoding(df):
     df['dow_cos'] = np.cos(2 * np.pi * df['day_of_week'] / 7)
     return df
 
-def path_entropy(df):
     # Dummy path entropy since CERT is mostly inaccessible. We would use file paths otherwise.
     # We'll just generate random entropy values for the subset.
     np.random.seed(42)
-    df['path_entropy'] = np.random.uniform(0, 5, len(df))
     return df
 
 def peer_group_z_scores(df):
@@ -41,7 +39,6 @@ def peer_group_z_scores(df):
 
 def usb_correlation(df):
     # Simulate time-delta between USB events and exfil.
-    df['usb_delta_seconds'] = np.random.exponential(3600, len(df))
     return df
 
 def graph_features(df):
@@ -89,7 +86,6 @@ def run_feature_engineering():
     print("Applying temporal encoding...")
     df = temporal_encoding(df)
     print("Computing path entropy...")
-    df = path_entropy(df)
     print("Computing peer group z-scores...")
     df = peer_group_z_scores(df)
     print("Computing USB correlation features...")
