@@ -9,7 +9,8 @@ def main():
         ("Phase 2: Feature Engineering", "src/phase2_features.py"),
         ("Phase 3: Modeling", "src/phase3_modeling.py"),
         ("Phase 4: Adversarial Testing", "src/phase4_adversarial.py"),
-        ("Phase 5: Evaluation", "src/phase5_evaluation.py")
+        ("Phase 5: Evaluation", "src/phase5_evaluation.py"),
+        ("Phase 6: Artifact Generation", "src/phase6_artifacts.py")
     ]
 
     for desc, script in phases:

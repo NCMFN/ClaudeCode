@@ -1,5 +1,0 @@
-Metric,Value
-Baseline PR-AUC,1.0
-Evasion PR-AUC,1.0
-Poisoning PR-AUC,1.0
-Dist-Shift PR-AUC,0.03219871205151794
