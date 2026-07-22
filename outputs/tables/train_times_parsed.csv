@@ -1,0 +1,6 @@
+Model,Train_Time_sec
+XGBoost,0.03s
+SVM,1.66s
+DeepTabular,0.99s
+LSTM,4.38s
+Meta,0.02s
