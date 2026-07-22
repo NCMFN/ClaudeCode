@@ -44,7 +44,7 @@ def usb_correlation(df):
 def graph_features(df):
     print("Computing graph features on a sampled subgraph...")
     # Take a sample to keep it tractable
-    sub_df = df.head(10000)
+    sub_df = df.sample(n=min(50000, len(df)), random_state=42)
 
     G = nx.from_pandas_edgelist(sub_df, 'user_id', 'host_id', create_using=nx.Graph())
 
