@@ -1,0 +1,7 @@
+Title: Mockup — Transaction detail screen
+Type: text
+
+Transaction #12345
+Items: 2x Coke
+Total: $4.00
+[ Print Receipt ] [ Void ]

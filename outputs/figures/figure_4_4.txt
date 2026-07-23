@@ -1,0 +1,6 @@
+Title: Mockup — Login screen
+Type: text
+
+Phone Number: [__________]
+PIN: [******]
+[ Login ]

@@ -1,0 +1,9 @@
+Field,Type,Description
+id,String,Transaction identifier (HiveField 0)
+timestamp,DateTime,Time of transaction (HiveField 1)
+agentName,String,Processing agent name (HiveField 2)
+paymentMethod,String,Payment method (HiveField 3)
+items,List<CartItemEntity>,Purchased items (HiveField 4)
+total,double,Total amount (HiveField 5)
+status,String,Current status (HiveField 6)
+reason,String?,Reason for void/return (HiveField 7)

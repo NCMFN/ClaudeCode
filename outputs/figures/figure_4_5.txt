@@ -1,0 +1,7 @@
+Title: Mockup — Register screen
+Type: text
+
+Store Name: [__________]
+Phone Number: [__________]
+Create PIN: [******]
+[ Register ]

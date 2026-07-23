@@ -42,3 +42,8 @@ This file serves as a template for managing downloads for various tasks and proj
 - **Ventry POS Summary**
   - Description: Summary of tables and figures in the report.
   - Download Link: [SUMMARY.md](./ventry/SUMMARY.md)
+
+## Outputs (Figures & Tables)
+- **Extracted Figures & Tables Archive**
+  - Description: Contains all the extracted tables (CSV) and figures (TXT/Mermaid) from the Ventry POS Report, along with the manifest.
+  - Download Link: [outputs](./outputs/)

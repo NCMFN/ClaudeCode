@@ -1,0 +1,12 @@
+Package Name,Version,Purpose
+`get`,`^4.6.6`,"State management, routing, DI"
+`hive`,`^2.2.3`,Local offline database
+`hive_flutter`,`^1.1.0`,Hive integrations for Flutter
+`go_router`,`^13.2.0`,Declarative routing
+`firebase_core`,`^3.6.0`,Firebase initialization
+`firebase_auth`,`^5.3.1`,Authentication
+`cloud_firestore`,`^5.4.4`,Cloud database
+`blue_thermal_printer`,`^1.2.3`,Bluetooth receipt printing
+`pdf`,`^3.10.8`,Receipt generation
+`mobile_scanner`,`^6.0.4`,Barcode scanning
+`connectivity_plus`,`^6.0.5`,Network state detection

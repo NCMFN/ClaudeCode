@@ -1,0 +1,4 @@
+Use Case,Actor,Preconditions,Main Flow,Postconditions
+Process Sale,Agent,Logged in,1. Add items to cart 2. Checkout 3. Print receipt,Sale saved to Hive/Firestore
+Manage Products,Admin,Logged in as Admin,1. Add/Edit product details 2. Update stock,Product updated locally and synced
+Offline Sync,System,Internet connected,1. Detect connection 2. Push local changes,Local data matches cloud state

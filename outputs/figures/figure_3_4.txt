@@ -1,0 +1,13 @@
+Title: Use case diagram
+Type: mermaid
+
+usecaseDiagram
+    actor Agent
+    actor Admin
+    Agent --> (Login)
+    Agent --> (Process Sale)
+    Agent --> (View Products)
+    Admin --> (Login)
+    Admin --> (Manage Agents)
+    Admin --> (Manage Products)
+    Admin --> (View History)

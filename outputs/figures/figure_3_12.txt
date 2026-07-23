@@ -1,0 +1,14 @@
+Title: App navigation/route map
+Type: mermaid
+
+flowchart TD
+    Splash[/splash] --> Welcome[/welcome]
+    Welcome --> Login[/login]
+    Welcome --> Register[/register]
+    Login --> Home[/home]
+    Home --> Sales[/sales]
+    Home --> History[/history]
+    Home --> Products[/products]
+    Home --> UserProfile[/user]
+    Sales --> OrderReview[/order-review]
+    Products --> AddProduct[/add-product]

@@ -1,0 +1,14 @@
+Title: Class diagram for the Products feature
+Type: mermaid
+
+classDiagram
+    class ProductController {
+        +RxList~ProductEntity~ products
+        +fetchProducts()
+    }
+    class ProductEntity {
+        +String id
+        +String name
+        +List~BatchEntity~ batches
+    }
+    ProductController --> ProductEntity

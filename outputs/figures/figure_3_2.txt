@@ -1,0 +1,14 @@
+Title: Clean architecture layer diagram
+Type: mermaid
+
+flowchart TD
+    subgraph Feature [Feature Module (e.g., Sales)]
+        Presentation[Presentation Layer
+(Views, Controllers)]
+        Domain[Domain Layer
+(Entities, Repositories)]
+        Data[Data Layer
+(RepositoryImpl, Data Sources)]
+        Presentation --> Domain
+        Data --> Domain
+    end

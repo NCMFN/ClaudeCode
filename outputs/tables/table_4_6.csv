@@ -1,0 +1,5 @@
+Failure Type,Description
+`CacheFailure`,Local Hive storage errors
+`NotFoundFailure`,Missing entities in DB
+`ValidationFailure`,Form input errors
+`UnknownFailure`,Generic unhandled errors

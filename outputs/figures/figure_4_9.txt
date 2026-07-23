@@ -1,0 +1,6 @@
+Title: Mockup — Add product screen
+Type: text
+
+Add Product
+Name: [_______] Price: [_____]
+[ Save ]

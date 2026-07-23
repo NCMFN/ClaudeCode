@@ -1,0 +1,7 @@
+Title: Mockup — Sales/cart screen
+Type: text
+
+Cart:
+- 2x Coke = $4.00
+Total: $4.00
+[ Checkout ]

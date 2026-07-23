@@ -1,0 +1,4 @@
+Title: Mockup — Receipt preview screen
+Type: text
+
+[ PDF Preview of Receipt ]

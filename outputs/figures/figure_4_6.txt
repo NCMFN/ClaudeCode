@@ -1,0 +1,6 @@
+Title: Mockup — Additional details modal
+Type: text
+
+Additional Details
+Upload Logo: [ Browse ]
+[ Save ]

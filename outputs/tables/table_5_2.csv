@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC3,Products,Add product + batch,Appears in list with stock,As expected,Pass
+TC4,Products,View product details,Shows stats and batches,As expected,Pass

@@ -1,0 +1,67 @@
+Asset_Type,File_Name,Title
+Table,table_1_1.csv,Summary of project objectives vs. corresponding implemented feature
+Table,table_1_2.csv,Comparison of Ventry against existing POS solutions (feature matrix)
+Table,table_2_1.csv,Comparative review of related academic/commercial POS systems
+Table,table_2_2.csv,Summary of technology choices and their justification
+Table,table_3_1.csv,Data dictionary — AgentEntity
+Table,table_3_2.csv,Data dictionary — ProductEntity
+Table,table_3_3.csv,Data dictionary — BatchEntity
+Table,table_3_4.csv,Data dictionary — SaleEntity
+Table,table_3_5.csv,Data dictionary — CartItemEntity
+Table,table_3_6.csv,Data dictionary — TransactionEntity
+Table,table_3_7.csv,Data dictionary — LogEntity
+Table,table_3_8.csv,Use case descriptions
+Table,table_3_9.csv,Route table
+Table,table_3_10.csv,GetX controllers/bindings inventory
+Table,table_4_1.csv,Tools/SDKs used
+Table,table_4_2.csv,Full dependency table
+Table,table_4_3.csv,Feature module summary
+Table,table_4_4.csv,Hive boxes and their stored entity types
+Table,table_4_5.csv,Firestore collections and document schema
+Table,table_4_6.csv,Failure/error types handled
+Table,table_5_1.csv,Test case table — Auth
+Table,table_5_2.csv,Test case table — Products
+Table,table_5_3.csv,Test case table — Sales
+Table,table_5_4.csv,Test case table — History
+Table,table_5_5.csv,Test case table — Sync
+Table,table_5_6.csv,Test case table — Printing
+Table,table_5_7.csv,Test case table — Notifications
+Table,table_5_8.csv,Test case table — User Profile
+Table,table_5_9.csv,Test case table — Navigation
+Table,table_5_10.csv,Test case table — Offline Mode
+Table,table_5_11.csv,Summary of flutter analyze findings
+Table,table_5_12.csv,Performance test summary
+Table,table_5_13.csv,UAT checklist results
+Table,table_6_1.csv,Objectives-vs-achievements summary table
+Figure,figure_3_1.txt,High-level system architecture diagram
+Figure,figure_3_2.txt,Clean architecture layer diagram
+Figure,figure_3_3.txt,Entity-Relationship diagram
+Figure,figure_3_4.txt,Use case diagram
+Figure,figure_3_5.txt,Sequence diagram — User Registration/Login flow
+Figure,figure_3_6.txt,Sequence diagram — Add Product with Batch/Stock
+Figure,figure_3_7.txt,Sequence diagram — Sales/Checkout flow
+Figure,figure_3_8.txt,Sequence diagram — Offline-to-online Sync flow
+Figure,figure_3_9.txt,Sequence diagram — Receipt printing flow
+Figure,figure_3_10.txt,DFD Level 0 (Context diagram)
+Figure,figure_3_11.txt,DFD Level 1
+Figure,figure_3_12.txt,App navigation/route map
+Figure,figure_3_13.txt,Class diagram for the Sales feature
+Figure,figure_3_14.txt,Class diagram for the Products feature
+Figure,figure_4_1.txt,Annotated project directory tree
+Figure,figure_4_2.txt,Mockup — Splash screen
+Figure,figure_4_3.txt,Mockup — Welcome screen
+Figure,figure_4_4.txt,Mockup — Login screen
+Figure,figure_4_5.txt,Mockup — Register screen
+Figure,figure_4_6.txt,Mockup — Additional details modal
+Figure,figure_4_7.txt,Mockup — Home screen
+Figure,figure_4_8.txt,Mockup — Products list screen
+Figure,figure_4_9.txt,Mockup — Add product screen
+Figure,figure_4_10.txt,Mockup — Product detail screen
+Figure,figure_4_11.txt,Mockup — Stock update bottom sheet
+Figure,figure_4_12.txt,Mockup — Sales/cart screen
+Figure,figure_4_13.txt,Mockup — Order review screen
+Figure,figure_4_14.txt,Mockup — History screen
+Figure,figure_4_15.txt,Mockup — Transaction detail screen
+Figure,figure_4_16.txt,Mockup — Receipt preview screen
+Figure,figure_4_17.txt,Mockup — User profile screen
+Figure,figure_5_1.txt,Chart of analyzer issues

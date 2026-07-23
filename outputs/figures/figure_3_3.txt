@@ -1,0 +1,8 @@
+Title: Entity-Relationship diagram
+Type: mermaid
+
+erDiagram
+    AgentEntity ||--o{ SaleEntity : "processes"
+    ProductEntity ||--|{ BatchEntity : "contains"
+    SaleEntity ||--|{ CartItemEntity : "includes"
+    TransactionEntity ||--|{ CartItemEntity : "includes"

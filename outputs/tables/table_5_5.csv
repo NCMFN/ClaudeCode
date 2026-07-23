@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC9,Sync,Pull on login,Firebase data loads to Hive,As expected,Pass
+TC10,Sync,Push on change,Local save triggers Firestore upload,As expected,Pass

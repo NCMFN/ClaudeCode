@@ -1,0 +1,7 @@
+Title: Mockup — Product detail screen
+Type: text
+
+Product: Coke
+Total Sold: 100 | Remaining: 50
+Batches:
+- Batch 1 (Qty: 50, Expiry: 12/25)

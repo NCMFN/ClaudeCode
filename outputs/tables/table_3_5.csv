@@ -1,0 +1,8 @@
+Field,Type,Description
+productId,String,Reference to Product ID (HiveField 0)
+qty,int,Quantity purchased (HiveField 1)
+price,double,Unit price (HiveField 2)
+lineTotal,double,qty * price (HiveField 3)
+name,String,Name of product (HiveField 4)
+imageUrl,String?,Product image URL (HiveField 5)
+size,String,Product size details (HiveField 6)

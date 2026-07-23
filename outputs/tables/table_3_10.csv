@@ -1,0 +1,7 @@
+Controller Name,Feature,Responsibilities,Observable State
+`AuthController`,Auth,"Handle login/logout, track active agent","`currentAgent`, `isSignedIn`, `isLoading`"
+`CartController`,Sales,"Manage cart items, calculate totals","`items`, `total`"
+`ProductController`,Products,"CRUD products, inventory tracking",`products`
+`HistoryController`,History,Load and filter past transactions,"`transactions`, `isLoading`"
+`UserController`,User,Manage profiles and roles,"`currentAgent`, `agents`"
+`NotificationController`,Notifications,"Check low stock, trigger local alerts",`notifications`

@@ -1,0 +1,12 @@
+Title: Sequence diagram — Offline-to-online Sync flow
+Type: mermaid
+
+sequenceDiagram
+    participant Connectivity
+    participant SyncService
+    participant HiveService
+    participant Firestore
+    Connectivity->>SyncService: network restored
+    SyncService->>HiveService: get pending changes
+    SyncService->>Firestore: pushOnChange(collection, docId, data)
+    Firestore-->>SyncService: Ack

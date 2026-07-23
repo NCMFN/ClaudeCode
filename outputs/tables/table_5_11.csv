@@ -1,0 +1,6 @@
+Severity,Description,Count,Resolution
+Warning,`include_file_not_found`,1,Ignore/Fix analysis_options.yaml
+Error,`undefined_named_parameter` (routerConfig),1,Fix in app.dart
+Info,"`deprecated_member_use` (value, withOpacity)",7,Update to modern APIs
+Error,`uri_does_not_exist` / `undefined_method`,2,Fix imports in HomeBinding
+Warning,`unused_import`,4,Remove imports

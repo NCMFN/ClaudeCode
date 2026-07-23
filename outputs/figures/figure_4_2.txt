@@ -1,0 +1,5 @@
+Title: Mockup — Splash screen
+Type: text
+
+[ Ventry Logo ]
+Loading...

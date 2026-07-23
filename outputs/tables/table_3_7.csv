@@ -1,0 +1,7 @@
+Field,Type,Description
+id,String,Log identifier (HiveField 0)
+action,String,Action performed (HiveField 1)
+userName,String,User performing action (HiveField 2)
+details,String,Additional log info (HiveField 3)
+timestamp,DateTime,Time of event (HiveField 4)
+businessCode,String,Associated business (HiveField 5)

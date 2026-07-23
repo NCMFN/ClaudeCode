@@ -1,0 +1,9 @@
+Title: High-level system architecture diagram
+Type: mermaid
+
+flowchart LR
+    FlutterClient[Flutter Client
+(GetX UI)] <--> HiveStore[(Hive Local Store)]
+    HiveStore <--> SyncService[Sync Service]
+    SyncService <--> FirebaseBackend[(Firebase Firestore)]
+    FlutterClient --> Printer[Bluetooth Thermal Printer]

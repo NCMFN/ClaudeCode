@@ -1,0 +1,4 @@
+Metric,Value
+Offline Write Latency,< 50ms (via Hive)
+Sync Latency,Network dependent
+App Startup Time,< 2s

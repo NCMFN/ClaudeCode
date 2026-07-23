@@ -1,0 +1,9 @@
+Title: DFD Level 1
+Type: mermaid
+
+flowchart TD
+    UI[User Interface] -->|Action| Controller[GetX Controllers]
+    Controller -->|Read/Write| Repository[Repositories]
+    Repository <-->|Local| Hive[(Hive Storage)]
+    Repository <-->|Remote| Sync[Sync Service]
+    Sync <--> Firebase[(Firestore)]

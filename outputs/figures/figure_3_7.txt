@@ -1,0 +1,13 @@
+Title: Sequence diagram — Sales/Checkout flow
+Type: mermaid
+
+sequenceDiagram
+    actor Agent
+    participant CartController
+    participant OrderReviewScreen
+    participant ReceiptGenerator
+    Agent->>CartController: checkout()
+    CartController->>OrderReviewScreen: display totals
+    Agent->>OrderReviewScreen: confirm payment
+    OrderReviewScreen->>ReceiptGenerator: generate(SaleEntity)
+    ReceiptGenerator-->>Agent: PDF/Print output

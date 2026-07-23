@@ -1,0 +1,5 @@
+Tool/SDK,Version/Info
+Flutter SDK,`>=3.0.0 <4.0.0` (from pubspec.yaml)
+Dart SDK,Included with Flutter
+IDE,VS Code / Android Studio
+Backend,Firebase Console

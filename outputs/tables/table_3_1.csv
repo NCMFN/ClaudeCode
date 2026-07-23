@@ -1,0 +1,9 @@
+Field,Type,Description
+id,String,Firebase UID (HiveField 0)
+name,String,Agent's full name (HiveField 1)
+phone,String,Phone number (HiveField 2)
+role,String,'admin' or 'agent' (HiveField 3)
+businessCode,String,Unique store identifier (HiveField 4)
+lastLogin,DateTime?,Timestamp of last login (HiveField 5)
+createdAt,DateTime,Account creation timestamp (HiveField 6)
+logoPath,String?,Path to store logo (HiveField 7)

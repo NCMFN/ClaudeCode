@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC7,History,View transactions,Recent sales listed,As expected,Pass
+TC8,History,Void sale,"Stock restored, status updated",As expected,Pass

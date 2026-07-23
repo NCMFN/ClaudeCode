@@ -1,0 +1,7 @@
+Title: Mockup — Products list screen
+Type: text
+
+Product List
+- Coke (50 remaining)
+- Bread (10 remaining)
+[+] Add Product

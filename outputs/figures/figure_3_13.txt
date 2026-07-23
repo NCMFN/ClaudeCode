@@ -1,0 +1,15 @@
+Title: Class diagram for the Sales feature
+Type: mermaid
+
+classDiagram
+    class CartController {
+        +RxList~CartItemEntity~ items
+        +RxDouble total
+        +addItem(ProductEntity, qty)
+    }
+    class SaleEntity {
+        +String id
+        +double total
+        +List~CartItemEntity~ items
+    }
+    CartController --> SaleEntity

@@ -1,0 +1,2 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC13,Notifs,Trigger low stock,Local notification fired,As expected,Pass

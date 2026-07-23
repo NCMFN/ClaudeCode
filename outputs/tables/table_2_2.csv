@@ -1,0 +1,6 @@
+Technology,Dependency in pubspec.yaml,Justification
+Flutter,`flutter`,Cross-platform UI toolkit for rapid mobile development
+GetX,`get: ^4.6.6`,Lightweight state management and dependency injection
+Hive,`hive: ^2.2.3`,High-performance local NoSQL database for offline-first design
+Firebase,`firebase_core: ^3.6.0`,Backend-as-a-service for cloud sync and authentication
+Bluetooth Printer,`blue_thermal_printer: ^1.2.3`,Direct thermal receipt printing integration

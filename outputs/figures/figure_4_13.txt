@@ -1,0 +1,7 @@
+Title: Mockup — Order review screen
+Type: text
+
+Order Review
+Total: $4.00
+Payment Method: [ Cash | Card ]
+[ Confirm Sale ]

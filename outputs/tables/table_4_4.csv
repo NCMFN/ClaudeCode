@@ -1,0 +1,6 @@
+Box Name,Entity Type,TypeId
+`agents`,AgentEntity,0
+`sales`,SaleEntity,2
+`products`,ProductEntity,3
+`logs`,LogEntity,6
+`settings`,(Various config),-

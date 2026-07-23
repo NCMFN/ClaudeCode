@@ -1,0 +1,7 @@
+Title: DFD Level 0 (Context diagram)
+Type: mermaid
+
+flowchart TD
+    User((User)) -->|Inputs| Ventry[Ventry POS System]
+    Ventry -->|Receipts| User
+    Ventry <-->|Sync| Cloud((Firebase))

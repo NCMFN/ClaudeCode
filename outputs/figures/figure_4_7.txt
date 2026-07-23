@@ -1,0 +1,4 @@
+Title: Mockup — Home screen
+Type: text
+
+[ Tab: Sales | History | Products | User ]

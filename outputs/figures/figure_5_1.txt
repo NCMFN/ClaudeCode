@@ -1,0 +1,7 @@
+Title: Chart of analyzer issues
+Type: mermaid
+
+pie title Analyzer Issues by Type
+    "Infos (Deprecations)" : 7
+    "Warnings (Unused/Duplicate)" : 5
+    "Errors (Undefined)" : 3

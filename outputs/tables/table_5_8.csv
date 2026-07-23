@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC14,Profile,View profile,Correct details shown,As expected,Pass
+TC15,Profile,Logout,Redirects to Welcome screen,As expected,Pass

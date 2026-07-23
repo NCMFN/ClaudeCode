@@ -1,0 +1,6 @@
+Title: Mockup — Stock update bottom sheet
+Type: text
+
+Update Stock (Bottom Sheet)
+Quantity: [___] Expiry: [___]
+[ Add Stock ]

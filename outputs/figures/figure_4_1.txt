@@ -1,0 +1,18 @@
+Title: Annotated project directory tree
+Type: text
+
+ventry/
+├── android/
+├── ios/
+├── lib/
+│   ├── app/ (app.dart, router.dart)
+│   ├── common/ (shared widgets)
+│   ├── core/ (constants, errors, services, sync, theme)
+│   └── features/
+│       ├── auth/
+│       ├── history/
+│       ├── home/
+│       ├── notifications/
+│       ├── products/
+│       ├── sales/
+│       └── user/

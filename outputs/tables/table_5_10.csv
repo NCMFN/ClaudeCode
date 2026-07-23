@@ -1,0 +1,2 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC17,Offline,"Disable WiFi, sell",Sale processed via Hive,As expected,Pass

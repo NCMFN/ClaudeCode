@@ -1,0 +1,14 @@
+Title: Sequence diagram — Add Product with Batch/Stock
+Type: mermaid
+
+sequenceDiagram
+    actor Admin
+    participant ProductController
+    participant ProductsRepository
+    participant HiveService
+    Admin->>ProductController: addProduct(details, batch)
+    ProductController->>ProductsRepository: saveProduct(ProductEntity)
+    ProductsRepository->>HiveService: put(productId, entity)
+    HiveService-->>ProductsRepository: Success
+    ProductsRepository-->>ProductController: Success
+    ProductController-->>Admin: Show Success

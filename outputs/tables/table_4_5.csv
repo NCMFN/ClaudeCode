@@ -1,0 +1,5 @@
+Collection,Document Schema corresponds to
+`agents`,AgentEntity.toJson()
+`products`,ProductEntity.toJson()
+`sales`,SaleEntity.toJson()
+`logs`,LogEntity.toJson()

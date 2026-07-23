@@ -1,0 +1,13 @@
+Title: Sequence diagram — Receipt printing flow
+Type: mermaid
+
+sequenceDiagram
+    participant PrinterService
+    participant BlueThermalPrinter
+    participant Device
+    PrinterService->>BlueThermalPrinter: getDevices()
+    BlueThermalPrinter-->>PrinterService: list
+    PrinterService->>BlueThermalPrinter: connect(device)
+    BlueThermalPrinter->>Device: Bluetooth pairing
+    Device-->>PrinterService: Connected
+    PrinterService->>BlueThermalPrinter: printCustom(receiptData)

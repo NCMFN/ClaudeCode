@@ -1,0 +1,7 @@
+Feature,Screens,Controllers,Repositories,Entities
+Auth,"Splash, Welcome, Login, Register",AuthController,AuthRepository,AgentEntity
+Products,"List, Add, Detail",ProductController,ProductsRepository,"ProductEntity, BatchEntity"
+Sales,"Cart, OrderReview",CartController,SalesRepository,"SaleEntity, CartItemEntity"
+History,"List, Detail",HistoryController,HistoryRepository,TransactionEntity
+User,Profile,UserController,UserRepository,-
+Notifications,-,NotificationController,-,-

@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC5,Sales,Add item to cart,Cart total updates,As expected,Pass
+TC6,Sales,Checkout order,"Success dialog, receipt generated",As expected,Pass

@@ -1,0 +1,4 @@
+System,Target Market,Architecture,Offline Capability
+Ventry,Nigeria Retail,Clean + GetX,Full (Hive)
+System A,Global,MVC + SQL,Partial
+System B,US Retail,MVVM + Realm,Full

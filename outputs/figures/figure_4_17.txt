@@ -1,0 +1,7 @@
+Title: Mockup — User profile screen
+Type: text
+
+Profile
+Name: John Doe
+Role: Admin
+[ Logout ]

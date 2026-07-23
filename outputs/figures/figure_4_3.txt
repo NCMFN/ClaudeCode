@@ -1,0 +1,5 @@
+Title: Mockup — Welcome screen
+Type: text
+
+Welcome to Ventry!
+[Login Button] [Register Store Button]

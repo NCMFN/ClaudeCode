@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC1,Auth,"Open app, create store","Store created, redirect to login",As expected,Pass
+TC2,Auth,Login with PIN,Redirect to Sales tab,As expected,Pass

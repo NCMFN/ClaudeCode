@@ -1,0 +1,5 @@
+Field,Type,Description
+id,String,Batch identifier (HiveField 0)
+qty,int,Quantity in batch (HiveField 1)
+expiryDate,DateTime?,Expiration date of batch (HiveField 2)
+addedAt,DateTime,Timestamp when added (HiveField 3)

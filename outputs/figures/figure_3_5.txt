@@ -1,0 +1,14 @@
+Title: Sequence diagram — User Registration/Login flow
+Type: mermaid
+
+sequenceDiagram
+    actor User
+    participant AuthController
+    participant AuthRepositoryImpl
+    participant HiveService
+    User->>AuthController: enter credentials
+    AuthController->>AuthRepositoryImpl: login(phone, pin)
+    AuthRepositoryImpl->>HiveService: fetch Agent
+    HiveService-->>AuthRepositoryImpl: AgentEntity
+    AuthRepositoryImpl-->>AuthController: Success
+    AuthController-->>User: Navigate to /sales

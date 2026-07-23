@@ -1,0 +1,3 @@
+ID,Feature,Steps,Expected Result,Actual Result,Status
+TC11,Printing,Connect printer,Bluetooth pairs,As expected,Pass
+TC12,Printing,Print receipt,Receipt printed on thermal paper,As expected,Pass

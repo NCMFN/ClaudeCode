@@ -1,0 +1,6 @@
+Title: Mockup — History screen
+Type: text
+
+Transactions Today
+- $4.00 (Agent: John) [Completed]
+- $10.00 (Agent: Jane) [Voided]

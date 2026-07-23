@@ -1,0 +1,10 @@
+Field,Type,Description
+id,String,Sale transaction ID (HiveField 0)
+timestamp,DateTime,Time of sale (HiveField 1)
+agentId,String,ID of processing agent (HiveField 2)
+agentName,String,Name of processing agent (HiveField 3)
+paymentMethod,String,Payment type used (HiveField 4)
+items,List<CartItemEntity>,Items sold (HiveField 5)
+total,double,Total sale amount (HiveField 6)
+status,String,"'completed', 'voided', 'returned' (HiveField 7)"
+businessCode,String,Associated business (HiveField 8)

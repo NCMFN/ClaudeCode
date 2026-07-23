@@ -1,0 +1,5 @@
+Feature,Ventry,Opay POS,Square POS
+True Offline-First,Yes,Partial,Partial
+Bluetooth Printing,Yes,Yes,Yes
+Agent/Admin Roles,Yes,Yes,Yes
+Cloud Sync,Yes (Firebase),Yes,Yes
