@@ -1,0 +1,141 @@
+asset_type,filename,description
+figure,feature_correlation.png,Figure asset
+document,tab18_diagnostic_stat.tex,LaTeX source asset
+table,tab14_diagnostic_stat.csv,Table data asset
+figure,pr_curve.png,Figure asset
+table,tab13_diagnostic_stat.csv,Table data asset
+table,tab00_evaluation_metrics.csv,Table data asset
+document,tab12_mean_by_class.tex,LaTeX source asset
+figure,fig01_xgb_pr_curve.png,Figure asset
+figure,fig08_shap_dependence_hour_cos.png,Figure asset
+table,tab20_diagnostic_stat.csv,Table data asset
+table,tab10_feature_quantile_50.csv,Table data asset
+document,tab09_feature_quantile_25.tex,LaTeX source asset
+document,tab09_diagnostic_stat.tex,LaTeX source asset
+figure,dsd16.png,Figure asset
+document,tab16_diagnostic_stat.tex,LaTeX source asset
+table,final_manifest.csv,Table data asset
+figure,adversarial_bar.png,Figure asset
+figure,fig15_shap_dependence_graph_betweenness.png,Figure asset
+figure,cm_xgboost.png,Figure asset
+document,tab19_path_entropy_view.tex,LaTeX source asset
+figure,DSD7.png,Figure asset
+document,tab15_diagnostic_stat.tex,LaTeX source asset
+figure,system_architecture.png,Figure asset
+table,tab14_skew_by_class.csv,Table data asset
+figure,fig17_meta_confusion.png,Figure asset
+document,tab17_prob_decile_malicious.tex,LaTeX source asset
+document,tab10_diagnostic_stat.tex,LaTeX source asset
+figure,cm_mlp.png,Figure asset
+document,tab03_meta_thresholds.tex,LaTeX source asset
+figure,fig10_shap_dependence_dow_cos.png,Figure asset
+figure,fig11_shap_dependence_path_entropy.png,Figure asset
+table,cross_validation.csv,Table data asset
+figure,DSD8.png,Figure asset
+figure,fig06_feature_correlation.png,Figure asset
+figure,cv_variance.png,Figure asset
+figure,DSD13.png,Figure asset
+table,tab06_methodology_comparison.csv,Table data asset
+table,meta_hyperparams.csv,Table data asset
+table,tab17_prob_decile_malicious.csv,Table data asset
+table,optimal_threshold.csv,Table data asset
+figure,shap_dependence_hour.png,Figure asset
+figure,split_distribution.png,Figure asset
+table,tab15_diagnostic_stat.csv,Table data asset
+figure,calibration_plot.png,Figure asset
+table,tab18_diagnostic_stat.csv,Table data asset
+figure,fig14_shap_dependence_graph_degree.png,Figure asset
+document,tab16_prob_decile_counts.tex,LaTeX source asset
+table,adversarial_robustness.csv,Table data asset
+table,shap_mean_abs.csv,Table data asset
+document,tab11_diagnostic_stat.tex,LaTeX source asset
+figure,fig12_shap_dependence_peer_z_score.png,Figure asset
+table,tab08_class_distribution.csv,Table data asset
+table,complexity_analysis.csv,Table data asset
+document,tab00_evaluation_metrics.tex,LaTeX source asset
+table,tab09_feature_quantile_25.csv,Table data asset
+table,tab02_svm_thresholds.csv,Table data asset
+bibliography,refs.bib,Bibliography asset
+figure,DSD9.png,Figure asset
+table,tab11_feature_quantile_75.csv,Table data asset
+figure,DSD11.jpg,Figure asset
+figure,feature_importance.png,Figure asset
+table,significance_testing.csv,Table data asset
+document,tab13_diagnostic_stat.tex,LaTeX source asset
+table,tab17_diagnostic_stat.csv,Table data asset
+document,tab12_diagnostic_stat.tex,LaTeX source asset
+document,tab18_prob_decile_rate.tex,LaTeX source asset
+figure,DSD2.png,Figure asset
+figure,cm_svm.png,Figure asset
+document,tab10_feature_quantile_50.tex,LaTeX source asset
+figure,pr_all_models.png,Figure asset
+figure,fig13_shap_dependence_usb_delta_seconds.png,Figure asset
+figure,fig05_lime_stability.png,Figure asset
+table,tab11_diagnostic_stat.csv,Table data asset
+document,merged.tex,LaTeX source asset
+figure,fig09_shap_dependence_dow_sin.png,Figure asset
+document,tab01_xgb_thresholds.tex,LaTeX source asset
+document,tab14_diagnostic_stat.tex,LaTeX source asset
+table,tab01_xgb_thresholds.csv,Table data asset
+table,cm_counts_svm.csv,Table data asset
+document,tab05_adversarial_robustness.tex,LaTeX source asset
+figure,fig19_path_entropy_dist.png,Figure asset
+document,tab20_diagnostic_stat.tex,LaTeX source asset
+table,tab03_meta_thresholds.csv,Table data asset
+table,cm_counts_mlp.csv,Table data asset
+table,tab16_diagnostic_stat.csv,Table data asset
+table,tab12_diagnostic_stat.csv,Table data asset
+table,train_times_parsed.csv,Table data asset
+table,tab18_prob_decile_rate.csv,Table data asset
+table,tab09_diagnostic_stat.csv,Table data asset
+table,methodology_comparison.csv,Table data asset
+table,tab12_mean_by_class.csv,Table data asset
+table,feature_importance.csv,Table data asset
+document,tab06_methodology_comparison.tex,LaTeX source asset
+table,cm_counts_meta.csv,Table data asset
+document,tab19_diagnostic_stat.tex,LaTeX source asset
+document,tab04_xgb_importance.tex,LaTeX source asset
+figure,fig02_svm_pr_curve.png,Figure asset
+table,tab20_peer_zscore_view.csv,Table data asset
+figure,DSD4.png,Figure asset
+document,tab08_class_distribution.tex,LaTeX source asset
+document,tab07_feature_distributions.tex,LaTeX source asset
+document,tab15_prob_summary.tex,LaTeX source asset
+figure,fig07_shap_dependence_hour_sin.png,Figure asset
+table,tab10_diagnostic_stat.csv,Table data asset
+figure,fig20_peer_zscore_dist.png,Figure asset
+figure,fig03_meta_pr_curve.png,Figure asset
+table,ablation_study.csv,Table data asset
+table,xgb_hyperparams.csv,Table data asset
+table,tab19_diagnostic_stat.csv,Table data asset
+table,tab04_xgb_importance.csv,Table data asset
+table,tab15_prob_summary.csv,Table data asset
+figure,prob_distribution_meta.png,Figure asset
+table,tab13_std_by_class.csv,Table data asset
+document,merged_paper.tex,LaTeX source asset
+table,tab19_path_entropy_view.csv,Table data asset
+table,cm_counts_xgboost.csv,Table data asset
+figure,pr_threshold_sweep.png,Figure asset
+figure,shap_summary.png,Figure asset
+table,tab07_feature_distributions.csv,Table data asset
+document,tab02_svm_thresholds.tex,LaTeX source asset
+figure,cm_meta.png,Figure asset
+table,evaluation_metrics.csv,Table data asset
+figure,fig04_shap_summary.png,Figure asset
+table,class_distributions_splits.csv,Table data asset
+figure,fig18_class_imbalance.png,Figure asset
+figure,DSD5.png,Figure asset
+figure,roc_all_models.png,Figure asset
+figure,fig16_meta_roc.png,Figure asset
+figure,DSD3.png,Figure asset
+document,tab14_skew_by_class.tex,LaTeX source asset
+table,tab16_prob_decile_counts.csv,Table data asset
+document,tab13_std_by_class.tex,LaTeX source asset
+document,tab20_peer_zscore_view.tex,LaTeX source asset
+document,tab17_diagnostic_stat.tex,LaTeX source asset
+table,tab05_adversarial_robustness.csv,Table data asset
+figure,base_model_correlation.png,Figure asset
+table,cm_counts_lstm.csv,Table data asset
+figure,ablation_bar.png,Figure asset
+figure,cm_lstm.png,Figure asset
+document,tab11_feature_quantile_75.tex,LaTeX source asset

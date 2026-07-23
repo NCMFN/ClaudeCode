@@ -1,0 +1,8 @@
+Feature,Importance
+hour_sin,0.0
+hour_cos,1.0
+dow_sin,0.0
+dow_cos,0.0
+peer_z_score,0.0
+graph_degree,0.0
+graph_betweenness,0.0

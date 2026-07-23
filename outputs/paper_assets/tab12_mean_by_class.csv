@@ -1,0 +1,10 @@
+index,0,1
+hour_sin,0.0,0.0
+hour_cos,1.0,1.0
+dow_sin,0.4338837,0.43388373
+dow_cos,-0.90096885,-0.90096885
+path_entropy,2.5120058,2.3243372
+peer_z_score,-0.5460164,-0.3278942
+usb_delta_seconds,3516.606,4534.918
+graph_degree,1.0180055,7.9
+graph_betweenness,9.0860725e-05,0.0008364358

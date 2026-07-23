@@ -1,0 +1,4 @@
+Metric,Value
+Baseline,0.57
+Adv,0.62
+Robust,0.85
