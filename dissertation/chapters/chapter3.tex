@@ -1,0 +1,189 @@
+\chapter{Unified Methodology}
+\label{ch:methodology}
+
+This chapter outlines the methodological approaches used in both the post-hoc forensic evaluation (Study A) and the real-time operational telemetry monitoring (Study B). While examining different stages of the digital sanitization lifecycle, both studies are united by a shared evaluation philosophy: rigorous handling of class imbalance, prioritization of adversarial robustness, out-of-distribution awareness, and the use of explainable AI (SHAP and LIME) to interrogate model decisions beyond headline metrics.
+
+\section{Study A: Post-Hoc Forensic Pipeline Methodology}
+
+
+\subsection{Research Design}
+This study follows a quantitative, experimental design within a supervised machine learning framework. Labelled forensic event records are used to train and evaluate models that classify deletion activities as either normal or suspicious.
+
+The workflow is organised as a structured pipeline (Figure \ref{fig:sys_arch}), beginning with data ingestion and proceeding through preprocessing, feature engineering, class balancing, model training, and evaluation. The pipeline concludes with robustness testing and explainability analysis. Each stage is implemented with strict separation between training and test data to prevent information leakage and to ensure that performance metrics reflect realistic deployment conditions.
+
+Three classification algorithm are evaluated under identical conditions. This enables direct comparison of their behaviour across multiple dimensions: standard performance on imbalanced data, performance under SMOTE-resampled cross-validation, and robustness when key features are intentionally suppressed. This design aligns with the practical requirements of forensic detection systems.
+
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1.0\linewidth]{dsd16.png}
+    \caption{System Architecture}
+    \label{fig:sys_arch}
+\end{figure*}
+
+\subsection{Dataset Description}
+The study uses the Cybercrime Forensic Dataset (CCFD), which contains 7,400 records representing simulated enterprise activity logs. These records span seven activity categories: File Access (n=1,092), Network Traffic (n=1,068), File Modification (n=1,067), Login (n=1,053), Remote Login (n=1,052), File Deletion (n=1,037), and USB Insert (n=1,031).
+
+Each record is labelled as either Normal (83.3\%, n=6,167) or Suspicious (16.7\%, n=1,233). The dataset covers a 30-day period (12 September 2024 to 12 October 2024) and includes activity from 5,031 unique users.
+
+Eleven variables are recorded per event, including Timestamp, “User\_ID”, “IP Address”, “Activity Type”, “Resource Accessed”, “File Name”, Action, “Login Attempts”, “File Size”, “Anomaly Type”, and Label. Some variables are partially missing; for example, “File Name” appears in 43.2\% of records and “Login Attempts” in 28.4\%.
+
+To focus on digital sanitization, the dataset was filtered to include only deletion-related events. Records with “Activity Type” = 'File Deletion' or Action = 'Delete' were retained. This produced a subset of 1,971 records, consisting of 1,647 Normal (83.6\%) and 324 Suspicious (16.4\%), yielding an imbalance ratio of approximately 1:5.
+
+The “Anomaly Type” variable was removed from the feature set to prevent label leakage, as it directly encodes the reason for a suspicious classification.
+
+
+
+
+\begin{table}
+\centering
+\caption{Summary Characteristics of the Cybercrime Forensic Dataset (Deletion Subset)}
+\label{tab:delsub}
+
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Characteristic} & \textbf{Full Dataset} & \textbf{Deletion Subset} \\
+\hline
+Total Records & 7,400 & 1,971 \\
+\hline
+Normal Class (n) & 6,167 (83.3\%) & 1,647 (83.6\%) \\
+\hline
+Suspicious Class (n) & 1,233 (16.7\%) & 324 (16.4\%) \\
+\hline
+Class Imbalance Ratio & \~1:5 & \~1:5 \\
+\hline
+Unique Users & 5,031 & 1,487 (estimated) \\
+\hline
+Observation Period & 30 days & 30 days \\
+\hline
+Number of Features (post)& — & 21 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+
+
+\subsection{Preprocessing}
+Several preprocessing steps were applied to prepare the data for analysis.
+
+Missing values were handled based on the meaning of each variable. “File Size”, missing in 56.8\% of deletion records, was set to 0, reflecting either a zero-byte file or missing metadata. “File Name” was extracted from the “Resource Accessed” path where possible; otherwise, the value 'Unknown' was assigned. “Login Attempts” was set to 0 when absent, and Action was assigned 'Unknown' if missing.
+
+The target variable Label was converted from categorical values ('Normal', 'Suspicious') to binary integers (0 and 1). Timestamps were parsed into datetime objects to support temporal feature generation.
+
+All preprocessing steps were applied consistently and documented to ensure reproducibility.
+
+
+
+\subsection{Feature Engineering}
+A total of 21 features were derived from the original variables. These features fall into five groups: temporal, behavioural, file-related, frequency-encoded, and one-hot encoded features.
+
+Temporal features include Hour (0-23), “DayOfWeek” (0-6), and “Is Weekend”, capturing when events occur. Additional features were created by ordering events by User\_ID and Timestamp. This allowed computation of “Time Since Last Action” (in seconds) and “Is Burst Deletion”, which identifies events occurring within 60 seconds of each other.
+
+Behavioural features include “User Total Deletions”, which counts the number of deletion events per user. This was computed on the training set and applied to both training and test data.
+
+File-related features include “File Size” and “File Extension”. The latter was extracted from “File Name” and encoded as “File Extension Freq”, representing its frequency in the training data.
+
+Categorical variables (“Activity Type” and "Action”) were one-hot encoded with “drop first”=True, producing 7 and 6 binary features, respectively.
+
+Numerical features were standardised using a StandardScaler fitted only on the training data. High-cardinality identifiers such as “User ID” and “IP Address” were removed.
+
+
+
+\begin{table*}[t] % Use table* to span two columns
+\centering
+\caption{Engineered Feature Set and Descriptions}
+\label{tab:EFSD}
+\begin{tabular}{| l | l | p{10cm} |} % Increased description width for a full-page table
+\hline
+\textbf{Feature} & \textbf{Type} & \textbf{Description} \\ \hline
+Hour & Continuous & Hour of day (0--23) at which deletion event occurred \\ \hline
+DayOfWeek & Continuous & Day of week (0=Monday, 6=Sunday) \\ \hline
+Is Weekend & Binary & 1 if event occurred on Saturday or Sunday \\ \hline
+Time Since Last Action & Continuous & Seconds since previous deletion event by same user \\ \hline
+Is Burst Deletion & Binary & 1 if Time Since Last Action is between 0 and 60 seconds \\ \hline
+File Size & Continuous & Size of deleted file in MB (0 if unknown) \\ \hline
+Login Attempts & Continuous & Number of associated login attempts (0 if not applicable) \\ \hline
+User Total Deletions & Continuous & Total deletion events per user (frequency encoded, train-fitted) \\ \hline
+File Extension Freq & Continuous & Relative frequency of file extension in training set \\ \hline
+Activity Type * (6 dummies) & Binary & One-hot encoding of activity type category \\ \hline
+Action * (6 dummies) & Binary & One-hot encoding of action category \\ \hline
+\end{tabular}
+\end{table*}
+
+
+
+\subsection{Data Partitioning and Class Balancing}
+The dataset was split into training (80\%, n=1,576) and test (20\%, n=395) sets using stratified sampling with random state=42. This preserved the class distribution of 83.6\% Normal and 16.4\% Suspicious in both subsets.
+
+To address class imbalance, SMOTE was applied to the training data only. This produced a balanced training set of 2,634 records (1,317 Normal, 1,317 Suspicious). The test set remained unchanged to reflect real-world conditions.
+
+This separation ensures that evaluation metrics are not inflated by synthetic data.
+
+
+\subsection{Model Training and Cross Validation}
+Three classifiers were implemented:
+
+\begin{itemize}
+    \item Random Forest with 100 estimators and random state=42
+    \item XGBoost with log-loss evaluation and random state=42
+    \item Support Vector Machine with an RBF kernel and probability estimation enabled
+\end{itemize}
+
+Each model was evaluated using 5-fold stratified cross-validation on the SMOTE-balanced training set, with ROC-AUC as the primary metric.
+
+After cross-validation, models were retrained on the full SMOTE-balanced training data and evaluated on the untouched test set. This approach allows direct comparison between performance on balanced training data and real-world conditions.
+
+
+\subsection{Evaluation Metrics}
+Performance was assessed using multiple metrics suited to imbalanced classification:
+
+\begin{itemize}
+    \item Accuracy: provides overall correctness but is less informative in imbalanced settings
+    \item Precision: measures the proportion of predicted suspicious events that are correct
+    \item Recall: measures how many true suspicious events are detected
+    \item F1-score: balances precision and recall
+    \item ROC-AUC: evaluates discrimination across all thresholds
+\end{itemize}
+
+Recall and F1-score are particularly important, as missed detections carry higher risk in forensic applications.
+
+
+
+
+\section{Study B: Real-Time Telemetry Pipeline Methodology}
+
+\subsection{Dataset, Ground Truth, and Sampling}
+The revised pipeline uses the LANL Comprehensive, Multi-Source Cyber-Security Events authentication data. Malicious labels are tied to event signatures obtained from \texttt{redteam.txt.gz}; no observations were assigned malicious labels at random. The corresponding red-team timestamps, users, and computers were harmonized with authentication-schema fields, while benign authentication events were collected with reservoir sampling capped at 50,000 records. For execution feasibility, the streamed authentication pass was bounded at 500,001 lines. Events were converted to user-day observations before modeling.
+
+The saved train and test artifacts contain 148 malicious and 4,229 benign user-day observations, corresponding to 3.381\% malicious prevalence across those retained splits (Table~\ref{tab:split_counts}). This is an intentionally enriched evaluation sample relative to the approximately 0.00007\% malicious event rate in the full LANL population. Consequently, precision, false-positive burden, and other deployment-facing metrics should be interpreted as optimistic relative to true prevalence. The CERT insider-threat data could not be included because the Kilthub-hosted files were inaccessible during this revision.
+
+\begin{table}[!htbp]
+\caption{Saved Train and Test Class Distributions}
+\label{tab:split_counts}
+\centering
+\begin{tabular}{lrr}
+\toprule
+Split & Malicious & Benign \\
+\midrule
+Train & 113 & 3177 \\
+Test & 35 & 1052 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Feature Engineering}
+The final tabular matrix contains seven verified features: sine and cosine encodings of hour of day, sine and cosine encodings of day of week, peer-normalized z-score, graph degree, and graph betweenness. User-day event-code sequences of length 20 were retained separately for the LSTM. This design preserves the original temporal, peer-relative, relational, and sequential framing while permitting direct attribution and feature-group ablation.
+
+\subsection{Models and Baselines}
+The tabular baselines are XGBoost, a class-weighted support-vector machine, and a multilayer perceptron reported as \emph{DeepTabular}. The sequence baseline is an embedding-plus-LSTM model. Their probability outputs are combined by an XGBoost meta-classifier. DeepTabular provides a practical nonlinear neural baseline; a full graph neural network or transformer baseline was scoped but not completed in this revision and is therefore not claimed as an evaluated comparator.
+
+\subsection{Evaluation Protocol and Leakage Control}
+Users define the grouping variable throughout evaluation. Five-fold \texttt{StratifiedGroupKFold} cross-validation produces foldwise PR-AUC for XGBoost, SVM, DeepTabular, and the meta-classifier. The primary evaluation uses a 60/20/20 group-aware train/validation/test procedure. SMOTE is applied only to the training tabular data. The meta-classifier is fitted on training predictions; its decision threshold is selected on validation predictions by maximizing F1 and is then applied unchanged to the held-out test set. The resulting threshold is 0.99237144. This separation prevents test-label leakage into operating-point selection.
+
+Wilcoxon signed-rank tests compare meta-classifier and baseline PR-AUC values across the five folds. The ablation study removes each verified feature group, retrains XGBoost, and evaluates held-out PR-AUC. Robustness testing evaluates XGBoost under feature evasion, 5\% training-label poisoning, and an ordered-split distribution-shift scenario. Training time and single-event XGBoost inference latency are measured directly.
+
+\subsection{Explainability and Reproducibility}
+Global XGBoost importance is read from the saved model, and mean absolute SHAP values are calculated from 50 saved training observations. All reported artifacts are generated by the six-phase pipeline: ingestion, feature engineering, modeling, adversarial testing, evaluation, and artifact generation. Running \texttt{src/run\_pipeline.py} executes the workflow end-to-end from raw LANL inputs to the saved models and all reported CSV and PNG outputs.

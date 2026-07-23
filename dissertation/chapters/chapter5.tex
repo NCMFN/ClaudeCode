@@ -1,0 +1,208 @@
+\chapter{Study B: Real-Time Telemetry Results}
+\label{ch:study_b_results}
+
+
+\subsection{Held-Out Performance and Cross-Validation}
+At the validation-selected threshold of 0.99237144, the held-out meta-classifier produced PR-AUC 1.0, macro-F1 1.0, malicious recall 1.0, and 0 false positives per 1000 events (Table~\ref{tab:heldout_metrics}). These values must be read together with the temporal ablation and distribution-shift results reported below: they describe separation within the sampled split, not demonstrated behavioral generalization.
+
+\begin{table}[!htbp]
+\caption{Held-Out Meta-Classifier Metrics}
+\label{tab:heldout_metrics}
+\centering
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+Threshold & 0.99237144 \\
+PR-AUC & 1.000000 \\
+Macro-F1 & 1.000000 \\
+Malicious recall & 1.000000 \\
+False positives per 1000 & 0.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Five-fold group cross-validation yielded PR-AUC 1.0 in every fold for XGBoost, SVM, and the meta-classifier. DeepTabular varied from 0.751730 to 0.996888, with mean 0.873603 and a t-based 95\% confidence interval of 0.762171--0.985035 (Table~\ref{tab:cv_results}). The exported cross-validation artifact contains PR-AUC only; cross-validated F1 and recall are therefore not reported. Figure~\ref{fig:cv_variance} visualizes the fold variance.
+
+\begin{table*}[!tbp]
+\caption{Five-Fold Stratified Group Cross-Validation PR-AUC}
+\label{tab:cv_results}
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Fold 1 & Fold 2 & Fold 3 & Fold 4 & Fold 5 & Mean (95\% CI) \\
+\midrule
+XGBoost & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 (1.000000--1.000000) \\
+SVM & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 (1.000000--1.000000) \\
+DeepTabular & 0.996888 & 0.879727 & 0.902223 & 0.837447 & 0.751730 & 0.873603 (0.762171--0.985035) \\
+Meta & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 & 1.000000 (1.000000--1.000000) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/pr_all_models.png}
+\caption{Held-out precision--recall curves for the saved base models and meta-classifier. The near-perfect curves are evaluated further through ablation and distribution-shift testing rather than treated as evidence of generalization.}
+\label{fig:pr_all_models}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/roc_all_models.png}
+\caption{Held-out receiver-operating-characteristic curves for all saved models.}
+\label{fig:roc_all_models}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/calibration_plot.png}
+\caption{Calibration curves computed from the held-out test probabilities.}
+\label{fig:calibration}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/cv_variance.png}
+\caption{Foldwise PR-AUC variance for XGBoost, SVM, DeepTabular, and the meta-classifier.}
+\label{fig:cv_variance}
+\end{figure}
+
+\subsection{Statistical Comparison}
+The Wilcoxon tests found no significant PR-AUC difference between the meta-classifier and any tested baseline (Table~\ref{tab:significance}). The p-values were 1.0 against XGBoost, 1.0 against SVM, and 0.0625 against DeepTabular. The perfect fold values of the meta-classifier therefore do not establish superiority over XGBoost or SVM.
+
+\begin{table}[!htbp]
+\caption{Wilcoxon Signed-Rank Tests on Foldwise PR-AUC}
+\label{tab:significance}
+\centering
+\begin{tabular}{lrc}
+\toprule
+Comparison & p-value & Significant \\
+\midrule
+Meta vs. XGBoost & 1.0000 & No \\
+Meta vs. SVM & 1.0000 & No \\
+Meta vs. DeepTabular & 0.0625 & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Feature Attribution and Ablation}
+The attribution results identify a single-feature solution. XGBoost assigns importance 1.0 to \texttt{hour\_cos} and 0 to all six other tabular features. Its mean absolute SHAP value is 8.187043, while every other feature has mean absolute SHAP value 0 (Table~\ref{tab:attribution}). Removing the temporal group reduces XGBoost PR-AUC from 1.0 to 0.208214, whereas removing peer z-score or graph centrality leaves PR-AUC at 1.0 (Table~\ref{tab:ablation}). This is direct evidence that the headline performance is driven by temporal separation rather than the intended behavioral graph or peer signals.
+
+\begin{table}[!htbp]
+\caption{Verified XGBoost Feature Importance and Mean Absolute SHAP}
+\label{tab:attribution}
+\centering
+\begin{tabular}{lrr}
+\toprule
+Feature & Importance & Mean $|\mathrm{SHAP}|$ \\
+\midrule
+\texttt{hour\_sin} & 0.000000 & 0.000000 \\
+\texttt{hour\_cos} & 1.000000 & 8.187043 \\
+\texttt{dow\_sin} & 0.000000 & 0.000000 \\
+\texttt{dow\_cos} & 0.000000 & 0.000000 \\
+\texttt{peer\_z\_score} & 0.000000 & 0.000000 \\
+\texttt{graph\_degree} & 0.000000 & 0.000000 \\
+\texttt{graph\_betweenness} & 0.000000 & 0.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\caption{Feature-Group Ablation Study}
+\label{tab:ablation}
+\centering
+\begin{tabular}{lr}
+\toprule
+Removed feature set & PR-AUC \\
+\midrule
+Temporal & 0.208214 \\
+Peer z-score & 1.000000 \\
+Graph centrality & 1.000000 \\
+None (full model) & 1.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/feature_importance.png}
+\caption{Saved-model XGBoost feature importance, showing exclusive reliance on \texttt{hour\_cos}.}
+\label{fig:feature_importance}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/shap_summary.png}
+\caption{Global SHAP summary generated from the saved XGBoost model and training sample.}
+\label{fig:shap_summary_verified}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/ablation_bar.png}
+\caption{Ablation result showing the PR-AUC collapse caused only by removal of temporal features.}
+\label{fig:ablation}
+\end{figure}
+
+\subsection{Adversarial Robustness and Distribution Shift}
+The XGBoost stress tests retained PR-AUC 1.0 under the specified feature-evasion perturbation and 5\% training-label poisoning, but PR-AUC fell to 0.032199 in the distribution-shift scenario (Table~\ref{tab:adversarial}). Thus, robustness to the tested local perturbations does not imply robustness to a changed temporal distribution. The collapse is the first quantitative indication that the held-out score exploits a sampling boundary rather than stable malicious behavior.
+
+\begin{table}[!htbp]
+\caption{XGBoost Adversarial and Distribution-Shift Tests}
+\label{tab:adversarial}
+\centering
+\begin{tabular}{lr}
+\toprule
+Scenario & PR-AUC \\
+\midrule
+Baseline & 1.000000 \\
+Feature evasion & 1.000000 \\
+Training-label poisoning & 1.000000 \\
+Distribution shift & 0.032199 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\columnwidth]{pass5_assets/outputs/figures/adversarial_bar.png}
+\caption{XGBoost degradation under evasion, poisoning, and distribution-shift scenarios.}
+\label{fig:adversarial}
+\end{figure}
+
+\subsection{Complexity and Deployability}
+Measured training times were 0.03~s for XGBoost, 1.66~s for SVM, 0.99~s for DeepTabular, 4.38~s for LSTM, and 0.02~s for the meta-classifier. Mean XGBoost inference latency was 0.48~ms per event (Table~\ref{tab:complexity}). These measurements indicate that the implemented models are computationally lightweight in the experimental environment. They do not, however, offset the temporal-generalization limitation; deployability requires both acceptable latency and valid out-of-time detection.
+
+\begin{table}[!htbp]
+\caption{Measured Training Time and Inference Latency}
+\label{tab:complexity}
+\centering
+\begin{tabular}{lr}
+\toprule
+Measurement & Value \\
+\midrule
+XGBoost training & 0.03 s \\
+SVM training & 1.66 s \\
+DeepTabular training & 0.99 s \\
+LSTM training & 4.38 s \\
+Meta-classifier training & 0.02 s \\
+XGBoost inference mean & 0.48 ms/event \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+\subsection{Interpretation of the Near-Perfect Scores}
+The revised evaluation produces superficially ideal held-out and group-cross-validation scores, but the combined diagnostic evidence shows that these results are a temporal-sampling artifact, not genuine generalizable insider-threat behavioral detection. First, model importance assigns the entire gain to \texttt{hour\_cos}; graph degree, graph betweenness, peer z-score, and the remaining cyclic variables all receive zero importance and zero mean absolute SHAP. Second, removal of the temporal feature group alone reduces PR-AUC from 1.0 to 0.208214, while removal of the intended peer and graph groups has no measurable effect. Third, the distribution-shift stress test reduces PR-AUC from 1.0 to 0.032199. Together, these observations show that the model learned the chronological separation created by how red-team and benign events were represented in the sampled windows. The 1.0 scores therefore characterize the sampled split and must not be interpreted as evidence of operational behavioral detection capability.
+
+\subsection{Methodological Implications}
+This negative result is itself methodologically important. A conventional random or group-aware held-out split can remain misleading when labels are temporally clustered and a cyclical time feature becomes a near-deterministic proxy. Cross-validation does not correct the problem when each fold inherits the same sampling construction, which explains why XGBoost, SVM, and the meta-classifier all achieve foldwise PR-AUC 1.0 and why the Wilcoxon tests show no significant differences. Ablation and distribution-shift testing are therefore not optional supplementary analyses in this setting; they are necessary checks on whether a detector has learned behavior or merely chronology.
+
+\subsection{Scope Limitations}
+Several limitations constrain the claims. The retained sample has 3.381\% malicious prevalence, vastly higher than the approximately 0.00007\% LANL population rate, so reported precision and false-positive burden are optimistic for deployment. CERT data could not be obtained because of the Kilthub access barrier, preventing cross-dataset validation. DeepTabular is only a practical neural baseline; no full graph neural network or transformer was completed. The graph-centrality and peer-behavior features did not contribute measurably in this evaluation, but the zero attribution should not be generalized into a claim that those features are intrinsically uninformative: their signal may have been masked by the dominant timestamp construction.
+
+\subsection{Operational Implications and Future Work}
+No operational deployment claim should be made from the present held-out metrics. Future work should rebuild the sample so malicious and benign observations are not separable by collection window, select thresholds only within past data, and evaluate on strictly later chronological periods. External validation on another organization or a successfully acquired CERT release is also required. Only after time-disjoint and cross-organizational evaluation should the low measured inference latency be considered evidence of practical deployability. Further work should also complete genuine GNN and transformer baselines and reevaluate graph and peer features after removal of the temporal shortcut.
+
+\FloatBarrier

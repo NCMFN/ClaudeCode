@@ -1,0 +1,40 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{cite}
+
+\title{Behavioral Forensics and Adversarially Aware Detection \\ for Digital Sanitization and Insider Threats}
+\author{PhD Candidate Name}
+\date{\today}
+
+\graphicspath{{assets/}}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This dissertation investigates the detection of digital sanitization---a key anti-forensic behavior where actors delete or destroy digital evidence. It examines this problem across two distinct operational layers: post-hoc forensic analysis of file deletion events (Study A) and real-time operational telemetry within enterprise networks (Study B). By analyzing these two settings using a shared methodological philosophy that emphasizes class-imbalance handling, adversarial robustness, and model explainability (via SHAP and LIME), the research identifies a unified vulnerability in rare-event security modeling. Specifically, apparently strong machine learning detection scores are frequently artifacts of evaluation design---such as cross-validation optimism on SMOTE-resampled data in the forensic context, and temporal-proxy feature leakage (\texttt{hour\_cos}) in the operational context. The principal contribution is demonstrating that neither post-hoc nor real-time layers alone provide trustworthy detection without leakage-controlled, distributionally aware validation, necessitating fundamentally new evaluation paradigms for digital sanitization detection.
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+\include{chapters/chapter6}
+\include{chapters/chapter7}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

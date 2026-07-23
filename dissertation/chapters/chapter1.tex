@@ -1,0 +1,30 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{Background and Motivation}
+Digital sanitization---the intentional deletion, modification, or destruction of digital evidence to evade forensic investigation---represents a fundamental challenge in both post-hoc digital forensics and real-time enterprise security monitoring. As perpetrators of insider threats and advanced persistent threats (APTs) increasingly employ anti-forensic techniques to cover their tracks, the ability to detect malicious data sanitization has become critical.
+
+However, detecting these activities poses a significant machine learning challenge because sanitization behaviors are highly imbalanced, structurally similar to legitimate administrative behavior, and often exhibit complex temporal patterns. Consequently, evaluating the true effectiveness of detection models requires rigorous methodology.
+
+\section{Problem Statement}
+This dissertation addresses the problem of detecting digital sanitization behavior across the forensic-to-operational continuum. The central problem is that while modern supervised learning and ensemble methods appear to achieve near-perfect detection of anti-forensic activity, these results are frequently artifacts of the evaluation methodology rather than genuine operational capability. Both forensic event-log analysis (post-hoc) and enterprise authentication telemetry (real-time) are susceptible to different forms of evaluation leakage that artificially inflate performance metrics.
+
+\section{Research Objectives}
+This dissertation aims to:
+\begin{enumerate}
+    \item Evaluate the effectiveness of machine learning models in detecting intentional file-deletion and anti-forensic behavior in post-hoc forensic investigations.
+    \item Develop and rigorously test an explainable, adversarially aware detection pipeline for real-time enterprise authentication telemetry.
+    \item Demonstrate the impact of evaluation design choices---specifically SMOTE-resampling in cross-validation and temporal proxy features---on the deployability of security models.
+    \item Provide a unified methodological framework for mitigating evaluation leakage and enhancing explainability (via SHAP and LIME) in rare-event digital sanitization detection.
+\end{enumerate}
+
+\section{Contributions}
+The primary contributions of this work are two-fold:
+\begin{itemize}
+    \item \textbf{Methodological critique of forensic evaluation:} Through experimental evaluation on forensic file-deletion logs (Study A), this work demonstrates that cross-validation on SMOTE-resampled data produces overly optimistic performance estimates, and that simpler models like SVMs can outperform complex ensembles on held-out imbalanced test sets.
+    \item \textbf{Identification of temporal leakage in enterprise telemetry:} Using a large-scale enterprise authentication dataset with red-team ground truth (Study B), this research shows that near-perfect detection scores (PR-AUC of 1.0) can be entirely driven by temporal sampling artifacts (\texttt{hour\_cos}), highlighting the necessity of out-of-distribution evaluation.
+\end{itemize}
+Ultimately, this dissertation demonstrates that neither the forensic layer nor the operational layer alone is trustworthy without leakage-controlled evaluation.
+
+\section{Dissertation Roadmap}
+The remainder of this dissertation is structured as follows. Chapter \ref{ch:lit_review} provides a unified literature review. Chapter \ref{ch:methodology} presents the shared methodological framework and specific pipeline designs for both studies. Chapter \ref{ch:study_a_results} details the findings of the post-hoc forensic evaluation. Chapter \ref{ch:study_b_results} details the findings from the real-time operational telemetry. Chapter \ref{ch:synthesis} provides a cross-study synthesis of the implications, and Chapter \ref{ch:conclusion} concludes the dissertation.

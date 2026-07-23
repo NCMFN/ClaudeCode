@@ -1,0 +1,127 @@
+\chapter{Literature Review}
+\label{ch:lit_review}
+
+This chapter synthesizes the literature surrounding digital sanitization and insider threat detection. It integrates perspectives from both post-hoc digital forensics and real-time enterprise telemetry monitoring.
+
+\section{Digital Anti-Forensics and File System Artefacts}
+
+
+
+This section reviews the academic literature relevant to the study. It focuses on five areas: digital anti-forensics and sanitization, machine learning in digital forensics, class imbalance, adversarial robustness, and model explainability. Rather than listing prior work, the discussion evaluates how these strands connect and where limitations remain. The section concludes by identifying the gaps that shape the present research.
+
+Anti-forensics refers to techniques designed to disrupt or evade digital investigations. These methods aim to prevent evidence collection, distort findings, or delay analysis \cite{ref22}. While the broader category includes encryption, data hiding, and artefact manipulation, digital sanitization occupies a central role because of its direct effect on evidence availability.
+
+Digital sanitization involves deleting or destroying data so that it cannot be recovered \cite{ref2}. Kao et al. \cite{ref23} classify these actions into three types. Logical deletion removes file system references while leaving the underlying data intact. Secure deletion overwrites the data, making recovery unlikely. Physical destruction damages storage media to eliminate access entirely. Each approach introduces different challenges for forensic recovery.
+
+Deletion activity is especially relevant in insider threat investigations. Al-Dhaqm et al. \cite{ref24} report that file deletion appears in over 65\% of analysed insider incidents. Similar patterns emerge in organised cybercrime. Spiekermann and Kuntze \cite{ref25} show that attackers often align deletion activity with routine system operations, such as maintenance windows, to avoid detection. Timing, therefore, becomes as important as the act itself.
+
+Earlier detection efforts focused on file system artefacts such as MFT records, journal logs, and inode structures \cite{ref26}. These methods can identify deleted files and sometimes recover their contents \cite{ref27}. However, they depend on the integrity of the artefacts being analysed. When adversaries actively manipulate or erase these traces, their reliability decreases.
+
+More recent work shifts attention toward behavioural analysis. Instead of examining static artefacts, researchers analyse event logs to identify unusual patterns \cite{ref28}. Logs often persist across systems and formats, making them harder to eliminate completely. This shift marks an important transition from recovery-based forensics to detection-based approaches.
+
+Despite these advances, much of the literature remains descriptive. Studies catalogue anti-forensic techniques and evaluate their effectiveness, but fewer propose scalable detection systems. This gap is most evident in enterprise environments, where the volume of events makes manual analysis impractical.
+
+Machine learning has become increasingly prominent in digital forensics. This growth reflects both the availability of large datasets and the limitations of rule-based systems \cite{ref9}. Applications range from malware detection \cite{ref17} to intrusion detection \cite{ref29} and user behaviour analysis \cite{ref30}. Across these domains, the central task is to identify meaningful patterns in complex and often noisy data.
+
+Tree-based ensemble methods, particularly Random Forest and XGBoost, are widely used. They handle mixed data types well and tend to perform strongly on structured datasets. For example, Sanjalawe et al. \cite{ref32} report F1 scores above 0.92 for intrusion detection tasks, although performance declines under real-world class distributions. Similarly, Le et al. \cite{ref33} find that XGBoost outperforms neural networks on log-based data, largely due to its ability to manage sparsity and heterogeneity.
+
+Support Vector Machines (SVMs) remain relevant, especially when datasets are smaller or require strong regularisation \cite{ref34}. Ektefa et al. \cite{ref35} show that SVMs can achieve competitive accuracy, though often at higher computational cost. Notably, SVMs tend to generalise more consistently under class imbalance, as their margin-based optimisation reduces sensitivity to majority-class dominance \cite{ref36}.
+
+Feature engineering plays a decisive role in model performance. Common features include temporal indicators (timestamps, intervals), behavioural metrics (activity frequency), and structural attributes (file types, access paths) \cite{ref37}. Poor feature design can introduce bias or data leakage, particularly when information from the full dataset is used before splitting \cite{ref38}.
+
+Temporal dynamics deserve special attention. Forensic data is inherently sequential, and events are rarely independent. Yang et al. \cite{ref39} show that incorporating temporal features improves classification performance. This insight supports the inclusion of features like "Time Since Last Action" and "Is Burst Deletion" in the present study.
+
+Class imbalance is a persistent issue in forensic datasets. Suspicious events typically represent a small fraction of overall activity, sometimes less than 1\% in large systems \cite{ref40}. This imbalance biases standard classifiers toward the majority class, leading to misleadingly high accuracy but poor detection of rare events.
+
+SMOTE addresses this problem by generating synthetic minority samples through interpolation \cite{ref41}. It is widely used and often improves recall for minority classes \cite{ref42,ref43}. However, its effectiveness depends on careful implementation. Applying SMOTE before splitting the data introduces leakage, as related samples may appear in both training and test sets \cite{ref44}.
+
+A more subtle issue concerns evaluation. Models trained and validated on SMOTE-balanced data may not perform similarly on real distributions. El-Rashidy et al. \cite{ref45} demonstrate a case where ROC-AUC dropped from 0.94 in cross-validation to 0.61 on a real test set. This gap reflects the difference between synthetic training distributions and real-world conditions.
+
+Alternative approaches include cost-sensitive learning and threshold adjustment \cite{ref46}. These methods can complement oversampling by shifting the decision boundary rather than altering the data itself. Hossain et al. \cite{ref47} find that threshold tuning often yields more consistent improvements across models.
+
+Despite these options, SMOTE remains widely used due to its simplicity and compatibility with many algorithms. The present study adopts SMOTE but explicitly evaluates its impact on cross-validation and test performance.
+
+Forensic detection systems operate in adversarial environments. Unlike typical classification tasks, the subjects being detected may actively attempt to evade detection. This changes the problem fundamentally.
+
+Adversarial machine learning examines how models behave under such conditions \cite{ref48}. In digital forensics, attackers can manipulate features such as timestamps, file sizes, or event frequency \cite{ref8}. These changes are not arbitrary; they reflect realistic actions within a system.
+
+The problem-space framework proposed by Pierazzi et al. \cite{ref49} provides a useful perspective. It focuses on attacks that are feasible in practice rather than purely theoretical manipulations. In the context of file deletion, this includes altering metadata, spreading actions over time, or suppressing logging signals \cite{ref51}.
+
+Empirical studies highlight the impact of these strategies. Ficco et al. \cite{ref52} show that models relying heavily on a small set of features are particularly vulnerable. When those features are removed or altered, performance drops sharply. Suciu et al. \cite{ref53} report reductions in F1-score of up to 40\% under feature suppression.
+
+Improving robustness requires multiple strategies. These include using diverse feature sets, retraining models over time, and combining detection approaches \cite{ref54}. Temporal retraining, in particular, helps models adapt to evolving attack patterns \cite{ref14}.
+
+Despite growing interest, robustness evaluation remains limited in forensic ML studies. Many models are tested only under ideal conditions, leaving their real-world reliability uncertain.
+
+Explainability is essential in forensic applications. Model outputs may be used as evidence, which means they must be understandable to investigators, legal professionals, and courts \cite{ref15}. Accuracy alone is not sufficient.
+
+SHAP provides a principled method for interpreting model predictions \cite{ref55,ref56}. It assigns importance values to features based on their contribution to the final decision. SHAP supports both global explanations (overall feature importance) and local explanations (individual predictions), making it well suited to forensic use.
+
+LIME offers a complementary approach. It explains individual predictions by approximating the model locally with a simpler, interpretable model \cite{ref58}. Because it is model-agnostic, it can be applied across different classifiers. However, LIME explanations can be unstable in high-dimensional settings \cite{ref59}.
+
+Using both methods together provides a more complete picture. SHAP captures overall behaviour, while LIME focuses on specific cases. This combination is particularly useful when explaining decisions in investigative or legal contexts.
+
+Legal scholarship reinforces this need. Deeks \cite{ref60} notes that courts increasingly require transparency in algorithmic decision-making. Systems that cannot provide clear explanations may face challenges in admissibility.
+
+The literature points to four main gaps.
+First, there is no fully developed machine learning pipeline dedicated to detecting digital sanitization events, despite their importance.
+
+Second, the difference between SMOTE-based cross-validation performance and real test performance is rarely examined, leading to overly optimistic conclusions.
+
+Third, model robustness under realistic adversarial conditions remains insufficiently studied.
+
+Fourth, explainability methods are often applied in isolation. Few studies integrate SHAP and LIME within a single framework or evaluate their combined usefulness in forensic workflows.
+
+
+
+
+
+
+\section{Enterprise Telemetry and Insider Threat Detection}
+
+\subsection{Evolution of Insider Threat Detection Research}
+\subsubsection{Reconstruction and Behavioral Baselines}
+Early recent work emphasized learning normal behavior from enterprise activity logs and flagging deviations from expected user patterns. Zhang et al. used ensemble and self-supervised learning to detect insider activity from behavioral logs, showing that learned representations could strengthen detection where malicious labels are scarce \cite{zhang2021ensemble}. Tuor et al. explored autoencoder and variational-autoencoder models for insider detection, reinforcing the value of reconstruction error as an anomaly signal while also showing that threshold selection remains a critical issue \cite{tuor2021autoencoder}.
+
+\subsubsection{Relational and Graph-Based Modeling}
+Research then moved toward relational representations because insider activity is rarely isolated to a single event. Yuan et al. applied graph neural networks to model relationships among users, devices, and resources, indicating that graph structure can reveal abnormal interaction patterns that flat tabular features may miss \cite{yuan2022gnn}. This stage established the importance of representing enterprise activity as a network of related entities rather than as independent log rows.
+
+\subsubsection{Supervised Learning, Explainability, and Robustness}
+The next stage expanded supervised machine learning, systematic reviews, and explainability. Sarker et al. and Zhang et al. demonstrated the usefulness of machine-learning classifiers on CERT-style insider threat datasets, while also showing the persistent influence of class imbalance and benchmark design \cite{sarker2023insider,zhang2023supervised}. Ali et al. and Rosati et al. emphasized that security models require interpretable outputs, not only predictive scores, because analysts need evidence that supports investigation and governance \cite{ali2023xai,rosati2023blackbox}. Robustness studies further showed that adversarial behavior and distribution shift can undermine models that appear strong under static evaluation \cite{apruzzese2023robustness,alani2023adversarial}.
+
+\subsubsection{Imbalance Handling and Session Graphs}
+Recent work increasingly addresses data imbalance and graph-based session modeling. Imbalance-focused research used sampling and temporal-sequence approaches to improve detection under rare malicious labels \cite{balanced2024imbalance}. Liu et al. reviewed graph-based insider threat detection and showed that relational modeling is now a major research direction \cite{liu2024graph}. Session-graph models such as ASG-ITD further demonstrate how user sessions and entity relationships can be linked to improve monitoring fidelity \cite{asg2024}.
+
+\subsubsection{Explainable and Operational Frameworks}
+The current stage focuses on transparent, hybrid, and operationally deployable frameworks. Cloud-XAI style work combines explanations such as SHAP, LIME, and counterfactuals with insider detection requirements \cite{cloudxai2025}. Hybrid frameworks combine isolation forests, autoencoders, LSTM autoencoders, SHAP explanations, and response logic for risk ranking and containment \cite{aibitd2026}. Ensemble explanation studies also combine filtering, SHAP, LIME, and natural-language interpretation to make session-level alerts easier for analysts to understand \cite{illuminating2026}.
+
+\subsection{Summary of Related Works}
+\begin{table*}[!tbp]
+\caption{Summary of Related Works}
+\label{tab:related_works}
+\centering
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{0.15\textwidth}p{0.17\textwidth}p{0.22\textwidth}p{0.20\textwidth}p{0.17\textwidth}}
+\toprule
+Author/Year & Dataset Used & Technique Used & Results Used & Limitations \\
+\midrule
+Zhang et al./2021 \cite{zhang2021ensemble} & CERT behavioral logs & Ensemble and self-supervised sequence learning & Improved detection from behavioral-log representations & Sensitive to imbalance and reconstruction-threshold choice \\
+Tuor et al./2021 \cite{tuor2021autoencoder} & CERT insider threat data & Autoencoder and variational autoencoder & Anomaly separation from learned normal-user behavior & Relies on simulated data and threshold tuning \\
+Yuan et al./2022 \cite{yuan2022gnn} & CERT graph-form telemetry & Graph neural network anomaly detection & Improved relational anomaly modeling over flat event features & Requires careful graph construction and relational coverage \\
+Sarker et al./2023 \cite{sarker2023insider} & CERT insider threat data & Machine-learning classification and anomaly detection & Reported F1 behavior for insider detection tasks & Benchmark imbalance limits operational generalization \\
+Zhang et al./2023 \cite{zhang2023supervised} & CERT r4.2 & Supervised learning with balanced training and random forest & Reported accuracy and F1 up to 95.9\% in balanced settings & Balanced evaluation may overstate field performance \\
+Ali et al./2023 \cite{ali2023xai} & Cybersecurity literature & Systematic review of explainable AI methods & Identified SHAP/LIME-style explanation needs & Review-level work without new insider deployment \\
+Sarhan and Altwaijry/2024 \cite{balanced2024imbalance} & CERT r4.2 and r5.2 & Sampling and temporal-sequence learning & Improved balanced accuracy and anomaly-detection behavior & Sampling can alter natural prevalence \\
+Liu et al./2024 \cite{liu2024graph} & Graph-based insider studies & Survey of graph-based insider threat detection & Established value of relational modeling & Does not provide a unified detector \\
+Li et al./2024 \cite{asg2024} & CERT insider threat data & Associated session graph and graph neural network & Demonstrated session-graph potential for monitoring & Requires adaptive learning for real-time deployment \\
+Kumar/2025 \cite{cloudxai2025} & CERT, ADFA-LD, and synthetic logs & SHAP, LIME, and counterfactual explanations & Reported 94.5\% accuracy and 27\% false-positive reduction & Cloud setting may not represent sanitization fully \\
+Rahman and Islam/2026 \cite{aibitd2026} & CERT r4.2 & Isolation Forest, PCA, autoencoder, LSTM-AE, and SHAP & Improved risk ranking, robustness, and response integration & Prioritizes ranking consistency over direct malicious recall \\
+Hassan et al./2026 \cite{illuminating2026} & CERT r5.2 & Ensemble learning, filtering, SHAP, LIME, and language explanation & Improved interpretability for session classification & Explanation quality depends on model and feature quality \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The reviewed works show that insider threat detection has progressed from reconstruction-based anomaly detection to graph-aware, explainable, and operationally calibrated systems. Additional security analytics studies also emphasize ensemble learning, deep sequence modeling, graph representation learning, explainable risk scoring, class-imbalance control, and adversarial robustness as complementary foundations for insider-threat monitoring \cite{ghosh2021survey,le2021log,nguyen2021xai,shen2022sequence,wang2022graph,ahmad2022cyberxai,patel2023ensemble,kim2023bertlogs,chen2024federated,park2024zero,garcia2025adaptive,okafor2025privacy,zhou2026trustworthy,ibrahim2026soc}. However, the literature still shows recurring limitations: dependence on synthetic CERT scenarios, sensitivity to imbalance handling, limited reporting of malicious recall at fixed thresholds, and incomplete integration of low-and-slow robustness. The present study responds to these gaps by combining relational, temporal, peer-relative, and sequential features with leakage-controlled threshold selection, ablation, distribution-shift evaluation, and explanation artifacts.
+
+\input{verified_update}

@@ -1,0 +1,17 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+This dissertation investigated the detection of digital sanitization behaviors across two operational extremes: post-hoc file-deletion forensic analysis and real-time enterprise authentication telemetry. Through rigorous, leakage-aware evaluation methodologies, it identified a critical vulnerability in how rare-event cybersecurity models are validated.
+
+The central meta-finding of this work is that apparently high-performing machine learning detectors are frequently driven by evaluation artifacts. In Study A, SMOTE-CV evaluation masked the deployment reality that simpler models like SVMs are more robust to true class imbalance and adversarial feature suppression than complex ensembles. In Study B, held-out metrics of 1.0 for PR-AUC and Macro-F1 were revealed by SHAP and ablation to be entirely dependent on temporal sampling leakage, completely failing under distribution shift.
+
+\section{Summary of Contributions}
+By comparing these two environments, this work contributes:
+\begin{enumerate}
+    \item A demonstration that standard resampling and cross-validation techniques are insufficient, and often harmful, when validating forensic and insider-threat detection models.
+    \item Evidence that temporal proxy variables can silently dominate high-dimensional telemetry models, necessitating explicit out-of-distribution and temporal-ablation stress testing.
+    \item A blueprint for using explainability tools (SHAP and LIME) not merely as user-facing interpretation aids, but as critical diagnostic instruments for verifying model behavior prior to deployment.
+\end{enumerate}
+
+\section{Future Work}
+Future research should focus on developing cross-organizational benchmarking datasets that accurately preserve temporal and relational structures without injecting artifactual boundaries between benign and malicious classes. Moreover, the logical next step for operational security is to bridge the two layers studied here, constructing a multi-modal pipeline that correlates real-time authentication anomalies with downstream file-system sanitization events in a unified, adversarially robust framework.

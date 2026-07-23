@@ -1,0 +1,16 @@
+\chapter{Cross-Study Synthesis and Discussion}
+\label{ch:synthesis}
+
+This chapter synthesizes the findings of Study A and Study B, drawing explicit connections between the post-hoc forensic environment and the real-time enterprise telemetry environment.
+
+\section{The Pervasiveness of Evaluation Artifacts}
+The most significant finding shared across both studies is the degree to which evaluation artifacts can dominate apparent model performance in rare-event security research. Study A demonstrated that relying on SMOTE-resampled cross-validation scores significantly overstates deployable capability when the system faces true imbalanced distributions. Study B compounded this warning, demonstrating that even with rigorous held-out test sets and explicit leakage controls, a dataset's underlying temporal sampling structure (e.g., \texttt{hour\_cos}) can create near-perfect classification boundaries that vanish completely under temporal ablation or distribution shift. Together, these results argue that headline metrics like ROC-AUC or Macro-F1 are untrustworthy in this domain unless accompanied by out-of-distribution stress tests and interpretability analysis.
+
+\section{Explainability Differences: Forensic vs. Telemetry Space}
+The utility of explainability tools like SHAP and LIME differs significantly depending on the feature space. In Study A's file-deletion logs, the features (e.g., deletion volume, specific directories) provided actionable forensic evidence that could guide an investigator. In Study B's telemetry space, SHAP's primary utility was not in aiding human triage of legitimate behavioral alerts, but rather as an indispensable diagnostic tool for uncovering the model's reliance on temporal proxy leakage. This demonstrates that explainability is not just a tool for end-user trust, but a fundamental prerequisite for valid model development in cybersecurity.
+
+\section{Requirements for a Unified Forensic and Telemetry System}
+Detecting digital sanitization effectively requires combining these layers. A real-time telemetry model must detect the anomalous authentication or process creation events that precede a data-destruction attack, passing those alerts to a post-hoc forensic model that analyzes the resulting file-system modifications. Both systems must be calibrated to true base rates and robust against adversaries attempting to suppress key features or shift their temporal activity to mimic normal administrative rhythms.
+
+\section{Shared Limitations}
+Both studies share limitations inherent to this domain. Both were constrained to specific organizational datasets (LANL and the forensic dataset used in Study A), which limits claims of universal generalizability across arbitrary IT environments. Furthermore, while both studies modeled digital sanitization and anti-forensic behaviors, they stopped short of building a unified, multi-modal pipeline that simultaneously processes both real-time authentication graphs and file-system artifacts.

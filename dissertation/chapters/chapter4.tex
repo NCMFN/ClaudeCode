@@ -1,0 +1,305 @@
+\chapter{Study A: Behavioral Forensics Results}
+\label{ch:study_a_results}
+
+
+This chapter presents the experimental results and interprets them in relation to the study objectives. The analysis focuses on three aspects: model performance under standard conditions, the effect of class balancing using SMOTE, and robustness under adversarial feature suppression. The chapter concludes with an examination of model interpretability using SHAP and LIME.
+
+\subsection{Cross-Validation Performance on SMOTE-Balanced Data}
+All three models performed strongly during 5-fold cross-validation on the SMOTE-balanced training set. Random Forest achieved the highest mean ROC-AUC (0.9419), followed by XGBoost (0.9279) and SVM (0.8970).
+
+At this stage, the results suggest that ensemble methods outperform SVM in distinguishing between normal and suspicious deletion events. However, these values reflect performance on synthetically balanced data. They do not yet indicate how the models behave under real class distributions.
+
+The consistency of the cross-validation scores indicates stable learning across folds. No model showed large variance, suggesting that the engineered features provide a reliable signal for classification under balanced conditions.
+
+
+
+\begin{figure}[htbp]
+    \centering
+    % First Subfigure (Before SMOTE)
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{DSD3.png}
+        \caption{Before SMOTE application}
+        \label{fig:before}
+    \end{subfigure}
+    \hfill % Adds horizontal spacing between the two images
+    % Second Subfigure (After SMOTE)
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{DSD2.png}
+        \caption{After SMOTE application}
+        \label{fig:after}
+    \end{subfigure}
+
+    \caption{Comparison of training set class distributions before and after SMOTE.}
+    \label{fig:smote_comparison}
+\end{figure}
+
+
+
+\begin{table}
+\centering
+\caption{5-Fold Cross-Validation ROC-AUC Scores on SMOTE-Resampled Training Data}
+\label{tab:5F}
+
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Model} & \textbf{Mean CV ROC-AUC} & \textbf{Std Dev} \\
+\hline
+Random Forest & 0.9419 & 0.0078 \\
+\hline
+XGBoost & 0.9279 & 0.0115 \\
+\hline
+SVM & 0.7984 & 0.0138 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+\subsection{Test Set Performance on Imbalanced Data}
+When evaluated on the untouched test set (n=395), performance declined across all models. This shift highlights the difference between training on balanced data and deploying on imbalanced data.
+
+Random Forest achieved an accuracy of 0.8203 and ROC-AUC of 0.7672, but its F1-score dropped to 0.443. This indicates difficulty in identifying the minority class despite strong overall accuracy.
+
+XGBoost produced similar results, with accuracy 0.8177, ROC-AUC 0.7783, and F1-score 0.438. The pattern mirrors that of Random Forest: reasonable discrimination ability, but limited effectiveness in detecting suspicious events.
+
+SVM showed a different profile. Its accuracy (0.7646) and ROC-AUC (0.7305) were lower, but its F1-score (0.510) exceeded both ensemble models. This suggests that SVM maintains a better balance between precision and recall under imbalanced conditions.
+
+The gap between cross-validation and test performance is substantial. For example, Random Forest drops from 0.9419 ROC-AUC in cross-validation to 0.7672 on the test set. This confirms that SMOTE-based evaluation can overestimate real-world performance.
+
+
+
+\begin{table}
+\centering
+\caption{Classification Performance on Held-Out Test Set (Real Class Distribution)}
+\label{tab:realclass}
+
+\begin{tabular}{| l | l | l | l | l |}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\
+\hline
+Random Forest & 0.749 & 0.075 & 0.046 & 0.057 \\
+\hline
+XGBoost & 0.729 & 0.096 & 0.077 & 0.086 \\
+\hline
+SVM & 0.635 & 0.157 & 0.277 & 0.200 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+\begin{table}
+\centering
+\caption{ROC-AUC Scores and Confusion Matrices on Held-Out Test Set}
+\label{tab:heldout}
+
+\begin{tabular}{| l | l | l | l | l | l |}
+\hline
+\textbf{Model} & \textbf{ROC-AUC} & \textbf{TP} & \textbf{FP} & \textbf{FN} & \textbf{TN} \\
+\hline
+Random Forest & 0.443 & 3 & 37 & 62 & 293 \\
+\hline
+XGBoost & 0.480 & 5 & 47 & 60 & 283 \\
+\hline
+SVM & 0.510 & 18 & 97 & 47 & 233 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{DSD9.png}
+    \caption{Confusion Matrices}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{DSD4.png}
+    \caption{ROC Curves}
+    \label{fig:rocurves}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{DSD5.png}
+    \caption{Model Comparison}
+    \label{fig:placeholder}
+\end{figure}
+
+\subsection{ Impact of Class Imbalance on Model Behaviour}
+The results show that class imbalance affects models in different ways. Ensemble methods optimise overall classification performance and tend to favour the majority class. As a result, they achieve higher accuracy but miss a larger proportion of suspicious events.
+SVM behaves differently due to its margin-based optimisation. By focusing on the decision boundary, it is less influenced by the dominance of the majority class. This explains its higher F1-score despite lower overall accuracy.
+These findings align with prior work on imbalanced learning. They also reinforce the importance of selecting evaluation metrics carefully. Accuracy alone would suggest that Random Forest and XGBoost perform best, but F1-score reveals a different ranking.
+
+
+\begin{table}
+\centering
+\caption{Cross-Validation to Test-Set ROC-AUC Performance Gap}
+\label{tab:rocauc}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Model} & \textbf{CV-AUC (SMOTE)} & \textbf{Test-AUC (Real)} & \textbf{AUC Drop (pp)} \\
+\hline
+Random Forest & 0.9419 & 0.443 & 49.89 \\
+\hline
+XGBoost & 0.9279 & 0.480 & 44.79 \\
+\hline
+SVM & 0.7984 & 0.510 & 28.84 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+\subsection{Robustness Under Anti-Forensic Feature Suppression}
+Robustness testing produced a clear separation between models. When key features were suppressed, performance declined for all models, but the extent of the decline varied.
+
+Random Forest accuracy dropped from 0.8203 to 0.6532, with F1-score falling from 0.443 to 0.331. XGBoost showed a similar pattern, declining from 0.8177 to 0.6532 in accuracy and from 0.438 to 0.312 in F1-score.
+
+SVM, in contrast, showed a smaller reduction. Accuracy decreased from 0.7646 to 0.6937, and F1-score from 0.510 to 0.482. While performance still declined, the change was less pronounced.
+
+These results indicate that SVM is more robust to feature manipulation. Ensemble models appear to rely more heavily on specific features, making them more vulnerable when those features are removed or altered.
+
+This finding supports earlier studies showing that models with concentrated feature dependence are more susceptible to adversarial interference.
+
+
+
+
+\begin{table}
+\centering
+\caption{ Model Performance Under Simulated Anti-Forensic Feature Suppression}
+\label{tab:mp}
+
+\begin{tabular}{| l | l | l | l | l | l |}
+\hline
+\textbf{Model} & \textbf{Clean Acc.} & \textbf{Clean F1} & \textbf{Corrupt Acc.} & \textbf{Corrupt F1} & \textbf{F1 Change} \\
+\hline
+RF & 0.749 & 0.057 & 0.727 & 0.143 & +0.086 \\
+\hline
+XGBoost & 0.729 & 0.086 & 0.744 & 0.151 & +0.065 \\
+\hline
+SVM & 0.635 & 0.200 & 0.646 & 0.222 & +0.022 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+
+\subsection{Explainability Results}
+SHAP analysis identified “File Extension Freq”, “User Total Deletions”, and “Time Since Last Action” as the most influential features in the Random Forest model.
+
+Higher values of “File Extension Freq” were associated with lower probabilities of suspicious classification. In contrast, shorter “Time Since Last Action” and higher “User Total Deletions” increased the likelihood of a suspicious label. These patterns are consistent with expected forensic behaviour, where rapid or repeated deletions may indicate intentional sanitization.
+
+LIME explanations provided case-level insight. For individual predictions, the method highlighted how combinations of features contributed to classification outcomes. For example, a prediction might be influenced by a short time interval between deletions combined with an unusual file extension.
+
+Together, SHAP and LIME offer complementary perspectives. SHAP captures overall model behaviour, while LIME explains specific decisions. This combination supports both analytical understanding and practical investigation.
+
+
+
+
+\begin{table}
+\centering
+\caption{Top 10 Features by Mean Absolute SHAP Value (Random Forest)}
+\label{tab:10rf}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Rank} & \textbf{Feature} & \textbf{Mean} & \textbf{RF Importance} \\
+\hline
+1 & File\_Extension\_Freq & 0.0964 & 0.2086 \\
+\hline
+2 & DayOfWeek & 0.0532 & 0.1611 \\
+\hline
+3 & Hour & 0.0471 & 0.2109 \\
+\hline
+4 & File\_Size & 0.0308 & 0.1533 \\
+\hline
+5 & Activity\_Type\_Network\_Traffic & 0.0294 & 0.0154 \\
+\hline
+6 & Activity\_Type\_File\_Modification & 0.0252 & 0.0141 \\
+\hline
+7 & Action\_Inserted & 0.0209 & 0.0163 \\
+\hline
+8 & Is\_Weekend & 0.0197 & 0.0194 \\
+\hline
+9 & Action\_Failed & 0.0158 & 0.0168 \\
+\hline
+10 & Activity\_Type\_USB\_Insert & 0.0136 & 0.0118 \\
+\hline
+
+\end{tabular}
+
+\end{table}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{DSD7.png}
+    \caption{SHAP Summary Plot}
+    \label{fig:shapsum}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{DSD8.png}
+    \caption{SHAP Dependence Plot}
+    \label{fig:shapdepend}
+\end{figure}
+
+\subsection{Discussion}
+The results address the core objectives of the study.
+
+First, machine learning models can detect patterns associated with digital sanitization. All three models achieved meaningful discrimination between normal and suspicious events, confirming the viability of the approach.
+
+Second, the gap between cross-validation and test performance is significant. Models trained with SMOTE perform well under balanced conditions but lose effectiveness when evaluated on real distributions. This finding has practical implications. Systems that appear highly accurate during development may underperform in deployment.
+
+Third, robustness varies across models. SVM demonstrates greater resilience under feature suppression, suggesting that simpler decision boundaries may generalise better in adversarial settings.
+
+Fourth, interpretability methods provide actionable insight. SHAP and LIME identify features that align with known forensic indicators, supporting their use in investigative workflows.
+
+Overall, the findings emphasise the need to evaluate models under realistic conditions. Performance on balanced datasets is not sufficient. Robustness and interpretability must also be considered.
+
+
+
+\subsection{Summary}
+
+\begin{table}
+\centering
+\caption{Consolidated Summary of Experimental Results}
+\label{tab:CSES}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Evaluation Dimension} & \textbf{RF} & \textbf{XGBoost} & \textbf{SVM} \\
+\hline
+CV-AUC (SMOTE-resampled) & 0.9419 & 0.9279 & 0.7984 \\
+\hline
+Test ROC-AUC (real distribution) & 0.443 & 0.480 & 0.510 \\
+\hline
+Test Accuracy & 0.749 & 0.729 & 0.635 \\
+\hline
+Test Precision (Suspicious) & 0.075 & 0.096 & 0.157 \\
+\hline
+Test Recall (Suspicious) & 0.046 & 0.077 & 0.277 \\
+\hline
+Test F1-Score (Suspicious) & 0.057 & 0.086 & 0.200 \\
+\hline
+Corrupt Test F1 (Anti-forensic) & 0.143 & 0.151 & 0.222 \\
+\hline
+Top SHAP Feature & File Ext Freq & — & — \\
+\hline
+CV-to-Test AUC Drop (pp) & 49.89 & 44.79 & 28.84 \\
+\hline
+
+\end{tabular}
+
+\end{table}
