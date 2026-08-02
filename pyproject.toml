@@ -3,11 +3,9 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "coherence_safe_obfuscation"
+name = "adaptive_ttl_entangled_keys"
 version = "0.1.0"
 dependencies = [
-    "qiskit>=1.0",
-    "qiskit-ibm-runtime",
     "numpy",
     "pandas",
     "matplotlib",

@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: adaptive_ttl_entangled_keys
+Version: 0.1.0
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: pytest
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
