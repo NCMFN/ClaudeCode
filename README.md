@@ -1,40 +1,25 @@
-# Claude Code Resources 🚀
+# Adaptive TTL Policy for Entangled Keys
 
-> A curated collection of the best GitHub repositories to supercharge your Claude Code workflow in 2026.
+A Python research simulator for a telemetry-driven buffer-flush policy for quantum key distribution systems.
 
----
+## Overview
+Bell pairs held in quantum memory decohere over time ($T_2$ relaxation). Classical confirmation signals carrying key-validity info travel at network speed and are subject to latency/jitter. If confirmation arrives after fidelity drops below 0.85, the key is a security liability ("Zombie Data"). This policy monitors real-time RTT, computes fidelity decay, and flushes the buffer before that threshold is crossed.
 
-## 📚 Top 12 Repos That Will 10x Your Next Project
+## Model and Assumptions
+- **Fidelity Decay**: $F(t) = 0.5 + 0.5 \times \exp(-t / T_2)$, where $t$ is the measured classical RTT latency.
+- **T2 Regimes**:
+  - **IonQ Aria**: $T_2 \approx 1.0$ s (Source: [IonQ Aria Capabilities](https://www.ionq.com/quantum-systems/aria))
+  - **AQT Ring Chip**: $T_2 \approx 50$ ms typical (Source: [AQT Capabilities](https://aqt.lbl.gov/about-aqt/collaborate-with-us/aqt-capabilities/))
+- **RTT Data**: Uses the [Seattle dataset](https://github.com/uofa-rzhu3/NetLatency-Data) (99x99 RTT matrices, 688 time slices).
+  - *Note*: RTT data is not genuinely time-correlated with real quantum hardware runs. This simulator is a synthetic fusion of independent public datasets, not a validated end-to-end experiment.
 
-| # | Repository | Description |
-|---|------------|-------------|
-| 1 | [Claude Mem](https://github.com/thedotmack/claude-mem) | Persistent memory across sessions — stop re-teaching Claude your codebase |
-| 2 | [UI UX Pro Max](https://github.com/czlonkowski/n8n-mcp) | 50+ styles, 161 color palettes, 99 UX guidelines — Claude stops building ugly UIs |
-| 3 | [n8n-MCP](https://github.com/czlonkowski/n8n-mcp) | Connect Claude Code to 400+ n8n integrations via MCP |
-| 4 | [LightRAG](https://github.com/hkuds/lightrag) | Graph + vector RAG — lets Claude understand large codebases structurally |
-| 5 | [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) | Skills, instincts, security scanning, multi-language coverage — full agent harness |
-| 6 | [Awesome Claude Code](https://github.com/sickn33/antigravity) | Community bible — curated skills, hooks, slash commands, orchestrators |
-| 7 | [Superpowers](https://github.com/obra/superpowers) | Forces structured thinking before writing a single line of code |
-| 8 | [Claude Code Ultimate Guide](https://github.com/FlorianBruniau/claude-code-ultimate-guide) | 23K+ lines of docs, 219 templates, 271 quizzes — beginner to power user |
-| 9 | [Antigravity Awesome Skills](https://github.com/sickn33/antigravity) | 1,200+ ready-to-use skills — one of the largest collections |
-| 10 | [Claude Agent Blueprints](https://github.com/danielrosehill/claude-agent-blueprints) | 75+ agent workspace templates beyond coding |
-| 11 | [VoiceMode MCP](https://github.com/mbailey/voicemode) | Natural voice conversations with Claude Code via Whisper + Kokoro |
-| 12 | [Awesome Claude Plugins](https://github.com/ComposioHQ/awesome-claude-plugins) | 9,000+ repos indexed with adoption metrics — find what people actually install |
+## Output Locations
+- **Raw Simulation Outputs**: `src/outputs/raw/` (CSV logs and Open MCT JSON schema).
+- **Figures**: `src/outputs/figures/` (10 generated plots).
+- **Tables**: `src/outputs/tables/` (10 generated CSV tables).
+- **Manifest**: `src/outputs/source_manifest.json` mapping all artifacts to their source computations.
 
----
+## Usage
+- To run the simulator: `python3 src/simulate.py`
+- To generate figures and tables: `python3 src/reporting/generate_outputs.py`
 
-## 🗂️ How to Update This Repo
-
-See [RESOURCES.md](./RESOURCES.md) for the full step-by-step guide on keeping this repository up to date.
-
----
-
-## 🔗 Official Claude Code Links
-
-- 📖 [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
-- 📦 [npm Package](https://www.npmjs.com/package/@anthropic-ai/claude-code)
-- 🌐 [Anthropic](https://www.anthropic.com)
-
----
-
-*Last updated: April 2026*
