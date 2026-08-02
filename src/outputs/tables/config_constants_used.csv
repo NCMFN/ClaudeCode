@@ -1,0 +1,4 @@
+constant,value,source_citation
+eta,0.1,default configuration
+dummy_gate_name,id,default configuration
+backend,FakeSherbrooke,default configuration

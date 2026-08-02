@@ -1,0 +1,4 @@
+circuit,stage,time_s
+ghz,obfuscation,0.0019321441650390625
+qft,obfuscation,0.0024650096893310547
+vqe,obfuscation,0.002450704574584961

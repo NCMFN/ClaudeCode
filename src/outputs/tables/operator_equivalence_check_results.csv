@@ -1,0 +1,4 @@
+circuit,operator_equivalence_passed,max_deviation
+ghz,True,0.0
+qft,True,0.0
+vqe,True,0.0
