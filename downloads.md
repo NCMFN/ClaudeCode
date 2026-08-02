@@ -1,37 +1,9 @@
 # Downloads
-
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- [Fidelity vs RTT (IonQ Aria)](outputs/fidelity_vs_rtt_ionq_aria.png)
+- [Fidelity vs RTT (AQT Ring)](outputs/fidelity_vs_rtt_aqt_ring.png)
+- [Policy Comparison (IonQ Aria)](outputs/policy_comparison_ionq_aria.png)
+- [Policy Comparison (AQT Ring)](outputs/policy_comparison_aqt_ring.png)
+- [Simulation Results CSV (IonQ Aria)](outputs/simulation_results_ionq_aria.csv)
+- [Simulation Results CSV (AQT Ring)](outputs/simulation_results_aqt_ring.csv)
+- [Telemetry JSON (IonQ Aria)](outputs/telemetry_ionq_aria.json)
+- [Telemetry JSON (AQT Ring)](outputs/telemetry_aqt_ring.json)
