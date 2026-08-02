@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coherence_safe_obfuscation"
+version = "0.1.0"
+description = "A latency-adaptive quantum circuit obfuscation pass."
+dependencies = [
+    "qiskit>=1.0",
+    "qiskit-ibm-runtime",
+    "numpy",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
