@@ -1,0 +1,13 @@
+rtt_threshold_ms: 150
+block_size_high_latency_bits: 50000
+block_size_low_latency_bits: 200000
+qber_range: [0.02, 0.05]
+# Brassard & Salvail (1994) or standard LDPC efficiency references (e.g., Elkouss et al. 2009)
+error_correction_efficiency_f: 1.16
+epsilon_security: 1.0e-10
+random_seed: 42
+rtt_data_source: "wondernetwork"
+n_simulation_runs: 2
+# Time-to-Key proxy metric illustrative constants: T2K = c1 * block_size + c2 * rtt
+c1: 0.001
+c2: 1.0
