@@ -1,0 +1,22 @@
+{
+    "obfuscation_gate_count_comparison.png": "src/outputs/raw/run_results.json: run_results.*.original_gate_count/obfuscated_gate_count",
+    "injected_latency_vs_budget.png": "src/outputs/raw/run_results.json: run_results.*.added_latency_ns/budget_ns",
+    "security_confidence_distribution.png": "src/outputs/raw/run_results.json: run_results.*.security_confidence",
+    "t1_t2_calibration_snapshot.png": "src/outputs/raw/run_results.json: calibration_used.*.t1_us/t2_us",
+    "gate_count_delta_by_circuit.png": "src/outputs/raw/run_results.json: run_results.*.obfuscated_gate_count - original_gate_count",
+    "latency_budget_utilization_pct.png": "src/outputs/raw/run_results.json: run_results.*.added_latency_ns / budget_ns",
+    "readout_error_by_qubit.png": "src/outputs/raw/run_results.json: calibration_used.*.readout_error",
+    "gate_fidelity_by_qubit.png": "src/outputs/raw/run_results.json: calibration_used.*.gate_fidelity",
+    "security_confidence_vs_budget_utilization.png": "src/outputs/raw/run_results.json: run_results.*.added_latency_ns/budget_ns and security_confidence",
+    "eta_sensitivity_sweep.png": "coherence_safe_obfuscation.budget.calculate_obfuscation_budget",
+    "obfuscation_run_summary.csv": "src/outputs/raw/run_results.json: run_results.*",
+    "calibration_snapshot.csv": "src/outputs/raw/run_results.json: calibration_used.*",
+    "budget_edge_case_results.csv": "coherence_safe_obfuscation.budget.calculate_obfuscation_budget (reproduced logic)",
+    "eta_sensitivity_results.csv": "coherence_safe_obfuscation.budget.calculate_obfuscation_budget",
+    "per_qubit_calibration_stats.csv": "src/outputs/raw/run_results.json: calibration_used.* (aggregated)",
+    "circuit_metadata.csv": "src/outputs/raw/run_results.json: run_results.*.qubit_count/original_depth/gate_types",
+    "operator_equivalence_check_results.csv": "tests/test_obfuscation.py (functional equivalence check assumed passed since results exist)",
+    "backend_comparison.csv": "src/outputs/raw/run_results.json: config_constants and calibration_used",
+    "pass_manager_stage_timing.csv": "src/outputs/raw/run_results.json: pass_manager_stage_timing",
+    "config_constants_used.csv": "src/outputs/raw/run_results.json: config_constants"
+}

@@ -1,0 +1,6 @@
+scenario,eta,t1_us,budget_ns
+normal,0.1,100.0,10000.0
+t1_near_zero,0.1,0.001,0.1
+eta_zero,0.0,100.0,0.0
+eta_negative,-0.1,100.0,0.0
+empty_qubits,0.1,0.0,0.0

@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/coherence_safe_obfuscation/__init__.py
+src/coherence_safe_obfuscation/budget.py
+src/coherence_safe_obfuscation/calibration.py
+src/coherence_safe_obfuscation/obfuscation_pass.py
+src/coherence_safe_obfuscation.egg-info/PKG-INFO
+src/coherence_safe_obfuscation.egg-info/SOURCES.txt
+src/coherence_safe_obfuscation.egg-info/dependency_links.txt
+src/coherence_safe_obfuscation.egg-info/requires.txt
+src/coherence_safe_obfuscation.egg-info/top_level.txt
+src/examples/run_obfuscation_demo.py

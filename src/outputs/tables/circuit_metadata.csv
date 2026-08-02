@@ -1,0 +1,4 @@
+circuit,qubit_count,original_depth,gate_types_used
+ghz,3,3,"cx, h"
+qft,4,1,QFT
+vqe,4,1,RealAmplitudes
