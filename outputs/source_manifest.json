@@ -1,0 +1,30 @@
+{
+    "figures": [
+        {
+            "filename": "fidelity_decay_vs_threshold.png",
+            "source": "model equations + rtt limits"
+        },
+        {
+            "filename": "flush_hold_comparison_adaptive_vs_static.png",
+            "source": "outputs/raw/simulation_results_*.csv"
+        },
+        {
+            "filename": "zombie_key_exposure_rate.png",
+            "source": "outputs/raw/simulation_results_*.csv"
+        }
+    ],
+    "tables": [
+        {
+            "filename": "policy_event_log_summary.csv",
+            "source": "outputs/raw/simulation_results_*.csv"
+        },
+        {
+            "filename": "zombie_vs_early_flush_tradeoff.csv",
+            "source": "outputs/raw/simulation_results_*.csv"
+        },
+        {
+            "filename": "t2_regime_comparison.csv",
+            "source": "outputs/raw/simulation_results_*.csv"
+        }
+    ]
+}

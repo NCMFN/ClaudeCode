@@ -1,0 +1,10 @@
+Column,Dtype,Null_Count,Unique_Count
+timestamp,str,0,688
+rtt,float64,0,107
+true_fidelity,float64,0,107
+adaptive_action,str,0,2
+static_action,str,0,2
+zombie_adaptive,float64,0,1
+unnecessary_flush_adaptive,float64,0,1
+zombie_static,float64,0,1
+unnecessary_flush_static,float64,0,2

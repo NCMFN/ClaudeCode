@@ -79,7 +79,7 @@ def run_simulation(data_dir: str, output_dir: str, t2_key: str = 'aqt_ring', sta
 if __name__ == "__main__":
     base_dir = os.path.dirname(__file__)
     data_path = os.path.join(base_dir, 'NetLatency-Data', 'Seattle')
-    output_path = os.path.join(base_dir, 'outputs')
+    output_path = os.path.join(base_dir, 'outputs/raw')
 
     # We will simulate for both hardware regimes
     # For IonQ Aria, T2 = 1.0s. Let's use a static timeout of 0.3s (just for comparison)
