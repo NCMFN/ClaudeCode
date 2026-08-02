@@ -1,0 +1,12 @@
+Constant,Value,Source_Citation
+rtt_threshold_ms,150,Project Specs
+block_size_high_latency_bits,1024,Project Specs
+block_size_low_latency_bits,4096,Project Specs
+qber_range,"[0.02, 0.05]",Project Specs
+error_correction_efficiency_f,1.16,Brassard and Salvail (1993)
+epsilon_security,1e-10,Project Specs
+random_seed,42,Project Specs
+rtt_data_source,wondernetwork,Project Specs
+n_simulation_runs,2,Project Specs
+t2k_c1,0.005,Project Specs
+t2k_c2,0.1,Project Specs

@@ -1,0 +1,4 @@
+Policy,Availability_Percent,Failure_Rate_Percent
+dbs,0.0,100.0
+fixed_large,0.0,100.0
+fixed_small,0.0,100.0

@@ -1,0 +1,2 @@
+source_url,row_count_used,date_range,sha256,source_node,dest_node
+https://wp-public-data.s3.amazonaws.com/pings/pings-2020-07-19-2020-07-20.csv.gz,1504,"['2020-07-19 00:46:55.000', '2020-07-20 23:46:54.000']",46617678d0180d784cdfb0eabb3e5918952fc7cb25d64a4a0c11fdd9278d9a97,155,32
