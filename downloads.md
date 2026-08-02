@@ -34,4 +34,6 @@ This file serves as a template for managing downloads for various tasks and proj
 
 ---
 
-*Customize the sections above by filling in the details relevant to your project.*
+*Customize the sections above by filling in the details relevant to your project.** [Outputs - Figures](./src/outputs/figures)
+* [Outputs - Tables](./src/outputs/tables)
+* [Outputs - Raw Data](./src/outputs/raw)

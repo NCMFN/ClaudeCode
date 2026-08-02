@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coherence_safe_obfuscation"
+version = "0.1.0"
+description = "A latency-adaptive compiler pass for hiding quantum circuit structure while adhering to decoherence budgets."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "qiskit>=2.0",
+    "qiskit-ibm-runtime",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "pytest"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]

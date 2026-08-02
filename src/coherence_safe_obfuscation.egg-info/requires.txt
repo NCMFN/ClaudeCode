@@ -1,0 +1,9 @@
+qiskit>=2.0
+qiskit-ibm-runtime
+numpy
+pandas
+matplotlib
+pytest
+
+[dev]
+pytest
