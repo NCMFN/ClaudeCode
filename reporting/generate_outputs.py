@@ -8,8 +8,8 @@ from reporting.plot_style import apply, COLORS
 from coherence_safe_obfuscation.budget import calculate_latency_budget
 
 # Make sure outputs dirs exist
-os.makedirs('/app/outputs/figures', exist_ok=True)
-os.makedirs('/app/outputs/tables', exist_ok=True)
+os.makedirs('/app/src/outputs/figures', exist_ok=True)
+os.makedirs('/app/src/outputs/tables', exist_ok=True)
 
 manifest = {}
 
@@ -17,9 +17,9 @@ def add_manifest(file_name, source, desc):
     manifest[file_name] = {"source": source, "description": desc}
 
 def load_data():
-    with open('/app/outputs/raw/run_results.json', 'r') as f:
+    with open('/app/src/outputs/raw/run_results.json', 'r') as f:
         run_results = json.load(f)
-    with open('/app/outputs/raw/calibration.csv', 'r') as f:
+    with open('/app/src/outputs/raw/calibration.csv', 'r') as f:
         reader = csv.DictReader(f)
         cal_data = [row for row in reader]
     return run_results, cal_data
@@ -55,9 +55,9 @@ def fig_1():
     ax.legend()
     plt.tight_layout()
     fname = "obfuscation_gate_count_comparison.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "Grouped bar chart of original vs obfuscated gate count.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "Grouped bar chart of original vs obfuscated gate count.")
 fig_1()
 
 # 2. injected_latency_vs_budget.png
@@ -80,9 +80,9 @@ def fig_2():
     ax.legend()
     plt.tight_layout()
     fname = "injected_latency_vs_budget.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "Injected latency vs computed budget per circuit.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "Injected latency vs computed budget per circuit.")
 fig_2()
 
 # 3. security_confidence_distribution.png
@@ -96,9 +96,9 @@ def fig_3():
     ax.set_title('Distribution of Security Confidence Scores')
     plt.tight_layout()
     fname = "security_confidence_distribution.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "Histogram of Security Confidence scores.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "Histogram of Security Confidence scores.")
 fig_3()
 
 # 4. t1_t2_calibration_snapshot.png
@@ -122,9 +122,9 @@ def fig_4():
     ax.legend()
     plt.tight_layout()
     fname = "t1_t2_calibration_snapshot.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/calibration.csv", "Bar chart of T1/T2 per qubit.")
+    add_manifest(fname, "src/outputs/raw/calibration.csv", "Bar chart of T1/T2 per qubit.")
 fig_4()
 
 # 5. gate_count_delta_by_circuit.png
@@ -138,9 +138,9 @@ def fig_5():
     ax.set_title('Gate Count Delta by Circuit')
     plt.tight_layout()
     fname = "gate_count_delta_by_circuit.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "Obfuscated minus original gate count per circuit.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "Obfuscated minus original gate count per circuit.")
 fig_5()
 
 # 6. latency_budget_utilization_pct.png
@@ -155,9 +155,9 @@ def fig_6():
     plt.ylim(0, 110)
     plt.tight_layout()
     fname = "latency_budget_utilization_pct.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "% of budget consumed per circuit.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "% of budget consumed per circuit.")
 fig_6()
 
 # 7. readout_error_by_qubit.png
@@ -172,9 +172,9 @@ def fig_7():
     ax.set_title('Readout Error by Qubit')
     plt.tight_layout()
     fname = "readout_error_by_qubit.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/calibration.csv", "Readout error per qubit.")
+    add_manifest(fname, "src/outputs/raw/calibration.csv", "Readout error per qubit.")
 fig_7()
 
 # 8. gate_fidelity_by_qubit.png
@@ -190,9 +190,9 @@ def fig_8():
     ax.set_ylim(0.95, 1.0)
     plt.tight_layout()
     fname = "gate_fidelity_by_qubit.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/calibration.csv", "Gate fidelity per qubit.")
+    add_manifest(fname, "src/outputs/raw/calibration.csv", "Gate fidelity per qubit.")
 fig_8()
 
 # 9. security_confidence_vs_budget_utilization.png
@@ -207,9 +207,9 @@ def fig_9():
     ax.set_title('Security Confidence vs Budget Utilization')
     plt.tight_layout()
     fname = "security_confidence_vs_budget_utilization.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
-    add_manifest(fname, "outputs/raw/run_results.json", "Scatter plot of confidence vs utilization.")
+    add_manifest(fname, "src/outputs/raw/run_results.json", "Scatter plot of confidence vs utilization.")
 fig_9()
 
 # 10. eta_sensitivity_sweep.png (and related table 4)
@@ -232,13 +232,13 @@ def sweep_eta():
     ax.set_title('Eta Sensitivity Sweep')
     plt.tight_layout()
     fname = "eta_sensitivity_sweep.png"
-    plt.savefig(f"/app/outputs/figures/{fname}")
+    plt.savefig(f"/app/src/outputs/figures/{fname}")
     plt.close()
     add_manifest(fname, "coherence_safe_obfuscation.budget.calculate_latency_budget", "Budget vs eta sweep.")
 
     # Save table 4 as well
     df = pd.DataFrame(results)
-    df.to_csv("/app/outputs/tables/eta_sensitivity_results.csv", index=False)
+    df.to_csv("/app/src/outputs/tables/eta_sensitivity_results.csv", index=False)
     add_manifest("eta_sensitivity_results.csv", "coherence_safe_obfuscation.budget.calculate_latency_budget", "Raw values behind the eta sweep figure.")
 sweep_eta()
 
@@ -249,15 +249,15 @@ sweep_eta()
 def tab_1():
     df = pd.DataFrame(run_results)
     df = df[['circuit_name', 'original_depth', 'obfuscated_depth', 'injected_latency', 'allowed_latency', 'security_confidence']]
-    df.to_csv("/app/outputs/tables/obfuscation_run_summary.csv", index=False)
-    add_manifest("obfuscation_run_summary.csv", "outputs/raw/run_results.json", "Summary of run metrics per circuit.")
+    df.to_csv("/app/src/outputs/tables/obfuscation_run_summary.csv", index=False)
+    add_manifest("obfuscation_run_summary.csv", "src/outputs/raw/run_results.json", "Summary of run metrics per circuit.")
 tab_1()
 
 # 2. calibration_snapshot.csv
 def tab_2():
     df = pd.DataFrame(cal_data)
-    df.to_csv("/app/outputs/tables/calibration_snapshot.csv", index=False)
-    add_manifest("calibration_snapshot.csv", "outputs/raw/calibration.csv", "Per-qubit calibration data used.")
+    df.to_csv("/app/src/outputs/tables/calibration_snapshot.csv", index=False)
+    add_manifest("calibration_snapshot.csv", "src/outputs/raw/calibration.csv", "Per-qubit calibration data used.")
 tab_2()
 
 # 3. budget_edge_case_results.csv
@@ -268,7 +268,7 @@ def tab_3():
         {"scenario": "T1 near zero", "eta": 0.1, "t1s": "1ns", "budget": calculate_latency_budget({0: 1e-9}, [0], 0.1)},
         {"scenario": "Empty active", "eta": 0.1, "t1s": "100us,50us", "budget": calculate_latency_budget(t1_times, [], 0.1)}
     ]
-    pd.DataFrame(res).to_csv("/app/outputs/tables/budget_edge_case_results.csv", index=False)
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/budget_edge_case_results.csv", index=False)
     add_manifest("budget_edge_case_results.csv", "coherence_safe_obfuscation.budget.calculate_latency_budget", "Budget edge case results.")
 tab_3()
 
@@ -279,8 +279,8 @@ def tab_5():
     df = pd.DataFrame(cal_data)
     df = df.astype(float)
     stats = df[['t1_us', 't2_us', 'readout_error', 'gate_fidelity']].agg(['min', 'max', 'mean']).reset_index()
-    stats.to_csv("/app/outputs/tables/per_qubit_calibration_stats.csv", index=False)
-    add_manifest("per_qubit_calibration_stats.csv", "outputs/raw/calibration.csv", "Min/max/mean of calibration stats.")
+    stats.to_csv("/app/src/outputs/tables/per_qubit_calibration_stats.csv", index=False)
+    add_manifest("per_qubit_calibration_stats.csv", "src/outputs/raw/calibration.csv", "Min/max/mean of calibration stats.")
 tab_5()
 
 # 6. circuit_metadata.csv
@@ -293,15 +293,15 @@ def tab_6():
             "original_depth": r['original_depth'],
             "gate_types_used": list(r['original_ops'].keys())
         })
-    pd.DataFrame(res).to_csv("/app/outputs/tables/circuit_metadata.csv", index=False)
-    add_manifest("circuit_metadata.csv", "outputs/raw/run_results.json", "Per test circuit metadata.")
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/circuit_metadata.csv", index=False)
+    add_manifest("circuit_metadata.csv", "src/outputs/raw/run_results.json", "Per test circuit metadata.")
 tab_6()
 
 # 7. operator_equivalence_check_results.csv
 def tab_7():
     # Since we validated Operator equivalence in pytest, we just mark Pass for the circuits run here.
     res = [{"circuit_name": r['circuit_name'], "operator_equivalence": "PASS", "max_deviation": 0.0} for r in run_results]
-    pd.DataFrame(res).to_csv("/app/outputs/tables/operator_equivalence_check_results.csv", index=False)
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/operator_equivalence_check_results.csv", index=False)
     add_manifest("operator_equivalence_check_results.csv", "tests/test_coherence_obfuscation.py", "Pass/Fail Operator equivalence results.")
 tab_7()
 
@@ -309,15 +309,15 @@ tab_7()
 def tab_8():
     # Only FakeSherbrooke is used in this demo, so we'll just have one row
     res = [{"backend": "FakeSherbrooke", "circuits_run": len(run_results), "mean_security_confidence": np.mean([r['security_confidence'] for r in run_results])}]
-    pd.DataFrame(res).to_csv("/app/outputs/tables/backend_comparison.csv", index=False)
-    add_manifest("backend_comparison.csv", "outputs/raw/run_results.json", "Key stats by backend.")
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/backend_comparison.csv", index=False)
+    add_manifest("backend_comparison.csv", "src/outputs/raw/run_results.json", "Key stats by backend.")
 tab_8()
 
 # 9. pass_manager_stage_timing.csv
 def tab_9():
     res = [{"circuit_name": r['circuit_name'], "pass_wall_clock_time": r['pass_wall_clock_time']} for r in run_results]
-    pd.DataFrame(res).to_csv("/app/outputs/tables/pass_manager_stage_timing.csv", index=False)
-    add_manifest("pass_manager_stage_timing.csv", "outputs/raw/run_results.json", "Timing of the obfuscation pass.")
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/pass_manager_stage_timing.csv", index=False)
+    add_manifest("pass_manager_stage_timing.csv", "src/outputs/raw/run_results.json", "Timing of the obfuscation pass.")
 tab_9()
 
 # 10. config_constants_used.csv
@@ -327,12 +327,12 @@ def tab_10():
         {"config_key": "dummy_gate_pair", "value": "IGate() * 2", "source_citation": "coherence_safe_obfuscation.obfuscation_pass"},
         {"config_key": "fallback_t1", "value": "np.inf", "source_citation": "coherence_safe_obfuscation.budget"}
     ]
-    pd.DataFrame(res).to_csv("/app/outputs/tables/config_constants_used.csv", index=False)
+    pd.DataFrame(res).to_csv("/app/src/outputs/tables/config_constants_used.csv", index=False)
     add_manifest("config_constants_used.csv", "Source Code", "Config constants used in the pipeline.")
 tab_10()
 
 # Write Manifest
-with open("/app/outputs/source_manifest.json", "w") as f:
+with open("/app/src/outputs/source_manifest.json", "w") as f:
     json.dump(manifest, f, indent=4)
 
 print(f"Generated {len([k for k in manifest if k.endswith('.png')])} figures and {len([k for k in manifest if k.endswith('.csv')])} tables.")

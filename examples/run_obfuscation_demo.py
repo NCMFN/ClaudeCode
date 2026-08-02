@@ -37,8 +37,8 @@ def run():
     # Export calibration data
     cal_data = fetch_calibration_from_backend(backend)
 
-    os.makedirs('/app/outputs/raw', exist_ok=True)
-    with open('/app/outputs/raw/calibration.csv', 'w', newline='') as f:
+    os.makedirs('/app/src/outputs/raw', exist_ok=True)
+    with open('/app/src/outputs/raw/calibration.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['qubit_index', 't1_us', 't2_us', 'u2_ns', 'u3_ns', 'readout_error', 'gate_fidelity'])
         for q, data in cal_data.items():
@@ -88,7 +88,7 @@ def run():
             "original_ops": dict(original_translated.count_ops())
         })
 
-    with open('/app/outputs/raw/run_results.json', 'w') as f:
+    with open('/app/src/outputs/raw/run_results.json', 'w') as f:
         json.dump(run_results, f, indent=4)
 
     print("Demo completed successfully. Raw results saved.")
