@@ -1,0 +1,5 @@
+Regime,Policy,Zombie_Count,Zombie_Rate,Premature_Flush_Count,Premature_Flush_Rate
+IonQ Aria,Adaptive,0,0.0,0,0.0
+IonQ Aria,Static,0,0.0,25,0.036337209302325583
+AQT,Adaptive,0,0.0,0,0.0
+AQT,Static,13,0.0188953488372093,0,0.0

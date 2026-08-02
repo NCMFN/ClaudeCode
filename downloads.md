@@ -1,37 +1,37 @@
 # Downloads
+- [Fidelity vs RTT (IonQ Aria)](outputs/fidelity_vs_rtt_ionq_aria.png)
+- [Fidelity vs RTT (AQT Ring)](outputs/fidelity_vs_rtt_aqt_ring.png)
+- [Policy Comparison (IonQ Aria)](outputs/policy_comparison_ionq_aria.png)
+- [Policy Comparison (AQT Ring)](outputs/policy_comparison_aqt_ring.png)
+- [Simulation Results CSV (IonQ Aria)](outputs/simulation_results_ionq_aria.csv)
+- [Simulation Results CSV (AQT Ring)](outputs/simulation_results_aqt_ring.csv)
+- [Telemetry JSON (IonQ Aria)](outputs/telemetry_ionq_aria.json)
+- [Telemetry JSON (AQT Ring)](outputs/telemetry_aqt_ring.json)
+- [Fidelity Decay Curve (IonQ Aria)](outputs/figures/01_fidelity_decay_curve_ionq.png)
+- [Fidelity Decay Curve (AQT Ring)](outputs/figures/02_fidelity_decay_curve_aqt.png)
+- [RTT Distribution Histogram](outputs/figures/03_rtt_distribution_histogram.png)
+- [Fidelity Distribution (IonQ Aria)](outputs/figures/04_fidelity_distribution_ionq.png)
+- [Fidelity Distribution (AQT Ring)](outputs/figures/05_fidelity_distribution_aqt.png)
+- [Policy Actions Bar (IonQ Aria)](outputs/figures/06_policy_actions_bar_ionq.png)
+- [Policy Actions Bar (AQT Ring)](outputs/figures/07_policy_actions_bar_aqt.png)
+- [Error Types Comparison (IonQ Aria)](outputs/figures/08_error_types_comparison_ionq.png)
+- [Error Types Comparison (AQT Ring)](outputs/figures/09_error_types_comparison_aqt.png)
+- [RTT Timeseries Trace](outputs/figures/10_rtt_timeseries_trace.png)
+- [Fidelity Timeseries Trace (IonQ Aria)](outputs/figures/11_fidelity_timeseries_trace_ionq.png)
+- [Fidelity Timeseries Trace (AQT Ring)](outputs/figures/12_fidelity_timeseries_trace_aqt.png)
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- [RTT Summary Stats](outputs/tables/01_rtt_summary_stats.csv)
+- [Fidelity Summary (IonQ Aria)](outputs/tables/02_fidelity_summary_ionq.csv)
+- [Fidelity Summary (AQT Ring)](outputs/tables/03_fidelity_summary_aqt.csv)
+- [Policy Actions Summary (IonQ Aria)](outputs/tables/04_policy_actions_summary_ionq.csv)
+- [Policy Actions Summary (AQT Ring)](outputs/tables/05_policy_actions_summary_aqt.csv)
+- [Error Metrics (IonQ Aria)](outputs/tables/06_error_metrics_ionq.csv)
+- [Error Metrics (AQT Ring)](outputs/tables/07_error_metrics_aqt.csv)
+- [Top 10 Highest RTT](outputs/tables/08_top_10_highest_rtt.csv)
+- [Top 10 Lowest Fidelity (IonQ Aria)](outputs/tables/09_top_10_lowest_fidelity_ionq.csv)
+- [Top 10 Lowest Fidelity (AQT Ring)](outputs/tables/10_top_10_lowest_fidelity_aqt.csv)
+- [Zombie Events Log Static AQT](outputs/tables/11_zombie_events_log_static_aqt.csv)
+- [Correlation Heatmap (IonQ Aria)](outputs/figures/13_correlation_heatmap_ionq.png)
+- [Correlation Heatmap (AQT Ring)](outputs/figures/14_correlation_heatmap_aqt.png)
+- [Data Quality Report](outputs/tables/12_data_quality_report.csv)
+- [Correlation Matrix (AQT Ring)](outputs/tables/13_correlation_matrix_aqt.csv)

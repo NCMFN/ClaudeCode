@@ -1,40 +1,40 @@
-# Claude Code Resources 🚀
+# Adaptive TTL Policy for Entangled Keys - QKD Simulator
 
-> A curated collection of the best GitHub repositories to supercharge your Claude Code workflow in 2026.
+This repository implements a Python research simulator for an "Adaptive TTL Policy for Entangled Keys." It explores a No-ML, telemetry-driven buffer-flush policy for Quantum Key Distribution (QKD) systems.
 
----
+## Context
+In QKD systems, Bell pairs held in quantum memory decohere over time (T2 transverse relaxation). Classical confirmation signals travel at network speed and are subject to latency and jitter. If confirmation arrives after fidelity drops below 0.85, the key is considered a security liability ("Zombie Data"). This policy monitors real-time Round Trip Time (RTT), computes fidelity decay, and flushes the buffer if the threshold is crossed.
 
-## 📚 Top 12 Repos That Will 10x Your Next Project
+## Model Constraints and Assumptions
+- **RTT Dataset**: The simulation leverages the Seattle dataset from [NetLatency-Data](https://github.com/uofa-rzhu3/NetLatency-Data). For each of the 688 time slices, one strictly non-zero RTT sample is extracted randomly. This synthesizes a continuous trace of sequential measurements.
+- **Independence**: The RTT data is not genuinely time-correlated with real quantum hardware runs; it's a synthetic fusion of independent public datasets. It's meant for simulating telemetry feedback.
+- **Fidelity Decay**: model is `F(t) = 0.5 + 0.5 * exp(-t / T2)`.
+- **Pure Python**: Uses `pandas`, `numpy`, `matplotlib`, and `seaborn`. No machine learning elements are included, demonstrating a purely deterministic approach.
 
-| # | Repository | Description |
-|---|------------|-------------|
-| 1 | [Claude Mem](https://github.com/thedotmack/claude-mem) | Persistent memory across sessions — stop re-teaching Claude your codebase |
-| 2 | [UI UX Pro Max](https://github.com/czlonkowski/n8n-mcp) | 50+ styles, 161 color palettes, 99 UX guidelines — Claude stops building ugly UIs |
-| 3 | [n8n-MCP](https://github.com/czlonkowski/n8n-mcp) | Connect Claude Code to 400+ n8n integrations via MCP |
-| 4 | [LightRAG](https://github.com/hkuds/lightrag) | Graph + vector RAG — lets Claude understand large codebases structurally |
-| 5 | [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) | Skills, instincts, security scanning, multi-language coverage — full agent harness |
-| 6 | [Awesome Claude Code](https://github.com/sickn33/antigravity) | Community bible — curated skills, hooks, slash commands, orchestrators |
-| 7 | [Superpowers](https://github.com/obra/superpowers) | Forces structured thinking before writing a single line of code |
-| 8 | [Claude Code Ultimate Guide](https://github.com/FlorianBruniau/claude-code-ultimate-guide) | 23K+ lines of docs, 219 templates, 271 quizzes — beginner to power user |
-| 9 | [Antigravity Awesome Skills](https://github.com/sickn33/antigravity) | 1,200+ ready-to-use skills — one of the largest collections |
-| 10 | [Claude Agent Blueprints](https://github.com/danielrosehill/claude-agent-blueprints) | 75+ agent workspace templates beyond coding |
-| 11 | [VoiceMode MCP](https://github.com/mbailey/voicemode) | Natural voice conversations with Claude Code via Whisper + Kokoro |
-| 12 | [Awesome Claude Plugins](https://github.com/ComposioHQ/awesome-claude-plugins) | 9,000+ repos indexed with adoption metrics — find what people actually install |
+## Components
+1. `data_loaders/netlatency_loader.py` - Parses the Seattle NetLatency data into a time series.
+2. `model/fidelity.py` - Implements the fidelity decay math. T2 configuration defaults are provided for:
+   - **IonQ Aria** (Trapped-ion): T2 ≈ 1.0 s
+   - **AQT ring chip** (Superconducting transmon): T2 ≈ 50 ms
+3. `policy/adaptive_ttl.py` & `policy/static_ttl.py` - Implement adaptive buffer flushing and a naive static-TTL timeout comparison.
+4. `simulate.py` - Executes both policies against the parsed dataset and exports performance to CSV and an Open MCT-compliant JSON telemetry format.
+5. `reporting/generate_reports.py` - Generates a variety of figures (distributions, time series, correlations) and tables (summaries, metrics) for reporting purposes.
 
----
+## Usage
+Ensure you have the required dependencies installed:
+```bash
+pip install pandas numpy matplotlib seaborn
+```
 
-## 🗂️ How to Update This Repo
+First, clone the required NetLatency-Data repository to provide the RTT matrix files:
+```bash
+git clone https://github.com/uofa-rzhu3/NetLatency-Data.git
+```
 
-See [RESOURCES.md](./RESOURCES.md) for the full step-by-step guide on keeping this repository up to date.
+Then, execute the entire simulation pipeline and reporting scripts:
+```bash
+python simulate.py
+python reporting/generate_reports.py
+```
 
----
-
-## 🔗 Official Claude Code Links
-
-- 📖 [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
-- 📦 [npm Package](https://www.npmjs.com/package/@anthropic-ai/claude-code)
-- 🌐 [Anthropic](https://www.anthropic.com)
-
----
-
-*Last updated: April 2026*
+Output datasets, Open MCT telemetry JSONs, graphical charts, and CSV tables will populate in the `outputs/` folder.
