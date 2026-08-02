@@ -1,0 +1,11 @@
+{
+    "source_url": "https://wp-public-data.s3.amazonaws.com/pings/pings-2020-07-19-2020-07-20.csv.gz",
+    "row_count_used": 1504,
+    "date_range": [
+        "2020-07-19 00:46:55.000",
+        "2020-07-20 23:46:54.000"
+    ],
+    "sha256": "46617678d0180d784cdfb0eabb3e5918952fc7cb25d64a4a0c11fdd9278d9a97",
+    "source_node": "155",
+    "dest_node": "32"
+}

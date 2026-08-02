@@ -1,0 +1,22 @@
+{
+    "tables/tradeoff_comparison.csv": "results.json",
+    "tables/key_availability_summary.csv": "results.json",
+    "tables/wilcoxon_test_results.csv": "results.json",
+    "tables/config_constants_used.csv": "config.yaml",
+    "tables/rtt_source_manifest.csv": "outputs/manifest.json",
+    "tables/qber_summary_stats.csv": "results.json",
+    "tables/block_size_selection_summary.csv": "results.json",
+    "tables/key_generation_failure_summary.csv": "results.json",
+    "tables/reproducibility_diff_summary.csv": "Placeholder",
+    "tables/skr_percentiles_by_policy.csv": "results.json",
+    "figures/latency_trend.png": "results.json",
+    "figures/tradeoff_comparison.png": "results.json",
+    "figures/skr_distribution_by_policy.png": "results.json",
+    "figures/key_availability_percent_by_policy.png": "results.json",
+    "figures/t2k_distribution_by_policy.png": "results.json",
+    "figures/block_size_selection_over_time.png": "results.json",
+    "figures/qber_distribution.png": "results.json",
+    "figures/key_generation_failure_rate_by_policy.png": "results.json",
+    "figures/wilcoxon_effect_size_comparison.png": "results.json",
+    "figures/skr_vs_rtt_scatter.png": "results.json"
+}

@@ -1,0 +1,11 @@
+rtt_threshold_ms: 150
+block_size_high_latency_bits: 1024
+block_size_low_latency_bits: 4096
+qber_range: [0.02, 0.05]
+error_correction_efficiency_f: 1.16
+epsilon_security: 1e-10
+random_seed: 42
+rtt_data_source: "wondernetwork"
+n_simulation_runs: 2
+t2k_c1: 0.005
+t2k_c2: 0.1

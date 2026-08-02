@@ -97,3 +97,9 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+src/outputs/
+outputs/
+data/
+src/outputs/
+outputs/
+data/
