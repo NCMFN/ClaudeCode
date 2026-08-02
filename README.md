@@ -8,8 +8,8 @@ In QKD systems, Bell pairs held in quantum memory decohere over time (T2 transve
 ## Model Constraints and Assumptions
 - **RTT Dataset**: The simulation leverages the Seattle dataset from [NetLatency-Data](https://github.com/uofa-rzhu3/NetLatency-Data). For each of the 688 time slices, one strictly non-zero RTT sample is extracted randomly. This synthesizes a continuous trace of sequential measurements.
 - **Independence**: The RTT data is not genuinely time-correlated with real quantum hardware runs; it's a synthetic fusion of independent public datasets. It's meant for simulating telemetry feedback.
-- **Fidelity Decay**: mode is `F(t) = 0.5 + 0.5 * exp(-t / T2)`.
-- **Pure Python**: Uses `pandas`, `numpy`, and `matplotlib`. No machine learning elements are included, demonstrating a purely deterministic approach.
+- **Fidelity Decay**: model is `F(t) = 0.5 + 0.5 * exp(-t / T2)`.
+- **Pure Python**: Uses `pandas`, `numpy`, `matplotlib`, and `seaborn`. No machine learning elements are included, demonstrating a purely deterministic approach.
 
 ## Components
 1. `data_loaders/netlatency_loader.py` - Parses the Seattle NetLatency data into a time series.
@@ -18,13 +18,23 @@ In QKD systems, Bell pairs held in quantum memory decohere over time (T2 transve
    - **AQT ring chip** (Superconducting transmon): T2 ≈ 50 ms
 3. `policy/adaptive_ttl.py` & `policy/static_ttl.py` - Implement adaptive buffer flushing and a naive static-TTL timeout comparison.
 4. `simulate.py` - Executes both policies against the parsed dataset and exports performance to CSV and an Open MCT-compliant JSON telemetry format.
-5. `analysis/report.py` - Visualizes fidelity degradation and trade-offs between "Zombie keys" and "Unnecessary Flushes".
+5. `reporting/generate_reports.py` - Generates a variety of figures (distributions, time series, correlations) and tables (summaries, metrics) for reporting purposes.
 
 ## Usage
-Ensure you have `pandas`, `numpy`, and `matplotlib` installed.
-Execute the entire simulation pipeline:
+Ensure you have the required dependencies installed:
+```bash
+pip install pandas numpy matplotlib seaborn
+```
+
+First, clone the required NetLatency-Data repository to provide the RTT matrix files:
+```bash
+git clone https://github.com/uofa-rzhu3/NetLatency-Data.git
+```
+
+Then, execute the entire simulation pipeline and reporting scripts:
 ```bash
 python simulate.py
-python analysis/report.py
+python reporting/generate_reports.py
 ```
-Output datasets, Open MCT telemetry JSONs, and graphical charts will populate in the `outputs/` folder.
+
+Output datasets, Open MCT telemetry JSONs, graphical charts, and CSV tables will populate in the `outputs/` folder.

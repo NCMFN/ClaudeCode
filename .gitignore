@@ -2,3 +2,9 @@ NetLatency-Data/
 outputs/
 __pycache__/
 *.pyc
+
+# Simulator specifics
+NetLatency-Data/
+outputs/
+__pycache__/
+*.pyc

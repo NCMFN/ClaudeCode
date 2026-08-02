@@ -31,3 +31,7 @@
 - [Top 10 Lowest Fidelity (IonQ Aria)](outputs/tables/09_top_10_lowest_fidelity_ionq.csv)
 - [Top 10 Lowest Fidelity (AQT Ring)](outputs/tables/10_top_10_lowest_fidelity_aqt.csv)
 - [Zombie Events Log Static AQT](outputs/tables/11_zombie_events_log_static_aqt.csv)
+- [Correlation Heatmap (IonQ Aria)](outputs/figures/13_correlation_heatmap_ionq.png)
+- [Correlation Heatmap (AQT Ring)](outputs/figures/14_correlation_heatmap_aqt.png)
+- [Data Quality Report](outputs/tables/12_data_quality_report.csv)
+- [Correlation Matrix (AQT Ring)](outputs/tables/13_correlation_matrix_aqt.csv)

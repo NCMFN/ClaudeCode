@@ -28,3 +28,9 @@ This folder generates and contains scripts for creating analytical reports from 
 9. **09_top_10_lowest_fidelity_ionq.csv**: Top 10 lowest fidelity instances (IonQ).
 10. **10_top_10_lowest_fidelity_aqt.csv**: Top 10 lowest fidelity instances (AQT).
 11. **11_zombie_events_log_static_aqt.csv**: Sample of first 10 zombie events exposed by Static policy in AQT.
+13. **13_correlation_heatmap_ionq.png**: Correlation heatmap of numeric features for IonQ.
+14. **14_correlation_heatmap_aqt.png**: Correlation heatmap of numeric features for AQT.
+
+**Additional Tables:**
+12. **12_data_quality_report.csv**: Null counts and dtypes.
+13. **13_correlation_matrix_aqt.csv**: Correlation matrix for AQT.
