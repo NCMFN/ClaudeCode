@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coherence_safe_obfuscation"
+version = "0.1.0"
+dependencies = [
+    "qiskit>=1.0",
+    "qiskit-ibm-runtime",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "pytest"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]

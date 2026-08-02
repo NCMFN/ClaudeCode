@@ -1,37 +1,21 @@
-# Downloads
-
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+# Artifacts
+- [obfuscation_gate_count_comparison.png](outputs/figures/obfuscation_gate_count_comparison.png)
+- [injected_latency_vs_budget.png](outputs/figures/injected_latency_vs_budget.png)
+- [security_confidence_distribution.png](outputs/figures/security_confidence_distribution.png)
+- [t1_t2_calibration_snapshot.png](outputs/figures/t1_t2_calibration_snapshot.png)
+- [gate_count_delta_by_circuit.png](outputs/figures/gate_count_delta_by_circuit.png)
+- [latency_budget_utilization_pct.png](outputs/figures/latency_budget_utilization_pct.png)
+- [readout_error_by_qubit.png](outputs/figures/readout_error_by_qubit.png)
+- [gate_fidelity_by_qubit.png](outputs/figures/gate_fidelity_by_qubit.png)
+- [security_confidence_vs_budget_utilization.png](outputs/figures/security_confidence_vs_budget_utilization.png)
+- [eta_sensitivity_sweep.png](outputs/figures/eta_sensitivity_sweep.png)
+- [obfuscation_run_summary.csv](outputs/tables/obfuscation_run_summary.csv)
+- [calibration_snapshot.csv](outputs/tables/calibration_snapshot.csv)
+- [budget_edge_case_results.csv](outputs/tables/budget_edge_case_results.csv)
+- [eta_sensitivity_results.csv](outputs/tables/eta_sensitivity_results.csv)
+- [per_qubit_calibration_stats.csv](outputs/tables/per_qubit_calibration_stats.csv)
+- [circuit_metadata.csv](outputs/tables/circuit_metadata.csv)
+- [operator_equivalence_check_results.csv](outputs/tables/operator_equivalence_check_results.csv)
+- [backend_comparison.csv](outputs/tables/backend_comparison.csv)
+- [pass_manager_stage_timing.csv](outputs/tables/pass_manager_stage_timing.csv)
+- [config_constants_used.csv](outputs/tables/config_constants_used.csv)
