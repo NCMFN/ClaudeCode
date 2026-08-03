@@ -1,37 +1,22 @@
-# Downloads
-
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- [outputs/figures/latency_trend.png](outputs/figures/latency_trend.png)
+- [outputs/figures/tradeoff_comparison.png](outputs/figures/tradeoff_comparison.png)
+- [outputs/figures/skr_distribution_by_policy.png](outputs/figures/skr_distribution_by_policy.png)
+- [outputs/figures/key_availability_percent_by_policy.png](outputs/figures/key_availability_percent_by_policy.png)
+- [outputs/figures/t2k_distribution_by_policy.png](outputs/figures/t2k_distribution_by_policy.png)
+- [outputs/figures/block_size_selection_over_time.png](outputs/figures/block_size_selection_over_time.png)
+- [outputs/figures/qber_distribution.png](outputs/figures/qber_distribution.png)
+- [outputs/figures/key_generation_failure_rate_by_policy.png](outputs/figures/key_generation_failure_rate_by_policy.png)
+- [outputs/figures/wilcoxon_effect_size_comparison.png](outputs/figures/wilcoxon_effect_size_comparison.png)
+- [outputs/figures/skr_vs_rtt_scatter.png](outputs/figures/skr_vs_rtt_scatter.png)
+- [outputs/tables/tradeoff_comparison.csv](outputs/tables/tradeoff_comparison.csv)
+- [outputs/tables/key_availability_summary.csv](outputs/tables/key_availability_summary.csv)
+- [outputs/tables/wilcoxon_test_results.csv](outputs/tables/wilcoxon_test_results.csv)
+- [outputs/tables/config_constants_used.csv](outputs/tables/config_constants_used.csv)
+- [outputs/tables/qber_summary_stats.csv](outputs/tables/qber_summary_stats.csv)
+- [outputs/tables/block_size_selection_summary.csv](outputs/tables/block_size_selection_summary.csv)
+- [outputs/tables/key_generation_failure_summary.csv](outputs/tables/key_generation_failure_summary.csv)
+- [outputs/tables/skr_percentiles_by_policy.csv](outputs/tables/skr_percentiles_by_policy.csv)
+- [outputs/tables/t2k_percentiles_by_policy.csv](outputs/tables/t2k_percentiles_by_policy.csv)
+- [outputs/rtt_source_manifest.csv](outputs/rtt_source_manifest.csv)
+- [outputs/report.md](outputs/report.md)
+- [outputs/paper_assets_manifest.csv](outputs/paper_assets_manifest.csv)
