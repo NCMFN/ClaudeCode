@@ -35,3 +35,5 @@ This file serves as a template for managing downloads for various tasks and proj
 ---
 
 *Customize the sections above by filling in the details relevant to your project.*
+- [01_schema_summary.csv](deliverables/tables/01_schema_summary.csv)
+- [01_missingness_heatmap.png](deliverables/figures/01_missingness_heatmap.png)

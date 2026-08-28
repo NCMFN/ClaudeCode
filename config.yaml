@@ -1,0 +1,8 @@
+paths:
+  raw_data_dir: data/raw
+  reports_dir: reports
+  figures_dir: deliverables/figures
+  tables_dir: deliverables/tables
+  schema_audit_md: reports/schema_audit.md
+  schema_summary_csv: deliverables/tables/01_schema_summary.csv
+  missingness_heatmap_png: deliverables/figures/01_missingness_heatmap.png
