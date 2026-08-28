@@ -22,3 +22,7 @@ def test_schema_audit_output():
     assert "Reactive power" in content
     assert "IGBT" in content
     assert "Row count" in content
+
+def test_deliverables_output():
+    assert os.path.exists('deliverables/tables/01_schema_summary.csv')
+    assert os.path.exists('deliverables/figures/01_missingness_heatmap.png')
