@@ -1,0 +1,27 @@
+Dataset,Column,Dtype,Missing_%
+Plant 1 Generation,DATE_TIME,str,0.00%
+Plant 1 Generation,PLANT_ID,int64,0.00%
+Plant 1 Generation,SOURCE_KEY,str,0.00%
+Plant 1 Generation,DC_POWER,float64,0.00%
+Plant 1 Generation,AC_POWER,float64,0.00%
+Plant 1 Generation,DAILY_YIELD,float64,0.00%
+Plant 1 Generation,TOTAL_YIELD,float64,0.00%
+Plant 1 Weather,DATE_TIME,str,0.00%
+Plant 1 Weather,PLANT_ID,int64,0.00%
+Plant 1 Weather,SOURCE_KEY,str,0.00%
+Plant 1 Weather,AMBIENT_TEMPERATURE,float64,0.00%
+Plant 1 Weather,MODULE_TEMPERATURE,float64,0.00%
+Plant 1 Weather,IRRADIATION,float64,0.00%
+Plant 2 Generation,DATE_TIME,str,0.00%
+Plant 2 Generation,PLANT_ID,int64,0.00%
+Plant 2 Generation,SOURCE_KEY,str,0.00%
+Plant 2 Generation,DC_POWER,float64,0.00%
+Plant 2 Generation,AC_POWER,float64,0.00%
+Plant 2 Generation,DAILY_YIELD,float64,0.00%
+Plant 2 Generation,TOTAL_YIELD,float64,0.00%
+Plant 2 Weather,DATE_TIME,str,0.00%
+Plant 2 Weather,PLANT_ID,int64,0.00%
+Plant 2 Weather,SOURCE_KEY,str,0.00%
+Plant 2 Weather,AMBIENT_TEMPERATURE,float64,0.00%
+Plant 2 Weather,MODULE_TEMPERATURE,float64,0.00%
+Plant 2 Weather,IRRADIATION,float64,0.00%
