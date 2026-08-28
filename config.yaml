@@ -1,0 +1,9 @@
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  plant1_gen: "Plant_1_Generation_Data.csv"
+  plant1_weather: "Plant_1_Weather_Sensor_Data.csv"
+  plant2_gen: "Plant_2_Generation_Data.csv"
+  plant2_weather: "Plant_2_Weather_Sensor_Data.csv"
+
+random_seed: 42
