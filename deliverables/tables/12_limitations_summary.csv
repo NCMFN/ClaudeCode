@@ -1,0 +1,4 @@
+Limitation,Description
+Heuristic Fault Labels,"Fault labels are synthesized from thresholding rules on efficiency and thermal elevation, not from ground truth hardware telemetry."
+Missing THD/Frequency Data,Total Harmonic Distortion (THD) and frequency deviation channels were assumed by prior proposals but are demonstrably absent in the source data.
+Dataset Scope,"The dataset only spans 34 days across 2 solar plants, which may limit generalizability to longer-term seasonal degradation."
