@@ -1,0 +1,5 @@
+State,Description,Thresholds
+0,Normal,"Elev <= 5.0, Eff >= 0.1"
+1,Thermal Warning,"Elev > 5.0, Eff >= 0.1"
+2,Volatility,"Eff < 0.1, Elev <= 5.0, DC > 0"
+3,Failure Proxy,"Irr > 0.1, AC < 5"
