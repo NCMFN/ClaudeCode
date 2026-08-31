@@ -1,37 +1,99 @@
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+## Tables
+- **final_manifest.csv**
+  - Download Link: [Download final_manifest.csv](outputs/tables/final_manifest.csv)
+- **significance_and_effect_sizes.csv**
+  - Download Link: [Download significance_and_effect_sizes.csv](outputs/tables/significance_and_effect_sizes.csv)
+- **temporal_class_overlap.csv**
+  - Download Link: [Download temporal_class_overlap.csv](outputs/tables/temporal_class_overlap.csv)
+- **cross_validation.csv**
+  - Download Link: [Download cross_validation.csv](outputs/tables/cross_validation.csv)
+- **meta_hyperparams.csv**
+  - Download Link: [Download meta_hyperparams.csv](outputs/tables/meta_hyperparams.csv)
+- **optimal_threshold.csv**
+  - Download Link: [Download optimal_threshold.csv](outputs/tables/optimal_threshold.csv)
+- **adversarial_robustness.csv**
+  - Download Link: [Download adversarial_robustness.csv](outputs/tables/adversarial_robustness.csv)
+- **shap_mean_abs.csv**
+  - Download Link: [Download shap_mean_abs.csv](outputs/tables/shap_mean_abs.csv)
+- **complexity_analysis.csv**
+  - Download Link: [Download complexity_analysis.csv](outputs/tables/complexity_analysis.csv)
+- **significance_testing.csv**
+  - Download Link: [Download significance_testing.csv](outputs/tables/significance_testing.csv)
+- **cert_cross_dataset_validation_skipped.csv**
+  - Download Link: [Download cert_cross_dataset_validation_skipped.csv](outputs/tables/cert_cross_dataset_validation_skipped.csv)
+- **temporal_period_counts.csv**
+  - Download Link: [Download temporal_period_counts.csv](outputs/tables/temporal_period_counts.csv)
+- **cm_counts_svm.csv**
+  - Download Link: [Download cm_counts_svm.csv](outputs/tables/cm_counts_svm.csv)
+- **cm_counts_mlp.csv**
+  - Download Link: [Download cm_counts_mlp.csv](outputs/tables/cm_counts_mlp.csv)
+- **train_times_parsed.csv**
+  - Download Link: [Download train_times_parsed.csv](outputs/tables/train_times_parsed.csv)
+- **feature_importance.csv**
+  - Download Link: [Download feature_importance.csv](outputs/tables/feature_importance.csv)
+- **cm_counts_meta.csv**
+  - Download Link: [Download cm_counts_meta.csv](outputs/tables/cm_counts_meta.csv)
+- **feature_operationalization_map.csv**
+  - Download Link: [Download feature_operationalization_map.csv](outputs/tables/feature_operationalization_map.csv)
+- **ablation_variant_conditions.csv**
+  - Download Link: [Download ablation_variant_conditions.csv](outputs/tables/ablation_variant_conditions.csv)
+- **ablation_study.csv**
+  - Download Link: [Download ablation_study.csv](outputs/tables/ablation_study.csv)
+- **xgb_hyperparams.csv**
+  - Download Link: [Download xgb_hyperparams.csv](outputs/tables/xgb_hyperparams.csv)
+- **cm_counts_xgboost.csv**
+  - Download Link: [Download cm_counts_xgboost.csv](outputs/tables/cm_counts_xgboost.csv)
+- **evaluation_metrics.csv**
+  - Download Link: [Download evaluation_metrics.csv](outputs/tables/evaluation_metrics.csv)
+- **class_distributions_splits.csv**
+  - Download Link: [Download class_distributions_splits.csv](outputs/tables/class_distributions_splits.csv)
+- **cm_counts_lstm.csv**
+  - Download Link: [Download cm_counts_lstm.csv](outputs/tables/cm_counts_lstm.csv)
 
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+## Figures
+- **feature_correlation.png**
+  - Download Link: [Download feature_correlation.png](outputs/figures/feature_correlation.png)
+- **adversarial_bar.png**
+  - Download Link: [Download adversarial_bar.png](outputs/figures/adversarial_bar.png)
+- **temporal_distribution_stacked.png**
+  - Download Link: [Download temporal_distribution_stacked.png](outputs/figures/temporal_distribution_stacked.png)
+- **cm_xgboost.png**
+  - Download Link: [Download cm_xgboost.png](outputs/figures/cm_xgboost.png)
+- **cm_mlp.png**
+  - Download Link: [Download cm_mlp.png](outputs/figures/cm_mlp.png)
+- **cv_variance.png**
+  - Download Link: [Download cv_variance.png](outputs/figures/cv_variance.png)
+- **shap_dependence_hour.png**
+  - Download Link: [Download shap_dependence_hour.png](outputs/figures/shap_dependence_hour.png)
+- **split_distribution.png**
+  - Download Link: [Download split_distribution.png](outputs/figures/split_distribution.png)
+- **calibration_plot.png**
+  - Download Link: [Download calibration_plot.png](outputs/figures/calibration_plot.png)
+- **feature_importance.png**
+  - Download Link: [Download feature_importance.png](outputs/figures/feature_importance.png)
+- **cm_svm.png**
+  - Download Link: [Download cm_svm.png](outputs/figures/cm_svm.png)
+- **pr_all_models.png**
+  - Download Link: [Download pr_all_models.png](outputs/figures/pr_all_models.png)
+- **day_of_week_by_class.png**
+  - Download Link: [Download day_of_week_by_class.png](outputs/figures/day_of_week_by_class.png)
+- **hour_cos_distribution_by_class.png**
+  - Download Link: [Download hour_cos_distribution_by_class.png](outputs/figures/hour_cos_distribution_by_class.png)
+- **prob_distribution_meta.png**
+  - Download Link: [Download prob_distribution_meta.png](outputs/figures/prob_distribution_meta.png)
+- **ablation_variant_conditions_bar.png**
+  - Download Link: [Download ablation_variant_conditions_bar.png](outputs/figures/ablation_variant_conditions_bar.png)
+- **pr_threshold_sweep.png**
+  - Download Link: [Download pr_threshold_sweep.png](outputs/figures/pr_threshold_sweep.png)
+- **cm_meta.png**
+  - Download Link: [Download cm_meta.png](outputs/figures/cm_meta.png)
+- **roc_all_models.png**
+  - Download Link: [Download roc_all_models.png](outputs/figures/roc_all_models.png)
+- **base_model_correlation.png**
+  - Download Link: [Download base_model_correlation.png](outputs/figures/base_model_correlation.png)
+- **ablation_bar.png**
+  - Download Link: [Download ablation_bar.png](outputs/figures/ablation_bar.png)
+- **cm_lstm.png**
+  - Download Link: [Download cm_lstm.png](outputs/figures/cm_lstm.png)
