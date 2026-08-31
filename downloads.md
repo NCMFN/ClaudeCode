@@ -1,37 +1,19 @@
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+## Figures
+- [Temporal Distribution](outputs/figures/temporal_distribution.png)
+- [Hour Cosine Distribution](outputs/figures/hour_cos_distribution.png)
+- [Day of Week Distribution](outputs/figures/day_of_week_distribution.png)
 
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
+## Tables
+- [Ablation Study](outputs/tables/ablation_study.csv)
+- [Model Evaluations](outputs/tables/model_evaluations.csv)
+- [Significance Tests](outputs/tables/significance_tests.csv)
+- [Adversarial Diagnostics](outputs/tables/adversarial_diagnostics.csv)
+- [Sampling Period Counts](outputs/tables/sampling_period_counts.csv)
+- [Sampling Temporal Overlap](outputs/tables/sampling_temporal_overlap.csv)
+- [Feature Operationalization](outputs/tables/feature_operationalization.csv)
 
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+## Paper Assets
+- [Manifest](outputs/paper_assets/paper_assets_manifest.csv)
+- [Revision Log](outputs/revision_log.md)
