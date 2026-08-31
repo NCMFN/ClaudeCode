@@ -1,125 +1,65 @@
 # Downloads
 
 ## Tables
-- **final_manifest.csv**
-  - Download Link: [Download final_manifest.csv](outputs/tables/final_manifest.csv)
-- **cross_validation_chrono.csv**
-  - Download Link: [Download cross_validation_chrono.csv](outputs/tables/cross_validation_chrono.csv)
-- **significance_and_effect_sizes.csv**
-  - Download Link: [Download significance_and_effect_sizes.csv](outputs/tables/significance_and_effect_sizes.csv)
-- **temporal_class_overlap.csv**
-  - Download Link: [Download temporal_class_overlap.csv](outputs/tables/temporal_class_overlap.csv)
-- **cross_validation.csv**
-  - Download Link: [Download cross_validation.csv](outputs/tables/cross_validation.csv)
-- **meta_hyperparams.csv**
-  - Download Link: [Download meta_hyperparams.csv](outputs/tables/meta_hyperparams.csv)
-- **optimal_threshold.csv**
-  - Download Link: [Download optimal_threshold.csv](outputs/tables/optimal_threshold.csv)
-- **adversarial_robustness.csv**
-  - Download Link: [Download adversarial_robustness.csv](outputs/tables/adversarial_robustness.csv)
-- **shap_mean_abs.csv**
-  - Download Link: [Download shap_mean_abs.csv](outputs/tables/shap_mean_abs.csv)
-- **complexity_analysis.csv**
-  - Download Link: [Download complexity_analysis.csv](outputs/tables/complexity_analysis.csv)
-- **evaluation_metrics_chrono.csv**
-  - Download Link: [Download evaluation_metrics_chrono.csv](outputs/tables/evaluation_metrics_chrono.csv)
-- **significance_testing.csv**
-  - Download Link: [Download significance_testing.csv](outputs/tables/significance_testing.csv)
-- **cert_cross_dataset_validation_skipped.csv**
-  - Download Link: [Download cert_cross_dataset_validation_skipped.csv](outputs/tables/cert_cross_dataset_validation_skipped.csv)
-- **temporal_period_counts.csv**
-  - Download Link: [Download temporal_period_counts.csv](outputs/tables/temporal_period_counts.csv)
-- **cm_counts_svm.csv**
-  - Download Link: [Download cm_counts_svm.csv](outputs/tables/cm_counts_svm.csv)
-- **cm_counts_mlp.csv**
-  - Download Link: [Download cm_counts_mlp.csv](outputs/tables/cm_counts_mlp.csv)
-- **train_times_parsed.csv**
-  - Download Link: [Download train_times_parsed.csv](outputs/tables/train_times_parsed.csv)
-- **feature_importance.csv**
-  - Download Link: [Download feature_importance.csv](outputs/tables/feature_importance.csv)
-- **cm_counts_meta.csv**
-  - Download Link: [Download cm_counts_meta.csv](outputs/tables/cm_counts_meta.csv)
-- **feature_operationalization_map.csv**
-  - Download Link: [Download feature_operationalization_map.csv](outputs/tables/feature_operationalization_map.csv)
-- **ablation_variant_conditions.csv**
-  - Download Link: [Download ablation_variant_conditions.csv](outputs/tables/ablation_variant_conditions.csv)
-- **ablation_study.csv**
-  - Download Link: [Download ablation_study.csv](outputs/tables/ablation_study.csv)
-- **xgb_hyperparams.csv**
-  - Download Link: [Download xgb_hyperparams.csv](outputs/tables/xgb_hyperparams.csv)
-- **chrono_split_limitation.csv**
-  - Download Link: [Download chrono_split_limitation.csv](outputs/tables/chrono_split_limitation.csv)
-- **cm_counts_xgb_dist.csv**
-  - Download Link: [Download cm_counts_xgb_dist.csv](outputs/tables/cm_counts_xgb_dist.csv)
-- **cm_counts_xgboost.csv**
-  - Download Link: [Download cm_counts_xgboost.csv](outputs/tables/cm_counts_xgboost.csv)
-- **evaluation_metrics_dist.csv**
-  - Download Link: [Download evaluation_metrics_dist.csv](outputs/tables/evaluation_metrics_dist.csv)
-- **evaluation_metrics.csv**
-  - Download Link: [Download evaluation_metrics.csv](outputs/tables/evaluation_metrics.csv)
-- **class_distributions_splits.csv**
-  - Download Link: [Download class_distributions_splits.csv](outputs/tables/class_distributions_splits.csv)
-- **cm_counts_lstm.csv**
-  - Download Link: [Download cm_counts_lstm.csv](outputs/tables/cm_counts_lstm.csv)
+- [Download final_manifest.csv](sandbox:/app/outputs/tables/final_manifest.csv)
+- [Download cross_validation_chrono.csv](sandbox:/app/outputs/tables/cross_validation_chrono.csv)
+- [Download significance_and_effect_sizes.csv](sandbox:/app/outputs/tables/significance_and_effect_sizes.csv)
+- [Download temporal_class_overlap.csv](sandbox:/app/outputs/tables/temporal_class_overlap.csv)
+- [Download cross_validation.csv](sandbox:/app/outputs/tables/cross_validation.csv)
+- [Download meta_hyperparams.csv](sandbox:/app/outputs/tables/meta_hyperparams.csv)
+- [Download optimal_threshold.csv](sandbox:/app/outputs/tables/optimal_threshold.csv)
+- [Download adversarial_robustness.csv](sandbox:/app/outputs/tables/adversarial_robustness.csv)
+- [Download shap_mean_abs.csv](sandbox:/app/outputs/tables/shap_mean_abs.csv)
+- [Download complexity_analysis.csv](sandbox:/app/outputs/tables/complexity_analysis.csv)
+- [Download evaluation_metrics_chrono.csv](sandbox:/app/outputs/tables/evaluation_metrics_chrono.csv)
+- [Download significance_testing.csv](sandbox:/app/outputs/tables/significance_testing.csv)
+- [Download cert_cross_dataset_validation_skipped.csv](sandbox:/app/outputs/tables/cert_cross_dataset_validation_skipped.csv)
+- [Download temporal_period_counts.csv](sandbox:/app/outputs/tables/temporal_period_counts.csv)
+- [Download cm_counts_svm.csv](sandbox:/app/outputs/tables/cm_counts_svm.csv)
+- [Download cm_counts_mlp.csv](sandbox:/app/outputs/tables/cm_counts_mlp.csv)
+- [Download train_times_parsed.csv](sandbox:/app/outputs/tables/train_times_parsed.csv)
+- [Download feature_importance.csv](sandbox:/app/outputs/tables/feature_importance.csv)
+- [Download cm_counts_meta.csv](sandbox:/app/outputs/tables/cm_counts_meta.csv)
+- [Download feature_operationalization_map.csv](sandbox:/app/outputs/tables/feature_operationalization_map.csv)
+- [Download ablation_variant_conditions.csv](sandbox:/app/outputs/tables/ablation_variant_conditions.csv)
+- [Download ablation_study.csv](sandbox:/app/outputs/tables/ablation_study.csv)
+- [Download xgb_hyperparams.csv](sandbox:/app/outputs/tables/xgb_hyperparams.csv)
+- [Download chrono_split_limitation.csv](sandbox:/app/outputs/tables/chrono_split_limitation.csv)
+- [Download cm_counts_xgb_dist.csv](sandbox:/app/outputs/tables/cm_counts_xgb_dist.csv)
+- [Download cm_counts_xgboost.csv](sandbox:/app/outputs/tables/cm_counts_xgboost.csv)
+- [Download evaluation_metrics_dist.csv](sandbox:/app/outputs/tables/evaluation_metrics_dist.csv)
+- [Download evaluation_metrics.csv](sandbox:/app/outputs/tables/evaluation_metrics.csv)
+- [Download class_distributions_splits.csv](sandbox:/app/outputs/tables/class_distributions_splits.csv)
+- [Download cm_counts_lstm.csv](sandbox:/app/outputs/tables/cm_counts_lstm.csv)
 
 ## Figures
-- **feature_correlation.png**
-  - Download Link: [Download feature_correlation.png](outputs/figures/feature_correlation.png)
-- **adversarial_bar.png**
-  - Download Link: [Download adversarial_bar.png](outputs/figures/adversarial_bar.png)
-- **temporal_distribution_stacked.png**
-  - Download Link: [Download temporal_distribution_stacked.png](outputs/figures/temporal_distribution_stacked.png)
-- **cm_svm_chrono.png**
-  - Download Link: [Download cm_svm_chrono.png](outputs/figures/cm_svm_chrono.png)
-- **cm_xgboost.png**
-  - Download Link: [Download cm_xgboost.png](outputs/figures/cm_xgboost.png)
-- **cm_mlp.png**
-  - Download Link: [Download cm_mlp.png](outputs/figures/cm_mlp.png)
-- **cm_mlp_chrono.png**
-  - Download Link: [Download cm_mlp_chrono.png](outputs/figures/cm_mlp_chrono.png)
-- **cv_variance.png**
-  - Download Link: [Download cv_variance.png](outputs/figures/cv_variance.png)
-- **shap_dependence_hour.png**
-  - Download Link: [Download shap_dependence_hour.png](outputs/figures/shap_dependence_hour.png)
-- **split_distribution.png**
-  - Download Link: [Download split_distribution.png](outputs/figures/split_distribution.png)
-- **calibration_plot.png**
-  - Download Link: [Download calibration_plot.png](outputs/figures/calibration_plot.png)
-- **cm_meta_chrono.png**
-  - Download Link: [Download cm_meta_chrono.png](outputs/figures/cm_meta_chrono.png)
-- **feature_importance.png**
-  - Download Link: [Download feature_importance.png](outputs/figures/feature_importance.png)
-- **cm_svm.png**
-  - Download Link: [Download cm_svm.png](outputs/figures/cm_svm.png)
-- **pr_all_models.png**
-  - Download Link: [Download pr_all_models.png](outputs/figures/pr_all_models.png)
-- **day_of_week_by_class.png**
-  - Download Link: [Download day_of_week_by_class.png](outputs/figures/day_of_week_by_class.png)
-- **hour_cos_distribution_by_class.png**
-  - Download Link: [Download hour_cos_distribution_by_class.png](outputs/figures/hour_cos_distribution_by_class.png)
-- **pr_xgb_dist.png**
-  - Download Link: [Download pr_xgb_dist.png](outputs/figures/pr_xgb_dist.png)
-- **roc_all_models_chrono.png**
-  - Download Link: [Download roc_all_models_chrono.png](outputs/figures/roc_all_models_chrono.png)
-- **pr_all_models_chrono.png**
-  - Download Link: [Download pr_all_models_chrono.png](outputs/figures/pr_all_models_chrono.png)
-- **prob_distribution_meta.png**
-  - Download Link: [Download prob_distribution_meta.png](outputs/figures/prob_distribution_meta.png)
-- **ablation_variant_conditions_bar.png**
-  - Download Link: [Download ablation_variant_conditions_bar.png](outputs/figures/ablation_variant_conditions_bar.png)
-- **pr_threshold_sweep.png**
-  - Download Link: [Download pr_threshold_sweep.png](outputs/figures/pr_threshold_sweep.png)
-- **cm_meta.png**
-  - Download Link: [Download cm_meta.png](outputs/figures/cm_meta.png)
-- **cm_xgboost_chrono.png**
-  - Download Link: [Download cm_xgboost_chrono.png](outputs/figures/cm_xgboost_chrono.png)
-- **roc_all_models.png**
-  - Download Link: [Download roc_all_models.png](outputs/figures/roc_all_models.png)
-- **base_model_correlation.png**
-  - Download Link: [Download base_model_correlation.png](outputs/figures/base_model_correlation.png)
-- **ablation_bar.png**
-  - Download Link: [Download ablation_bar.png](outputs/figures/ablation_bar.png)
-- **cm_lstm.png**
-  - Download Link: [Download cm_lstm.png](outputs/figures/cm_lstm.png)
-- **cm_xgb_dist.png**
-  - Download Link: [Download cm_xgb_dist.png](outputs/figures/cm_xgb_dist.png)
+- [Download feature_correlation.png](sandbox:/app/outputs/figures/feature_correlation.png)
+- [Download adversarial_bar.png](sandbox:/app/outputs/figures/adversarial_bar.png)
+- [Download temporal_distribution_stacked.png](sandbox:/app/outputs/figures/temporal_distribution_stacked.png)
+- [Download cm_svm_chrono.png](sandbox:/app/outputs/figures/cm_svm_chrono.png)
+- [Download cm_xgboost.png](sandbox:/app/outputs/figures/cm_xgboost.png)
+- [Download cm_mlp.png](sandbox:/app/outputs/figures/cm_mlp.png)
+- [Download cm_mlp_chrono.png](sandbox:/app/outputs/figures/cm_mlp_chrono.png)
+- [Download cv_variance.png](sandbox:/app/outputs/figures/cv_variance.png)
+- [Download shap_dependence_hour.png](sandbox:/app/outputs/figures/shap_dependence_hour.png)
+- [Download split_distribution.png](sandbox:/app/outputs/figures/split_distribution.png)
+- [Download calibration_plot.png](sandbox:/app/outputs/figures/calibration_plot.png)
+- [Download cm_meta_chrono.png](sandbox:/app/outputs/figures/cm_meta_chrono.png)
+- [Download feature_importance.png](sandbox:/app/outputs/figures/feature_importance.png)
+- [Download cm_svm.png](sandbox:/app/outputs/figures/cm_svm.png)
+- [Download pr_all_models.png](sandbox:/app/outputs/figures/pr_all_models.png)
+- [Download day_of_week_by_class.png](sandbox:/app/outputs/figures/day_of_week_by_class.png)
+- [Download hour_cos_distribution_by_class.png](sandbox:/app/outputs/figures/hour_cos_distribution_by_class.png)
+- [Download pr_xgb_dist.png](sandbox:/app/outputs/figures/pr_xgb_dist.png)
+- [Download roc_all_models_chrono.png](sandbox:/app/outputs/figures/roc_all_models_chrono.png)
+- [Download pr_all_models_chrono.png](sandbox:/app/outputs/figures/pr_all_models_chrono.png)
+- [Download prob_distribution_meta.png](sandbox:/app/outputs/figures/prob_distribution_meta.png)
+- [Download ablation_variant_conditions_bar.png](sandbox:/app/outputs/figures/ablation_variant_conditions_bar.png)
+- [Download pr_threshold_sweep.png](sandbox:/app/outputs/figures/pr_threshold_sweep.png)
+- [Download cm_meta.png](sandbox:/app/outputs/figures/cm_meta.png)
+- [Download cm_xgboost_chrono.png](sandbox:/app/outputs/figures/cm_xgboost_chrono.png)
+- [Download roc_all_models.png](sandbox:/app/outputs/figures/roc_all_models.png)
+- [Download base_model_correlation.png](sandbox:/app/outputs/figures/base_model_correlation.png)
+- [Download ablation_bar.png](sandbox:/app/outputs/figures/ablation_bar.png)
+- [Download cm_lstm.png](sandbox:/app/outputs/figures/cm_lstm.png)
+- [Download cm_xgb_dist.png](sandbox:/app/outputs/figures/cm_xgb_dist.png)
