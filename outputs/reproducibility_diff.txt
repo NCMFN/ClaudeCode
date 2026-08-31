@@ -1,1 +1,3 @@
-Zero-diff
+Missing in Run 2: outputs/reproducibility_diff.txt
+Mismatch: outputs/revision_log.md
+Mismatch: outputs/tables/final_manifest.csv
