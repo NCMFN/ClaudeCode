@@ -1,0 +1,14 @@
+Asset_Type,Path
+Figure,outputs/figures/temporal_distribution.png
+Figure,outputs/figures/day_of_week_distribution.png
+Figure,outputs/figures/ablation_chart.png
+Figure,outputs/figures/hour_cos_distribution.png
+Table,outputs/tables/adversarial_diagnostics.csv
+Table,outputs/tables/cross_validation.csv
+Table,outputs/tables/sampling_period_counts.csv
+Table,outputs/tables/model_evaluations.csv
+Table,outputs/tables/confusion_matrices.csv
+Table,outputs/tables/ablation_study.csv
+Table,outputs/tables/feature_operationalization.csv
+Table,outputs/tables/sampling_temporal_overlap.csv
+Table,outputs/tables/significance_tests.csv
