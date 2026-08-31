@@ -1,0 +1,12 @@
+Artifact Name,Relative Path,Type,Description
+period_bucket_counts,outputs/tables/period_bucket_counts.csv,Table,Breakdown of class counts across chronological splits
+temporal_overlap,outputs/tables/temporal_overlap.csv,Table,Overlap of malicious vs benign timestamps
+temporal_distribution,outputs/figures/temporal_distribution.png,Figure,Timeline of events colored by class
+hour_cos_distribution,outputs/figures/hour_cos_distribution.png,Figure,KDE plot of hour_cos feature by class
+day_of_week_distribution,outputs/figures/day_of_week_distribution.png,Figure,Bar chart of day_of_week by class
+feature_operationalization,outputs/tables/feature_operationalization.csv,Table,Mapping of tabular features to behavioral proxies
+feature_ablation_results,outputs/tables/feature_ablation_results.csv,Table,PR-AUC/F1 for Variants A-D across splits
+feature_ablation_chart,outputs/figures/feature_ablation_chart.png,Figure,Bar chart visualizing feature ablation results
+adversarial_diagnostics_summary,outputs/tables/adversarial_diagnostics_summary.csv,Table,Summary of boundary crossings for adversarial attacks
+metrics_group_split,outputs/tables/metrics_group_split.csv,Table,Metrics evaluated on Group split
+metrics_chronological_split,outputs/tables/metrics_chronological_split.csv,Table,Metrics evaluated on Chronological split

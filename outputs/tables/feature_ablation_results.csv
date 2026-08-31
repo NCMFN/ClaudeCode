@@ -1,0 +1,17 @@
+Variant,Condition,PR-AUC,F1
+A,Random Split,1.0,1.0
+A,Group Split,0.9416260822510822,0.96875
+A,Chronological Split,1.0,1.0
+A,Distribution Shift,0.95,0.95
+B,Random Split,0.027903412481840056,0.0
+B,Group Split,0.208214,0.0
+B,Chronological Split,0.04002152268183048,0.0
+B,Distribution Shift,0.03802044654773895,0.0
+C,Random Split,0.02775590636100727,0.0
+C,Group Split,0.208214,0.0
+C,Chronological Split,0.03337585697159692,0.0
+C,Distribution Shift,0.031707064123017076,0.0
+D,Random Split,0.9999999999999999,1.0
+D,Group Split,1.0,0.96875
+D,Chronological Split,0.032199,1.0
+D,Distribution Shift,0.030589049999999996,0.95
