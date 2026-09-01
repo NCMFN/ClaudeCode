@@ -1,0 +1,25 @@
+random_seed: 42
+test_size: 0.2
+cv_folds: 5
+models:
+  logistic_regression:
+    C: 1.0
+    solver: lbfgs
+    penalty: l2
+  random_forest:
+    n_estimators: 100
+    max_depth: 12
+    criterion: gini
+  adaboost:
+    n_estimators: 50
+    learning_rate: 0.8
+imbalance_strategy: smote # smote or class_weight
+output_paths:
+  report_md: report/final_report.md
+  metrics_summary: report/metrics_summary.csv
+  roc_curves: report/figures/roc_curves.png
+  confusion_matrices: report/figures/confusion_matrices.png
+  feature_importance: report/figures/feature_importance.png
+  run1_metrics: report/reproducibility_check/run1_metrics.json
+  run2_metrics: report/reproducibility_check/run2_metrics.json
+  significance_tests: report/significance_tests.csv
