@@ -1,0 +1,4 @@
+Attack,Features_Perturbed,Touches_hour_cos,Perturbation_Magnitude,Boundary_Crossing_Fraction,Resulting_PRAUC
+Feature Evasion (Existing),"peer_z_score, graph_degree",False,1.2x to 1.5x (Large for graph),0.007945516458569807,0.7589662413908715
+Label Poisoning 5% (Existing),None (Labels only),False,5% of labels,0.0170261066969353,0.6332444094266195
+Temporal Shift (New),"hour_cos, hour_sin",True,12 hours (Full range shift),0.13166855845629966,0.02760558038150009

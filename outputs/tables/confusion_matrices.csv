@@ -1,0 +1,11 @@
+Model,Split,TN,FP,FN,TP
+XGBoost,chronological,829,19,5,23
+SVM,chronological,811,37,0,28
+MLP,chronological,827,21,4,24
+LSTM_proxy,chronological,828,20,5,23
+Meta,chronological,839,9,9,19
+XGBoost,group,824,12,14,31
+SVM,group,810,26,8,37
+MLP,group,822,14,15,30
+LSTM_proxy,group,824,12,20,25
+Meta,group,832,4,25,20

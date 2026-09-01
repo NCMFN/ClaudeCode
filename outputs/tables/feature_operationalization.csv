@@ -1,0 +1,8 @@
+Feature,Proxy_For,Is_Temporal
+hour_cos,Time of day cyclical patterns,True
+hour_sin,Time of day cyclical patterns,True
+day_of_week,Weekly routine patterns,True
+event_count,Volume of authentication activity,False
+graph_degree,Number of distinct systems connected,False
+graph_betweenness,Centrality in authentication graph,False
+peer_z_score,Deviation from peer group norm,False
