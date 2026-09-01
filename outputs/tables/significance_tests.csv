@@ -1,0 +1,3 @@
+Comparison,p_value,cohens_d,Significant
+A_temporal vs D_all (Chronological),0.60163534,-0.024963303,False
+Chronological vs Group Split (D_all XGBoost),0.9765051,-0.0014062154,False
