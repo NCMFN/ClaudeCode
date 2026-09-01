@@ -1,0 +1,8 @@
+Feature,Proxy Behavior,Role in Sanitization
+hour_sin,Time of day (cyclic),Temporal leakage artifact from red-team schedule
+hour_cos,Time of day (cyclic),Temporal leakage artifact from red-team schedule
+dow_sin,Day of week (cyclic),Temporal leakage artifact from red-team schedule
+dow_cos,Day of week (cyclic),Temporal leakage artifact from red-team schedule
+peer_z_score,Action volume relative to peers,Anomalous mass deletion / data moving proxy
+graph_degree,Network traversal diversity,Lateral movement prior to exfil/sanitization
+graph_betweenness,Centrality in auth network,Accessing central file shares or jump boxes

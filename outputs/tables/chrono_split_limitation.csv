@@ -1,0 +1,2 @@
+Limitation,Details
+Chronological Evaluation Failure,Chronological evaluation was not fully completable under this class distribution because true malicious samples do not overlap the temporal bounds of the subsampled training period. Metrics below reflect untrained default states and are NOT comparable to group splits.

@@ -1,0 +1,2 @@
+fold,status
+0,Failed to train due to zero malicious samples in temporal window
