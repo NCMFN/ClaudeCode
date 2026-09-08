@@ -97,3 +97,11 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+outputs/figures
+outputs/tables
+outputs/datasets
+outputs/paper_assets
+*.zip
+wsn_data1
+wsn_data2
+wsn_data3
