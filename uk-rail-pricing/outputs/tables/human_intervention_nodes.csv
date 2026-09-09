@@ -1,0 +1,51 @@
+Station,Anomaly Rate,Primary Disruption Type,Avg Revenue Deficit per Event
+Reading -> Liverpool Lime Street,1.0,NA,0.0
+Reading -> Birmingham New Street,0.5833333333333334,NA,35.71152127229758
+Liverpool Lime Street -> London St Pancras,0.5,NA,21.30950546092318
+Manchester Piccadilly -> London Kings Cross,0.5,NA,20.25651368594361
+London Paddington -> Manchester Piccadilly,0.4,NA,0.0
+Edinburgh Waverley -> London Kings Cross,0.35714285714285715,Staffing,32.8
+York -> Edinburgh,0.30612244897959184,NA,10.518518518518519
+York -> Edinburgh Waverley,0.2857142857142857,NA,0.0
+Liverpool Lime Street -> London Paddington,0.2,NA,39.30868167202573
+Birmingham New Street -> Edinburgh,0.2,NA,51.92903225806452
+Manchester Piccadilly -> London Euston,0.19298245614035087,NA,19.805195793178097
+London Kings Cross -> Liverpool Lime Street,0.18181818181818182,NA,23.845905775450777
+Liverpool Lime Street -> London Euston,0.1784037558685446,Weather,18.69907176280254
+London Euston -> Manchester Piccadilly,0.17204301075268819,NA,15.338465568225686
+Birmingham New Street -> London Kings Cross,0.16666666666666666,NA,33.25
+Birmingham New Street -> Reading,0.14285714285714285,NA,15.846895922059085
+Birmingham New Street -> Liverpool Lime Street,0.13333333333333333,NA,39.46238196901379
+Birmingham New Street -> London Euston,0.13157894736842105,NA,21.2828746476455
+London St Pancras -> Birmingham New Street,0.09593246354566386,NA,48.60047856106188
+Oxford -> Bristol Temple Meads,0.09433962264150944,NA,9.616381051349189
+London Euston -> Birmingham New Street,0.09114927344782034,NA,45.62601065170003
+Manchester Piccadilly -> London Paddington,0.07692307692307693,NA,10.544048476928443
+York -> Peterborough,0.056818181818181816,NA,8.42799119647859
+Reading -> Swindon,0.05434782608695652,NA,30.45917961075044
+Birmingham New Street -> London St Pancras,0.053497942386831275,NA,12.512888746482666
+London Kings Cross -> York,0.043689320388349516,NA,11.392997482154692
+London St Pancras -> Wolverhampton,0.034482758620689655,NA,15.626984126984127
+London Paddington -> Oxford,0.030612244897959183,NA,16.004673161782744
+London Kings Cross -> Edinburgh Waverley,0.017241379310344827,NA,10.568247126436782
+London Paddington -> Reading,0.012622720897615708,NA,9.413554895983106
+Birmingham New Street -> Coventry,0.0,NA,1.4000000000000004
+Liverpool Lime Street -> Birmingham New Street,0.0,NA,14.04485460563092
+Birmingham New Street -> London Paddington,0.0,NA,17.87214611872146
+London Paddington -> London Waterloo,0.0,NA,1.4000000000000004
+London Paddington -> Liverpool Lime Street,0.0,NA,18.92035398230088
+London Euston -> Oxford,0.0,NA,0.0
+London Euston -> York,0.0,Signal Failure,0.0
+Liverpool Lime Street -> Crewe,0.0,NA,0.5703125
+Liverpool Lime Street -> Leeds,0.0,NA,7.22392851444014
+Liverpool Lime Street -> Manchester Piccadilly,0.0,NA,3.5803554278630823
+Liverpool Lime Street -> Sheffield,0.0,NA,3.1425083971811816
+Birmingham New Street -> Nuneaton,0.0,NA,2.4088383057353124
+Birmingham New Street -> Manchester Piccadilly,0.0,NA,3.7601361449465776
+Birmingham New Street -> Tamworth,0.0,NA,1.7345081676136362
+Birmingham New Street -> Stafford,0.0,NA,1.3524493243243245
+Birmingham New Street -> Wolverhampton,0.0,NA,0.0
+Birmingham New Street -> York,0.0,NA,16.285714285714285
+Bristol Temple Meads -> Cardiff Central,0.0,NA,0.0
+Manchester Piccadilly -> Liverpool Lime Street,0.0,NA,6.64459973051893
+Manchester Piccadilly -> York,0.0,NA,0.0
