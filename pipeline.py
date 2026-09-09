@@ -19,7 +19,7 @@ tf.random.set_seed(42)
 plt.rcParams["figure.figsize"] = (10, 6)
 
 os.makedirs('outputs/figures', exist_ok=True)
-os.makedirs('outputs', exist_ok=True)
+os.makedirs('outputs/tables', exist_ok=True)
 os.makedirs('models', exist_ok=True)
 
 def save_fig(fig_num, title):
@@ -693,9 +693,9 @@ joblib.dump(xgb, 'models/xgboost_model.pkl')
 joblib.dump(rf, 'models/rf_model.pkl')
 lstm_clf.save('models/lstm_model.keras')
 
-with open('outputs/classification_report_xgb.txt', 'w') as f:
+with open('outputs/tables/table_classification_report_xgb.txt', 'w') as f:
     f.write(classification_report(y_test, xgb_pred))
-os.makedirs('outputs', exist_ok=True)
-df[['machine_id', 'timestamp', 'risk_score', 'high_risk']].to_csv('outputs/risk_scores.csv', index=False)
+os.makedirs('outputs/tables', exist_ok=True)
+df[['machine_id', 'timestamp', 'risk_score', 'high_risk']].to_csv('outputs/tables/table_risk_scores.csv', index=False)
 
 print("Pipeline complete!")
