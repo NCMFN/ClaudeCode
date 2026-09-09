@@ -26,7 +26,9 @@ def save_fig(fig_num, title):
     caption = f"Figure {fig_num}: {title}. Source: Smart Manufacturing IoT-Cloud Monitoring Dataset."
     plt.suptitle(caption, fontsize=10, y=0.02)
     plt.tight_layout(rect=[0, 0.05, 1, 1])
-    plt.savefig(f'outputs/figures/Figure {fig_num}.png', dpi=300, bbox_inches='tight')
+    path = f'outputs/figures/Figure {fig_num}.png'
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    plt.savefig(path, dpi=300, bbox_inches='tight')
     plt.close()
 
 
@@ -651,6 +653,7 @@ plt.tight_layout()
 caption = "Figure 50: Composite 2x2 dashboard figure. Source: Smart Manufacturing IoT-Cloud Monitoring Dataset."
 plt.suptitle(caption, fontsize=10, y=0.02)
 plt.subplots_adjust(bottom=0.08)
+os.makedirs('outputs/figures', exist_ok=True)
 plt.savefig(f'outputs/figures/Figure 50.png', dpi=300, bbox_inches='tight')
 plt.close()
 
@@ -692,6 +695,7 @@ lstm_clf.save('models/lstm_model.keras')
 
 with open('outputs/classification_report_xgb.txt', 'w') as f:
     f.write(classification_report(y_test, xgb_pred))
+os.makedirs('outputs', exist_ok=True)
 df[['machine_id', 'timestamp', 'risk_score', 'high_risk']].to_csv('outputs/risk_scores.csv', index=False)
 
 print("Pipeline complete!")
