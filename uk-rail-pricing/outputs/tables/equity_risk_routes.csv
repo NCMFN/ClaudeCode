@@ -1,0 +1,8 @@
+Route,Railcard Tier,Avg Current Price,Avg Predicted Price,% Increase,Risk Level
+Birmingham New Street -> Liverpool Lime Street,Senior,5.0,10.3490922262958,106.98184452591602,Severe
+Birmingham New Street -> London Euston,Senior,19.555555555555557,27.698138718220477,41.63820935453652,High
+London Paddington -> Reading,Disabled,12.232,16.278487949573602,33.081163747331615,High
+London Paddington -> Reading,Senior,14.315436241610739,16.563295409017723,15.702344863743114,Moderate
+London St Pancras -> Birmingham New Street,Senior,6.909090909090909,10.125637397442626,46.555278120880104,High
+York -> Durham,Disabled,6.5,8.672863396396565,33.42866763687023,High
+York -> Durham,Senior,5.0,7.891089108910891,57.821782178217816,Severe
