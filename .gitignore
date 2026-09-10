@@ -106,9 +106,9 @@ wsn_data1
 wsn_data2
 wsn_data3
 
-rmsda/outputs/figures
-rmsda/outputs/tables
-rmsda/outputs/datasets
-rmsda/outputs/paper_assets
+outputs/figures
+outputs/tables
+outputs/datasets
+outputs/paper_assets
 
-rmsda/outputs/models
+outputs/models
