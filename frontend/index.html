@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roots – Family Tree Demo</title>
+<style>
+:root{--bg:#EEF1EC;--card:#fff;--ink:#1C2B27;--muted:#5E6F69;--pine:#2F5D50;--gold:#C79A3B;--line:#B9C6BF;--sheet:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111916;--card:#1B2622;--ink:#E8EFEB;--muted:#93A59D;--pine:#6FB39F;--gold:#E0B45A;--line:#33453E;--sheet:#1B2622}}
+:root[data-theme="dark"]{--bg:#111916;--card:#1B2622;--ink:#E8EFEB;--muted:#93A59D;--pine:#6FB39F;--gold:#E0B45A;--line:#33453E;--sheet:#1B2622}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.serif{font-family:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif}
+header{padding:20px 16px 8px;max-width:760px;margin:0 auto}
+h1{margin:0;font-size:28px;font-weight:600;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:2px 0 0}
+.plan{max-width:760px;margin:12px auto;padding:0 16px}
+.plan div{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--gold);border-radius:12px;padding:10px 14px;background:var(--card)}
+.plan b{display:block;font-size:14px}.plan span{font-size:13px;color:var(--muted)}
+.plan button{flex:none}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--pine);background:var(--pine);color:#fff;padding:8px 14px}
+button.ghost{background:transparent;color:var(--pine)}
+:root[data-theme="dark"] button:not(.ghost),:root:not([data-theme="light"]) button:not(.ghost){color:#0E1512}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.p:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+main{max-width:760px;margin:0 auto;padding:4px 16px 96px}
+.gen{margin-top:22px;position:relative}
+.gen h2{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:14px}
+.unit{display:flex;gap:0;border-top:3px solid var(--gold);padding-top:8px;position:relative}
+.unit::before{content:"";position:absolute;top:-3px;left:50%;height:0}
+.p{position:relative;width:118px;text-align:center;background:var(--card);color:var(--ink);border:1px solid var(--line);padding:10px 6px;margin-right:6px;border-radius:10px}
+.p:last-child{margin-right:0}
+.p .n{display:block;font-size:15px;line-height:1.2;margin-top:6px}
+.p .y{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.av{display:block;margin:0 auto;border-radius:50%;overflow:hidden;background:var(--bg);width:52px;height:52px}
+.av svg,.av img{display:block;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:2px;right:2px;width:16px;height:16px;line-height:16px;border-radius:50%;background:var(--gold);color:#2A1F06;font-size:10px;text-align:center;pointer-events:none}
+.origline{font-size:13px;color:var(--muted);margin:2px 0 0}
+.top{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+.top .av{width:84px;height:84px;flex:none;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 10px;font-size:13px}
+.up{font-size:13px;color:var(--pine);background:none;border:0;padding:0;margin:6px 0 0;text-decoration:underline}
+.p.me{border-color:var(--pine);border-width:2px}
+.p.new{animation:pop .4s}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+@media (prefers-reduced-motion:reduce){.p.new{animation:none}}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line);display:flex;gap:10px;justify-content:center}
+.bar button{flex:1;max-width:340px}
+.stats{color:var(--muted);font-size:13px;margin:14px 0 0}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:5}
+.sheet.on{display:flex}
+.panel{background:var(--sheet);width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));max-height:88%;overflow:auto}
+.panel h3{margin:0;font-size:24px;font-weight:600}
+.panel .meta{color:var(--muted);margin:2px 0 12px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+input,select,textarea{width:100%;font:inherit;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+.acts{display:flex;gap:10px;margin-top:14px}
+.acts button{flex:1}
+.toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.toast.on{opacity:1}
+.tools{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.tools button{padding:6px 12px;font-size:13px}
+.scroll{overflow:auto;-webkit-overflow-scrolling:touch;height:66vh;min-height:380px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+#size{position:relative}
+#tree{position:absolute;left:0;top:0;transform-origin:0 0}
+#tree svg{position:absolute;left:0;top:0}
+#tree path{fill:none;stroke:var(--line);stroke-width:2;stroke-linejoin:round}
+#tree path.ext{stroke-dasharray:5 4}
+#tree path.mar{stroke:var(--gold);stroke-width:4}
+#tree path.hl{stroke:var(--gold);stroke-width:4}
+#tree .p{position:absolute;width:100px;height:112px;padding:8px 4px;margin:0}
+#tree .p.anc{border:2px solid var(--gold)}
+#tree .av{width:46px;height:46px}
+#tree .p .n{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tree .p .y{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel h4{margin:14px 0 2px;font-size:12px;color:var(--pine);text-transform:uppercase;letter-spacing:.05em}
+.panel textarea{min-height:64px}
+</style>
+</head>
+<body>
+<header>
+  <h1 class="serif">The Adler Family</h1>
+  <p class="sub">Tap anyone to highlight their line back to the great-grandparents.</p>
+</header>
+<div class="plan"><div>
+  <span><b>Family plan · $59 per year</b>Renews Mar 12, 2027 · 6 relatives can edit</span>
+  <button class="ghost" id="inv">Invite</button>
+</div></div>
+<main>
+  <p class="stats" id="stats"></p>
+  <div class="tools"><button class="ghost" id="zo" aria-label="Zoom out">−</button><button class="ghost" id="zi" aria-label="Zoom in">+</button><button class="ghost" id="all">Whole tree</button><button class="ghost" id="fit">Find me</button></div>
+  <div class="scroll" id="scroll"><div id="size"><div id="tree"></div></div></div>
+</main>
+<div class="bar"><button id="add">Add a relative</button><button id="bio" class="ghost" style="display:none">Biography</button></div>
+
+<div class="sheet" id="sheet"><div class="panel" id="panel" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+var GENS=["Great-grandparents","Grandparents","Parents, aunts and uncles","Your generation","Next generation"];
+var SK=["#F3D5C0","#E8B996","#C98D66","#9A6444","#6B4429"],HC=["#2B1D14","#5A3A22","#8A5A2E","#C9A24B","#B5482A","#3B3B3B","#D9D9D9"],CL=["#2F5D50","#C79A3B","#4A6FA5","#A5545E","#7A5C9E","#3E7C8C"];
+var SEED=[
+{id:1,name:"Henry Adler",rel:"Great-grandfather",born:1908,died:1981,gen:0,unit:"a",place:"Gdańsk, Poland",a:[0,6,"m",2,0],bio:"A carpenter's son who sailed to America in 1929 with one suitcase and his father's tools. He built the family's first home in Cleveland by hand and never threw away a nail."},
+{id:2,name:"Rosa Adler",rel:"Great-grandmother",born:1911,died:1994,gen:0,unit:"a",place:"Kraków, Poland",maiden:"Kamiński",origin:"Kraków, Poland",a:[0,6,"u",3,0],bio:"Ran a bakery from the front room of the Cleveland house for thirty years. Her poppy seed rolls are still baked at every family holiday."},
+{id:3,name:"Tomas Reyes",rel:"Great-grandfather",born:1905,died:1979,gen:0,unit:"b",place:"Oaxaca, Mexico",a:[2,5,"m",1,0],bio:"A railway foreman who moved his family from Oaxaca to San Antonio in 1932. He taught his children that work done properly needs no praise."},
+{id:4,name:"Lucia Reyes",rel:"Great-grandmother",born:1910,died:1990,gen:0,unit:"b",place:"Oaxaca, Mexico",maiden:"Flores",origin:"Oaxaca, Mexico",a:[2,6,"u",4,0],bio:"Kept a garden that fed half the street and remembered every neighbor's birthday. She sang while she worked, mostly boleros."},
+{id:5,name:"Walter Adler",rel:"Grandfather",born:1934,died:2015,gen:1,unit:"c",place:"Cleveland, Ohio",par:[1,2],a:[0,5,"m",0,1],bio:"Worked 38 years as a machinist and coached Little League on weekends. He met Maria at a church dance in 1957 and proposed within a year."},
+{id:6,name:"Maria Adler",rel:"Grandmother",born:1937,died:null,gen:1,unit:"c",place:"San Antonio, Texas",par:[3,4],a:[1,6,"l",3,1],bio:"A retired schoolteacher who still writes letters by hand. She is keeper of the family recipes and its unofficial historian."},
+{id:11,name:"Helen Novak",rel:"Great-aunt",born:1938,died:null,gen:1,unit:"f",place:"Toledo, Ohio",par:[1,2],a:[0,6,"u",4,0],bio:"Walter's younger sister, a librarian who first collected the family's old photographs. She married Peter Novak in 1961."},
+{id:12,name:"Peter Novak",rel:"Great-uncle",born:1936,died:2010,gen:1,unit:"f",place:"Toledo, Ohio",maiden:"Novak",origin:"Toledo, Ohio",a:[0,6,"b",0,1],bio:"A high-school band director who could repair any instrument. He taught half of Toledo to march in step."},
+{id:13,name:"Carlos Reyes",rel:"Great-uncle",born:1940,died:null,gen:1,unit:"g",place:"San Antonio, Texas",par:[3,4],a:[2,5,"m",2,0],bio:"Maria's brother, a mechanic who opened Reyes Auto in 1968. The shop still stands, now run by his son."},
+{id:14,name:"Elena Reyes",rel:"Great-aunt",born:1943,died:null,gen:1,unit:"g",place:"San Antonio, Texas",maiden:"Vargas",origin:"San Antonio, Texas",a:[2,0,"u",3,0],bio:"Kept the shop's books for forty years and hosted the loudest Christmas Eve dinners in Texas."},
+{id:7,name:"Daniel Adler",rel:"Father",born:1962,died:null,gen:2,unit:"d",place:"Columbus, Ohio",par:[5,6],a:[1,1,"m",2,1],bio:"A civil engineer who restores vintage radios in his garage. He married Grace in 1991 and raised Maya and Leo in Columbus."},
+{id:8,name:"Grace Adler",rel:"Mother",born:1965,died:null,gen:2,unit:"d",place:"Columbus, Ohio",maiden:"Whitfield",origin:"Dayton, Ohio",a:[0,3,"l",0,0],bio:"A pediatric nurse and marathon runner. She organizes the family reunion every July and keeps the shared photo albums."},
+{id:15,name:"Susan Bell",rel:"Aunt",born:1960,died:null,gen:2,unit:"h",place:"Pittsburgh, Pennsylvania",par:[5,6],a:[1,4,"l",5,0],bio:"Daniel's older sister and a high-school biology teacher. She married Mark in 1988 and is mother of Emma and Jack."},
+{id:16,name:"Mark Bell",rel:"Uncle",born:1958,died:null,gen:2,unit:"h",place:"Pittsburgh, Pennsylvania",maiden:"Bell",origin:"near Pittsburgh, Pennsylvania",a:[1,1,"m",0,1],bio:"An architect who designed the family's lake cabin. Terrible at fishing, excellent at cooking what others catch."},
+{id:17,name:"Robert Adler",rel:"Uncle",born:1966,died:null,gen:2,unit:"i",place:"Denver, Colorado",par:[5,6],a:[1,0,"m",1,0],bio:"Daniel's younger brother, a software developer. He met Priya in graduate school and never left the mountains."},
+{id:18,name:"Priya Adler",rel:"Aunt",born:1968,died:null,gen:2,unit:"i",place:"Denver, Colorado",maiden:"Sharma",origin:"Pune, India",a:[3,0,"l",4,0],bio:"A pediatric dentist born in Pune who moved to Denver in 1997. Her mango pickle is legendary at reunions."},
+{id:19,name:"Karen Novak",rel:"Father's cousin",born:1964,died:null,gen:2,unit:"j",place:"Toledo, Ohio",par:[11,12],a:[0,4,"c",3,1],bio:"Helen and Peter's daughter, a landscape architect. She uses her mother's old photographs to date every family gathering."},
+{id:20,name:"Mateo Reyes",rel:"Father's cousin",born:1968,died:null,gen:2,unit:"k",place:"San Antonio, Texas",par:[13,14],a:[2,0,"m",5,0],bio:"Runs Reyes Auto, founded by his father Carlos. He has been a volunteer firefighter for twenty years."},
+{id:21,name:"Ana Reyes",rel:"Father's cousin's wife",born:1970,died:null,gen:2,unit:"k",place:"San Antonio, Texas",maiden:"Torres",origin:"Laredo, Texas",a:[2,1,"c",1,0],bio:"A hospice nurse and the family's best storyteller. She keeps the Reyes family recipe box."},
+{id:9,name:"Maya Adler",rel:"You",born:2000,died:null,gen:3,unit:"e",place:"Chicago, Illinois",par:[7,8],me:true,a:[1,0,"l",1,0],bio:"Began this tree after interviewing her grandmother over one long weekend. She works in urban planning in Chicago."},
+{id:10,name:"Leo Adler",rel:"Brother",born:2003,died:null,gen:3,unit:"e2",place:"Ann Arbor, Michigan",par:[7,8],a:[1,0,"m",5,0],bio:"A music student who plays trumpet. He says great-grandfather Henry would have liked his taste in jazz."},
+{id:22,name:"Emma Bell",rel:"Cousin",born:1993,died:null,gen:3,unit:"l",place:"Portland, Oregon",par:[15,16],a:[1,4,"l",2,0],bio:"A graphic designer who became a mother in 2024. She started a private photo blog for the whole family."},
+{id:27,name:"Sam Park",rel:"Cousin's partner",born:1992,died:null,gen:3,unit:"l",place:"Portland, Oregon",maiden:"Park",origin:"Portland, Oregon",a:[1,0,"m",3,1],bio:"A middle-school science teacher. He learned to make poppy seed rolls from Maria."},
+{id:23,name:"Jack Bell",rel:"Cousin",born:1996,died:null,gen:3,unit:"m",place:"Corvallis, Oregon",par:[15,16],a:[1,1,"m",0,0],bio:"A field biologist studying river otters. He turns up at reunions with muddy boots and new stories."},
+{id:24,name:"Arjun Adler",rel:"Cousin",born:2002,died:null,gen:3,unit:"n",place:"Boulder, Colorado",par:[17,18],a:[3,0,"c",2,0],bio:"Robert and Priya's son, studying computer science and playing goalie for the university soccer team."},
+{id:25,name:"Nia Adler",rel:"Cousin",born:2008,died:null,gen:3,unit:"n2",place:"Denver, Colorado",par:[17,18],a:[3,0,"l",1,0],bio:"A high-school junior who sings in the choir and wants to study medicine."},
+{id:26,name:"Sofia Reyes",rel:"Second cousin",born:1995,died:null,gen:3,unit:"o",place:"Austin, Texas",par:[20,21],a:[2,0,"u",4,0],bio:"Mateo and Ana's daughter, a chef who has begun reviving Lucia's recipes from Oaxaca."},
+{id:28,name:"Theo Park",rel:"Cousin's son",born:2024,died:null,gen:4,unit:"q",place:"Portland, Oregon",par:[22,27],a:[1,0,"b",5,0],bio:"The newest branch of the tree. He already owns a large collection of hats sent by relatives."}
+];
+var people=load();
+var SEC={
+1:["Known as Hank. Polish Catholic, from a working-class family of carpenters.","Grew up in a two-room Gdańsk flat; left school at 13 to apprentice with his father.","Carpenter in Cleveland from 1930. Lost work in 1933 and took factory shifts. Built his family's home by hand.","Married Rosa in 1932; father of Walter and Helen. Quiet, exacting, generous with tools.","Remembered for the house he built, still in the family, and for teaching neighbors carpentry."],
+2:["Called Rosie. Polish Catholic; her family ran a Kraków bakery.","Learned baking from her mother; crossed to America in 1930 to marry Henry.","Baked for the parish from her kitchen, then ran a small bakery for thirty years.","Mother of Walter and Helen. Warm, blunt, devout; sang in the church choir.","Remembered for poppy seed rolls and open-door Sundays. Her recipe card is framed at Maria's."],
+3:["Known as Tomás. Catholic Mexican family of farmers and railway workers.","Grew up in a village near Oaxaca; worked the rails from age 15.","Railway foreman in San Antonio from 1932, leading crews across Texas.","Married Lucia in 1930; father of Maria and Carlos. Proud, disciplined, fond of dominoes.","Remembered for his fairness to workers and for moving the family north for opportunity."],
+4:["Called Lucha. Catholic, from a farming family in Oaxaca.","Raised on a small farm; learned herbs, sewing and songs from her grandmother.","Seamstress in San Antonio who also sold vegetables from her garden.","Mother of Maria and Carlos. Generous, sociable, devoted to the Virgin of Guadalupe.","Remembered for her garden, her boleros and her open kitchen."],
+5:["Called Walt. Polish-American Catholic, working-class Cleveland.","Grew up in the house his father built; attended parish school, then a trade school.","Machinist for 38 years; foreman from 1972. Passed over once for plant manager.","Married Maria in 1958 after meeting at a church dance; father of Susan, Daniel and Robert. Steady, dry-humored, baseball fan.","Remembered as a coach and a fixer of everything. Retired in 1996."],
+6:["Called Mari. Catholic Mexican-American, raised in a railway family.","Grew up in San Antonio; first in her family to attend college, on scholarship.","Taught elementary school in Cleveland for 34 years; regional teaching award in 1985.","Married Walter in 1958; mother of three. Curious, devout, a devoted letter writer.","Remembered by generations of pupils and as the family's historian."],
+7:["Called Danny. Polish-Mexican American, raised Catholic, middle class.","Grew up in Cleveland; earned an engineering degree at Ohio State on scholarship.","Civil engineer for a state transport department from 1985; led a 2004 bridge rehabilitation. Briefly laid off in 1992.","Married Grace in 1991; father of Maya and Leo. Patient, practical, tinkers with radios.","Known for bridges he helped keep safe and a garage full of working radios."],
+8:["Born Grace Whitfield. Protestant, Ohio middle-class family.","Grew up in Dayton; a school nurse inspired her to study nursing at Ohio State.","Pediatric nurse for 30 years; charge nurse from 2001. Ran her first marathon in 2005.","Married Daniel in 1991; mother of Maya and Leo. Energetic, organized, very funny.","Remembered by patients' families and as the reunion's organizer."],
+9:["Called May. Fourth-generation American; secular home with Catholic holidays.","Grew up in Columbus; studied urban planning at Michigan, mentored by a transit professor.","City planner in Chicago since 2023, on neighborhood transit projects. Missed her first-choice job in 2022.","Close to her brother Leo; loves cycling and cooking her grandmother's recipes. Curious, determined.","Started this family tree and hopes to pass it on to her future children."],
+10:["Called Leo-Leo by Grandma. Secular home with Catholic holidays.","Grew up in Columbus; began trumpet at nine and joined a youth jazz band.","Music performance student; won a 2024 concerto contest. Recovered from a lip injury in 2025.","Close to Maya; enjoys jazz, hiking and cooking. Easygoing and playful.","Hopes to teach music one day."],
+11:["Called Nell. Polish-American Catholic, Cleveland working class.","Grew up in Cleveland; earned a library science degree at Kent State.","Librarian in Toledo for 35 years; built the local history archive in 1978.","Married Peter in 1961; mother of Karen. Meticulous, warm, a lifelong photo collector.","Remembered in Toledo for the archive, and in the family for saving early photographs."],
+12:["Called Pete. Czech-American Catholic, from Toledo.","Grew up in Toledo, played clarinet from age 8; studied music education at Bowling Green.","Band director for 34 years; state titles in 1974 and 1981. Let go in 1975 budget cuts, then rehired.","Married Helen in 1961; father of Karen. Cheerful, patient, always fixing instruments.","Remembered by hundreds of former students and a memorial scholarship."],
+13:["Called Charlie. Mexican-American Catholic, working class.","Grew up in San Antonio; learned engines in his father's yard; attended vocational school.","Mechanic, then founded Reyes Auto in 1968. Survived the 1982 recession by taking fleet contracts.","Married Elena in 1966; father of Mateo. Talkative, proud, loves boxing and Tejano music.","Remembered as the neighborhood mechanic who never turned a customer away."],
+14:["Born Elena Vargas. Mexican-American Catholic.","Grew up in San Antonio; studied bookkeeping at a business college.","Ran Reyes Auto's books from 1968 to 2008 and helped open a second location.","Married Carlos in 1966; mother of Mateo. Warm, shrewd, famous for her tamales.","Remembered for Christmas Eve dinners that filled two houses."],
+15:["Called Suzie. Raised Catholic, now secular; middle class.","Grew up in Cleveland; studied biology at Ohio University, inspired by a high-school teacher.","Biology teacher in Pittsburgh for 33 years; department head from 2003; regional teaching award in 2011.","Married Mark in 1988; mother of Emma and Jack. Practical, outdoorsy, big reader.","Known to students as the teacher who took them to the creek."],
+16:["Presbyterian, from a Pennsylvania middle-class family.","Grew up near Pittsburgh; studied architecture at Carnegie Mellon.","Architect who designed several schools and the family's lake cabin; opened his own practice in 2000.","Married Susan in 1988; father of Emma and Jack. Easygoing, loves fishing and cooking.","Remembered around Pittsburgh for schools full of natural light."],
+17:["Called Bob. Raised Catholic, now secular; middle class.","Grew up in Cleveland; studied computer science at Case Western.","Software developer from 1990; moved to Denver in 1996; principal engineer by 2015.","Married Priya in 1998; father of Arjun and Nia. Thoughtful, sporty, keen skier.","Known as the family's tech help line and a mentor to young engineers."],
+18:["Born Priya Sharma in a Hindu, middle-class family of doctors in Pune.","Grew up in Pune; came to the US in 1994 for dental school in Ohio.","Pediatric dentist; opened her Denver practice in 2003 after passing licensing on a second attempt.","Married Robert in 1998; mother of Arjun and Nia. Warm, disciplined, devoted to yoga.","Known for her patience with nervous children and her mango pickle."],
+19:["Called Kari. Czech-Polish American Catholic; Toledo middle class.","Grew up surrounded by her mother's photographs; studied landscape architecture at Michigan State.","Landscape architect at a Toledo firm; designed the city's riverfront park (2009).","Divorced; enjoys gardening and genealogy. Cheerful and independent.","Remembered for the riverfront park and for dating the family's photographs."],
+20:["Called Teo. Mexican-American Catholic, working class.","Grew up above the auto shop; learned engines at ten; studied business at UTSA.","Took over Reyes Auto in 2008; nearly lost it in 2009; added electric-vehicle repair in 2019.","Married Ana in 1993; father of Sofia. Loyal, funny, avid fisherman.","Known for twenty years as a volunteer firefighter."],
+21:["Born Ana Torres. Mexican-American Catholic.","Grew up in Laredo; trained as a nurse at a community college.","Hospice nurse for 25 years; compassionate-care award in 2017.","Married Mateo in 1993; mother of Sofia. Gentle, funny, a natural storyteller.","Remembered by families she supported through hard days."],
+22:["Raised secular; middle class.","Grew up in Pittsburgh; studied graphic design at a Portland art college.","Designer at a Portland studio; art director from 2022; created the family's photo blog.","Partner of Sam; mother of Theo. Creative, organized, loves hiking.","Hopes to preserve the family's photographs for Theo's generation."],
+23:["Raised secular; middle class.","Grew up in Pittsburgh; studied biology at Oregon State, following his mother's example.","Field biologist on otter recovery since 2020; co-authored two papers. Lost funding in 2023, then found new grants.","Single; enjoys canoeing and photography. Curious and adventurous.","Known for muddy boots at reunions and his otter photos."],
+24:["Raised in a Hindu-Catholic household; upper middle class.","Grew up in Denver; began programming at 11; plays goalie.","Computer science student; interned at a Denver tech firm in 2025; won a campus hackathon.","Close to his sister Nia. Loyal, competitive, loves soccer.","Hopes to build software for public health."],
+25:["Raised in a Hindu-Catholic household; upper middle class.","Grew up in Denver; sings in the school choir, mentored by her choir director.","High-school junior; soloist at the 2025 state choir festival.","Close to her brother Arjun; loves music and volunteering. Bold and kind.","Hopes to study medicine, following her mother's care for children."],
+26:["Mexican-American Catholic; middle class.","Grew up above the auto shop in San Antonio; attended culinary school in Austin.","Line cook, then sous chef; head chef since 2024. Her restaurant closed briefly in 2020.","Single; loves travel to Oaxaca. Curious and driven.","Is compiling Lucia's recipes into a family cookbook."],
+27:["Korean-American, raised Presbyterian; middle class.","Grew up in Portland; studied chemistry at Oregon State.","Middle-school science teacher since 2017; teacher of the year in 2022.","Partner of Emma; father of Theo. Calm and funny.","Known by students for hands-on experiments."],
+28:["Born into a Polish, Mexican, Korean and Indian-rooted family.","First months at home in Portland; first outing was a family reunion.","Too young for a career; the family expects big things.","Loves hats, blocks and his cousins.","The newest branch of the tree."]
+};
+function era(y){return !y?"":y<1920?"Lived through two world wars and the Great Depression.":y<1945?"Childhood shaped by the Great Depression and the Second World War.":y<1970?"Grew up in the postwar boom, the civil rights era and the Cold War.":y<1990?"Came of age in the 1980s and 90s, as the Cold War ended and the internet arrived.":y<2010?"Grew up with the internet, 9/11 and the 2008 financial crisis.":"Born into the smartphone era and the pandemic years."}
+function basics(p){var par=(p.par||[]).map(byId).filter(Boolean),sib=people.filter(function(x){return x!==p&&x.par&&p.par&&x.par[0]===p.par[0]});
+  return p.name+", born "+(p.born||"in an unknown year")+". Parents: "+(par.map(function(x){return x.name}).join(" and ")||"not yet recorded")+". Siblings: "+(sib.map(function(x){return x.name}).join(", ")||"none recorded")+"."}
+function fill(p){if(p.s)return;var x=SEC[p.id]||[],N="Not yet recorded. Tap Edit to add.";
+  p.s={b:basics(p)+(x[0]?" "+x[0]:""),e:x[1]||N,c:x[2]||N,p:x[3]||N,h:(era(p.born)+(p.place?" Place: "+p.place+".":"")).trim()||N,g:(p.died?"Died in "+p.died+(p.born?" at age "+(p.died-p.born):"")+". ":"")+(x[4]||N)}}
+people.forEach(fill);
+var TT=[["b","Basics"],["e","Early life"],["c","Career and achievements"],["p","Personal life"],["h","Historical context"],["g","Legacy"]];
+function view(p){return '<p class="meta" style="margin:10px 0 0"><i>'+esc(p.bio)+"</i></p>"+TT.map(function(t){return "<h4>"+t[1]+"</h4><p style=\"margin:0\">"+esc(p.s[t[0]])+"</p>"}).join("")}
+function edit(p){return "<label>Summary</label><textarea data-k=\"bio\">"+esc(p.bio)+"</textarea>"+TT.map(function(t){return "<label>"+t[1]+"</label><textarea data-k=\""+t[0]+"\">"+esc(p.s[t[0]])+"</textarea>"}).join("")}
+
+function load(){try{var s=localStorage.getItem("roots-demo3");if(s){var d=JSON.parse(s);if(Array.isArray(d)&&d.length){var sm={};SEED.forEach(function(x){if(x.maiden)sm[x.id]={maiden:x.maiden,origin:x.origin}});d.forEach(function(p){if(!p.maiden&&sm[p.id]){p.maiden=sm[p.id].maiden;p.origin=sm[p.id].origin}});return d}}}catch(e){}return JSON.parse(JSON.stringify(SEED))}
+function save(){try{localStorage.setItem("roots-demo3",JSON.stringify(people))}catch(e){}}
+function $(i){return document.getElementById(i)}
+function yrs(p){return p.born?(p.born+" – "+(p.died||"present")):"Dates unknown"}
+function toast(t){var e=$("toast");e.textContent=t;e.className="toast on";setTimeout(function(){e.className="toast"},1800)}
+var lastNew=null;
+var W=100,G=14,GAP=16,H=112,V=46,sel=null,scale=.8,POS={},TW=0,TH=0;
+function nodesOf(){
+  var seen={},N=[],of={};
+  people.forEach(function(p){
+    if(seen[p.id])return;
+    var m=[p].concat(people.filter(function(x){return x!==p&&x.unit===p.unit&&!seen[x.id]})).slice(0,2);
+    m.sort(function(a,b){return (b.par?1:0)-(a.par?1:0)});
+    var n={m:m,kids:[],gen:m[0].gen};
+    m.forEach(function(x){seen[x.id]=1;of[x.id]=n});N.push(n)});
+  N.forEach(function(n){
+    var pm=n.m.filter(function(x){return x.par&&of[x.par[0]]});
+    if(pm[0]){n.prim=pm[0];n.up=of[pm[0].par[0]];n.up.kids.push(n)}
+    if(pm[1]&&of[pm[1].par[0]]!==n.up){n.ext=pm[1];n.extUp=of[pm[1].par[0]]}});
+  N.forEach(function(n){n.kids.sort(function(a,b){return (a.ext?1:0)-(b.ext?1:0)})});
+  return N}
+function nw(n){return n.m.length*W+(n.m.length-1)*G}
+function kw(n){return n.kids.reduce(function(a,c){return a+sw(c)},0)+GAP*Math.max(0,n.kids.length-1)}
+function sw(n){n.sw=Math.max(nw(n),kw(n));return n.sw}
+function place(n,L){
+  var x=L+(n.sw-kw(n))/2;
+  n.kids.forEach(function(c){place(c,x);x+=c.sw+GAP});
+  n.cx=L+n.sw/2;n.y=n.gen*(H+V)+10}
+function render(){
+  var N=nodesOf(),R=N.filter(function(n){return !n.up}),L=10,mg=0,svg="",cards="";POS={};
+  R.forEach(function(r){sw(r);place(r,L);L+=r.sw+40});
+  TW=L-30;
+  N.forEach(function(n){
+    mg=Math.max(mg,n.gen);
+    var x0=n.cx-nw(n)/2;
+    n.m.forEach(function(p,i){var x=x0+i*(W+G);POS[p.id]={x:x,y:n.y};
+      var mi=marriedIn(p);
+      cards+='<button type="button" class="p'+(p.me?" me":"")+(p.id===lastNew?" new":"")+'" data-id="'+p.id+'" style="left:'+x+'px;top:'+n.y+'px"'+(mi?' title="Married in — born into the '+esc(origLabel(p))+'"':"")+'>'+(mi?'<span class="tag" aria-hidden="true">⚭</span>':"")+'<span class="av">'+face(p)+'</span><span class="n serif">'+esc(p.name)+'</span><span class="y">'+esc(p.rel)+'</span><span class="y">'+(p.born||"?")+(p.died?" – "+p.died:"")+"</span></button>"});
+    if(n.m.length>1)svg+='<path class="mar" d="M'+(x0+W)+" "+(n.y+32)+"H"+(x0+W+G)+'"/>'});
+  N.forEach(function(n){
+    [[n.prim,n.up,18],[n.ext,n.extUp,8]].forEach(function(e,k){
+      if(!e[0])return;var u=e[1];
+      svg+='<path class="'+(k?"ext":"")+'" data-c="'+e[0].id+'" d="M'+u.cx+" "+(u.y+(u.m.length>1?32:H))+"V"+(u.y+H+e[2])+"H"+(POS[e[0].id].x+W/2)+"V"+n.y+'"/>'})});
+  TH=(mg+1)*(H+V)+10;
+  $("tree").style.cssText="width:"+TW+"px;height:"+TH+"px;transform:scale("+scale+")";
+  $("size").style.cssText="width:"+TW*scale+"px;height:"+TH*scale+"px";
+  $("tree").innerHTML='<svg width="'+TW+'" height="'+TH+'">'+svg+"</svg>"+cards;
+  $("stats").textContent=people.length+" relatives across "+(mg+1)+" generations";
+  trace(sel);
+}
+function anc(id,s){s[id]=1;var p=byId(id);((p&&p.par)||[]).forEach(function(q){anc(q,s)});return s}
+function trace(id){
+  var s=id?anc(id,{}):{},sv=document.querySelector("#tree svg");
+  document.querySelectorAll("#tree .p").forEach(function(b){b.classList.toggle("anc",!!s[b.dataset.id])});
+  sv.querySelectorAll("path[data-c]").forEach(function(p){var on=!!s[p.getAttribute("data-c")];p.classList.toggle("hl",on);if(on)sv.appendChild(p)});
+}
+function setBio(){var b=$("bio");if(!sel){b.style.display="none";return}b.style.display="";b.textContent="Biography: "+byId(sel).name.split(" ")[0]}
+function focus(id){var q=POS[id],sc=$("scroll");if(!q)return;sc.scrollTo({left:Math.max(0,(q.x+W/2)*scale-sc.clientWidth/2),top:Math.max(0,q.y*scale-sc.clientHeight/3)})}
+function setScale(v){scale=Math.max(.25,Math.min(1.3,v));render()}
+$("tree").onclick=function(e){var b=e.target.closest(".p");if(b){sel=+b.dataset.id;trace(sel);setBio()}};
+$("scroll").onclick=function(e){if(!e.target.closest(".p")){sel=null;trace(null);setBio()}};
+$("bio").onclick=function(){if(sel)openPerson(sel)};
+$("zo").onclick=function(){setScale(scale-.15)};
+$("zi").onclick=function(){setScale(scale+.15)};
+$("all").onclick=function(){setScale(($("scroll").clientWidth-4)/TW)};
+$("fit").onclick=function(){var m=people.filter(function(p){return p.me})[0]||people[0];focus(m.id)};
+function open(html){$("panel").innerHTML=html;$("sheet").className="sheet on"}
+function close(){$("sheet").className="sheet"}
+$("sheet").onclick=function(e){if(e.target===$("sheet"))close()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":s;return d.innerHTML}
+function face(p){
+  if(p.img)return '<img alt="" src="'+p.img+'">';
+  var a=p.a||[1,0,"m",0,0],sk=SK[a[0]],hc=HC[a[1]],cl=CL[a[3]],t=a[2],s='<svg viewBox="0 0 64 64" aria-hidden="true">';
+  if(t==="l")s+='<path d="M19 28c0-13 6-19 13-19s13 6 13 19v20H19z" fill="'+hc+'"/>';
+  if(t==="c")s+='<g fill="'+hc+'"><circle cx="32" cy="16" r="11"/><circle cx="22" cy="23" r="7"/><circle cx="42" cy="23" r="7"/></g>';
+  s+='<path d="M8 64c0-13 10-19 24-19s24 6 24 19z" fill="'+cl+'"/><rect x="28" y="38" width="8" height="10" fill="'+sk+'"/><ellipse cx="32" cy="28" rx="11" ry="13" fill="'+sk+'"/>';
+  if(t==="m"||t==="u")s+='<path d="M20 27c0-13 7-17 12-17s12 4 12 17c-3-6-8-8-12-8s-9 2-12 8z" fill="'+hc+'"/>';
+  if(t==="u")s+='<circle cx="32" cy="8" r="5" fill="'+hc+'"/>';
+  if(t==="l")s+='<path d="M21 25c2-8 7-11 11-11s9 3 11 11c-4-4-8-5-11-5s-7 1-11 5z" fill="'+hc+'"/>';
+  s+='<circle cx="27" cy="29" r="1.5" fill="#222"/><circle cx="37" cy="29" r="1.5" fill="#222"/><path d="M28 35q4 3 8 0" stroke="#222" stroke-width="1.4" fill="none" stroke-linecap="round"/>';
+  if(a[4])s+='<g fill="none" stroke="#222" stroke-width="1.2"><circle cx="27" cy="29" r="4"/><circle cx="37" cy="29" r="4"/><path d="M31 29h2"/></g>';
+  return s+"</svg>";
+}
+function byId(i){return people.filter(function(x){return x.id===i})[0]}
+function marriedIn(p){return !!p.maiden}
+function origLabel(p){return p.maiden+" family"+(p.origin?" · "+p.origin:"")}
+function rnd(n){return Math.floor(Math.random()*n)}
+function chips(l,a){if(!a.length)return"";return "<label>"+l+'</label><div class="chips">'+a.map(function(x){return '<button class="ghost chip" data-id="'+x.id+'">'+esc(x.name)+"</button>"}).join("")+"</div>"}
+function openPerson(id){
+  var p=byId(id);sel=id;trace(id);setBio();
+  var par=(p.par||[]).map(byId).filter(Boolean);
+  var kin=function(x){return x.id!==p.id&&x.par&&p.par&&x.par[0]===p.par[0]};
+  var sib=people.filter(kin);
+  var mate=people.filter(function(x){return x.id!==p.id&&x.unit===p.unit&&!kin(x)});
+  var kids=people.filter(function(x){return x.par&&x.par.indexOf(p.id)>-1});
+  var mi=marriedIn(p);
+  open('<div class="top"><span class="av">'+face(p)+'</span><div><h3 class="serif">'+esc(p.name)+'</h3><p class="meta" style="margin:2px 0 0">'+esc(p.rel)+" · "+esc(yrs(p))+(p.place?"<br>"+esc(p.place):"")+'</p>'+(mi?'<p class="origline">⚭ Married in · <button type="button" class="up" id="origfam" style="margin:0">'+esc(origLabel(p))+"</button></p>":"")+'<button class="up" id="pb">Change photo</button><input type="file" id="ph" accept="image/*" hidden></div></div>'+
+  chips("Parents",par)+chips("Partner",mate)+chips("Siblings",sib)+chips("Children",kids)+'<div id="bd">'+view(p)+"</div>"+
+  '<div class="acts"><button class="ghost" id="cl">Close</button><button id="sv">Edit biography</button></div>');
+  if(mi)$("origfam").onclick=function(){toast(p.name.split(" ")[0]+" was born into the "+origLabel(p)+", before marrying into this family.")};
+  $("cl").onclick=close;
+  $("sv").onclick=function(){
+    if(this.textContent==="Edit biography"){$("bd").innerHTML=edit(p);this.textContent="Save biography";return}
+    document.querySelectorAll("#bd textarea").forEach(function(t){var k=t.dataset.k;if(k==="bio")p.bio=t.value;else p.s[k]=t.value});
+    save();$("bd").innerHTML=view(p);this.textContent="Edit biography";toast("Biography saved")};
+  $("pb").onclick=function(){$("ph").click()};
+  $("ph").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement("canvas");c.width=c.height=160;var m=Math.min(im.width,im.height);c.getContext("2d").drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,160,160);p.img=c.toDataURL("image/jpeg",.75);save();render();openPerson(id);toast("Photo updated")};im.src=r.result};r.readAsDataURL(f)};
+  document.querySelectorAll(".chip").forEach(function(b){if(b.dataset.id)b.onclick=function(){openPerson(+b.dataset.id)}});
+}
+function openAdd(){
+  var opts='<option value="">Nobody (start a new branch)</option>'+people.map(function(x){return '<option value="'+x.id+'">'+esc(x.name)+"</option>"}).join("");
+  open('<h3 class="serif">Add a relative</h3><p class="meta">A portrait is created for them. You can upload a real photo afterward.</p>'+
+  '<label for="nm">Full name</label><input id="nm" autocomplete="off">'+
+  '<label for="rl">Relationship to you</label><input id="rl" placeholder="Aunt, cousin, grandfather" autocomplete="off">'+
+  '<label for="ct">Connect to</label><select id="ct">'+opts+"</select>"+'<label for="as">Add them as</label><select id="as"><option value="child">Child</option><option value="partner">Partner</option></select>'+
+  '<div id="mnWrap" style="display:none"><label for="mn">Family name before marriage</label><input id="mn" placeholder="e.g. Whitfield" autocomplete="off">'+
+  '<label for="mo">Where that family was from</label><input id="mo" placeholder="e.g. Dayton, Ohio" autocomplete="off"></div>'+
+  '<label for="gd">Portrait style</label><select id="gd"><option value="f">Woman</option><option value="m">Man</option></select>'+
+  '<label for="by">Year born</label><input id="by" inputmode="numeric" maxlength="4">'+
+  '<label for="pl">Place</label><input id="pl" autocomplete="off">'+
+  '<label for="sy">Biography</label><textarea id="sy"></textarea>'+
+  '<div class="acts"><button class="ghost" id="cl">Cancel</button><button id="ok">Add to tree</button></div>');
+  $("cl").onclick=close;
+  $("as").onchange=function(){$("mnWrap").style.display=this.value==="partner"?"":"none"};
+  $("ok").onclick=function(){
+    var nm=$("nm").value.trim();
+    if(!nm){toast("Enter a name first");$("nm").focus();return}
+    var id=Date.now(),cid=parseInt($("ct").value,10)||0,c=cid?byId(cid):null,as=$("as").value,par=null,unit="u"+id,gen=0;
+    if(c&&as==="child"){var mt=people.filter(function(x){return x!==c&&x.unit===c.unit})[0];par=[c.id].concat(mt?[mt.id]:[]);gen=c.gen+1}
+    if(c&&as==="partner"){if(people.some(function(x){return x!==c&&x.unit===c.unit})){toast(c.name+" already has a partner");return}unit=c.unit;gen=c.gen}
+    lastNew=id;
+    var by=parseInt($("by").value,10)||null,w=$("gd").value==="f";
+    var o={id:id,name:nm,rel:$("rl").value.trim()||"Relative",born:by,died:null,gen:gen,unit:unit,place:$("pl").value.trim(),bio:$("sy").value.trim()||"No biography yet. Tap to add one.",a:[rnd(5),by&&by<1950?6:rnd(6),w?(rnd(2)?"l":"u"):"m",rnd(6),0]};
+    if(par)o.par=par;
+    if(as==="partner"){var mn=$("mn").value.trim();if(mn){o.maiden=mn;o.origin=$("mo").value.trim()}}
+    fill(o);people.push(o);sel=id;save();close();render();focus(id);setBio();toast(nm+" added")};
+}
+$("add").onclick=openAdd;
+$("inv").onclick=function(){toast("Invite link copied (demo)")};
+render();
+focus((people.filter(function(p){return p.me})[0]||people[0]).id);
+</script>
+</body>
+</html>
