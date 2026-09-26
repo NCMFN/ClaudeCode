@@ -1,47 +1,37 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { resources } from '../data';
 
 const Resources: React.FC = () => {
   return (
-    <div className="pt-20">
+    <>
       <Helmet>
-        <title>Teledom - Resources & Insights</title>
-        <meta name="description" content="Stay updated with the latest insights, whitepapers, and case studies from Teledom." />
+        <title>Resources - Teledom International</title>
+        <meta name="description" content="Download company profiles, solution brochures, and other resources." />
       </Helmet>
 
-      <section className="bg-blue-900 text-white py-20 text-center">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Resources & Insights</h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Industry knowledge, technical guides, and company news to help you stay ahead.
-          </p>
-        </div>
-      </section>
+      <div className="bg-gray-50 py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl mb-4">
+              Resources & Downloads
+            </h1>
+            <p className="text-xl text-gray-500">
+              Access our company profile and solution brochures.
+            </p>
+          </div>
 
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="space-y-6">
-            {resources.map((resource, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <div>
-                  <div className="flex items-center space-x-3 mb-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                      {resource.type}
-                    </span>
-                    <span className="text-sm text-gray-500">{resource.date}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mt-1">{resource.title}</h3>
-                </div>
-                <a href={resource.link} className="mt-4 sm:mt-0 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
-                  Read More <span className="ml-1">→</span>
-                </a>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+               <h3 className="text-2xl font-bold text-gray-900 mb-4">Teledom International Company Profile</h3>
+               <p className="text-gray-600 mb-6">Learn more about our comprehensive IT, telecommunication, and security solutions.</p>
+               <a href="#" className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors shadow">
+                 <span className="mr-2">[PDF]</span> Download Company Profile
+               </a>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 

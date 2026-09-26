@@ -1,56 +1,53 @@
+export const companyInfo = {
+  name: 'Teledom International',
+  address: '6A & 6B, Sule Abuka Crescent, Off Opebi Road, Ikeja, Lagos.',
+  emails: ['info@teledominternational.net', 'uyo@teledominternational.net'],
+  phones: ['+234 706 601 2671', '+234 808 058 0288', '+234 808 113 1346', '+234 808 303 5594']
+};
+
 export const solutions = [
-  { id: 'networking', title: 'Enterprise Networking', description: 'Robust, scalable network infrastructure designed to support high-demand enterprise environments with uncompromising reliability.' },
-  { id: 'security', title: 'Cybersecurity', description: 'Advanced protection for your digital assets, ensuring data integrity and compliance with state-of-the-art threat detection and response.' },
-  { id: 'cloud', title: 'Cloud Infrastructure', description: 'Flexible and secure cloud solutions that drive efficiency, enabling seamless remote operations and robust data storage.' },
-  { id: 'unified-communications', title: 'Unified Communications', description: 'Streamline your business communications with integrated voice, video, and messaging platforms for enhanced collaboration.' }
+  { id: 'broadband', title: 'Broadband Connectivity Solutions', description: 'High-speed, reliable broadband infrastructure.', imagePlaceholder: 'broadband.png' },
+  { id: 'identity', title: 'Identity Capture & Tracking Solutions', description: 'Advanced biometric and tracking systems.', imagePlaceholder: 'smartId.jpeg' },
+  { id: 'security', title: 'Security Solutions', description: 'Surveillance for police, port, and military-grade applications.', imagePlaceholder: 'security.jpg' },
+  { id: 'smart-classroom', title: 'Smart Classroom Solutions', description: 'Interactive and modern educational environments.', imagePlaceholder: 'Smart-classroom.png' },
+  { id: 'snos', title: 'SNOS', description: 'Security Network Operating System (Smart National Security Operations).', imagePlaceholder: 'snos_flyer.png' },
+  { id: 'software', title: 'Software & Web Solutions', description: 'Custom software development and web platforms.', imagePlaceholder: 'software.jpg' },
+  { id: 'video', title: 'Video Communication Solutions', description: 'Room conferencing — point-to-point and multipoint.', imagePlaceholder: 'video.jpg' }
 ];
 
 export const team = [
-  { name: 'Dr. John Doe', role: 'Chief Executive Officer', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Jane Smith', role: 'Chief Technology Officer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200' },
-  { name: 'David Johnson', role: 'Head of Operations', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200' }
-];
-
-export const testimonials = [
-  { quote: 'Teledom transformed our IT infrastructure. Their networking solutions allowed us to scale seamlessly and securely across multiple regions.', author: 'Sarah Jenkins', role: 'CTO, Global Finance Inc.' },
-  { quote: 'The cybersecurity measures implemented by Teledom have been exceptional. We now have complete peace of mind regarding our data assets.', author: 'Michael Chen', role: 'CEO, TechStart Solutions' },
-  { quote: 'A highly professional team with a deep understanding of enterprise-level telecom needs. Their support is unparalleled.', author: 'Amanda Rodriguez', role: 'CIO, Healthcare Partners' }
+  { name: 'Dr. Emmanuel Ekuwem', role: 'CEO', image: '/assets/Dr Ekuwem-NKK5rSRO.jpg', bio: 'Dr. Ekuwem is a visionary leader with decades of experience in the telecommunications and IT sectors, driving Teledom International to become a premier solutions provider in Nigeria and beyond.' }
 ];
 
 export const partners = [
-  { name: 'MTN', type: 'Telecom Partner' },
-  { name: 'Access', type: 'Finance Partner' },
-  { name: 'Sterling', type: 'Finance Partner' },
-  { name: 'Cisco', type: 'Technology Partner' },
-  { name: 'Huawei', type: 'Network Partner' },
-  { name: 'Microsoft', type: 'Cloud Partner' },
-  { name: 'Dell', type: 'Hardware Partner' },
-  { name: 'Fortinet', type: 'Security Partner' },
-  { name: 'Lenovo', type: 'Hardware Partner' },
-  { name: 'Genetec', type: 'Security Partner' },
-  { name: 'Transition Networks', type: 'Network Partner' },
-  { name: 'Nutanix', type: 'Cloud Partner' },
-  { name: 'APC', type: 'Power Partner' },
-  { name: 'ISO', type: 'Certification' },
-  { name: 'NITDA', type: 'Certification' }
+  { name: 'Globacom Nigeria', type: 'Client', hasLogo: false },
+  { name: 'Mobil Producing Nigeria Unlimited', type: 'Client', hasLogo: false },
+  { name: 'Central Bank of Nigeria (CBN)', type: 'Client', hasLogo: false },
+  { name: 'Nigerian Communications Commission (NCC)', type: 'Client', hasLogo: false },
+  { name: 'Nigerian Deposit Insurance Corporation (NDIC)', type: 'Client', hasLogo: false },
+  { name: 'National Information Technology Development Agency (NITDA)', type: 'Client', hasLogo: false },
+  { name: 'Nigerian Army', type: 'Client', hasLogo: false },
+  { name: 'Nigerian Navy', type: 'Client', hasLogo: false },
+  { name: 'Nigerian Meteorological Agency (NIMET)', type: 'Client', hasLogo: false },
+  { name: 'Digital Bridge Institute', type: 'Client', hasLogo: false },
+  { name: 'Daar Communications', type: 'Client', hasLogo: false },
+  { name: 'Bi-Courtney Limited', type: 'Client', hasLogo: false },
+  { name: 'Beta Computers Limited', type: 'Client', hasLogo: false },
+  { name: 'NetLibrary Nigeria Limited', type: 'Client', hasLogo: false }
 ];
 
 export const industries = [
-  { id: 'finance', title: 'Financial Services', description: 'Secure and compliant IT solutions for banks and financial institutions.' },
-  { id: 'healthcare', title: 'Healthcare', description: 'Robust networks and data management systems for hospitals and clinics.' },
-  { id: 'education', title: 'Education', description: 'Enhancing learning environments with modern connectivity and collaborative tools.' },
-  { id: 'public-sector', title: 'Public Sector', description: 'Reliable telecommunication infrastructure for government agencies.' }
+  { id: 'government', title: 'Government & Public Sector', description: 'Secure infrastructure for national operations.' },
+  { id: 'telecom', title: 'Telecommunications', description: 'Broadband and network connectivity.' },
+  { id: 'education', title: 'Education', description: 'Smart classrooms and digital learning.' },
+  { id: 'finance', title: 'Finance', description: 'Secure networks for banking and insurance.' }
 ];
 
-export const resources = [
-  { title: 'The Future of Enterprise Networking', type: 'Blog Post', link: '#', date: 'October 10, 2023' },
-  { title: 'Cybersecurity Best Practices for 2024', type: 'Whitepaper', link: '#', date: 'September 25, 2023' },
-  { title: 'Migrating to Cloud Infrastructure', type: 'Case Study', link: '#', date: 'August 14, 2023' }
-];
+// Placeholder for resources - waiting on real material
+export const resources = [];
 
 export const stats = [
   { label: 'Years Experience', value: '25+' },
-  { label: 'Enterprise Clients', value: '500+' },
-  { label: 'Successful Projects', value: '1200+' },
-  { label: 'Support Availability', value: '24/7' }
+  { label: 'Enterprise & Govt Clients', value: '100+' },
+  { label: 'Successful Projects', value: '500+' }
 ];
