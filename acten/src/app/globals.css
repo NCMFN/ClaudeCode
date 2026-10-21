@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-green: 23, 61, 50;
+    --brand-burgundy: 123, 38, 58;
+    --brand-gold: 200, 164, 93;
+    --brand-ivory: 247, 245, 239;
+    --brand-charcoal: 36, 40, 36;
+    --brand-light-grey: 233, 236, 232;
+  }
+}
+
+@theme {
+  --color-brand-green: rgb(var(--brand-green));
+  --color-brand-burgundy: rgb(var(--brand-burgundy));
+  --color-brand-gold: rgb(var(--brand-gold));
+  --color-brand-ivory: rgb(var(--brand-ivory));
+  --color-brand-charcoal: rgb(var(--brand-charcoal));
+  --color-brand-light-grey: rgb(var(--brand-light-grey));
+}
+
+body {
+  font-family: var(--font-inter), sans-serif;
+  color: rgb(var(--brand-charcoal));
+  background-color: rgb(var(--brand-ivory));
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+}
