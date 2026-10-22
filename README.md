@@ -1,40 +1,32 @@
-# Claude Code Resources 🚀
+# Adaptive Lightweight Blockchain Node Architecture for Energy-Constrained DePIN Devices
 
-> A curated collection of the best GitHub repositories to supercharge your Claude Code workflow in 2026.
+## Overview
+This repository contains the simulation, modeling, and analysis code for the IEEE conference paper "Adaptive Lightweight Blockchain Node Architecture for Energy-Constrained DePIN Devices".
 
----
+The research introduces an autonomous 4-state Finite State Machine (FSM) tailored for DePIN (Decentralized Physical Infrastructure Networks) devices, optimizing energy consumption while guaranteeing primary task preservation.
 
-## 📚 Top 12 Repos That Will 10x Your Next Project
+## Differentiators
+1. **Device-side autonomous FSM**: The node regulates its own participation role via on-device firmware based on State-of-Charge (SoC), with zero network coordinator calls.
+2. **DePIN-specific proof types**: The adaptation focuses on Proof of Coverage (PoC) and Proof of Uptime (PoU) events, avoiding generic IoT transaction models.
+3. **Primary task guarantee**: A strict formal invariant ensures the device never fails its physical sensing or routing function regardless of the battery level.
 
-| # | Repository | Description |
-|---|------------|-------------|
-| 1 | [Claude Mem](https://github.com/thedotmack/claude-mem) | Persistent memory across sessions — stop re-teaching Claude your codebase |
-| 2 | [UI UX Pro Max](https://github.com/czlonkowski/n8n-mcp) | 50+ styles, 161 color palettes, 99 UX guidelines — Claude stops building ugly UIs |
-| 3 | [n8n-MCP](https://github.com/czlonkowski/n8n-mcp) | Connect Claude Code to 400+ n8n integrations via MCP |
-| 4 | [LightRAG](https://github.com/hkuds/lightrag) | Graph + vector RAG — lets Claude understand large codebases structurally |
-| 5 | [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) | Skills, instincts, security scanning, multi-language coverage — full agent harness |
-| 6 | [Awesome Claude Code](https://github.com/sickn33/antigravity) | Community bible — curated skills, hooks, slash commands, orchestrators |
-| 7 | [Superpowers](https://github.com/obra/superpowers) | Forces structured thinking before writing a single line of code |
-| 8 | [Claude Code Ultimate Guide](https://github.com/FlorianBruniau/claude-code-ultimate-guide) | 23K+ lines of docs, 219 templates, 271 quizzes — beginner to power user |
-| 9 | [Antigravity Awesome Skills](https://github.com/sickn33/antigravity) | 1,200+ ready-to-use skills — one of the largest collections |
-| 10 | [Claude Agent Blueprints](https://github.com/danielrosehill/claude-agent-blueprints) | 75+ agent workspace templates beyond coding |
-| 11 | [VoiceMode MCP](https://github.com/mbailey/voicemode) | Natural voice conversations with Claude Code via Whisper + Kokoro |
-| 12 | [Awesome Claude Plugins](https://github.com/ComposioHQ/awesome-claude-plugins) | 9,000+ repos indexed with adoption metrics — find what people actually install |
+## Project Structure
+- `data/`: Contains primary (IoT-Enabled Smart Grid) and processed datasets.
+- `src/fsm/`: FSM logic implementation (`ep_depin_fsm.py`).
+- `src/simulation/`: Discrete-event simulation using SimPy (`simulation.py`).
+- `src/analysis/`: Statistical tests and figure generation scripts.
+- `tests/`: Pytest unit tests verifying the FSM constraints and invariant.
+- `results/`: Simulation tables, statistical test outputs, and generated figures.
 
----
+## Environment Setup
+1. Create a Python 3 environment: `python3 -m venv venv`
+2. Activate the environment: `source venv/bin/activate`
+3. Install dependencies: `pip install -r requirements.txt`
 
-## 🗂️ How to Update This Repo
+## Reproduction Steps
+1. **Data Preprocessing**: `python3 preprocess_data.py`
+2. **Unit Tests**: `pytest tests/test_fsm.py`
+3. **Simulation Runs**: `python3 src/simulation/simulation.py`
+4. **Statistical Analysis**: `python3 src/analysis/analysis.py`
+5. **Figure Generation**: `python3 generate_figures.py` and `python3 generate_arch_diagram.py`
 
-See [RESOURCES.md](./RESOURCES.md) for the full step-by-step guide on keeping this repository up to date.
-
----
-
-## 🔗 Official Claude Code Links
-
-- 📖 [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
-- 📦 [npm Package](https://www.npmjs.com/package/@anthropic-ai/claude-code)
-- 🌐 [Anthropic](https://www.anthropic.com)
-
----
-
-*Last updated: April 2026*
