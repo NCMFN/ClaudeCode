@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(VISITOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reports   Report[] @relation("EditorReviews")
+}
+
+enum Role {
+  SUPER_ADMIN
+  EDITOR
+  CONTRIBUTOR
+  VISITOR
+}
+
+model Article {
+  id           String     @id @default(cuid())
+  title        String
+  slug         String     @unique
+  summary      String?
+  content      String
+  imageUrl     String?
+  imageCaption String?
+  categoryId   String?
+  category     Category?  @relation(fields: [categoryId], references: [id])
+  status       PostStatus @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  articles Article[]
+  reports  Report[]
+}
+
+model Event {
+  id               String      @id @default(cuid())
+  title            String
+  description      String
+  date             DateTime
+  venue            String
+  state            String?
+  diocese          String?
+  organizer        String?
+  contactInfo      String?
+  registrationLink String?
+  imageUrl         String?
+  status           EventStatus @default(UPCOMING)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+model Report {
+  id              String       @id @default(cuid())
+  submitterName   String
+  contactEmail    String
+  organization    String?
+  diocese         String?
+  parish          String?
+  title           String
+  categoryId      String?
+  category        Category?    @relation(fields: [categoryId], references: [id])
+  activityDate    DateTime
+  state           String?
+  location        String?
+  summary         String
+  content         String
+  imageUrls       String[] // Array of URLs
+  imageCaptions   String?
+  supportingLinks String?
+  status          ReportStatus @default(PENDING)
+  reviewedById    String?
+  reviewedBy      User?        @relation("EditorReviews", fields: [reviewedById], references: [id])
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+enum ReportStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  RETURNED
+}
+
+model Resource {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  category    String
+  author      String?
+  type        ResourceType
+  url         String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+enum ResourceType {
+  ARTICLE
+  PDF
+  VIDEO
+  AUDIO
+  LINK
+}
+
+model GalleryAlbum {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime?
+  location    String?
+  assets      MediaAsset[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model MediaAsset {
+  id        String       @id @default(cuid())
+  url       String
+  type      MediaType
+  caption   String?
+  albumId   String
+  album     GalleryAlbum @relation(fields: [albumId], references: [id])
+  createdAt DateTime     @default(now())
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+enum PostStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
