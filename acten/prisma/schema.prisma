@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?
+  role          String    @default("Visitor") // "SuperAdmin", "Editor", "Contributor", "Visitor"
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  articles      Article[]
+  reports       Report[]
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  articles    Article[]
+  events      Event[]
+  resources   Resource[]
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  content     String
+  summary     String?
+  status      String    @default("Draft") // "Draft", "Pending", "Published", "Archived"
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  featured    Boolean   @default(false)
+  imageUrl    String?
+  imageCredit String?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  venue       String?
+  isOnline    Boolean   @default(false)
+  state       String?
+  diocese     String?
+  organizer   String?
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  bannerUrl   String?
+  regLink     String?
+  status      String    @default("Upcoming") // "Upcoming", "Ongoing", "Completed", "Cancelled"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Resource {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  type        String // "PDF", "Video", "Audio", "Article", "ExternalLink"
+  url         String
+  author      String?
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  status      String    @default("Published") // "Draft", "Published"
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model GalleryAlbum {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String?
+  event       String?
+  diocese     String?
+  parish      String?
+  location    String?
+  year        Int?
+  media       Media[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Media {
+  id          String        @id @default(cuid())
+  url         String
+  type        String // "Image", "Video"
+  caption     String?
+  credit      String?
+  altText     String?
+  albumId     String
+  album       GalleryAlbum  @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  createdAt   DateTime      @default(now())
+}
+
+model Report {
+  id          String    @id @default(cuid())
+  title       String
+  summary     String?
+  content     String
+  date        DateTime
+  venue       String?
+  organizer   String?
+  objectives  String?
+  outcomes    String?
+  diocese     String?
+  state       String?
+  parish      String?
+  status      String    @default("Pending") // "Pending", "Approved", "Rejected"
+  submitterId String?
+  submitter   User?     @relation(fields: [submitterId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    String   @default("Unread") // "Unread", "Read", "Replied"
+  createdAt DateTime @default(now())
+}
