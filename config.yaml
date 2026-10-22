@@ -1,0 +1,26 @@
+random_seed: 42
+data:
+  raw_dir: data/raw/
+  processed_dir: data/processed/
+  reports_dir: reports/
+  figures_dir: deliverables/figures/
+  tables_dir: deliverables/tables/
+features:
+  rolling_window: 3 # rolling window size for temperature and missing value imputation
+  collinearity_threshold: 0.90
+  normal_elevation_max: 5.0 # thermal elevation threshold
+  normal_efficiency_min: 0.1 # efficiency threshold
+  low_irradiation_threshold: 0.1
+models:
+  cv_folds: 5
+  optuna_trials: 20
+  xgboost:
+    learning_rate: [0.01, 0.3]
+    max_depth: [3, 9]
+    subsample: [0.5, 1.0]
+    n_estimators: [50, 200]
+  lightgbm:
+    learning_rate: [0.01, 0.3]
+    max_depth: [3, 9]
+    subsample: [0.5, 1.0]
+    n_estimators: [50, 200]
