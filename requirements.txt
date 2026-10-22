@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+networkx
+xgboost
+tensorflow
+shap
+imbalanced-learn
+scipy
+matplotlib
+seaborn
+pyarrow
+fastparquet
+requests
+urllib3
