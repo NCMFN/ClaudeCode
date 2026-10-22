@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  password  String
+  role      String   @default("VISITOR") // SUPER_ADMIN, EDITOR, CONTRIBUTOR, VISITOR
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  articles  Article[]
+  events    Event[]
+  resources Resource[]
+  reports   Report[]
+}
+
+model Article {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  summary     String?
+  content     String
+  imageUrl    String?
+  categoryId  String?
+  authorId    String
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User     @relation(fields: [authorId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  articles    Article[]
+  events      Event[]
+  resources   Resource[]
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  venue       String?
+  state       String?
+  diocese     String?
+  organizer   String?
+  imageUrl    String?
+  status      String   @default("UPCOMING") // UPCOMING, COMPLETED, CANCELLED
+  categoryId  String?
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User      @relation(fields: [authorId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Resource {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  type        String   // PDF, VIDEO, AUDIO, LINK, DOCUMENT
+  url         String
+  authorId    String
+  categoryId  String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User      @relation(fields: [authorId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model GalleryAlbum {
+  id          String         @id @default(uuid())
+  title       String
+  slug        String         @unique
+  description String?
+  date        DateTime?
+  location    String?
+  coverImage  String?
+  images      GalleryImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model GalleryImage {
+  id          String       @id @default(uuid())
+  url         String
+  caption     String?
+  albumId     String
+  createdAt   DateTime     @default(now())
+
+  album       GalleryAlbum @relation(fields: [albumId], references: [id], onDelete: Cascade)
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  summary     String?
+  content     String
+  date        DateTime?
+  venue       String?
+  diocese     String?
+  parish      String?
+  organizer   String?
+  status      String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  submitterId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  submitter   User     @relation(fields: [submitterId], references: [id])
+}
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  status    String   @default("NEW") // NEW, READ, REPLIED
+  createdAt DateTime @default(now())
+}
