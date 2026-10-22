@@ -1,0 +1,9 @@
+data:
+  raw_dir: "data/raw"
+  files:
+    plant_1_gen: "Plant_1_Generation_Data.csv"
+    plant_1_weather: "Plant_1_Weather_Sensor_Data.csv"
+    plant_2_gen: "Plant_2_Generation_Data.csv"
+    plant_2_weather: "Plant_2_Weather_Sensor_Data.csv"
+reports:
+  schema_audit: "reports/schema_audit.md"

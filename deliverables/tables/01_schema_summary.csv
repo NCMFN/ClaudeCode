@@ -1,0 +1,27 @@
+File,Column,Data Type,Missing Values (%)
+Plant_1_Generation_Data.csv,DATE_TIME,datetime64[us],0.0
+Plant_1_Generation_Data.csv,PLANT_ID,int64,0.0
+Plant_1_Generation_Data.csv,SOURCE_KEY,str,0.0
+Plant_1_Generation_Data.csv,DC_POWER,float64,0.0
+Plant_1_Generation_Data.csv,AC_POWER,float64,0.0
+Plant_1_Generation_Data.csv,DAILY_YIELD,float64,0.0
+Plant_1_Generation_Data.csv,TOTAL_YIELD,float64,0.0
+Plant_1_Weather_Sensor_Data.csv,DATE_TIME,datetime64[us],0.0
+Plant_1_Weather_Sensor_Data.csv,PLANT_ID,int64,0.0
+Plant_1_Weather_Sensor_Data.csv,SOURCE_KEY,str,0.0
+Plant_1_Weather_Sensor_Data.csv,AMBIENT_TEMPERATURE,float64,0.0
+Plant_1_Weather_Sensor_Data.csv,MODULE_TEMPERATURE,float64,0.0
+Plant_1_Weather_Sensor_Data.csv,IRRADIATION,float64,0.0
+Plant_2_Generation_Data.csv,DATE_TIME,datetime64[us],0.0
+Plant_2_Generation_Data.csv,PLANT_ID,int64,0.0
+Plant_2_Generation_Data.csv,SOURCE_KEY,str,0.0
+Plant_2_Generation_Data.csv,DC_POWER,float64,0.0
+Plant_2_Generation_Data.csv,AC_POWER,float64,0.0
+Plant_2_Generation_Data.csv,DAILY_YIELD,float64,0.0
+Plant_2_Generation_Data.csv,TOTAL_YIELD,float64,0.0
+Plant_2_Weather_Sensor_Data.csv,DATE_TIME,datetime64[us],0.0
+Plant_2_Weather_Sensor_Data.csv,PLANT_ID,int64,0.0
+Plant_2_Weather_Sensor_Data.csv,SOURCE_KEY,str,0.0
+Plant_2_Weather_Sensor_Data.csv,AMBIENT_TEMPERATURE,float64,0.0
+Plant_2_Weather_Sensor_Data.csv,MODULE_TEMPERATURE,float64,0.0
+Plant_2_Weather_Sensor_Data.csv,IRRADIATION,float64,0.0
