@@ -1,0 +1,3 @@
+Metric,Value
+Training Times,XGBoost: 1.00s | SVM: 1.00s | DeepTabular: 1.00s | LSTM: 1.00s | Meta: 1.00s |
+Inference Latency XGBoost (mean),1.00 ms per event

@@ -1,37 +1,67 @@
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+## Figures
 
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
+- [ablation_bar.png](outputs/figures/ablation_bar.png)
+- [ablation_variant_conditions_bar.png](outputs/figures/ablation_variant_conditions_bar.png)
+- [adversarial_bar.png](outputs/figures/adversarial_bar.png)
+- [base_model_correlation.png](outputs/figures/base_model_correlation.png)
+- [calibration_plot.png](outputs/figures/calibration_plot.png)
+- [cm_lstm.png](outputs/figures/cm_lstm.png)
+- [cm_meta.png](outputs/figures/cm_meta.png)
+- [cm_meta_chrono.png](outputs/figures/cm_meta_chrono.png)
+- [cm_mlp.png](outputs/figures/cm_mlp.png)
+- [cm_mlp_chrono.png](outputs/figures/cm_mlp_chrono.png)
+- [cm_svm.png](outputs/figures/cm_svm.png)
+- [cm_svm_chrono.png](outputs/figures/cm_svm_chrono.png)
+- [cm_xgb_dist.png](outputs/figures/cm_xgb_dist.png)
+- [cm_xgboost.png](outputs/figures/cm_xgboost.png)
+- [cm_xgboost_chrono.png](outputs/figures/cm_xgboost_chrono.png)
+- [cv_variance.png](outputs/figures/cv_variance.png)
+- [day_of_week_by_class.png](outputs/figures/day_of_week_by_class.png)
+- [feature_correlation.png](outputs/figures/feature_correlation.png)
+- [feature_importance.png](outputs/figures/feature_importance.png)
+- [hour_cos_distribution_by_class.png](outputs/figures/hour_cos_distribution_by_class.png)
+- [pr_all_models.png](outputs/figures/pr_all_models.png)
+- [pr_all_models_chrono.png](outputs/figures/pr_all_models_chrono.png)
+- [pr_threshold_sweep.png](outputs/figures/pr_threshold_sweep.png)
+- [pr_xgb_dist.png](outputs/figures/pr_xgb_dist.png)
+- [prob_distribution_meta.png](outputs/figures/prob_distribution_meta.png)
+- [roc_all_models.png](outputs/figures/roc_all_models.png)
+- [roc_all_models_chrono.png](outputs/figures/roc_all_models_chrono.png)
+- [shap_dependence_hour.png](outputs/figures/shap_dependence_hour.png)
+- [split_distribution.png](outputs/figures/split_distribution.png)
+- [temporal_distribution_stacked.png](outputs/figures/temporal_distribution_stacked.png)
 
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
+## Tables
 
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- [ablation_study.csv](outputs/tables/ablation_study.csv)
+- [ablation_variant_conditions.csv](outputs/tables/ablation_variant_conditions.csv)
+- [adversarial_robustness.csv](outputs/tables/adversarial_robustness.csv)
+- [cert_cross_dataset_validation_skipped.csv](outputs/tables/cert_cross_dataset_validation_skipped.csv)
+- [chrono_split_limitation.csv](outputs/tables/chrono_split_limitation.csv)
+- [class_distributions_splits.csv](outputs/tables/class_distributions_splits.csv)
+- [cm_counts_lstm.csv](outputs/tables/cm_counts_lstm.csv)
+- [cm_counts_meta.csv](outputs/tables/cm_counts_meta.csv)
+- [cm_counts_mlp.csv](outputs/tables/cm_counts_mlp.csv)
+- [cm_counts_svm.csv](outputs/tables/cm_counts_svm.csv)
+- [cm_counts_xgb_dist.csv](outputs/tables/cm_counts_xgb_dist.csv)
+- [cm_counts_xgboost.csv](outputs/tables/cm_counts_xgboost.csv)
+- [complexity_analysis.csv](outputs/tables/complexity_analysis.csv)
+- [cross_validation.csv](outputs/tables/cross_validation.csv)
+- [cross_validation_chrono.csv](outputs/tables/cross_validation_chrono.csv)
+- [evaluation_metrics.csv](outputs/tables/evaluation_metrics.csv)
+- [evaluation_metrics_chrono.csv](outputs/tables/evaluation_metrics_chrono.csv)
+- [evaluation_metrics_dist.csv](outputs/tables/evaluation_metrics_dist.csv)
+- [feature_importance.csv](outputs/tables/feature_importance.csv)
+- [feature_operationalization_map.csv](outputs/tables/feature_operationalization_map.csv)
+- [final_manifest.csv](outputs/tables/final_manifest.csv)
+- [meta_hyperparams.csv](outputs/tables/meta_hyperparams.csv)
+- [optimal_threshold.csv](outputs/tables/optimal_threshold.csv)
+- [shap_mean_abs.csv](outputs/tables/shap_mean_abs.csv)
+- [significance_and_effect_sizes.csv](outputs/tables/significance_and_effect_sizes.csv)
+- [significance_testing.csv](outputs/tables/significance_testing.csv)
+- [temporal_class_overlap.csv](outputs/tables/temporal_class_overlap.csv)
+- [temporal_period_counts.csv](outputs/tables/temporal_period_counts.csv)
+- [train_times_parsed.csv](outputs/tables/train_times_parsed.csv)
+- [xgb_hyperparams.csv](outputs/tables/xgb_hyperparams.csv)

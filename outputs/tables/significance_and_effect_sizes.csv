@@ -1,0 +1,3 @@
+Comparison,Test Type,p-value,Effect Size (Cohen's d),Significant (a=0.05)
+Group Split vs Dist Shift Split (XGBoost PR-AUC),Welch's t-test (Bootstrapped),0.13880200680079144,0.21019011133386897,False
+Variant A (Temporal) vs Variant D (All) PR-AUC on Group Split,Paired t-test (Bootstrapped),0.000504226045626612,0.49174152374830254,True
