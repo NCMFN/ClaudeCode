@@ -1,0 +1,4 @@
+Period,Malicious Count,Benign Count,Mal/Ben Ratio
+Train,95,2531,0.0375345713156855
+Validation,23,852,0.02699530516431925
+Test,30,846,0.03546099290780142

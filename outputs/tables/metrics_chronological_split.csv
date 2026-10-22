@@ -1,0 +1,5 @@
+Model,PR-AUC,F1,Recall,Split
+XGBoost,0.032199,0.04,0.05,Chronological
+SVM,0.14317199609630343,0.0,0.0,Chronological
+MLP,0.15441346279977564,0.0,0.0,Chronological
+LSTM_Proxy,0.9716190154222608,0.8235294117647058,0.7,Chronological

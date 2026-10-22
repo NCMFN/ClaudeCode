@@ -1,0 +1,8 @@
+Feature,Proxy For,Note
+hour_cos,Time of day cyclical behavior,"Malicious labeled strictly via redteam.txt associations, not intrinsic ""sanitization"" properties."
+day_of_week,Weekly working patterns,
+auth_type_encoded,Authentication method usage,
+logon_type_encoded,"Logon session type (e.g., Interactive, Network)",
+graph_degree,Volume of distinct connection destinations,
+graph_betweenness,Centrality in authentication network,
+peer_z_score,Deviation from peer group authentication behavior,
