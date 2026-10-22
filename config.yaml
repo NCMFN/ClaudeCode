@@ -1,0 +1,18 @@
+data:
+  raw:
+    plant_1_gen: "data/raw/Plant_1_Generation_Data.csv"
+    plant_1_weather: "data/raw/Plant_1_Weather_Sensor_Data.csv"
+    plant_2_gen: "data/raw/Plant_2_Generation_Data.csv"
+    plant_2_weather: "data/raw/Plant_2_Weather_Sensor_Data.csv"
+  processed:
+    features_labeled: "data/processed/features_labeled.parquet"
+
+outputs:
+  reports:
+    schema_audit: "reports/schema_audit.md"
+  tables:
+    schema_summary: "deliverables/tables/01_schema_summary.csv"
+  figures:
+    missingness_heatmap: "deliverables/figures/01_missingness_heatmap.png"
+
+random_seed: 42
