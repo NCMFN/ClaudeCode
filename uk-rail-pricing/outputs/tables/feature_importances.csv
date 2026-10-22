@@ -1,0 +1,18 @@
+Feature,Importance Score,Rank
+haversine_distance_km,0.6629041679941926,1
+arrival_lat,0.13372744677721674,2
+advance_booking_days,0.10509546816677888,3
+has_railcard,0.05340983686823063,4
+departure_lat,0.025990365176985223,5
+scheduled_journey_duration_mins,0.009663651912739293,6
+arrival_lon,0.006787202709798976,7
+is_peak,0.0016875903476998957,8
+departure_lon,0.0007342700463578555,9
+is_delayed,0.0,10
+actual_delay_mins,0.0,11
+month,0.0,12
+hour_of_departure,0.0,13
+day_of_week,0.0,14
+hour_of_purchase,0.0,15
+is_senior,0.0,16
+is_disabled,0.0,17

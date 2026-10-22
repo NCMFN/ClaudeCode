@@ -1,0 +1,50 @@
+Starting E2E pipeline...
+1. Feature Engineering...
+Loading data...
+Feature engineering complete.
+2. EDA...
+/app/uk-rail-pricing/notebooks/01_eda.py:61: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df, x='Railcard', y='price_gbp', palette='Set2')
+/app/uk-rail-pricing/notebooks/01_eda.py:86: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df, x='is_disruption_day', y='price_gbp', errorbar=None, palette='pastel')
+/app/uk-rail-pricing/notebooks/01_eda.py:94: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df, x='month', y='price_gbp', palette='Blues')
+/app/uk-rail-pricing/notebooks/01_eda.py:145: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df, x='is_peak', y='price_gbp', palette='Set1')
+EDA complete.
+3. Model Training...
+Model training and evaluation complete.
+4. Anomaly Detection...
+Anomaly detection complete.
+5. Equity Analysis...
+/app/uk-rail-pricing/src/equity_analysis.py:48: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=tier_data, x='Price Type', y='Price_Value', palette='Set1')
+/app/uk-rail-pricing/src/equity_analysis.py:48: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=tier_data, x='Price Type', y='Price_Value', palette='Set1')
+/app/uk-rail-pricing/src/equity_analysis.py:48: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=tier_data, x='Price Type', y='Price_Value', palette='Set1')
+Equity and Elasticity analysis complete.
+6. Report Generation...
+Report generated successfully.
+Pipeline complete!

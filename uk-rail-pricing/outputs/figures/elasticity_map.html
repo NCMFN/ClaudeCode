@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_dc6b164b42811ecc08a25af80d48b6d7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+
+
+            <div class="folium-map" id="map_dc6b164b42811ecc08a25af80d48b6d7" ></div>
+
+</body>
+<script>
+
+
+            var map_dc6b164b42811ecc08a25af80d48b6d7 = L.map(
+                "map_dc6b164b42811ecc08a25af80d48b6d7",
+                {
+                    center: [54.0, -2.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+
+
+
+
+            var tile_layer_2c4044a4dd07a9e0bf02d1e6f265939a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+
+
+            tile_layer_2c4044a4dd07a9e0bf02d1e6f265939a.addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+    var color_map_ce55d47f394c631846a001621c60401f = {};
+
+
+    color_map_ce55d47f394c631846a001621c60401f.color = d3.scale.threshold()
+              .domain([0.0, 0.004618681756180497, 0.009237363512360994, 0.013856045268541492, 0.018474727024721988, 0.023093408780902488, 0.027712090537082984, 0.03233077229326348, 0.036949454049443976, 0.041568135805624476, 0.046186817561804976, 0.05080549931798547, 0.05542418107416597, 0.06004286283034646, 0.06466154458652695, 0.06928022634270746, 0.07389890809888795, 0.07851758985506846, 0.08313627161124895, 0.08775495336742944, 0.09237363512360995, 0.09699231687979043, 0.10161099863597094, 0.10622968039215143, 0.11084836214833194, 0.11546704390451243, 0.12008572566069292, 0.12470440741687343, 0.1293230891730539, 0.1339417709292344, 0.13856045268541492, 0.1431791344415954, 0.1477978161977759, 0.1524164979539564, 0.15703517971013692, 0.1616538614663174, 0.1662725432224979, 0.1708912249786784, 0.1755099067348589, 0.1801285884910394, 0.1847472702472199, 0.18936595200340037, 0.19398463375958086, 0.19860331551576135, 0.20322199727194187, 0.20784067902812237, 0.21245936078430286, 0.21707804254048335, 0.22169672429666387, 0.22631540605284436, 0.23093408780902486, 0.23555276956520535, 0.24017145132138584, 0.24479013307756636, 0.24940881483374686, 0.25402749658992735, 0.2586461783461078, 0.26326486010228833, 0.2678835418584688, 0.2725022236146493, 0.27712090537082984, 0.2817395871270103, 0.2863582688831908, 0.2909769506393713, 0.2955956323955518, 0.30021431415173233, 0.3048329959079128, 0.3094516776640933, 0.31407035942027384, 0.3186890411764543, 0.3233077229326348, 0.3279264046888153, 0.3325450864449958, 0.33716376820117633, 0.3417824499573568, 0.3464011317135373, 0.3510198134697178, 0.3556384952258983, 0.3602571769820788, 0.3648758587382593, 0.3694945404944398, 0.3741132222506202, 0.37873190400680073, 0.38335058576298126, 0.3879692675191617, 0.39258794927534224, 0.3972066310315227, 0.4018253127877032, 0.40644399454388375, 0.4110626763000642, 0.41568135805624473, 0.42030003981242525, 0.4249187215686057, 0.42953740332478624, 0.4341560850809667, 0.4387747668371472, 0.44339344859332774, 0.4480121303495082, 0.45263081210568873, 0.4572494938618692, 0.4618681756180497, 0.46648685737423023, 0.4711055391304107, 0.4757242208865912, 0.4803429026427717, 0.4849615843989522, 0.4895802661551327, 0.4941989479113132, 0.4988176296674937, 0.5034363114236742, 0.5080549931798547, 0.5126736749360352, 0.5172923566922156, 0.5219110384483961, 0.5265297202045767, 0.5311484019607572, 0.5357670837169376, 0.5403857654731181, 0.5450044472292986, 0.5496231289854792, 0.5542418107416597, 0.5588604924978401, 0.5634791742540206, 0.5680978560102011, 0.5727165377663817, 0.5773352195225622, 0.5819539012787426, 0.5865725830349231, 0.5911912647911036, 0.5958099465472841, 0.6004286283034647, 0.6050473100596451, 0.6096659918158256, 0.6142846735720061, 0.6189033553281866, 0.6235220370843672, 0.6281407188405477, 0.6327594005967281, 0.6373780823529086, 0.6419967641090891, 0.6466154458652696, 0.6512341276214502, 0.6558528093776306, 0.6604714911338111, 0.6650901728899916, 0.6697088546461721, 0.6743275364023527, 0.6789462181585331, 0.6835648999147136, 0.6881835816708941, 0.6928022634270746, 0.6974209451832551, 0.7020396269394356, 0.7066583086956161, 0.7112769904517966, 0.7158956722079771, 0.7205143539641576, 0.725133035720338, 0.7297517174765186, 0.7343703992326991, 0.7389890809888796, 0.74360776274506, 0.7482264445012404, 0.752845126257421, 0.7574638080136015, 0.762082489769782, 0.7667011715259625, 0.7713198532821429, 0.7759385350383234, 0.780557216794504, 0.7851758985506845, 0.789794580306865, 0.7944132620630454, 0.7990319438192259, 0.8036506255754065, 0.808269307331587, 0.8128879890877675, 0.817506670843948, 0.8221253526001284, 0.8267440343563089, 0.8313627161124895, 0.83598139786867, 0.8406000796248505, 0.8452187613810309, 0.8498374431372114, 0.854456124893392, 0.8590748066495725, 0.863693488405753, 0.8683121701619334, 0.8729308519181139, 0.8775495336742944, 0.882168215430475, 0.8867868971866555, 0.8914055789428359, 0.8960242606990164, 0.9006429424551969, 0.9052616242113775, 0.909880305967558, 0.9144989877237384, 0.9191176694799189, 0.9237363512360994, 0.92835503299228, 0.9329737147484605, 0.9375923965046409, 0.9422110782608214, 0.9468297600170019, 0.9514484417731824, 0.956067123529363, 0.9606858052855434, 0.9653044870417239, 0.9699231687979044, 0.9745418505540849, 0.9791605323102655, 0.983779214066446, 0.9883978958226264, 0.9930165775788069, 0.9976352593349874, 1.002253941091168, 1.0068726228473484, 1.011491304603529, 1.0161099863597094, 1.0207286681158898, 1.0253473498720704, 1.0299660316282508, 1.0345847133844313, 1.0392033951406119, 1.0438220768967923, 1.0484407586529727, 1.0530594404091533, 1.0576781221653337, 1.0622968039215144, 1.0669154856776948, 1.0715341674338752, 1.0761528491900558, 1.0807715309462362, 1.0853902127024169, 1.0900088944585973, 1.0946275762147777, 1.0992462579709583, 1.1038649397271387, 1.1084836214833194, 1.1131023032394998, 1.1177209849956802, 1.1223396667518608, 1.1269583485080412, 1.1315770302642219, 1.1361957120204023, 1.1408143937765827, 1.1454330755327633, 1.1500517572889437, 1.1546704390451243, 1.1592891208013048, 1.1639078025574852, 1.1685264843136658, 1.1731451660698462, 1.1777638478260268, 1.1823825295822072, 1.1870012113383877, 1.1916198930945683, 1.1962385748507487, 1.2008572566069293, 1.2054759383631097, 1.2100946201192901, 1.2147133018754708, 1.2193319836316512, 1.2239506653878318, 1.2285693471440122, 1.2331880289001926, 1.2378067106563733, 1.2424253924125537, 1.2470440741687343, 1.2516627559249147, 1.2562814376810953, 1.2609001194372758, 1.2655188011934562, 1.2701374829496368, 1.2747561647058172, 1.2793748464619978, 1.2839935282181782, 1.2886122099743587, 1.2932308917305393, 1.2978495734867197, 1.3024682552429003, 1.3070869369990807, 1.3117056187552611, 1.3163243005114418, 1.3209429822676222, 1.3255616640238028, 1.3301803457799832, 1.3347990275361636, 1.3394177092923443, 1.3440363910485247, 1.3486550728047053, 1.3532737545608857, 1.3578924363170661, 1.3625111180732468, 1.3671297998294272, 1.3717484815856078, 1.3763671633417882, 1.3809858450979686, 1.3856045268541493, 1.3902232086103297, 1.3948418903665103, 1.3994605721226907, 1.4040792538788711, 1.4086979356350517, 1.4133166173912322, 1.4179352991474128, 1.4225539809035932, 1.4271726626597736, 1.4317913444159542, 1.4364100261721346, 1.4410287079283153, 1.4456473896844957, 1.450266071440676, 1.4548847531968567, 1.4595034349530371, 1.4641221167092178, 1.4687407984653982, 1.4733594802215786, 1.4779781619777592, 1.4825968437339394, 1.48721552549012, 1.4918342072463004, 1.4964528890024809, 1.5010715707586615, 1.505690252514842, 1.5103089342710225, 1.514927616027203, 1.5195462977833833, 1.524164979539564, 1.5287836612957444, 1.533402343051925, 1.5380210248081054, 1.5426397065642858, 1.5472583883204665, 1.5518770700766469, 1.5564957518328275, 1.561114433589008, 1.5657331153451883, 1.570351797101369, 1.5749704788575494, 1.57958916061373, 1.5842078423699104, 1.5888265241260908, 1.5934452058822715, 1.5980638876384519, 1.6026825693946325, 1.607301251150813, 1.6119199329069935, 1.616538614663174, 1.6211572964193544, 1.625775978175535, 1.6303946599317154, 1.635013341687896, 1.6396320234440764, 1.6442507052002568, 1.6488693869564375, 1.6534880687126179, 1.6581067504687985, 1.662725432224979, 1.6673441139811593, 1.67196279573734, 1.6765814774935204, 1.681200159249701, 1.6858188410058814, 1.6904375227620618, 1.6950562045182425, 1.6996748862744229, 1.7042935680306035, 1.708912249786784, 1.7135309315429643, 1.718149613299145, 1.7227682950553254, 1.727386976811506, 1.7320056585676864, 1.7366243403238668, 1.7412430220800474, 1.7458617038362279, 1.7504803855924085, 1.755099067348589, 1.7597177491047693, 1.76433643086095, 1.7689551126171303, 1.773573794373311, 1.7781924761294914, 1.7828111578856718, 1.7874298396418524, 1.7920485213980328, 1.7966672031542135, 1.8012858849103939, 1.8059045666665743, 1.810523248422755, 1.8151419301789353, 1.819760611935116, 1.8243792936912964, 1.8289979754474768, 1.8336166572036574, 1.8382353389598378, 1.8428540207160184, 1.8474727024721989, 1.8520913842283793, 1.85671006598456, 1.8613287477407403, 1.865947429496921, 1.8705661112531013, 1.8751847930092818, 1.8798034747654624, 1.8844221565216428, 1.8890408382778234, 1.8936595200340038, 1.8982782017901842, 1.9028968835463649, 1.9075155653025453, 1.912134247058726, 1.9167529288149063, 1.9213716105710867, 1.9259902923272674, 1.9306089740834478, 1.9352276558396284, 1.9398463375958088, 1.9444650193519895, 1.9490837011081699, 1.9537023828643503, 1.958321064620531, 1.9629397463767113, 1.967558428132892, 1.9721771098890724, 1.9767957916452528, 1.9814144734014334, 1.9860331551576138, 1.9906518369137944, 1.9952705186699748, 1.9998892004261553, 2.004507882182336, 2.0091265639385165, 2.0137452456946967, 2.0183639274508773, 2.022982609207058, 2.027601290963238, 2.032219972719419, 2.0368386544755994, 2.0414573362317796, 2.0460760179879602, 2.050694699744141, 2.055313381500321, 2.0599320632565017, 2.064550745012682, 2.0691694267688625, 2.073788108525043, 2.0784067902812238, 2.083025472037404, 2.0876441537935846, 2.092262835549765, 2.0968815173059454, 2.101500199062126, 2.1061188808183067, 2.110737562574487, 2.1153562443306675, 2.119974926086848, 2.1245936078430288, 2.129212289599209, 2.1338309713553896, 2.13844965311157, 2.1430683348677504, 2.147687016623931, 2.1523056983801117, 2.1569243801362923, 2.1615430618924725, 2.166161743648653, 2.1707804254048337, 2.175399107161014, 2.1800177889171946, 2.184636470673375, 2.1892551524295554, 2.193873834185736, 2.1984925159419166, 2.2031111976980973, 2.2077298794542775, 2.212348561210458, 2.2169672429666387, 2.221585924722819, 2.2262046064789995, 2.23082328823518, 2.2354419699913604, 2.240060651747541, 2.2446793335037216, 2.2492980152599023, 2.2539166970160824, 2.258535378772263, 2.2631540605284437, 2.267772742284624, 2.2723914240408045, 2.277010105796985, 2.2816287875531653, 2.286247469309346, 2.2908661510655266, 2.2954848328217072, 2.3001035145778874, 2.304722196334068])
+              .range(['#008000ff', '#018100ff', '#028100ff', '#038200ff', '#048200ff', '#058300ff', '#068300ff', '#078400ff', '#088400ff', '#098500ff', '#0a8500ff', '#0b8600ff', '#0c8600ff', '#0d8700ff', '#0e8700ff', '#0f8800ff', '#108800ff', '#118900ff', '#128900ff', '#138a00ff', '#148a00ff', '#158b00ff', '#168b00ff', '#178c00ff', '#188c00ff', '#198d00ff', '#1a8d00ff', '#1b8e00ff', '#1c8e00ff', '#1d8f00ff', '#1e8f00ff', '#1f9000ff', '#209000ff', '#219100ff', '#229100ff', '#239200ff', '#249200ff', '#259300ff', '#269300ff', '#289400ff', '#299400ff', '#2a9500ff', '#2b9500ff', '#2c9600ff', '#2d9600ff', '#2e9700ff', '#2f9800ff', '#309800ff', '#319900ff', '#329900ff', '#339a00ff', '#349a00ff', '#359b00ff', '#369b00ff', '#379c00ff', '#389c00ff', '#399d00ff', '#3a9d00ff', '#3b9e00ff', '#3c9e00ff', '#3d9f00ff', '#3e9f00ff', '#3fa000ff', '#40a000ff', '#41a100ff', '#42a100ff', '#43a200ff', '#44a200ff', '#45a300ff', '#46a300ff', '#47a400ff', '#48a400ff', '#49a500ff', '#4aa500ff', '#4ba600ff', '#4ca600ff', '#4da700ff', '#4fa700ff', '#50a800ff', '#51a800ff', '#52a900ff', '#53a900ff', '#54aa00ff', '#55aa00ff', '#56ab00ff', '#57ab00ff', '#58ac00ff', '#59ac00ff', '#5aad00ff', '#5bad00ff', '#5cae00ff', '#5daf00ff', '#5eaf00ff', '#5fb000ff', '#60b000ff', '#61b100ff', '#62b100ff', '#63b200ff', '#64b200ff', '#65b300ff', '#66b300ff', '#67b400ff', '#68b400ff', '#69b500ff', '#6ab500ff', '#6bb600ff', '#6cb600ff', '#6db700ff', '#6eb700ff', '#6fb800ff', '#70b800ff', '#71b900ff', '#72b900ff', '#73ba00ff', '#74ba00ff', '#75bb00ff', '#77bb00ff', '#78bc00ff', '#79bc00ff', '#7abd00ff', '#7bbd00ff', '#7cbe00ff', '#7dbe00ff', '#7ebf00ff', '#7fbf00ff', '#80c000ff', '#81c000ff', '#82c100ff', '#83c100ff', '#84c200ff', '#85c200ff', '#86c300ff', '#87c300ff', '#88c400ff', '#89c400ff', '#8ac500ff', '#8bc500ff', '#8cc600ff', '#8dc700ff', '#8ec700ff', '#8fc800ff', '#90c800ff', '#91c900ff', '#92c900ff', '#93ca00ff', '#94ca00ff', '#95cb00ff', '#96cb00ff', '#97cc00ff', '#98cc00ff', '#99cd00ff', '#9acd00ff', '#9bce00ff', '#9cce00ff', '#9ecf00ff', '#9fcf00ff', '#a0d000ff', '#a1d000ff', '#a2d100ff', '#a3d100ff', '#a4d200ff', '#a5d200ff', '#a6d300ff', '#a7d300ff', '#a8d400ff', '#a9d400ff', '#aad500ff', '#abd500ff', '#acd600ff', '#add600ff', '#aed700ff', '#afd700ff', '#b0d800ff', '#b1d800ff', '#b2d900ff', '#b3d900ff', '#b4da00ff', '#b5da00ff', '#b6db00ff', '#b7db00ff', '#b8dc00ff', '#b9dc00ff', '#badd00ff', '#bbde00ff', '#bcde00ff', '#bddf00ff', '#bedf00ff', '#bfe000ff', '#c0e000ff', '#c1e100ff', '#c2e100ff', '#c3e200ff', '#c5e200ff', '#c6e300ff', '#c7e300ff', '#c8e400ff', '#c9e400ff', '#cae500ff', '#cbe500ff', '#cce600ff', '#cde600ff', '#cee700ff', '#cfe700ff', '#d0e800ff', '#d1e800ff', '#d2e900ff', '#d3e900ff', '#d4ea00ff', '#d5ea00ff', '#d6eb00ff', '#d7eb00ff', '#d8ec00ff', '#d9ec00ff', '#daed00ff', '#dbed00ff', '#dcee00ff', '#ddee00ff', '#deef00ff', '#dfef00ff', '#e0f000ff', '#e1f000ff', '#e2f100ff', '#e3f100ff', '#e4f200ff', '#e5f200ff', '#e6f300ff', '#e7f300ff', '#e8f400ff', '#e9f500ff', '#eaf500ff', '#ebf600ff', '#edf600ff', '#eef700ff', '#eff700ff', '#f0f800ff', '#f1f800ff', '#f2f900ff', '#f3f900ff', '#f4fa00ff', '#f5fa00ff', '#f6fb00ff', '#f7fb00ff', '#f8fc00ff', '#f9fc00ff', '#fafd00ff', '#fbfd00ff', '#fcfe00ff', '#fdfe00ff', '#feff00ff', '#ffff00ff', '#ffff00ff', '#fffe00ff', '#fffd00ff', '#fffc00ff', '#fffb00ff', '#fffa00ff', '#fff900ff', '#fff800ff', '#fff700ff', '#fff600ff', '#fff500ff', '#fff400ff', '#fff300ff', '#fff200ff', '#fff100ff', '#fff000ff', '#ffef00ff', '#ffee00ff', '#ffed00ff', '#ffeb00ff', '#ffea00ff', '#ffe900ff', '#ffe800ff', '#ffe700ff', '#ffe600ff', '#ffe500ff', '#ffe400ff', '#ffe300ff', '#ffe200ff', '#ffe100ff', '#ffe000ff', '#ffdf00ff', '#ffde00ff', '#ffdd00ff', '#ffdc00ff', '#ffdb00ff', '#ffda00ff', '#ffd900ff', '#ffd800ff', '#ffd700ff', '#ffd600ff', '#ffd500ff', '#ffd400ff', '#ffd300ff', '#ffd200ff', '#ffd100ff', '#ffd000ff', '#ffcf00ff', '#ffce00ff', '#ffcd00ff', '#ffcc00ff', '#ffcb00ff', '#ffca00ff', '#ffc900ff', '#ffc800ff', '#ffc700ff', '#ffc600ff', '#ffc500ff', '#ffc300ff', '#ffc200ff', '#ffc100ff', '#ffc000ff', '#ffbf00ff', '#ffbe00ff', '#ffbd00ff', '#ffbc00ff', '#ffbb00ff', '#ffba00ff', '#ffb900ff', '#ffb800ff', '#ffb700ff', '#ffb600ff', '#ffb500ff', '#ffb400ff', '#ffb300ff', '#ffb200ff', '#ffb100ff', '#ffb000ff', '#ffaf00ff', '#ffae00ff', '#ffad00ff', '#ffac00ff', '#ffab00ff', '#ffaa00ff', '#ffa900ff', '#ffa800ff', '#ffa700ff', '#ffa600ff', '#ffa500ff', '#ffa400ff', '#ffa300ff', '#ffa200ff', '#ffa100ff', '#ffa000ff', '#ff9f00ff', '#ff9e00ff', '#ff9c00ff', '#ff9b00ff', '#ff9a00ff', '#ff9900ff', '#ff9800ff', '#ff9700ff', '#ff9600ff', '#ff9500ff', '#ff9400ff', '#ff9300ff', '#ff9200ff', '#ff9100ff', '#ff9000ff', '#ff8f00ff', '#ff8e00ff', '#ff8d00ff', '#ff8c00ff', '#ff8b00ff', '#ff8a00ff', '#ff8900ff', '#ff8800ff', '#ff8700ff', '#ff8600ff', '#ff8500ff', '#ff8400ff', '#ff8300ff', '#ff8200ff', '#ff8100ff', '#ff8000ff', '#ff7f00ff', '#ff7e00ff', '#ff7d00ff', '#ff7c00ff', '#ff7b00ff', '#ff7a00ff', '#ff7900ff', '#ff7800ff', '#ff7700ff', '#ff7500ff', '#ff7400ff', '#ff7300ff', '#ff7200ff', '#ff7100ff', '#ff7000ff', '#ff6f00ff', '#ff6e00ff', '#ff6d00ff', '#ff6c00ff', '#ff6b00ff', '#ff6a00ff', '#ff6900ff', '#ff6800ff', '#ff6700ff', '#ff6600ff', '#ff6500ff', '#ff6400ff', '#ff6300ff', '#ff6200ff', '#ff6100ff', '#ff6000ff', '#ff5f00ff', '#ff5e00ff', '#ff5d00ff', '#ff5c00ff', '#ff5b00ff', '#ff5a00ff', '#ff5900ff', '#ff5800ff', '#ff5700ff', '#ff5600ff', '#ff5500ff', '#ff5400ff', '#ff5300ff', '#ff5200ff', '#ff5100ff', '#ff5000ff', '#ff4f00ff', '#ff4d00ff', '#ff4c00ff', '#ff4b00ff', '#ff4a00ff', '#ff4900ff', '#ff4800ff', '#ff4700ff', '#ff4600ff', '#ff4500ff', '#ff4400ff', '#ff4300ff', '#ff4200ff', '#ff4100ff', '#ff4000ff', '#ff3f00ff', '#ff3e00ff', '#ff3d00ff', '#ff3c00ff', '#ff3b00ff', '#ff3a00ff', '#ff3900ff', '#ff3800ff', '#ff3700ff', '#ff3600ff', '#ff3500ff', '#ff3400ff', '#ff3300ff', '#ff3200ff', '#ff3100ff', '#ff3000ff', '#ff2f00ff', '#ff2e00ff', '#ff2d00ff', '#ff2c00ff', '#ff2b00ff', '#ff2a00ff', '#ff2900ff', '#ff2800ff', '#ff2600ff', '#ff2500ff', '#ff2400ff', '#ff2300ff', '#ff2200ff', '#ff2100ff', '#ff2000ff', '#ff1f00ff', '#ff1e00ff', '#ff1d00ff', '#ff1c00ff', '#ff1b00ff', '#ff1a00ff', '#ff1900ff', '#ff1800ff', '#ff1700ff', '#ff1600ff', '#ff1500ff', '#ff1400ff', '#ff1300ff', '#ff1200ff', '#ff1100ff', '#ff1000ff', '#ff0f00ff', '#ff0e00ff', '#ff0d00ff', '#ff0c00ff', '#ff0b00ff', '#ff0a00ff', '#ff0900ff', '#ff0800ff', '#ff0700ff', '#ff0600ff', '#ff0500ff', '#ff0400ff', '#ff0300ff', '#ff0200ff', '#ff0100ff', '#ff0000ff']);
+
+
+    color_map_ce55d47f394c631846a001621c60401f.x = d3.scale.linear()
+              .domain([0.0, 2.304722196334068])
+              .range([0, 450 - 50]);
+
+    color_map_ce55d47f394c631846a001621c60401f.legend = L.control({position: 'topright'});
+    color_map_ce55d47f394c631846a001621c60401f.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_ce55d47f394c631846a001621c60401f.legend.addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+    color_map_ce55d47f394c631846a001621c60401f.xAxis = d3.svg.axis()
+        .scale(color_map_ce55d47f394c631846a001621c60401f.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([0.0, 1.152361098167034, 2.304722196334068]);
+
+    color_map_ce55d47f394c631846a001621c60401f.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_ce55d47f394c631846a001621c60401f.g = color_map_ce55d47f394c631846a001621c60401f.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_ce55d47f394c631846a001621c60401f.g.selectAll("rect")
+        .data(color_map_ce55d47f394c631846a001621c60401f.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_ce55d47f394c631846a001621c60401f.x(color_map_ce55d47f394c631846a001621c60401f.color.domain()[i - 1]) : color_map_ce55d47f394c631846a001621c60401f.x.range()[0],
+            x1: i < color_map_ce55d47f394c631846a001621c60401f.color.domain().length ? color_map_ce55d47f394c631846a001621c60401f.x(color_map_ce55d47f394c631846a001621c60401f.color.domain()[i]) : color_map_ce55d47f394c631846a001621c60401f.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_ce55d47f394c631846a001621c60401f.g.call(color_map_ce55d47f394c631846a001621c60401f.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("");
+
+            var circle_marker_2e773fa389ae14f3bbfe204027b878eb = L.circleMarker(
+                [52.478153, -1.898375],
+                {"bubblingMouseEvents": true, "color": "#bbdd00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbdd00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_472f20712cda6785e024185d115d0b82 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_9011c4479c520fb9ab266b7fe15dc71d = $(`<div id="html_9011c4479c520fb9ab266b7fe15dc71d" style="width: 100.0%; height: 100.0%;">Birmingham New Street: 0.84</div>`)[0];
+                popup_472f20712cda6785e024185d115d0b82.setContent(html_9011c4479c520fb9ab266b7fe15dc71d);
+
+
+
+        circle_marker_2e773fa389ae14f3bbfe204027b878eb.bindPopup(popup_472f20712cda6785e024185d115d0b82)
+        ;
+
+
+
+
+            var circle_marker_72db1997e0f809a3ef7b2f97256cb3ba = L.circleMarker(
+                [51.449093, -2.581349],
+                {"bubblingMouseEvents": true, "color": "#008000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#008000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_f65f70521d0e93f948bd36f1f53b5e57 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_4ad3785fdf425fefdc614674cfb6de70 = $(`<div id="html_4ad3785fdf425fefdc614674cfb6de70" style="width: 100.0%; height: 100.0%;">Bristol Temple Meads: 0.00</div>`)[0];
+                popup_f65f70521d0e93f948bd36f1f53b5e57.setContent(html_4ad3785fdf425fefdc614674cfb6de70);
+
+
+
+        circle_marker_72db1997e0f809a3ef7b2f97256cb3ba.bindPopup(popup_f65f70521d0e93f948bd36f1f53b5e57)
+        ;
+
+
+
+
+            var circle_marker_a0e8e6d6f5f5bc10929174bcd3a37c96 = L.circleMarker(
+                [55.952442, -3.188236],
+                {"bubblingMouseEvents": true, "color": "#58ac00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#58ac00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_e3e2a07acd03d4882631c569b97dd918 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_b1a0ec9acde019770d4ffd192420cdc4 = $(`<div id="html_b1a0ec9acde019770d4ffd192420cdc4" style="width: 100.0%; height: 100.0%;">Edinburgh Waverley: 0.40</div>`)[0];
+                popup_e3e2a07acd03d4882631c569b97dd918.setContent(html_b1a0ec9acde019770d4ffd192420cdc4);
+
+
+
+        circle_marker_a0e8e6d6f5f5bc10929174bcd3a37c96.bindPopup(popup_e3e2a07acd03d4882631c569b97dd918)
+        ;
+
+
+
+
+            var circle_marker_9cb3e1789e3f7a35a9e4ef6a205b27c2 = L.circleMarker(
+                [53.407299, -2.977746],
+                {"bubblingMouseEvents": true, "color": "#ffa200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffa200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_0dc7267ce2d4c3f17a927b01d98f2cd5 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_566a9a0c179975a82803ae416e5019e8 = $(`<div id="html_566a9a0c179975a82803ae416e5019e8" style="width: 100.0%; height: 100.0%;">Liverpool Lime Street: 1.57</div>`)[0];
+                popup_0dc7267ce2d4c3f17a927b01d98f2cd5.setContent(html_566a9a0c179975a82803ae416e5019e8);
+
+
+
+        circle_marker_9cb3e1789e3f7a35a9e4ef6a205b27c2.bindPopup(popup_0dc7267ce2d4c3f17a927b01d98f2cd5)
+        ;
+
+
+
+
+            var circle_marker_3a7214b79dfa31f43593bc383cc93bbd = L.circleMarker(
+                [51.528313, -0.134545],
+                {"bubblingMouseEvents": true, "color": "#ffc300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffc300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_2ffeaa1966ccb0576cb966cb7861bce8 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_4cf4f7fcb2748a7888303229ba4d6bda = $(`<div id="html_4cf4f7fcb2748a7888303229ba4d6bda" style="width: 100.0%; height: 100.0%;">London Euston: 1.43</div>`)[0];
+                popup_2ffeaa1966ccb0576cb966cb7861bce8.setContent(html_4cf4f7fcb2748a7888303229ba4d6bda);
+
+
+
+        circle_marker_3a7214b79dfa31f43593bc383cc93bbd.bindPopup(popup_2ffeaa1966ccb0576cb966cb7861bce8)
+        ;
+
+
+
+
+            var circle_marker_e07ce456a284aed061a36e59ae7269da = L.circleMarker(
+                [51.530827, -0.122907],
+                {"bubblingMouseEvents": true, "color": "#53aa00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#53aa00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_30b674ae019cea39881b8c22aa111af3 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_7360377a2d62ff1d83a9a75718e41384 = $(`<div id="html_7360377a2d62ff1d83a9a75718e41384" style="width: 100.0%; height: 100.0%;">London Kings Cross: 0.38</div>`)[0];
+                popup_30b674ae019cea39881b8c22aa111af3.setContent(html_7360377a2d62ff1d83a9a75718e41384);
+
+
+
+        circle_marker_e07ce456a284aed061a36e59ae7269da.bindPopup(popup_30b674ae019cea39881b8c22aa111af3)
+        ;
+
+
+
+
+            var circle_marker_32e3d18f70836e8ab6c170d0e6d7a6fa = L.circleMarker(
+                [51.516014, -0.176049],
+                {"bubblingMouseEvents": true, "color": "#83c200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#83c200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_e46c147ce91f2160c895e91cd1d6ee32 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_bd47c2733dcbf58453a7906b42ade181 = $(`<div id="html_bd47c2733dcbf58453a7906b42ade181" style="width: 100.0%; height: 100.0%;">London Paddington: 0.59</div>`)[0];
+                popup_e46c147ce91f2160c895e91cd1d6ee32.setContent(html_bd47c2733dcbf58453a7906b42ade181);
+
+
+
+        circle_marker_32e3d18f70836e8ab6c170d0e6d7a6fa.bindPopup(popup_e46c147ce91f2160c895e91cd1d6ee32)
+        ;
+
+
+
+
+            var circle_marker_92f4b74edc5aa76aa2b4ead5cb616b5b = L.circleMarker(
+                [51.531921, -0.126361],
+                {"bubblingMouseEvents": true, "color": "#e3f100ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e3f100ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_3fe885ddaca767963044b55aab7e8d8e = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_7110c9919b9d4b918a267bcb0bf8a287 = $(`<div id="html_7110c9919b9d4b918a267bcb0bf8a287" style="width: 100.0%; height: 100.0%;">London St Pancras: 1.02</div>`)[0];
+                popup_3fe885ddaca767963044b55aab7e8d8e.setContent(html_7110c9919b9d4b918a267bcb0bf8a287);
+
+
+
+        circle_marker_92f4b74edc5aa76aa2b4ead5cb616b5b.bindPopup(popup_3fe885ddaca767963044b55aab7e8d8e)
+        ;
+
+
+
+
+            var circle_marker_56be1e6bd6137710198696ed0a0f64c4 = L.circleMarker(
+                [53.476704, -2.228991],
+                {"bubblingMouseEvents": true, "color": "#ff0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_d21a4ab0e1a7b8c140d44e712e0d8259 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_d224d796668e48b94824c5d8bad3f03d = $(`<div id="html_d224d796668e48b94824c5d8bad3f03d" style="width: 100.0%; height: 100.0%;">Manchester Piccadilly: 2.30</div>`)[0];
+                popup_d21a4ab0e1a7b8c140d44e712e0d8259.setContent(html_d224d796668e48b94824c5d8bad3f03d);
+
+
+
+        circle_marker_56be1e6bd6137710198696ed0a0f64c4.bindPopup(popup_d21a4ab0e1a7b8c140d44e712e0d8259)
+        ;
+
+
+
+
+            var circle_marker_a2afdbd42751380d8145db1ab28dcecc = L.circleMarker(
+                [51.753549, -1.270037],
+                {"bubblingMouseEvents": true, "color": "#9cce00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9cce00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_fcc3df00556f5979d2de8ea4de60d723 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_6c3bd92f09485fab5abc3645149f7461 = $(`<div id="html_6c3bd92f09485fab5abc3645149f7461" style="width: 100.0%; height: 100.0%;">Oxford: 0.70</div>`)[0];
+                popup_fcc3df00556f5979d2de8ea4de60d723.setContent(html_6c3bd92f09485fab5abc3645149f7461);
+
+
+
+        circle_marker_a2afdbd42751380d8145db1ab28dcecc.bindPopup(popup_fcc3df00556f5979d2de8ea4de60d723)
+        ;
+
+
+
+
+            var circle_marker_5b7df9e5054921e1a5d06990ffc0bf40 = L.circleMarker(
+                [51.458767, -0.972172],
+                {"bubblingMouseEvents": true, "color": "#c0e000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c0e000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_cd41e47257477accb950e0988d751ab2 = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_3f0066e10212745248e73d6a27fd07c6 = $(`<div id="html_3f0066e10212745248e73d6a27fd07c6" style="width: 100.0%; height: 100.0%;">Reading: 0.86</div>`)[0];
+                popup_cd41e47257477accb950e0988d751ab2.setContent(html_3f0066e10212745248e73d6a27fd07c6);
+
+
+
+        circle_marker_5b7df9e5054921e1a5d06990ffc0bf40.bindPopup(popup_cd41e47257477accb950e0988d751ab2)
+        ;
+
+
+
+
+            var circle_marker_e66c1de39d1273ec3e8a63952a2f4688 = L.circleMarker(
+                [53.957966, -1.093159],
+                {"bubblingMouseEvents": true, "color": "#cde600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cde600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_dc6b164b42811ecc08a25af80d48b6d7);
+
+
+        var popup_27332cc227976d25bf219908c0bcabcb = L.popup({
+  "maxWidth": "100%",
+});
+
+
+
+                var html_7176075faaa73bdb37042dd12df1e8c1 = $(`<div id="html_7176075faaa73bdb37042dd12df1e8c1" style="width: 100.0%; height: 100.0%;">York: 0.93</div>`)[0];
+                popup_27332cc227976d25bf219908c0bcabcb.setContent(html_7176075faaa73bdb37042dd12df1e8c1);
+
+
+
+        circle_marker_e66c1de39d1273ec3e8a63952a2f4688.bindPopup(popup_27332cc227976d25bf219908c0bcabcb)
+        ;
+
+
+
+</script>
+</html>
