@@ -1,0 +1,6 @@
+Scenario,Battery_Lifetime_hrs,Proof_Success,Proof_Missed,Completion_Rate,Coordinator_Calls,WARNING
+Baseline,33.0,396,0,100.0,0,OK
+FSM_Default,53.266666666666666,260,380,100.0,0,OK
+FSM_Aggressive,48.766666666666666,300,286,100.0,0,OK
+FSM_Conservative,58.21666666666667,224,475,100.0,0,OK
+No_Blockchain,72.0,0,864,100.0,0,OK
