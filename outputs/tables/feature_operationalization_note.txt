@@ -1,0 +1,1 @@
+Note: LANL authentication schema does not directly encode 'digital sanitization' actions. The label comes entirely from redteam.txt.gz associations.
