@@ -1,0 +1,6 @@
+Scenario,Lifetime_mins_mean,Lifetime_mins_std,Proofs_Submitted_mean,Proofs_Submitted_std,Primary_Task_Completion_%_mean
+Baseline,4320.0,0.0,80.0,0.0,100.0
+EP-DePIN Aggressive,4320.0,0.0,75.0,0.0,100.0
+EP-DePIN Conservative,4320.0,0.0,57.0,0.0,100.0
+EP-DePIN FSM,4320.0,0.0,66.0,0.0,100.0
+No blockchain,4320.0,0.0,0.0,0.0,100.0
