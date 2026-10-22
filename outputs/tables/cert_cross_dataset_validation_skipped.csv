@@ -1,0 +1,2 @@
+Dataset,Status,Reason
+CERT r6.2,Skipped,WAF/auth-gated download constraints preventing automated ingestion.

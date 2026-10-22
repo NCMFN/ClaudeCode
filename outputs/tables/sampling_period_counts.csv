@@ -1,0 +1,4 @@
+period,Benign,Malicious,Ratio (Malicious/Benign)
+test,847,28,0.03305785123966942
+train,2539,88,0.03465931469082316
+val,843,32,0.03795966785290629
