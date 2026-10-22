@@ -24,10 +24,7 @@
     "presentations",
     "slides"
   ],
-  "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaanmustafa"
-  },
+  "author": "Affaan Mustafa (https://x.com/affaanmustafa)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -116,6 +113,15 @@
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "ajv": "^8.18.0",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0",
+    "pg": "^8.23.0",
     "sql.js": "^1.14.1"
   },
   "devDependencies": {
@@ -128,5 +134,12 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c"
+  "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c",
+  "main": "commitlint.config.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "type": "commonjs"
 }

@@ -1,40 +1,32 @@
-# Claude Code Resources 🚀
+# Roots – Family Tree Demo
 
-> A curated collection of the best GitHub repositories to supercharge your Claude Code workflow in 2026.
+A single-file, client-side prototype of a family tree app. Everything (data,
+styling, logic) lives in `index.html` — there's no build step and no server.
 
----
+## Run it
+Just open `index.html` in any modern browser (double-click it, or drag it
+into a browser tab). Works offline.
 
-## 📚 Top 12 Repos That Will 10x Your Next Project
+## What it does
+- Renders a zoomable, pannable family tree across five generations
+- Tap/click anyone to trace their ancestral line back to the great-grandparents
+- Tap a person for a full profile: bio, tabs (Basics, Early life, Career,
+  Personal life, Historical context, Legacy), and photo upload
+- "Add a relative" lets you add a child or partner to any existing person
+- People who **married into** the family (no blood parents in the tree) show
+  a small ⚭ badge and a tappable "Original family" note naming the family
+  and place they came from before marriage
+- Data is saved to the browser's `localStorage`, so edits persist on reload
+  in that same browser (there is no shared backend — it's all local)
 
-| # | Repository | Description |
-|---|------------|-------------|
-| 1 | [Claude Mem](https://github.com/thedotmack/claude-mem) | Persistent memory across sessions — stop re-teaching Claude your codebase |
-| 2 | [UI UX Pro Max](https://github.com/czlonkowski/n8n-mcp) | 50+ styles, 161 color palettes, 99 UX guidelines — Claude stops building ugly UIs |
-| 3 | [n8n-MCP](https://github.com/czlonkowski/n8n-mcp) | Connect Claude Code to 400+ n8n integrations via MCP |
-| 4 | [LightRAG](https://github.com/hkuds/lightrag) | Graph + vector RAG — lets Claude understand large codebases structurally |
-| 5 | [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) | Skills, instincts, security scanning, multi-language coverage — full agent harness |
-| 6 | [Awesome Claude Code](https://github.com/sickn33/antigravity) | Community bible — curated skills, hooks, slash commands, orchestrators |
-| 7 | [Superpowers](https://github.com/obra/superpowers) | Forces structured thinking before writing a single line of code |
-| 8 | [Claude Code Ultimate Guide](https://github.com/FlorianBruniau/claude-code-ultimate-guide) | 23K+ lines of docs, 219 templates, 271 quizzes — beginner to power user |
-| 9 | [Antigravity Awesome Skills](https://github.com/sickn33/antigravity) | 1,200+ ready-to-use skills — one of the largest collections |
-| 10 | [Claude Agent Blueprints](https://github.com/danielrosehill/claude-agent-blueprints) | 75+ agent workspace templates beyond coding |
-| 11 | [VoiceMode MCP](https://github.com/mbailey/voicemode) | Natural voice conversations with Claude Code via Whisper + Kokoro |
-| 12 | [Awesome Claude Plugins](https://github.com/ComposioHQ/awesome-claude-plugins) | 9,000+ repos indexed with adoption metrics — find what people actually install |
+## Known limitations (by design, since it's a demo)
+- Single-user only: data lives in one browser's localStorage, nothing is
+  shared between devices or people
+- No accounts/auth — the "Family plan" and "Invite" UI elements are
+  decorative and don't do anything real
+- No real photo storage — uploaded photos are downscaled and stored as
+  base64 data URIs inside localStorage
+- No server-side validation, backups, or multi-tree support
 
----
-
-## 🗂️ How to Update This Repo
-
-See [RESOURCES.md](./RESOURCES.md) for the full step-by-step guide on keeping this repository up to date.
-
----
-
-## 🔗 Official Claude Code Links
-
-- 📖 [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
-- 📦 [npm Package](https://www.npmjs.com/package/@anthropic-ai/claude-code)
-- 🌐 [Anthropic](https://www.anthropic.com)
-
----
-
-*Last updated: April 2026*
+See `JULES_PROMPT.md` for a ready-to-use prompt that asks Google Jules to
+turn this into a real, multi-user, persisted web app.
