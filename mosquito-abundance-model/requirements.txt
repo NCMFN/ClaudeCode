@@ -1,0 +1,16 @@
+pandas
+numpy
+xarray
+geopandas
+scikit-learn
+xgboost
+shap
+optuna
+torch
+matplotlib
+seaborn
+rasterio
+imageio
+netCDF4
+pyproj
+cdsapi

@@ -1,0 +1,10 @@
+data:
+  raw_vectabundance: "data/raw/vectabundance.csv"
+  raw_era5_dir: "data/raw"
+  processed_parquet: "data/processed/merged_dataset.parquet"
+  features_parquet: "data/processed/features_dataset.parquet"
+model:
+  random_seed: 42
+outputs:
+  figures_dir: "outputs/figures"
+  predictions_dir: "outputs/predictions"
