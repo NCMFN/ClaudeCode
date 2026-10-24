@@ -1,0 +1,12 @@
+requests
+numpy
+pandas
+scikit-learn
+xgboost
+shap
+matplotlib
+pyyaml
+pytest
+joblib
+tensorflow
+beautifulsoup4
