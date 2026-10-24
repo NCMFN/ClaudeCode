@@ -1,0 +1,21 @@
+filename,caption
+fig_timeline_redteam_vs_benign_leaky.png,Schematic for Timeline: Redteam vs Benign (Leaky Sampling)
+fig_timeline_redteam_vs_benign_matched.png,Schematic for Timeline: Redteam vs Benign (Matched Sampling)
+fig_leakage_gap_by_split.png,Schematic for Leakage Gap by Split Strategy
+fig_time_only_control.png,Schematic for Time-only Control PR-AUC
+fig_label_shuffle_control.png,Schematic for Label Shuffle Control PR-AUC
+fig_rolling_origin_prauc.png,Schematic for Rolling Origin PR-AUC over time
+fig_pr_curves_chronological.png,Schematic for Precision-Recall Curves (Chronological)
+fig_roc_curves_chronological.png,Schematic for ROC Curves (Chronological)
+fig_alert_budget_curve.png,Schematic for Alert Budget Curve
+fig_calibration.png,Schematic for Probability Calibration
+fig_confusion_matrices.png,Schematic for Confusion Matrices
+fig_shap_summary.png,Schematic for SHAP Summary
+fig_shap_dependence_top_feature.png,Schematic for SHAP Dependence (Top Feature)
+fig_attribution_share_temporal.png,Schematic for Attribution Share (Temporal)
+fig_ablation.png,Schematic for Feature Ablation
+fig_robustness_stress.png,Schematic for Robustness Stress Tests
+fig_bootstrap_ci_forest.png,Schematic for Bootstrap Confidence Intervals (Forest)
+fig_split_composition.png,Schematic for Split Composition (Positives/Negatives)
+fig_feature_correlation_train_only.png,Schematic for Feature Correlation (Train Only)
+fig_probability_distribution.png,Schematic for Probability Distribution (Pos/Neg)
