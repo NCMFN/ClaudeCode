@@ -1,0 +1,10 @@
+\section{Limitations}
+This study has several important limitations:
+\begin{itemize}
+    \item Extreme class imbalance and a small absolute number of positive events ($\approx 749$) yield high variance in evaluation metrics.
+    \item The analysis is restricted to a single network environment using 2015-era authentication data.
+    \item The dataset relies solely on the authentication modality.
+    \item The events represent a specific red-team exercise, which is distinct from actual insider behaviour and should not be conflated.
+    \item We note a discrepancy in ground truth mapping, requiring a strict exact match procedure. Forced matching was forbidden, yielding specific unmatchable events. Exact counts for \texttt{time\_match\_user\_mismatch}, \texttt{no\_auth\_at\_timestamp}, etc., are systematically logged in the provenance file, impacting the maximum attainable recall.
+    \item Re-weighting sampled metrics to true prevalence mathematically relies on assumptions that may affect exact precision scaling.
+\end{itemize}
