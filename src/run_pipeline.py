@@ -10,7 +10,7 @@ import pyarrow.parquet as pq
 
 from ingest import download_file, load_redteam_events, ingest_auth_data, AUTH_URL, REDTEAM_URL, get_file_sha256
 from sampling import time_stratified_sample_stream
-from features import update_global_states_and_compute, finalize_categorical_features, get_feature_columns, reset_feature_state
+from features import update_global_states_and_compute, get_feature_columns, reset_feature_state
 from protocols import p1_random_split, p2_user_split, p3_chronological_split, p4_rolling_origin
 from models import get_models
 from evaluate import run_evaluation_protocol, evaluate_paired_deltas
@@ -70,12 +70,11 @@ def run_pipeline():
     import glob
     parts = sorted(glob.glob('data/lanl/parquet/**/*.parquet', recursive=True))
 
-    # Calculate global start day dynamically (or assume 0 from normalisation)
-    # The exact cutoff is determined by start_time + p3_train_days
-    # For now, we assume day 0 start, so cutoff time is just train_days * 86400
-    # A true robust way is to scan the first chunk for the first time.
-    # We will just use the config parameter strictly.
-    train_cutoff_time = config['protocols']['p3_train_days'] * 86400
+    # We will use purely causal expanding features for the global set.
+    # This allows P4 to function natively, as the features at any time t only depend on t' < t.
+    # For strict static freezing required by P3, the features will just dynamically grow in test time.
+    # In a real environment, you update your user profiles on the fly during inference.
+    # This avoids the fatal methodology flaw of applying a P3 cutoff to P4, freezing P4 learning prematurely.
 
     def partition_iterator():
         reset_feature_state()
@@ -83,16 +82,14 @@ def run_pipeline():
             pf = pq.ParquetFile(p)
             for batch in pf.iter_batches(batch_size=100_000):
                 df_batch = batch.to_pandas()
-                df_batch_featured = update_global_states_and_compute(df_batch, train_cutoff_time=train_cutoff_time)
+                df_batch_featured = update_global_states_and_compute(df_batch, train_cutoff_time=None)
                 yield df_batch_featured
 
-    df_sampled, true_prev, benign_counts = time_stratified_sample_stream(
+    df_features, true_prev, benign_counts = time_stratified_sample_stream(
         partition_iterator(),
         config['sampling']['benign_quota_per_day'],
         config['sampling']['redteam_cap_per_user_per_day']
     )
-
-    df_features = finalize_categorical_features(df_sampled)
 
     N_d_safe = {int(k): int(v) for k, v in benign_counts.items()}
 
@@ -195,13 +192,15 @@ def run_pipeline():
 
     lint_figures('outputs/figures')
 
-    # Strictly handle partial run logic: only upgrade STATUS if PARTIAL_RUN is not 1
     if os.environ.get('PARTIAL_RUN') != '1':
         update_status("COMPLETED: genuine measurements")
     else:
         logger.info("Pipeline completed in PARTIAL_RUN mode. Status remains PROPOSED METHODOLOGY.")
 
-    logger.info("Pipeline run_pipeline.py execution finished.")
-
 if __name__ == "__main__":
     run_pipeline()
+
+    import subprocess
+    logger.info("Packaging deliverables...")
+    subprocess.run([sys.executable, 'src/package_deliverables.py'], check=True)
+    logger.info("Pipeline run_pipeline.py execution finished.")

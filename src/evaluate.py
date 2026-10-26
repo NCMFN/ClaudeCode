@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.metrics import average_precision_score, roc_auc_score
+from sklearn.preprocessing import OrdinalEncoder
 from typing import Dict, List, Tuple
 import logging
 import os
@@ -110,12 +111,14 @@ def run_evaluation_protocol(df: pd.DataFrame, feature_cols: List[str], model_nam
     time_features = ['hour_sin', 'hour_cos', 'day_of_week']
     non_time_features = [f for f in feature_cols if f not in time_features]
 
+    cat_cols = ['auth_type', 'logon_type', 'auth_orientation', 'success']
+
     for fold_idx, (train_idx, test_idx) in enumerate(protocol_generator):
         if len(train_idx) == 0 or len(test_idx) == 0:
             continue
 
-        df_train = df.iloc[train_idx]
-        df_test = df.iloc[test_idx]
+        df_train = df.iloc[train_idx].copy()
+        df_test = df.iloc[test_idx].copy()
 
         y_train = df_train['is_malicious']
         y_test = df_test['is_malicious']
@@ -124,10 +127,24 @@ def run_evaluation_protocol(df: pd.DataFrame, feature_cols: List[str], model_nam
              results.append({'fold': fold_idx, 'model': model_name, 'protocol': protocol_name, 'pr_auc': 'NA', 'status': 'INCONCLUSIVE'})
              continue
 
+        # Fit encoder on train, apply to train and test safely
+        enc = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
+        valid_cats = [c for c in cat_cols if c in df_train.columns]
+        if valid_cats:
+            enc.fit(df_train[valid_cats])
+
+            # Map encoded features to columns expected by feature_cols
+            train_enc = enc.transform(df_train[valid_cats])
+            test_enc = enc.transform(df_test[valid_cats])
+
+            for i, c in enumerate(valid_cats):
+                df_train[f'{c}_encoded'] = train_enc[:, i]
+                df_test[f'{c}_encoded'] = test_enc[:, i]
+
         X_train, X_test = df_train[feature_cols], df_test[feature_cols]
         m_full, _, trained_mdl = _fit_eval(model_obj, X_train, y_train, X_test, df_test, true_prevalence, df_groups, df_train, model_name, fold_idx, protocol_name, "full")
         results.append(m_full)
-        trained_models.append(trained_mdl)
+        trained_models.append((trained_mdl, enc))
 
         X_train_time, X_test_time = df_train[time_features], df_test[time_features]
         m_time, _, _ = _fit_eval(model_obj, X_train_time, y_train, X_test_time, df_test, true_prevalence, df_groups, df_train, model_name, fold_idx, protocol_name, "time_only")
@@ -168,50 +185,61 @@ def _fit_eval(base_model_obj, X_train, y_train, X_test, df_test, true_prevalence
         logger.error(f"Error evaluating {model_name} ({probe_type}) on fold {fold_idx}: {e}")
         return {'fold': fold_idx, 'model': model_name, 'protocol': protocol_name, 'probe_type': probe_type, 'pr_auc': 'NA', 'status': 'FAILED'}, None, None
 
-
 def evaluate_paired_deltas(df: pd.DataFrame, feature_cols: List[str], df_groups: pd.Series, p3_generator, trained_models: Dict[str, Dict[str, List]]):
-    """
-    Evaluate models trained on P1 and P2 against the exact same test block from P3/P4.
-    """
     os.makedirs('outputs/tables', exist_ok=True)
     with open('outputs/tables/leakage_delta.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['model', 'comparison', 'base_pr_auc', 'comp_pr_auc', 'delta_pr_auc', 'ci_low', 'ci_high'])
 
         folds = list(p3_generator)
-        if not folds:
-            return
+        if not folds: return
 
         train_idx, test_idx = folds[0]
-        if len(test_idx) == 0:
-            return
+        if len(test_idx) == 0: return
 
-        df_test = df.iloc[test_idx]
-        X_test = df_test[feature_cols]
+        df_test = df.iloc[test_idx].copy()
         y_test = df_test['is_malicious']
         group_ids = df_test[df_groups.name] if df_groups is not None else pd.Series([1]*len(df_test))
 
-        if y_test.sum() == 0:
-            return
+        if y_test.sum() == 0: return
+
+        cat_cols = ['auth_type', 'logon_type', 'auth_orientation', 'success']
 
         for model_name, protocols_dict in trained_models.items():
-            p3_model = protocols_dict.get('P3', [None])[0]
-            p1_model = protocols_dict.get('P1', [None])[0]
-            p2_model = protocols_dict.get('P2', [None])[0]
+            p3_tup = protocols_dict.get('P3', [(None, None)])[0]
+            p1_tup = protocols_dict.get('P1', [(None, None)])[0]
+            p2_tup = protocols_dict.get('P2', [(None, None)])[0]
 
-            if p3_model is None:
-                continue
+            p3_model, p3_enc = p3_tup if p3_tup else (None, None)
 
-            def score(m):
-                if hasattr(m, "predict_proba"): return m.predict_proba(X_test)[:, 1]
-                return -m.score_samples(X_test)
+            if p3_model is None: continue
 
-            y_score_p3 = pd.Series(score(p3_model))
+            # encode test set according to p3 enc
+            df_test_p3 = df_test.copy()
+            valid_cats = [c for c in cat_cols if c in df_test_p3.columns]
+            if valid_cats and p3_enc:
+                test_enc = p3_enc.transform(df_test_p3[valid_cats])
+                for i, c in enumerate(valid_cats): df_test_p3[f'{c}_encoded'] = test_enc[:, i]
+
+            X_test_p3 = df_test_p3[feature_cols]
+
+            def score(m, X):
+                if hasattr(m, "predict_proba"): return m.predict_proba(X)[:, 1]
+                return -m.score_samples(X)
+
+            y_score_p3 = pd.Series(score(p3_model, X_test_p3))
             p3_pr_auc = average_precision_score(y_test, y_score_p3)
 
-            for comp_name, m_comp in [('P1', p1_model), ('P2', p2_model)]:
+            for comp_name, comp_tup in [('P1', p1_tup), ('P2', p2_tup)]:
+                m_comp, enc_comp = comp_tup if comp_tup else (None, None)
                 if m_comp is not None:
-                    y_score_comp = pd.Series(score(m_comp))
+                    df_test_comp = df_test.copy()
+                    if valid_cats and enc_comp:
+                        test_enc = enc_comp.transform(df_test_comp[valid_cats])
+                        for i, c in enumerate(valid_cats): df_test_comp[f'{c}_encoded'] = test_enc[:, i]
+                    X_test_comp = df_test_comp[feature_cols]
+
+                    y_score_comp = pd.Series(score(m_comp, X_test_comp))
                     comp_pr_auc = average_precision_score(y_test, y_score_comp)
                     delta = comp_pr_auc - p3_pr_auc
                     ci_low, ci_high = compute_paired_delta_ci(y_test, y_score_comp, y_score_p3, group_ids)
