@@ -1,0 +1,3 @@
+time,src_user,dst_user,src_comp,dst_comp,auth_type,logon_type,auth_orientation,success
+1,u1,u1,c1,c1,a,l,o,s
+86401,u1,u2,c1,c2,a,l,o,f

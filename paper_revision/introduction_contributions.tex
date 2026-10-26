@@ -1,0 +1,9 @@
+\section{Introduction}
+Machine learning pipelines applied to cybersecurity datasets often suffer from methodological flaws that inflate performance metrics, particularly temporal leakage and class imbalance mishandling. The LANL red-team authentication dataset is a prime example where previous studies achieved near-perfect Precision-Recall AUC (PR-AUC) scores that completely collapsed under real-world chronological evaluation.
+
+Our contributions are as follows:
+\begin{itemize}
+    \item A documented case study of how time-correlated sampling inflates red-team / insider-threat detection metrics, using a legacy pipeline's near-1.0 results and subsequent collapse as a candid motivating artefact.
+    \item A leakage-aware chronological protocol featuring causal feature engineering, a strict purge gap, and block-bootstrap confidence intervals.
+    \item A set of leakage probes (including a time-only baseline, shuffle controls, and ablations) serving as a reusable audit checklist.
+\end{itemize}

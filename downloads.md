@@ -1,37 +1,30 @@
+PROPOSED METHODOLOGY
+Commit: aebe8628c6a5620de7423b35d5c09c70b782e78c | Date: 2026-10-26
+
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+## Bundle
+- [leakage_audit_bundle.zip](deliverables/leakage_audit_bundle.zip) - Complete deliverables archive - 6710 bytes
 
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
+## Figures
 
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
+## Tables
+- [redteam_unmatched.csv](deliverables/tables/redteam_unmatched.csv) - Table - 122 bytes
 
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
+## Paper Fragments
+- [CHANGES.md](deliverables/paper/CHANGES.md) - Paper fragment - 538 bytes
+- [abstract.tex](deliverables/paper/abstract.tex) - Paper fragment - 994 bytes
+- [conclusion.tex](deliverables/paper/conclusion.tex) - Paper fragment - 381 bytes
+- [introduction_contributions.tex](deliverables/paper/introduction_contributions.tex) - Paper fragment - 1004 bytes
+- [limitations.tex](deliverables/paper/limitations.tex) - Paper fragment - 1039 bytes
+- [methodology.tex](deliverables/paper/methodology.tex) - Paper fragment - 1220 bytes
+- [related_work.tex](deliverables/paper/related_work.tex) - Paper fragment - 540 bytes
+- [reproducibility_statement.tex](deliverables/paper/reproducibility_statement.tex) - Paper fragment - 423 bytes
+- [results.tex](deliverables/paper/results.tex) - Paper fragment - 535 bytes
 
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+## Metadata
+- [STATUS.md](deliverables/meta/STATUS.md) - Metadata - 90 bytes
+- [bundle_sha256.txt](deliverables/meta/bundle_sha256.txt) - Metadata - 64 bytes
+- [figure_manifest.csv](deliverables/meta/figure_manifest.csv) - Metadata - 67 bytes
+- [revision_log.md](deliverables/meta/revision_log.md) - Metadata - 1151 bytes
+- [table_manifest.csv](deliverables/meta/table_manifest.csv) - Metadata - 232 bytes

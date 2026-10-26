@@ -1,0 +1,11 @@
+\section{Methodology}
+Our protocol rigorously prevents temporal leakage during data ingestion, feature extraction, and model evaluation.
+
+\subsection{Time-Stratified Sampling}
+To counteract temporal bias introduced by uneven class distributions over time, we implement a time-stratified sampling approach. Benign events are sampled using a fixed daily quota across the entire 58-day timeline. Malicious events are capped per-user-per-day to prevent a single high-volume attack from dominating the distribution.
+
+\subsection{Causal Features and Purge Gap}
+Features must be strictly causal. Global statistics or future information are forbidden. Graph and peer-group statistics are computed exclusively on the training window and subsequently applied to test data. To prevent test data from being temporally adjacent to training data, a purge gap equal to the maximum feature lookback window is enforced between chronological splits.
+
+\subsection{Leakage Probes}
+We introduce a time-only baseline (incorporating only hour of the day and day of the week) to explicitly quantify temporal leakage. In a properly formulated split (P3/P4), this baseline should perform no better than random guessing (the prevalence baseline).

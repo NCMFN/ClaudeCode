@@ -1,0 +1,12 @@
+seed: 42
+sampling:
+  benign_quota_per_day: 1000
+  redteam_cap_per_user_per_day: 10
+features:
+  lookback_days: 7
+protocols:
+  purge_gap_days: 7
+  p3_train_days: 20
+  p3_val_days: 10
+  p3_test_days: 28
+  p4_n_splits: 4
