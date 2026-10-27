@@ -1,0 +1,5 @@
+Probe,Description
+Time-only Baseline,"Features: hour, day index, hour_sin/cos only"
+Label-shuffle Control,Randomize labels inside training window
+Ablations,Remove time features / remove graph/peer features
+Legacy Sampling Replay,"Rebuild flawed design from real rows, apply time-only baseline"

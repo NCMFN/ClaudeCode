@@ -1,0 +1,5 @@
+Protocol,Description,Purge Gap
+P1,Random stratified split (naive literature baseline),None
+P2,Grouped-by-user split (legacy approach),None
+P3,"Single chronological split (earliest train, next validate, latest test)",>= 14 days
+P4,Rolling-origin chronological evaluation (>= 4 folds),>= 14 days

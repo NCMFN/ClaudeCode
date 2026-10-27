@@ -1,0 +1,9 @@
+\section{Methodology}
+\subsection{Time-Stratified Sampling}
+We process the streaming authentication logs to extract equal quotas of benign events across the 58-day timeline, ensuring class balance does not vary with time.
+
+\subsection{Chronological Protocols}
+We compare a naive random stratified split (P1) against grouped-by-user (P2), single chronological split with a purge gap (P3), and rolling-origin chronological evaluation (P4).
+
+\subsection{Leakage Probes}
+We evaluate a time-only baseline (hour, day index, hour\_sin/cos) and perform label-shuffle controls within training windows to detect temporal leakage.
