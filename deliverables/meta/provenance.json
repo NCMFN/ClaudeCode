@@ -1,0 +1,19 @@
+{
+  "dataset_urls": {
+    "landing": "https://csr.lanl.gov/data/cyber1/",
+    "auth": "https://csr.lanl.gov/data/cyber1/auth.txt.gz",
+    "redteam": "https://csr.lanl.gov/data/cyber1/redteam.txt.gz"
+  },
+  "retrieval_date": "2026-10-27T10:57:42.215421",
+  "files": {
+    "auth.txt.gz": {
+      "size": "N/A",
+      "sha256": "N/A"
+    },
+    "redteam.txt.gz": {
+      "size": "N/A",
+      "sha256": "N/A"
+    }
+  },
+  "status": "PROPOSED"
+}

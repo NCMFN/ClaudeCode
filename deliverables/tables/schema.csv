@@ -1,0 +1,14 @@
+File,Field Index,Field Name,Notes
+auth.txt.gz,0,time,Epoch starts at 1
+auth.txt.gz,1,source user@domain,
+auth.txt.gz,2,destination user@domain,
+auth.txt.gz,3,source computer,
+auth.txt.gz,4,destination computer,
+auth.txt.gz,5,authentication type,
+auth.txt.gz,6,logon type,
+auth.txt.gz,7,authentication orientation,
+auth.txt.gz,8,success/failure,
+redteam.txt.gz,0,time,Matches auth time
+redteam.txt.gz,1,user@domain,
+redteam.txt.gz,2,source computer,
+redteam.txt.gz,3,destination computer,

@@ -1,0 +1,8 @@
+seed: 42
+longest_feature_lookback: 14 # days
+purge_gap: 14 # days
+state_caps:
+  user: 1000
+  host: 1000
+data:
+  local_dir: "data/lanl/"

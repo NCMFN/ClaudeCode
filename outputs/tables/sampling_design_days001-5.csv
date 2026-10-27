@@ -1,0 +1,3 @@
+Component,Detail
+Quota,Equal benign quota per day across 58 days
+Weight Formula,quota_d / N_d (where N_d is true daily total)

@@ -1,0 +1,9 @@
+\section{Introduction}
+Insider threat detection using machine learning heavily relies on realistic evaluation protocols. Legacy approaches on the LANL dataset achieved near-perfect PR-AUC by sampling benign events primarily from the beginning of the timeline while malicious events occurred later, introducing severe temporal leakage.
+
+\subsection{Contributions}
+\begin{enumerate}
+    \item A documented case study of how time-correlated sampling inflates detection metrics.
+    \item A leakage-aware chronological protocol enforcing a purge gap and block-bootstrap CIs.
+    \item A reusable audit checklist based on leakage probes.
+\end{enumerate}

@@ -1,0 +1,3 @@
+filename,type,source_script,source_data_hash,status_at_generation
+concept_methodology.pdf,CONCEPTUAL,src/figures.py,N/A,PROPOSED
+concept_methodology.png,CONCEPTUAL,src/figures.py,N/A,PROPOSED

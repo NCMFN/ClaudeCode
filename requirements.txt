@@ -1,0 +1,12 @@
+requests
+urllib3
+pyarrow
+pandas
+duckdb
+scikit-learn
+xgboost
+matplotlib
+pytest
+numba
+pytz
+scipy

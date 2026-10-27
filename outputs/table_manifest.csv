@@ -1,0 +1,6 @@
+filename,description,source_script,source_data_hash,status_at_generation,n_rows
+dataset_facts.csv,Official dataset facts from LANL page,src/tables.py,N/A,PROPOSED,5
+schema.csv,Auth and Redteam schemas,src/tables.py,N/A,PROPOSED,13
+protocols.csv,Protocol P1-P4 definitions,src/tables.py,N/A,PROPOSED,4
+leakage_probes.csv,Leakage-probe design,src/tables.py,N/A,PROPOSED,4
+sampling_design.csv,Sampling design and formulas,src/tables.py,N/A,PROPOSED,2
