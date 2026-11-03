@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small
+\caption{Metrics reported and their role.}
+\begin{tabular}{lp{3.2cm}p{3.2cm}}
+\toprule
+Metric & Definition & Role \\
+\midrule
+PR-AUC & Area under precision-recall curve, shown with prevalence baseline & Primary \\
+ROC-AUC & Area under ROC curve & Secondary \\
+Recall at k alerts per day & Fraction of positives found within a daily alert budget of 1, 10 or 100 & Operational \\
+Precision at k & Precision among the top k scored events & Operational \\
+User-level detection & Any red-team user flagged; days to first detection & Operational \\
+Block-bootstrap CI & 95\% interval from resampling days and users within a protocol & Uncertainty \\
+\bottomrule
+\end{tabular}
+\label{tab:metric_definitions}
+\end{table}

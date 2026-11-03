@@ -1,37 +1,17 @@
 # Downloads
 
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
+**Status:** PROPOSED METHODOLOGY
+**Date:** 2026-11-02 (UTC)
 
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
+* [leakage_audit_bundle.zip](deliverables/leakage_audit_bundle.zip) - Full deliverables bundle
 
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
+## Figures
+* [concept_methodology_overview.pdf](deliverables/figures/concept_methodology_overview.pdf) - CONCEPTUAL methodology overview
+* [concept_methodology_overview.png](deliverables/figures/concept_methodology_overview.png) - CONCEPTUAL methodology overview
 
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+## Metadata
+* [STATUS.md](deliverables/meta/STATUS.md)
+* [provenance.json](deliverables/meta/provenance.json)
+* [run_state.json](deliverables/meta/run_state.json)
+* [figure_manifest.csv](deliverables/meta/figure_manifest.csv)
+* [table_manifest.csv](deliverables/meta/table_manifest.csv)

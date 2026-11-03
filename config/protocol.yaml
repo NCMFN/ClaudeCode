@@ -1,0 +1,11 @@
+data:
+  local_dir: "data/lanl"
+  minimum_disk_gb: 45
+sampling:
+  min_positives_per_window: 5
+  seed: 42
+  bootstrap_n: 100
+  bootstrap_block_length_days: 1
+evaluation:
+  budget_seconds: 600
+  purge_gap_days: 7

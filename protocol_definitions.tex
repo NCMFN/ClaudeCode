@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering\small
+\caption{Evaluation protocols compared on identical data and models.}
+\begin{tabular}{lp{3.2cm}p{3.2cm}p{3.2cm}p{3.2cm}p{3.2cm}}
+\toprule
+Protocol & Split unit & Ordering respected & Purge gap & Leakage channel it permits & Role \\
+\midrule
+P1 & Event (stratified random) & No & No & Temporal and user leakage & Reference that mirrors common practice \\
+P2 & User (grouped) & No & No & Temporal leakage & Removes user identity leakage only \\
+P3 & Contiguous time blocks & Yes & Yes & None intended & Primary chronological protocol \\
+P4 & Rolling origin ($\geq$ 4 folds) & Yes & Yes ($\geq$ longest lookback) & None intended & Stability across origins \\
+\bottomrule
+\end{tabular}
+\label{tab:protocol_definitions}
+\end{table}
