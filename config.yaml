@@ -1,0 +1,10 @@
+status: PROPOSED_METHODOLOGY
+seed: 42
+min_malicious_events: 50
+graph_sample_n: 100000
+embargo_gap_days: 7
+positive_rate: 0.000000713
+top_k_percentiles: [0.001, 0.01, 0.05]
+urls:
+  redteam: "https://csr.lanl.gov/data-fence/1793705338/WpA_lPfF_8mj6tYNSeiT_57_tCw=/cyber1/redteam.txt.gz"
+  auth: "https://csr.lanl.gov/data-fence/1793705338/WpA_lPfF_8mj6tYNSeiT_57_tCw=/cyber1/auth.txt.gz"

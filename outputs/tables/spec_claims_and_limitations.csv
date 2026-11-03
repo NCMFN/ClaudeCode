@@ -1,0 +1,8 @@
+type,statement
+claim,Proposes a methodology for evaluating insider-threat benchmarks
+not_claimed,Detects digital sanitization in real time
+not_claimed,State-of-the-art
+not_claimed,Deployment-ready
+limitation,"LANL has no file-path, USB, or role data"
+limitation,Sampling prevalence differs from true prevalence
+limitation,"LANL red-team events are auth-level, not file-deletion (proxy)"

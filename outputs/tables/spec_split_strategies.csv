@@ -1,0 +1,5 @@
+strategy,description
+random_event,Random event-level split (leaky baseline)
+group_user,User-disjoint stratified group split
+chronological,"Train on [1..T1], validate later block, test later disjoint block with embargo"
+shift,"Train on one contiguous period, test on different non-overlapping period"

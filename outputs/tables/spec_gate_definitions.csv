@@ -1,0 +1,9 @@
+gate,enforced_in_fallback
+(a) redteam_auth,No
+(b) artifacts,Mostly No
+(c) no pl-ace-holders,Yes
+(d) download manifest,Yes
+(e) banned functions,Yes
+(f) pytest,Yes
+(g) reproducibility,No
+(h) chance-level perm,No
