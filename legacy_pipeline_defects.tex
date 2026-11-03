@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small
+\caption{Defects of the earlier pipeline and their remedies.}
+\begin{tabular}{lp{3.2cm}p{3.2cm}}
+\toprule
+Defect & Consequence & Remedy \\
+\midrule
+Unofficial mirror with TLS verification disabled & Unverifiable data source & Official source only, verification on \\
+Random event type assigned to malicious rows & Fabricated features & Real fields only \\
+Benign rows from the start of the file only & Classes occupy different time ranges; time features separate them & Equal benign quota for every day, with stored weights \\
+Group-shuffled splits & Training on later data, testing on earlier data & Chronological splits with a purge gap \\
+Text-only figure in place of data & Figure carried no measurement & Removed; figure lint added \\
+No pinned requirements & Not reproducible & Pinned requirements and one entrypoint \\
+\bottomrule
+\end{tabular}
+\label{tab:legacy_pipeline_defects}
+\end{table}

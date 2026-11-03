@@ -1,0 +1,14 @@
+\begin{tabular}{lll}
+\toprule
+Test & Rule & Enforces \\
+\midrule
+test_no_verify_false & R3 & No insecure connections \\
+test_ingest_schema & R10 & Schema validation \\
+test_sampling_deterministic & R3 & Deterministic hashing without random \\
+test_causality & R1 & Features rely only on past \\
+test_p3_no_overlap & R1 & Purge gap verification \\
+test_bootstrap & R1 & Proper bootstrap statistics \\
+test_figure_lint & R4 & No placeholder or forbidden text \\
+test_secret_hygiene & R8 & No leaked tokens or URLs \\
+\bottomrule
+\end{tabular}

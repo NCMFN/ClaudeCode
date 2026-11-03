@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small
+\caption{Leakage probes forming the audit checklist.}
+\begin{tabular}{lp{3.2cm}p{3.2cm}}
+\toprule
+Probe & What it tests & Reading that indicates leakage \\
+\midrule
+Time-only baseline & Whether hour, day index and cyclic time terms alone separate classes & Strong score under P1 that collapses under P3 or P4 \\
+Label-shuffle control & Whether the pipeline scores above chance on permuted labels & Score above prevalence baseline \\
+No-time-features ablation & Contribution of time features to the headline score & Large drop when time features are removed \\
+No graph or peer-feature ablation & Whether graph and peer features contribute at all & No change when removed \\
+Legacy sampling replay & Whether the earlier sampling design alone yields separability & Time-only baseline scores high on that design \\
+P1 and P2 models scored on the P3 test block & Paired transfer of non-chronological models & Gap relative to the P3-trained model \\
+\bottomrule
+\end{tabular}
+\label{tab:leakage_probes}
+\end{table}
