@@ -1,0 +1,5 @@
+limitation,effect_on_interpretation,addressing_it
+extreme imbalance,Metrics inflate for common classes,Resampling techniques
+small positive count,High variance in evaluation,More redteam events
+single network,Lack of generalization,Multisite data
+2015-era data,Old patterns,Fresh datasets

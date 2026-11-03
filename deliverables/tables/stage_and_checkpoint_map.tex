@@ -1,0 +1,13 @@
+\begin{tabular}{lllll}
+\toprule
+Stage & Input & Output & State Value & Resume Behaviour \\
+\midrule
+download & urls & auth.txt.gz & ingest & Resume from incomplete part \\
+ingest & auth.txt.gz & parquet/auth & sampling & Restart ingest \\
+sample & parquet/auth & parquet/sampled & features & Restart sample \\
+features & parquet/sampled & parquet/features & evaluate & Restart features \\
+evaluate & parquet/features & tables & figures & Restart evaluate \\
+figures & None & figures & package & Restart figures \\
+package & all & zip & done & Restart package \\
+\bottomrule
+\end{tabular}

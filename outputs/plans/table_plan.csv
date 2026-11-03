@@ -1,0 +1,27 @@
+id,filename_stem,type,produced_when,description,status
+K01,protocol_definitions,CONCEPTUAL,any,P1-P4 definitions (already built).,built
+K02,leakage_probes,CONCEPTUAL,any,Probe checklist (already built).,built
+K03,metric_definitions,CONCEPTUAL,any,Metric definitions (already built).,built
+K04,legacy_pipeline_defects,CONCEPTUAL,any,Defects of the earlier pipeline (already built).,built
+K05,unmatched_reason_codes,CONCEPTUAL,any,Reason codes with precedence order and the test that exercises each.,built
+K06,feature_catalogue,CONCEPTUAL,any,"Each feature, its source field, lookback, causal rule and where it is fitted.",built
+K07,config_parameters,CONCEPTUAL,any,"Every key in config/protocol.yaml with meaning and unit (values are settings, not results).",built
+K08,stage_and_checkpoint_map,CONCEPTUAL,any,"Stage, input, output, state value written, resume behaviour.",built
+K09,test_coverage_matrix,CONCEPTUAL,any,"Each test mapped to the rule (R1-R14, tests a-k) it enforces.",built
+K10,limitations_register,CONCEPTUAL,any,"Each limitation, its effect on interpretation, and what would address it.",built
+K11,figure_plan,CONCEPTUAL,any,This catalogue of figures with status of each.,built
+K12,table_plan,CONCEPTUAL,any,This catalogue of tables with status of each.,built
+D01,dataset_summary,MEASURED,COMPLETED|PARTIAL,"Files, bytes, SHA-256, line counts, users, computers, day coverage.",not applicable at this status
+D02,daily_counts_quota_weights,MEASURED,COMPLETED|PARTIAL,"Per day: N_d, quota, fraction, weight, red-team events.",not applicable at this status
+D03,redteam_matching_summary,MEASURED,COMPLETED|PARTIAL,Matched count and unmatched count per reason code.,not applicable at this status
+D04,window_boundaries_and_positives,MEASURED,COMPLETED|PARTIAL,Window boundaries in days and positives per window and fold.,not applicable at this status
+D05,metrics_by_protocol_model,MEASURED,COMPLETED|PARTIAL,"PR-AUC, ROC-AUC, prevalence, with CIs, per protocol and model.",not applicable at this status
+D06,leakage_delta,MEASURED,COMPLETED|PARTIAL,P1-P3 and P1-P4 deltas per model with paired-bootstrap CIs.,not applicable at this status
+D07,time_only_baseline_results,MEASURED,COMPLETED|PARTIAL,Time-only baseline per protocol.,not applicable at this status
+D08,ablation_results,MEASURED,COMPLETED|PARTIAL,"Full, no-time, no-graph/peer per protocol.",not applicable at this status
+D09,label_shuffle_results,MEASURED,COMPLETED|PARTIAL,Shuffled-label scores per protocol.,not applicable at this status
+D10,alert_budget_results,MEASURED,COMPLETED|PARTIAL,"Recall and precision at 1, 10, 100 alerts per day.",not applicable at this status
+D11,user_level_detection,MEASURED,COMPLETED|PARTIAL,"Per red-team user: flagged or not, days to first detection.",not applicable at this status
+D12,legacy_replay_results,MEASURED,COMPLETED|PARTIAL,Legacy replay versus new design results.,not applicable at this status
+D13,compute_budget,MEASURED,COMPLETED|PARTIAL,Runtime and peak RSS per stage.,not applicable at this status
+D14,provenance_summary,MEASURED,COMPLETED|PARTIAL,"Acquisition mode, redacted URLs, retrieval date, commit, library versions.",not applicable at this status

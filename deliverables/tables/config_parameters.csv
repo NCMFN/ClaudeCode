@@ -1,0 +1,9 @@
+key,meaning,unit
+data.local_dir,Local data directory,path
+data.minimum_disk_gb,Minimum disk space required,GB
+sampling.min_positives_per_window,Minimum positive samples per window,count
+sampling.seed,Random seed,int
+sampling.bootstrap_n,Number of bootstrap iterations,count
+sampling.bootstrap_block_length_days,Bootstrap block length,days
+evaluation.budget_seconds,Compute budget per evaluation,seconds
+evaluation.purge_gap_days,Purge gap between train and test,days

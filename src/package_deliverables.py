@@ -13,12 +13,14 @@ def get_hash(filepath):
 
 def package():
     deliverables = "deliverables"
+    # we don't rmtree deliverables entirely to avoid removing all_tables.xlsx if we placed it there, but for safety
     if os.path.exists(deliverables):
         shutil.rmtree(deliverables)
     os.makedirs(f"{deliverables}/figures", exist_ok=True)
     os.makedirs(f"{deliverables}/tables", exist_ok=True)
     os.makedirs(f"{deliverables}/paper", exist_ok=True)
     os.makedirs(f"{deliverables}/meta", exist_ok=True)
+    os.makedirs(f"{deliverables}/plans", exist_ok=True)
 
     if os.path.exists("outputs/figures"):
         for f in os.listdir("outputs/figures"):
@@ -32,9 +34,16 @@ def package():
         for f in os.listdir("paper_revision"):
             shutil.copy(os.path.join("paper_revision", f), f"{deliverables}/paper/{f}")
 
+    if os.path.exists("outputs/plans"):
+        for f in os.listdir("outputs/plans"):
+            shutil.copy(os.path.join("outputs/plans", f), f"{deliverables}/plans/{f}")
+
     for m in ["STATUS.md", "outputs/provenance.json", "outputs/run_state.json", "outputs/figure_manifest.csv", "outputs/table_manifest.csv"]:
         if os.path.exists(m):
             shutil.copy(m, f"{deliverables}/meta/{os.path.basename(m)}")
+
+    if os.path.exists("all_tables.xlsx"):
+        shutil.copy("all_tables.xlsx", f"{deliverables}/all_tables.xlsx")
 
     with zipfile.ZipFile(f"{deliverables}/leakage_audit_bundle.zip", 'w', zipfile.ZIP_DEFLATED) as zf:
         for root, _, files in sorted(os.walk(deliverables)):
@@ -48,3 +57,6 @@ def package():
         f.write(h)
 
     print("Package built successfully.")
+
+if __name__ == "__main__":
+    package()

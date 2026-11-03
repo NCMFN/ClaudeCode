@@ -1,0 +1,25 @@
+id,filename_stem,type,produced_when,description,status
+C01,concept_methodology_overview,CONCEPTUAL,any,"Pipeline boxes, single chronological split, rolling-origin folds (already built).",built
+C02,concept_leakage_mechanism,CONCEPTUAL,any,"Two timelines showing benign rows drawn from an early window and positives from a later one, and how a time feature then separates the classes. Boxes, arrows, axes only; no numbers.",built
+C03,concept_causal_feature_window,CONCEPTUAL,any,"A feature at time t using only events before t, the lookback window, and the purge gap being at least the lookback.",built
+C04,concept_sampling_and_weights,CONCEPTUAL,any,"Per-day true total N_d, per-day quota, and the weight quota/N_d, drawn with symbols only.",built
+C05,concept_audit_checklist_flow,CONCEPTUAL,any,"Decision flow through the leakage probes: time-only baseline, label shuffle, ablations, legacy replay, paired transfer.",built
+C06,concept_pipeline_stages_and_resume,CONCEPTUAL,any,"Stage graph (acquire, ingest, sample, features, protocols, models, evaluate, figures, package) with the checkpoint state file and the Decision Gate.",built
+M01,figA_class_distribution_timeline,MEASURED,COMPLETED|PARTIAL,"Figure A: legacy replay panel, new time-stratified panel with P3 boundaries, time-only-baseline PR-AUC under P1-P4 with CIs and prevalence line.",not applicable at this status
+M02,true_daily_event_volume,MEASURED,COMPLETED|PARTIAL,"True events per day N_d across the covered days (log y), with red-team events overlaid.",not applicable at this status
+M03,redteam_events_per_day_and_user,MEASURED,COMPLETED|PARTIAL,"Red-team events per day and per user, matched versus unmatched.",not applicable at this status
+M04,redteam_match_reason_codes,MEASURED,COMPLETED|PARTIAL,Counts of matched events and of each unmatched reason code.,not applicable at this status
+M05,pr_curves_by_protocol_model,MEASURED,COMPLETED|PARTIAL,"Precision-recall curves, one panel per model, one line per protocol, prevalence baseline dashed.",not applicable at this status
+M06,prauc_by_protocol_model_ci,MEASURED,COMPLETED|PARTIAL,PR-AUC per model and protocol with block-bootstrap CIs and the prevalence baseline.,not applicable at this status
+M07,leakage_delta_p1_vs_p3_p4,MEASURED,COMPLETED|PARTIAL,P1 minus P3 and P1 minus P4 per model with bootstrap CIs of the paired difference.,not applicable at this status
+M08,time_only_baseline_by_protocol,MEASURED,COMPLETED|PARTIAL,Time-only baseline PR-AUC under P1-P4 with CIs.,not applicable at this status
+M09,label_shuffle_control,MEASURED,COMPLETED|PARTIAL,Score distribution under shuffled labels versus the prevalence baseline.,not applicable at this status
+M10,ablation_no_time_no_graph,MEASURED,COMPLETED|PARTIAL,"Full model versus no-time-features versus no-graph/peer-features, per protocol.",not applicable at this status
+M11,recall_at_alert_budgets,MEASURED,COMPLETED|PARTIAL,"Recall at 1, 10 and 100 alerts per day by protocol and model.",not applicable at this status
+M12,user_level_detection_ecdf,MEASURED,COMPLETED|PARTIAL,"Days to first detection per red-team user, empirical CDF, with never-detected users shown.",not applicable at this status
+M13,rolling_origin_fold_prauc,MEASURED,COMPLETED|PARTIAL,PR-AUC per rolling-origin fold with positives count per fold.,not applicable at this status
+M14,positives_per_window,MEASURED,COMPLETED|PARTIAL,"Positive counts per train, validation, test window and fold; INCONCLUSIVE windows marked.",not applicable at this status
+M15,legacy_sampling_replay,MEASURED,COMPLETED|PARTIAL,"Time-only baseline on the replayed legacy design versus the new design, with feature contribution.",not applicable at this status
+M16,sampling_fraction_and_weights_per_day,MEASURED,COMPLETED|PARTIAL,Sampled fraction and weight per day.,not applicable at this status
+M17,feature_importance_or_shap,MEASURED,COMPLETED|PARTIAL,Only if non-degenerate; otherwise omit and say so in revision_log.md.,not applicable at this status
+M18,compute_throughput_peak_rss,MEASURED,COMPLETED|PARTIAL,Dry-run and full-run throughput and peak memory per stage.,not applicable at this status
