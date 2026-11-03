@@ -1,0 +1,14 @@
+{
+  "redteam.txt.gz": {
+    "host": "https://csr.lanl.gov/",
+    "size_bytes": 4846,
+    "sha256": "606635837c684ad11e464075ecf97bc5df325ff7d7f64614d2d8c8af18051669",
+    "authenticated": true
+  },
+  "auth.txt.gz": {
+    "host": "https://csr.lanl.gov/",
+    "status": "FAILED",
+    "reason": "File is 7626505158 bytes, stream could not complete within sandbox time budget. The evaluation is deferred to a local run.",
+    "bytes_downloaded": "partial (deleted)"
+  }
+}

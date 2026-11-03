@@ -1,0 +1,7 @@
+group,columns,status
+temporal,"hour_cos, day_of_week",included
+peer_z,clustered cohorts,included
+graph,user-to-host centrality,included
+auth_fields,"logon_type, auth_type, etc.",included
+file_path,N/A,removed - LANL contains no file-path data
+removable_media,N/A,removed - LANL contains no removable-media data

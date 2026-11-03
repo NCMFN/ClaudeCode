@@ -1,37 +1,19 @@
 # Downloads
-
-This file serves as a template for managing downloads for various tasks and projects. Users can customize this file according to their specific needs by filling out the placeholder sections for different artifact types.
-
-## Datasets
-- **Dataset Name**
-  - Description: 
-  - Source: 
-  - Download Link: 
-
-## Models
-- **Model Name**
-  - Description:
-  - Framework/Library Used:
-  - Download Link:
-
-## Images
-- **Image Name**
-  - Description:
-  - Source/Attribution:
-  - Download Link:
-
-## Notebooks
-- **Notebook Title**
-  - Description:
-  - Language/Framework:
-  - Download Link:
-
-## Research Files
-- **File Name**
-  - Description:
-  - Source: 
-  - Download Link:
-
----
-
-*Customize the sections above by filling in the details relevant to your project.*
+- [redteam_authentication.csv](outputs/tables/redteam_authentication.csv)
+- [cert_cross_dataset_validation_skipped.csv](outputs/tables/cert_cross_dataset_validation_skipped.csv)
+- [redteam_events_per_day.csv](outputs/tables/redteam_events_per_day.csv)
+- [redteam_events_per_hour_offset.csv](outputs/tables/redteam_events_per_hour_offset.csv)
+- [redteam_events_per_user.csv](outputs/tables/redteam_events_per_user.csv)
+- [redteam_computer_pair_counts.csv](outputs/tables/redteam_computer_pair_counts.csv)
+- [redteam_interevent_time_summary.csv](outputs/tables/redteam_interevent_time_summary.csv)
+- [redteam_split_feasibility.csv](outputs/tables/redteam_split_feasibility.csv)
+- [spec_split_strategies.csv](outputs/tables/spec_split_strategies.csv)
+- [spec_feature_groups.csv](outputs/tables/spec_feature_groups.csv)
+- [spec_claims_and_limitations.csv](outputs/tables/spec_claims_and_limitations.csv)
+- [spec_gate_definitions.csv](outputs/tables/spec_gate_definitions.csv)
+- [redteam_events_per_day.png](outputs/figures/redteam_events_per_day.png)
+- [redteam_cumulative_events.png](outputs/figures/redteam_cumulative_events.png)
+- [redteam_hour_offset_distribution.png](outputs/figures/redteam_hour_offset_distribution.png)
+- [redteam_events_per_user.png](outputs/figures/redteam_events_per_user.png)
+- [redteam_split_feasibility_heatmap.png](outputs/figures/redteam_split_feasibility_heatmap.png)
+- [protocol_schematic_chronological_split.png](outputs/figures/protocol_schematic_chronological_split.png)

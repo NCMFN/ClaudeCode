@@ -1,0 +1,7 @@
+train_end_day,val_end_day,test_end_day,train_positives,val_positives,test_positives,meets_min_positives
+10,20,30,338,351,60,True
+10,30,40,338,411,0,False
+20,30,40,689,60,0,False
+20,40,50,689,60,0,False
+30,40,50,749,0,0,False
+30,50,60,749,0,0,False

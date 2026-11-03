@@ -1,0 +1,2 @@
+filename,status,size_bytes,sha256,line_count,time_min,time_max
+redteam.txt.gz,PASSED,4846,606635837c684ad11e464075ecf97bc5df325ff7d7f64614d2d8c8af18051669,749,150885,2557047
